@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<person xmlns="http://www.assupg.cn/XMLSchema/04"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.assupg.cn/XMLSchema/04 04.xsd" sex="男">
+    <name>1</name>
+    <age>1</age>
+    <email>assupg@126.com</email>
+</person>

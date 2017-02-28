@@ -1,0 +1,81 @@
+##############################################################################################
+#                                   通用,忽略掉的文件                                          #
+##############################################################################################
+#
+#-- -------------------------
+#   Windows:
+#-- -------------------------
+Thumbs.db
+/Thumbs.db
+/**/Thumbs.db
+ehthumbs.db
+/ehthumbs.db
+/**/ehthumbs.db
+Desktop.ini
+/Desktop.ini
+/**/Desktop.ini
+*.swp
+/*.swp
+/**/*.swp
+#-- -------------------------
+# eclipse
+#-- -------------------------
+.project
+/.project
+/**/.project
+.classpath
+/.classpath
+/**/.classpath
+.settings/
+/.settings/
+/**/.settings/
+test-output/
+/test-output/
+/**/test-output/
+#bin/
+/bin/
+/*/bin/
+#/**/bin/
+#-- -------------------------
+# Idea
+#-- -------------------------
+*.iml
+/*.iml
+/**/*.iml
+.idea/
+/.idea/
+/**/.idea/
+#-- -------------------------
+# gradle
+#-- -------------------------
+.gradle/
+/.gradle/
+/**/.gradle/
+build/
+/build/
+/**/build/
+#-- -------------------------
+# maven
+#-- -------------------------
+target/
+/target/
+/**/target/
+classes/
+/classes/
+/**/classes/
+
+
+##############################################################################################
+#                                   Project,忽略掉的文件                                       #
+##############################################################################################
+#/**/rebel.xml
+#/**/everyday.bat
+#/*/src/main/resources/*.properties
+#/*/src/test/resources/*.properties
+#/*/src/main/resources/environment/dev/*.*
+#/*/src/main/resources/environment/dev/**/
+#/*/src/test/resources/environment/dev/*.*
+#/*/src/test/resources/environment/dev/**/
+/generatorConfiguration.xml
+/java/
+/resources/

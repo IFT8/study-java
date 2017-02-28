@@ -1,0 +1,8 @@
+xpath 读取xml
+
+java.xml.parsers.DocumentBuilder
+
+要通过 java.xml.parsers.DocumentBuilderFactory，来创建我们的DocumentBuilder.
+通过DocumentBuilder.parse(File f) 转换成一个Document.
+
+如果要使用xpath，必需要把整个文档读进内存；然后通过xpath进行转换.

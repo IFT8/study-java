@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    一、解释Schema
+        <schema xmlns="http://www.w3.org/2001/XMLSchema"
+            schema的默认命名空间，不能修改，但是可以增加前缀，如果增加前缀之后就意味着创建所有的 element等元素都需要增加前缀
+
+        targetNamespace="http://www.example.org/01"
+            自己这个文档01.xsd的命名空间；可以方便其他xml或者schema文件引用
+
+        xmlns:tns="http://www.example.org/01"
+            此处的名称和自己的名称空间一致，但是增加了tns的前缀，此时如果要引用当前自己的文件，创建的类型，需要加上tns的前缀
+
+        elementFormDefault="qualified"
+
+
+    二、xml中引入
+        <?xml version="1.0" encoding="utf-8" ?>
+        <user xmlns="http://www.example.org/01"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:schemaLocation="http://www.example.org/01">
+            <id>1</id>
+            <username>zhangSan</username>
+            <born>2016-10-01</born>
+        </user>
+
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            创建了一个可以引入其他schema文件的命名空间实例
+
+        xsi:schemaLocation="http://www.example.org/01">
+            引入其他命名空间，引入之后，特别注意：如果要在eclipse中使用命名空间的引入，需要为xml增加xml的category
+            若直接引入*.xsd文件，
+                xsi:schemaLocation 换成 xsi:noNamespaceSchemaLocation="文件路径+文件名"
+-->
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.assupg.cn/XMLSchema/01"
+        xmlns:tns="http://www.assupg.cn/XMLSchema/01"
+        elementFormDefault="qualified">
+
+    <element name="user">
+        <complexType>
+            <sequence><!--序列方式 即与DTD中，逗号分隔-->
+                <element name="id" type="int"/>
+                <element name="username" type="string"/>
+                <element name="born" type="date"/>
+            </sequence>
+        </complexType>
+    </element>
+</schema>

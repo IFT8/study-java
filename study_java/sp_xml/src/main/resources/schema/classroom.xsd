@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://www.assupg.cn/XMLSchema/classroom"
+            xmlns:tns="http://www.assupg.cn/XMLSchema/classroom"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="student.xsd"/>
+
+    <xsd:element name="classroom" type="tns:classroomBean"/>
+
+    <xsd:complexType name="classroomBean">
+        <xsd:sequence>
+            <xsd:element name="grade" type="tns:gradeType"/>
+            <xsd:element name="name" type="xsd:string"/>
+
+            <!--
+                这种在生成 java 时会产生一个，匿名内部类【protected ClassroomBean.Students students;】；而不是使用一个List<studentBean>
+                -->
+            <!-- <xsd:element name="students">
+                 <xsd:complexType>
+                     <xsd:sequence minOccurs="1" maxOccurs="unbounded">
+                         <xsd:element name="student" type="tns:studentBean"/>
+                     </xsd:sequence>
+                 </xsd:complexType>
+             </xsd:element>-->
+
+            <!--
+                这种在生成java时，以List<studentType> 形式
+                -->
+            <xsd:sequence minOccurs="1" maxOccurs="unbounded">
+                <xsd:element name="student" type="tns:studentBean"/>
+            </xsd:sequence>
+
+
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="gradeType">
+        <xsd:restriction base="xsd:int">
+            <xsd:minInclusive value="2000"/>
+            <xsd:maxExclusive value="3000"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>

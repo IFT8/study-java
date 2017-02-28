@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.assupg.cn/XMLSchema/04"
+        xmlns:tns="http://www.assupg.cn/XMLSchema/04"
+        elementFormDefault="qualified">
+
+    <!--
+        百叶窗，格式
+        -->
+    <element name="person" type="tns:personType"/>
+
+    <complexType name="personType">
+        <sequence>
+            <element name="name" type="string"/>
+            <element name="age" type="tns:ageType"/>
+            <element name="email" type="tns:emailType"/>
+        </sequence>
+        <attribute name="sex" type="tns:sexType"/>
+    </complexType>
+
+    <!--simpleType
+        不能放原素,用于定义约束，特殊类型进行定义-->
+    <simpleType name="emailType">
+        <restriction base="string">
+            <!--正则表达式，验证
+                \w          字母，不包含.
+                \w+         字母可以出现多次
+                \.          点
+                \.*         点，可以出现多次
+                (\w+\.*)*   字母 + 点 组合可以出现多次
+                \w+@        @符号前面必需出现一次，带字母的
+            -->
+            <pattern value="(\w+\.*)*\w+@\w+\.[A-Za-z]{2,6}"/>
+            <minLength value="6"/>
+            <maxLength value="255"/>
+        </restriction>
+    </simpleType>
+
+    <simpleType name="ageType">
+        <restriction base="int"> <!--基于什么数据类型的验证-->
+            <minInclusive value="1"/>
+            <maxExclusive value="150"/>
+        </restriction>
+    </simpleType>
+
+    <simpleType name="sexType">
+        <restriction base="string">
+            <enumeration value="男"/>
+            <enumeration value="女"/>
+        </restriction>
+    </simpleType>
+
+</schema>

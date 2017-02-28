@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<user xmlns="http://www.assupg.cn/XMLSchema/01"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.assupg.cn/XMLSchema/01 01user.xsd">
+    <id>1</id>
+    <username>liSi</username>
+    <born>2016-10-01</born>
+</user>

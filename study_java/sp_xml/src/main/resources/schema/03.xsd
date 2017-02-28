@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.assupg.cn/XMLSchema/03"
+        xmlns:tns="http://www.assupg.cn/XMLSchema/03"
+        elementFormDefault="qualified">
+
+    <!--俄罗斯，方块
+        优点：结构清晰
+        缺点：不能重用
+    -->
+
+    <!--拉肠切片方式：
+            优点：最大化重用
+            缺点：根节点不清晰
+        <element name="book" type="tns:bookType"/>
+        <element name="id" type="int"/>
+        <element name="title" type="string"/>
+        <element name="content" type="string"/>
+        <complexType name="bookType">
+            <sequence>
+                <element ref="tns:id"/>
+                <element ref="tns:title"/>
+                <element ref="tns:content"/>
+            </sequence>
+        </complexType>
+    -->
+    <element name="book" type="tns:bookType"/>
+    <element name="id" type="int"/>
+    <element name="title" type="string"/>
+    <element name="content" type="string"/>
+
+    <complexType name="bookType">
+        <sequence>
+            <element ref="tns:id"/>
+            <element ref="tns:title"/>
+            <element ref="tns:content"/>
+        </sequence>
+    </complexType>
+</schema>
