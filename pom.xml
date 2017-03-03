@@ -592,9 +592,9 @@
                     <exclude>environment/template/*</exclude>
                 </excludes>
             </resource>
-            <!--<resource>-->
-                <!--<directory>src/main/resources/environment/${env}</directory>-->
-            <!--</resource>-->
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
         </resources>
 
         <pluginManagement>
