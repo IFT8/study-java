@@ -23,7 +23,6 @@
 
         <module>study_spring/sp_spring-data-mongoDB-demo</module>
         <module>study_spring/springboot-maven-151</module>
-        <module>study_spring/springboot-maven-200</module>
     </modules>
 
     <properties>
