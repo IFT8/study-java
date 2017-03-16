@@ -25,12 +25,6 @@
         <module>study_spring/sp_springBoot-mongoDB</module>
     </modules>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring.version>4.3.7.RELEASE</spring.version>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
@@ -148,6 +142,12 @@
             <type>tar.gz</type>
         </dependency>
     </dependencies>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <spring.version>4.3.7.RELEASE</spring.version>
+    </properties>
 
     <dependencyManagement>
         <dependencies>
@@ -582,17 +582,41 @@
                 </excludes>
             </resource>
             <resource>
-                <directory>src/main/resources</directory>
+                <directory>src/main/resources/environment/${env}</directory>
             </resource>
         </resources>
 
         <pluginManagement>
             <plugins>
+                <!--jrebel 热部署插件,用来生成rebel.xml文件-->
+                <plugin>
+                    <groupId>org.zeroturnaround</groupId>
+                    <artifactId>jrebel-maven-plugin</artifactId>
+                    <version>1.1.6</version>
+                    <configuration>
+                        <addResourcesDirToRebelXml>true</addResourcesDirToRebelXml>
+                        <alwaysGenerate>true</alwaysGenerate>
+                        <showGenerated>true</showGenerated>
+                        <!-- 指定生成的jrebel.xml放在哪里， 要求放在web应用的 classpath下 -->
+                        <rebelXmlDirectory>${basedir}/target/classes</rebelXmlDirectory>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>generate-rebel-xml</id>
+                            <phase>process-resources</phase>
+                            <goals>
+                                <goal>generate</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+
                 <!--jetty-maven-plugin-->
                 <plugin>
                     <groupId>org.eclipse.jetty</groupId>
                     <artifactId>jetty-maven-plugin</artifactId>
-                    <version>9.4.1.v20170120</version>
+                    <version>9.4.2.v20170220</version>
                     <configuration>
                         <httpConnector>                         <!--端口配置 -->
                             <port>8080</port>                   <!--连接器监听的端口号。 默认情况下它是8080。-->
@@ -607,7 +631,7 @@
                          |reload    默认值“automatic”，与scanIntervalSeconds联合使用，表示当改变发生时，自动热重部署。
                          |          设置到“manual”，表示你需要在控制台执行换行来触发插件执行扫描。这有时候是有用的，当你一次做一系列的改变，你想忽略中间的改变时，就可以使用reload参数。
                          |-->
-                        <scanIntervalSeconds>1</scanIntervalSeconds>
+                        <scanIntervalSeconds>0</scanIntervalSeconds>
                         <reload>automatic</reload>
 
                         <webApp><!--配置你的WebApp-->
@@ -624,8 +648,8 @@
 
                         <!--scanTargets 可选的。除了插件自动扫描的文件和目录之外，还要定期扫描的文件和目录列表。-->
                         <scanTargets>
-                            <scanTarget>../fleet-core/target/classes</scanTarget>
-                            <scanTarget>../fleet-service/target/classes</scanTarget>
+                            <scanTarget>../fleet-core/target/classes;</scanTarget>
+                            <scanTarget>../fleet-service/target/classes;</scanTarget>
                         </scanTargets>
                         <!--scanTargetPatterns      可选的。如果您有一个长列表的额外文件，你想扫描，更方便的使用模式匹配表达式来指定它们，而不是使用scanTargetPatterns的scanTargetsList枚举它们，每个组成一个目录，包括和/或排除参数指定文件匹配模式。指定额外需要监控变化的文件或文件夹，主要用于热部署中的识别文件更新 -->
                         <!--scanClassesPattern      自9.3.0。可选的。包含和排除可应用于classesDirectory以用于扫描目的的模式，它不会影响类路径。如果文件或目录被模式排除，那么将忽略该文件（或在目录的情况下为子树）的更改，并且不会导致webapp重新部署。模式被指定为使用类似于glob的语法的相对路径，如FileSystem.getPathMatcher的javadoc中所述。-->
@@ -635,7 +659,7 @@
                         <dependency>
                             <groupId>org.eclipse.jetty</groupId>
                             <artifactId>jetty-webapp</artifactId>
-                            <version>9.4.0.v20161208</version>
+                            <version>9.4.2.v20170220</version>
                         </dependency>
                     </dependencies>
                 </plugin>
@@ -734,7 +758,7 @@
                         <dependency>
                             <groupId>mysql</groupId>
                             <artifactId>mysql-connector-java</artifactId>
-                            <version>${mysql.version}</version>
+                            <version>5.1.41</version>
                         </dependency>
                     </dependencies>
                     <!--为该插件配置数据库连接信息-->
@@ -750,7 +774,34 @@
                         <!--<printResultSet>true</printResultSet>-->
                     </configuration>
                 </plugin>
-
+                <plugin><!--mybatis-generator-maven-plugin 生成mybatis映射 -->
+                    <groupId>org.mybatis.generator</groupId>
+                    <artifactId>mybatis-generator-maven-plugin</artifactId>
+                    <version>1.3.2</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>mysql</groupId>
+                            <artifactId>mysql-connector-java</artifactId>
+                            <version>5.1.41</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.mybatis.generator</groupId>
+                            <artifactId>mybatis-generator-core</artifactId>
+                            <version>1.3.5</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>tk.mybatis</groupId>
+                            <artifactId>mapper</artifactId>
+                            <version>3.3.9</version>
+                        </dependency>
+                    </dependencies>
+                    <configuration>
+                        <verbose>true</verbose>
+                        <overwrite>true</overwrite>
+                        <configurationFile>${project.basedir}/src/main/resources/generatorConfig.xml
+                        </configurationFile>
+                    </configuration>
+                </plugin>
 
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -939,6 +990,10 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-idea-plugin</artifactId>
             </plugin>
+            <plugin>
+                <groupId>org.zeroturnaround</groupId>
+                <artifactId>jrebel-maven-plugin</artifactId>
+            </plugin>
         </plugins>
     </build>
 
@@ -994,9 +1049,23 @@
                 <tomcat-maven-plugin.manager.url>http://127.0.0.1:8080/manager/text</tomcat-maven-plugin.manager.url>
                 <tomcat-maven-plugin.manager.username>root</tomcat-maven-plugin.manager.username>
                 <tomcat-maven-plugin.manager.password>root123456</tomcat-maven-plugin.manager.password>
-                <sql-maven-plugin.url>jdbc:mysql://mysql2.comodin.cn:3306/?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;allowMultiQueries=true</sql-maven-plugin.url>
-                <sql-maven-plugin.username>fleet2</sql-maven-plugin.username>
+                <sql-maven-plugin.url>jdbc:mysql://mysql.demo.comodin.cn:3306/?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;allowMultiQueries=true</sql-maven-plugin.url>
+                <sql-maven-plugin.username>fleet</sql-maven-plugin.username>
                 <sql-maven-plugin.password>Comodin520</sql-maven-plugin.password>
+            </properties>
+        </profile>
+
+        <profile>
+            <!-- 本地开发环境 -->
+            <id>local</id>
+            <properties>
+                <env>dev</env>
+                <tomcat-maven-plugin.manager.url>http://localhost:8080/manager/text</tomcat-maven-plugin.manager.url>
+                <tomcat-maven-plugin.manager.username>root</tomcat-maven-plugin.manager.username>
+                <tomcat-maven-plugin.manager.password>root123456</tomcat-maven-plugin.manager.password>
+                <sql-maven-plugin.url>jdbc:mysql://localhost:3306/?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;allowMultiQueries=true</sql-maven-plugin.url>
+                <sql-maven-plugin.username>root</sql-maven-plugin.username>
+                <sql-maven-plugin.password>root123456</sql-maven-plugin.password>
             </properties>
         </profile>
     </profiles>

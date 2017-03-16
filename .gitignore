@@ -68,14 +68,14 @@ classes/
 ##############################################################################################
 #                                   Project,忽略掉的文件                                       #
 ##############################################################################################
-#/**/rebel.xml
-#/**/everyday.bat
-#/*/src/main/resources/*.properties
-#/*/src/test/resources/*.properties
-#/*/src/main/resources/environment/dev/*.*
-#/*/src/main/resources/environment/dev/**/
-#/*/src/test/resources/environment/dev/*.*
-#/*/src/test/resources/environment/dev/**/
+/**/rebel.xml
+/**/everyday.bat
+/*/src/main/resources/*.properties
+/*/src/test/resources/*.properties
+/*/src/main/resources/environment/dev/*.*
+/*/src/main/resources/environment/dev/**/
+/*/src/test/resources/environment/dev/*.*
+/*/src/test/resources/environment/dev/**/
 /generatorConfiguration.xml
 /java/
 /resources/
