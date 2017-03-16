@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>springboot-maven-151</artifactId>
+    <artifactId>sp_springBoot</artifactId>
     <packaging>jar</packaging>
 
     <properties>

@@ -8,7 +8,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>sp_spring-data-mongoDB-demo</artifactId>
+    <artifactId>sp_springBoot-mongoDB</artifactId>
     <packaging>jar</packaging>
 
 
