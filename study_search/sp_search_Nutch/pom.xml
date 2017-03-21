@@ -12,6 +12,72 @@
     <artifactId>sp_search_Nutch</artifactId>
 
     <dependencies>
+
+        <!--nutch
+        Nutch 是一个开源Java实现的搜索引擎。它提供了我们运行自己的搜索引擎所需的全部工具。包括全文搜索和Web爬虫。
+        中文名   nutch
+        本    质 开源Java 实现的搜索引擎
+        包    括 全文搜索和Web爬虫
+        最新版本  version v2.3
+        类    型 开放源代码
+        提    供 运行自己的搜索引擎所需的工具
+        目录
+        1 简介
+        2 目标
+        3 爬虫
+        4 工作流程
+        简介
+            Nutch 是一个开源Java 实现的搜索引擎。它提供了我们运行自己
+            的搜索引擎所需的全部工具。包括全文搜索和Web爬虫。
+            尽管Web搜索是漫游Internet的基本要求, 但是现有web搜索引擎的数目却在下降. 并且这很有可能进一步演变成为一个公司垄断了几乎所有的web搜索为其谋取商业利益.这显然 不利于广大Internet用户.
+            Nutch为我们提供了这样一个不同的选择. 相对于那些商用的搜索引擎, Nutch作为开放源代码 搜索引擎将会更加透明, 从而更值得大家信赖. 现在所有主要的搜索引擎都采用私有的排序算法, 而不会解释为什么一个网页会排在一个特定的位置. 除此之外, 有的搜索引擎依照网站所付的 费用, 而不是根据它们本身的价值进行排序. 与它们不同, Nutch没有什么需要隐瞒, 也没有 动机去扭曲搜索的结果. Nutch将尽自己最大的努力为用户提供最好的搜索结果.
+            Nutch目前最新的版本为version v2.3。[1]
+        目标
+            Nutch 致力于让每个人能很容易, 同时花费很少就可以配置世界一流的Web搜索引擎. 为了完成这一宏伟的目标, Nutch必须能够做到:
+            * 每个月取几十亿网页
+            * 为这些网页维护一个索引
+            * 对索引文件进行每秒上千次的搜索
+            * 提供高质量的搜索结果
+            组成
+                爬虫crawler和查询searcher。Crawler主要用于从网络上抓取网页并为这些网页建立索引。Searcher主要利用这些索引检索用户的查找关键词来产生查找结果。两者之间的接口是索引，所以除去索引部分，两者之间的耦合度很低。
+                Crawler和Searcher两部分尽量分开的目的主要是为了使两部分可以分布式配置在硬件平台上，例如将Crawler和Searcher分别放在两个主机上，这样可以提升性能。
+        爬虫
+            Crawler的重点在两个方面，Crawler的工作流程和涉及的数据文件的格式和含义。数据文件主要包括三类，分别是web database，一系列的segment加上index，三者的物理文件分别存储在爬行结果目录下的db目录下webdb子文件夹内，segments文件夹和index文件夹。那么三者分别存储的信息是什么呢？
+            一次爬行会产生很多个segment，每个segment内存储的是爬虫Crawler在单独一次抓取循环中抓到的网页以及这些网页的索引。Crawler爬行时会根据WebDB中的link关系按照一定的爬行策略生成每次抓取循环所需的fetchlist，然后Fetcher通过fetchlist中的URLs抓取这些网页并索引，然后将其存入segment。Segment是有时限的，当这些网页被Crawler重新抓取后，先前抓取产生的segment就作废了。在存储中。Segment文件夹是以产生时间命名的，方便我们删除作废的segments以节省存储空间。
+            Index是Crawler抓取的所有网页的索引，它是通过对所有单个segment中的索引进行合并处理所得的。Nutch利用Lucene技术进行索引，所以Lucene中对索引进行操作的接口对Nutch中的index同样有效。但是需要注意的是，Lucene中的segment和Nutch中的不同，Lucene中的segment是索引index的一部分，但是Nutch中的segment只是WebDB中各个部分网页的内容和索引，最后通过其生成的index跟这些segment已经毫无关系了。
+            Web database，也叫WebDB，其中存储的是爬虫所抓取网页之间的链接结构信息，它只在爬虫Crawler工作中使用而和Searcher的工作没有任何关系。WebDB内存储了两种实体的信息：page和link。Page实体通过描述网络上一个网页的特征信息来表征一个实际的网页，因为网页有很多个需要描述，WebDB中通过网页的URL和网页内容的MD5两种索引方法对这些网页实体进行了索引。Page实体描述的网页特征主要包括网页内的link数目，抓取此网页的时间等相关抓取信息，对此网页的重要度评分等。同样的，Link实体描述的是两个page实体之间的链接关系。WebDB构成了一个所抓取网页的链接结构图，这个图中Page实体是图的结点，而Link实体则代表图的边。
+        工作流程
+            在创建一个WebDB之后(步骤1), “产生/抓取/更新”循环(步骤3－6)根据一些种子URLs开始启动。当这个循环彻底结束，Crawler根据抓取中生成的segments创建索引（步骤7－10）。在进行重复URLs清除（步骤9）之前，每个segment的索引都是独立的（步骤8）。最终，各个独立的segment索引被合并为一个最终的索引index（步骤10）。
+            其中有一个细节问题，Dedup操作主要用于清除segment索引中的重复URLs，但是我们知道，在WebDB中是不允许重复的URL存在的，那么为什么这里还要进行清除呢？原因在于抓取的更新。比方说一个月之前你抓取过这些网页，一个月后为了更新进行了重新抓取，那么旧的segment在没有删除之前仍然起作用，这个时候就需要在新旧segment之间进行除重。
+
+            Nutch和Lucene
+                Nutch是基于Lucene的。Lucene为Nutch提供了文本索引和搜索的API。
+                一个常见的问题是：我应该使用Lucene还是Nutch？
+                最简单的回答是：如果你不需要抓取数据的话，应该使用Lucene。
+                常见的应用场合是：你有数据源，需要为这些数据提供一个搜索页面。在这种情况下，最好的方式是直接从数据库中取出数据并用Lucene API 建立索引。
+                在你没有本地数据源，或者数据源非常分散的情况下，应该使用Nutch。
+                在分析了Crawler工作中设计的文件之后，接下来我们研究Crawler的抓取流程以及这些文件在抓取中扮演的角色。Crawler的工作原理：首先Crawler根据WebDB生成一个待抓取网页的URL集合叫做Fetchlist，接着下载线程Fetcher根据Fetchlist将网页抓取回来，如果下载线程有很多个，那么就生成很多个Fetchlist，也就是一个Fetcher对应一个Fetchlist。然后Crawler用抓取回来的网页更新WebDB，根据更新后的WebDB生成新的Fetchlist，里面是未抓取的或者新发现的URLs，然后下一轮抓取循环重新开始。这个循环过程可以叫做“产生/抓取/更新”循环。
+                指向同一个主机上Web资源的URLs通常被分配到同一个Fetchlist中，这可防止过多的Fetchers对一个主机同时进行抓取造成主机负担过重。另外Nutch遵守Robots Exclusion Protocol，网站可以通过自定义Robots.txt控制Crawler的抓取。
+                在Nutch中，Crawler操作的实现是通过一系列子操作的实现来完成的。这些子操作Nutch都提供了子命令行可以单独进行调用。下面就是这些子操作的功能描述以及命令行，命令行在括号中。
+
+                1. 创建一个新的WebDb (admin db -create).
+                2. 将抓取起始URLs写入WebDB中 (inject).
+                3. 根据WebDB生成fetchlist并写入相应的segment(generate).
+                4. 根据fetchlist中的URL抓取网页 (fetch).
+                5. 根据抓取网页更新WebDb (updatedb).
+                6. 循环进行3－5步直至预先设定的抓取深度。
+                7. 根据WebDB得到的网页评分和links更新segments (updatesegs).
+                8. 对所抓取的网页进行索引(index).
+                9. 在索引中丢弃有重复内容的网页和重复的URLs (dedup).
+                10. 将segments中的索引进行合并生成用于检索的最终index(merge).
+ -->
+        <dependency>
+            <groupId>org.apache.nutch</groupId>
+            <artifactId>nutch</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+
+
         <!--test  testng mockito =================================================================================== -->
         <dependency>
             <groupId>org.testng</groupId>

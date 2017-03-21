@@ -4,14 +4,14 @@
         <artifactId>study-java-parent</artifactId>
         <groupId>cn.assupg.study</groupId>
         <version>1.0-SNAPSHOT</version>
-        <relativePath>../../pom.xml</relativePath>
+        <relativePath>../../../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>sp_java_Basic</artifactId>
+    <artifactId>sp_ws_CXF</artifactId>
     <packaging>jar</packaging>
 
-    <name>sp_study_javaBasic</name>
+    <name>sp_ws_CXF</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -20,8 +20,17 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxws</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-transports-http</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-transports-http-jetty</artifactId>
+        </dependency>
+
     </dependencies>
 </project>
