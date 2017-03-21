@@ -10,7 +10,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>sp_xml</artifactId>
+    <artifactId>sp_java_xml</artifactId>
 
     <dependencies>
         <!--test  testng mockito =================================================================================== -->
