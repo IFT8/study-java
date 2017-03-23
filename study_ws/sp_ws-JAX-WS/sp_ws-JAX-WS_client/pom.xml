@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>study-java-parent</artifactId>
@@ -10,8 +8,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>sp_ws_soap_server</artifactId>
+    <artifactId>sp_ws-JAX-WS_client</artifactId>
+    <packaging>jar</packaging>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
     <dependencies>
         <!--test  testng mockito =================================================================================== -->
         <dependency>
@@ -27,5 +29,4 @@
             <artifactId>hamcrest-all</artifactId>
         </dependency>
     </dependencies>
-
 </project>

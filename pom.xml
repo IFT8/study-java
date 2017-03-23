@@ -9,24 +9,27 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>study_java/sp_java_Basic</module>
-        <module>study_java/sp_java_Xml</module>
+
+        <module>study_java/sp_java-Basic</module>
+        <module>study_java/sp_java-Xml</module>
+
+        <module>study_jms/sp_jms-ActiveMQ</module>
+        <module>study_nio/sp_nio-Netty</module>
+        <module>study_search/sp_search-Nutch</module>
+        <module>study_security/sp_security-Shiro</module>
 
         <module>study_spring/sp_springBoot</module>
         <module>study_spring/sp_springBoot-mongoDB</module>
 
-        <module>study_ws/study_ws_JAX-WS/sp_ws_jax-ws_server</module>
-        <module>study_ws/study_ws_JAX-WS/sp_ws_jax-ws_client</module>
-        <module>study_ws/study_ws_JAX-WS/sp_ws_soap_server</module>
-        <module>study_ws/study_ws_JAX-WS/sp_ws_soap_client</module>
-        <module>study_ws/study_ws_JAX-WS/sp_ws_contractPriority_server</module>
-        <module>study_ws/study_CXF/sp_ws_CXF</module>
+        <module>study_workflow/sp_workflow-Activiti</module>
 
-        <module>study_jms/sp_jms_ActiveMQ</module>
-        <module>study_workflow/sp_workflow_Activiti</module>
-        <module>study_search/sp_search_Nutch</module>
-        <module>study_security/sp_security_Shiro</module>
-        <module>study_nio/sp_nio_Netty</module>
+        <module>study_ws/sp_ws-CXF</module>
+        <module>study_ws/sp_ws-JAX-WS/sp_ws_JAX-WS_contractPriority_server</module>
+        <module>study_ws/sp_ws-JAX-WS/sp_ws-JAX-WS_client</module>
+        <module>study_ws/sp_ws-JAX-WS/sp_ws-JAX-WS_server</module>
+        <module>study_ws/sp_ws-Soap/sp_ws-Soap_client</module>
+        <module>study_ws/sp_ws-Soap/sp_ws-Soap_server</module>
+
     </modules>
 
     <dependencies>
@@ -515,7 +518,7 @@
                 </excludes>
             </resource>
             <!--<resource>-->
-                <!--<directory>src/main/resources/environment/${env}</directory>-->
+            <!--<directory>src/main/resources/environment/${env}</directory>-->
             <!--</resource>-->
         </resources>
 

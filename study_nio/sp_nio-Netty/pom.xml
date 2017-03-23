@@ -8,11 +8,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>sp_nio_Netty</artifactId>
+    <artifactId>sp_nio-Netty</artifactId>
     <packaging>jar</packaging>
-
-    <name>sp_nio_Netty</name>
-    <url>http://maven.apache.org</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

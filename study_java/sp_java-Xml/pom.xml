@@ -10,7 +10,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>sp_workflow_Activiti</artifactId>
+    <artifactId>sp_java-Xml</artifactId>
 
     <dependencies>
         <!--test  testng mockito =================================================================================== -->
@@ -27,4 +27,5 @@
             <artifactId>hamcrest-all</artifactId>
         </dependency>
     </dependencies>
+
 </project>
