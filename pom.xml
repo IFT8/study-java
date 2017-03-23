@@ -20,6 +20,7 @@
 
         <module>study_spring/sp_springBoot</module>
         <module>study_spring/sp_springBoot-mongoDB</module>
+        <module>study_spring/sp_springBoot-webSocket</module>
 
         <module>study_workflow/sp_workflow-Activiti</module>
 
