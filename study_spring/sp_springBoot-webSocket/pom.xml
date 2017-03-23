@@ -49,11 +49,10 @@
             <artifactId>spring-boot-starter-websocket</artifactId>
         </dependency>
 
+        <!--test  testng mockito =================================================================================== -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>6.10</version>   <!--jdk1.5 最高版本5.11-->
-            <scope>test</scope>
         </dependency>
     </dependencies>
 
