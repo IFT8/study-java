@@ -1,935 +1,941 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<groupId>cn.assupg.study</groupId>
-	<artifactId>study-java-parent</artifactId>
-	<packaging>pom</packaging>
-	<version>1.0-SNAPSHOT</version>
-	<modules>
+    <groupId>cn.assupg.study</groupId>
+    <artifactId>study-java-parent</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
 
-		<module>study_java/sp_java-Basic</module>
-		<module>study_java/sp_java-Xml</module>
+        <module>study_java/sp_java-Basic</module>
+        <module>study_java/sp_java-Xml</module>
 
-		<module>study_jms/sp_jms-ActiveMQ</module>
-		<module>study_nio/sp_nio-Netty</module>
-		<module>study_search/sp_search-Nutch</module>
-		<module>study_security/sp_security-Shiro</module>
+        <module>study_jms/sp_jms-ActiveMQ</module>
+        <module>study_nio/sp_nio-Netty</module>
+        <module>study_search/sp_search-Nutch</module>
+        <module>study_security/sp_security-Shiro</module>
 
-		<module>study_spring/sp_springBoot</module>
-		<module>study_spring/sp_springBoot-mongoDB</module>
-		<module>study_spring/sp_springBoot-webSocket</module>
+        <module>study_spring/sp_springBoot</module>
+        <module>study_spring/sp_springBoot-mongoDB</module>
+        <module>study_spring/sp_springBoot-webSocket</module>
 
-		<module>study_workflow/sp_workflow-Activiti</module>
+        <module>study_workflow/sp_workflow-Activiti</module>
 
-		<module>study_ws/sp_ws-CXF</module>
-		<module>study_ws/sp_ws-JAX-WS/sp_ws_JAX-WS_contractPriority_server</module>
-		<module>study_ws/sp_ws-JAX-WS/sp_ws-JAX-WS_client</module>
-		<module>study_ws/sp_ws-JAX-WS/sp_ws-JAX-WS_server</module>
-		<module>study_ws/sp_ws-Soap/sp_ws-Soap_client</module>
-		<module>study_ws/sp_ws-Soap/sp_ws-Soap_server</module>
+        <module>study_ws/sp_ws-CXF</module>
+        <module>study_ws/sp_ws-JAX-WS/sp_ws_JAX-WS_contractPriority_server</module>
+        <module>study_ws/sp_ws-JAX-WS/sp_ws-JAX-WS_client</module>
+        <module>study_ws/sp_ws-JAX-WS/sp_ws-JAX-WS_server</module>
+        <module>study_ws/sp_ws-Soap/sp_ws-Soap_client</module>
+        <module>study_ws/sp_ws-Soap/sp_ws-Soap_server</module>
 
-	</modules>
+    </modules>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.codehaus.groovy</groupId>
-			<artifactId>groovy-all</artifactId>
-			<version>2.4.9</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.validation</groupId>
-			<artifactId>validation-api</artifactId>
-			<version>2.0.0-SNAPSHOT</version>
-		</dependency>
+    <dependencies>
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+            <version>2.4.9</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>2.0.0-SNAPSHOT</version>
+        </dependency>
 
-	</dependencies>
+    </dependencies>
 
-	<properties>
-		<java.version>1.8</java.version>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<spring.version>4.3.8.RELEASE</spring.version>
-		<!--<project.parentBasedir>${project.parent.basedir}</project.parentBasedir> -->
-	</properties>
+    <properties>
+        <java.version>1.8</java.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.testSource>1.8</maven.compiler.testSource>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.testTarget>1.8</maven.compiler.testTarget>
+        <encoding>UTF-8</encoding>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.apache.cxf</groupId>
-				<artifactId>cxf-rt-frontend-jaxws</artifactId>
-				<version>3.1.8</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.cxf</groupId>
-				<artifactId>cxf-rt-transports-http</artifactId>
-				<version>3.1.8</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.cxf</groupId>
-				<artifactId>cxf-rt-transports-http-jetty</artifactId>
-				<version>3.1.8</version>
-			</dependency>
+        <spring.version>4.3.8.RELEASE</spring.version>
+        <!--<project.parentBasedir>${project.parent.basedir}</project.parentBasedir> -->
+    </properties>
 
-
-			<!--web =================================================================================== -->
-			<dependency>
-				<groupId>javax.servlet</groupId>
-				<artifactId>javax.servlet-api</artifactId>
-				<version>3.1.0</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>javax.servlet.jsp</groupId>
-				<artifactId>javax.servlet.jsp-api</artifactId>
-				<version>2.3.1</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>javax.el</groupId>
-				<artifactId>javax.el-api</artifactId>
-				<version>3.0.0</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>javax.servlet</groupId>
-				<artifactId>jstl</artifactId>
-				<version>1.2</version>
-			</dependency>
-			<dependency>
-				<groupId>taglibs</groupId>
-				<artifactId>standard</artifactId>
-				<version>1.1.2</version>
-			</dependency>
-			<dependency>
-				<groupId>commons-fileupload</groupId>
-				<artifactId>commons-fileupload</artifactId>
-				<version>1.3.2</version>
-			</dependency>
-			<!--SSH spring mybatis =================================================================================== -->
-			<!--Spring -->
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-aop</artifactId>
-				<version>${spring.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-aspects</artifactId>
-				<version>${spring.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-beans</artifactId>
-				<version>${spring.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-context</artifactId>
-				<version>${spring.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-context-support</artifactId>
-				<version>${spring.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-core</artifactId>
-				<version>${spring.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-expression</artifactId>
-				<version>${spring.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-jdbc</artifactId>
-				<version>${spring.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-orm</artifactId>
-				<version>${spring.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-oxm</artifactId>
-				<version>${spring.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-tx</artifactId>
-				<version>${spring.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-web</artifactId>
-				<version>${spring.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-webmvc</artifactId>
-				<version>${spring.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-test</artifactId>
-				<version>${spring.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.hibernate</groupId>
-				<artifactId>hibernate-validator</artifactId>
-				<version>5.4.0.Final</version>
-			</dependency>
-			<!--Mybatis -->
-			<dependency>
-				<groupId>org.mybatis</groupId>
-				<artifactId>mybatis</artifactId>
-				<version>3.4.2</version>
-			</dependency>
-			<dependency>
-				<groupId>org.mybatis.generator</groupId>
-				<artifactId>mybatis-generator-core</artifactId>
-				<version>1.3.5</version>
-			</dependency>
-			<dependency>
-				<groupId>org.mybatis</groupId>
-				<artifactId>mybatis-spring</artifactId>
-				<version>1.3.1</version>
-			</dependency>
-			<!--Mybati 集成通用Mapper -->
-			<dependency>
-				<groupId>tk.mybatis</groupId>
-				<artifactId>mapper</artifactId>
-				<version>3.3.9</version>
-			</dependency>
-			<!--分页插件 -->
-			<dependency>
-				<groupId>com.github.pagehelper</groupId>
-				<artifactId>pagehelper</artifactId>
-				<version>4.1.6</version>
-			</dependency>
-			<dependency>
-				<groupId>com.github.jsqlparser</groupId>
-				<artifactId>jsqlparser</artifactId>
-				<version>0.9.6</version>
-			</dependency>
-
-			<!--database connector =================================================================================== -->
-			<dependency>
-				<groupId>mysql</groupId>
-				<artifactId>mysql-connector-java</artifactId>
-				<version>5.1.41</version>
-			</dependency>
-			<dependency>
-				<groupId>com.alibaba</groupId>
-				<artifactId>druid</artifactId>
-				<version>1.0.29</version>
-			</dependency>
-			<dependency>
-				<groupId>redis.clients</groupId>
-				<artifactId>jedis</artifactId>
-				<version>2.9.0</version>
-			</dependency>
-			<dependency>
-				<groupId>org.mongodb</groupId>
-				<artifactId>mongo-java-driver</artifactId>
-				<version>3.4.2</version>
-			</dependency>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-rt-frontend-jaxws</artifactId>
+                <version>3.1.8</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-rt-transports-http</artifactId>
+                <version>3.1.8</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-rt-transports-http-jetty</artifactId>
+                <version>3.1.8</version>
+            </dependency>
 
 
-			<!--common jar=================================================================================== -->
-			<dependency>
-				<groupId>javax.mail</groupId>
-				<artifactId>mail</artifactId>
-				<version>1.4.7</version>
-			</dependency>
-			<dependency>
-				<groupId>javax.inject</groupId>
-				<artifactId>javax.inject</artifactId>
-				<version>1</version>
-			</dependency>
-			<dependency>
-				<groupId>javax.persistence</groupId>
-				<artifactId>persistence-api</artifactId>
-				<version>1.0.2</version>
-			</dependency>
-			<dependency>
-				<groupId>javax.validation</groupId>
-				<artifactId>validation-api</artifactId>
-				<version>1.1.0.Final</version>
-			</dependency>
-			<!--1、BeanUtils 提供了对于JavaBean进行各种操作， 比如对象,属性复制等等。 -->
-			<dependency>
-				<groupId>commons-beanutils</groupId>
-				<artifactId>commons-beanutils</artifactId>
-				<version>1.9.3</version>
-			</dependency>
-			<!--ReflectASM 使用字节码生成的方式实现了更为高效的反射机制。执行时会生成一个存取类来 set/get 字段，访问方法或创建实例。一看到 
-				ASM 就能领悟到 ReflectASM 会用字节码生成的方式，而不是依赖于 Java 本身的反射机制来实现的，所以它更快，并且避免了访问原始类型因自动装箱而产生的问题。 -->
-			<dependency>
-				<groupId>com.esotericsoftware</groupId>
-				<artifactId>reflectasm</artifactId>
-				<version>1.11.3</version>
-			</dependency>
-			<!--2、XML -->
-			<!-- Java 领域 XML 文件的技术大致分为两类： XML API 和 OXMapping 。 XML API 是 XML 处理的基础，可选技术包括 
-				JDOM 、 Dom4j 等； OXMapping 是 Object-XML Mapping 的简称，这种技术隐藏了 XML 底层操作的细节，可以将 
-				XML 文件映射成一个 JavaBean 对象，也可以把一个 JavaBean 对象保存成一个 XML 文件， 可选技术 XStream 、 Digester 
-				、 Castor 等。 XML API 和 OXMapping 的关系类似于 JDBC 和 ORMaping 的关系， OXMapping 内部实现使用 
-				XML API 来完成，两种实现技术从不同的层面实现了 XML 的处理。 Dom4j是一个易用的、开源的库，用于XML，XPath和XSLT。它应用于Java平台，采用了Java集合框架并完全支持DOM，SAX和JAXP。Dom4j 
-				支持 XPath 等高级特性； OXMapping 框架，包括 XStream 、 Digester 、 Castor 等。 XStream 和 
-				Digester 把映射的过程在代码中完成，而 Castor 则需要写一个和 hibernate 中 cfg.xml 类似的映射配置文件。 XML三种解析方式比较 
-				DOM【系统自带】 优缺点：实现 W3C 标准，有多种编程语言支持这种解析方式，并且这种方法本身操作上简单快捷，十分易于初学者掌握。其处理方式是将 
-				XML 整个作为类似树结构的方式读入内存中以便操作及解析，因此支持应用程序对 XML 数据的内容和结构进行修改，但是同时由于其需要在处理开始时将整个 
-				XML 文件读入到内存中去进行分析，因此其在解析大数据量的 XML 文件时会遇到类似于内存泄露以及程序崩溃的风险，请对这点多加注意。 适用范围：小型 
-				XML 文件解析、需要全解析或者大部分解析 XML、需要修改 XML 树内容以生成自己的对象模型 SAX【系统自带】 SAX 从根本上解决了 DOM 
-				在解析 XML 文档时产生的占用大量资源的问题。其实现是通过类似于流解析的技术，通读整个 XML 文档树，通过事件处理器来响应程序员对于 XML 
-				数据解析的需求。由于其不需要将整个 XML 文档读入内存当中，它对系统资源的节省是十分显而易见的，它在一些需要处理大型 XML 文档以及性能要求较高的场合有起了十分重要的作用。支持 
-				XPath 查询的 SAX 使得开发人员更加灵活，处理起 XML 来更加的得心应手。但是同时，其仍然有一些不足之处也困扰广大的开发人员：首先是它十分复杂的 
-				API 接口令人望而生畏，其次由于其是属于类似流解析的文件扫描方式，因此不支持应用程序对于 XML 树内容结构等的修改，可能会有不便之处。 适用范围：大型 
-				XML 文件解析、只需要部分解析或者只想取得部分 XML 树内容、有 XPath 查询需求、有自己生成特定 XML 树对象模型的需求 Digester【apache】/JAXB2【系统自带】 
-				优缺点 : 由于其是在上述两者的基础上衍生出来的工具类，为的是满足将 XML 转换为 JavaBean 的特殊需求，故而没有什么特别明显的优缺点。作为大名鼎鼎的开源框架 
-				Struts 的 XML 解析工具 Digester，为我们带来了将 XML 转换为 JavaBean 的可靠方法。 适用范围 : 有将 XML 
-				文档直接转换为 JavaBean 需求。 Digester底层实现原理就是Stax JAXB vs XStream 这两东东本质上是有差别的，JAXB称为OX 
-				binding工具，XStream应该算序列化工具，但OX binding工具也会marshall和unmarshall，所以包含了序列化这一部分。 
-				序列化工具不一定需要提供binding的功能。既然都玩序列化，那就简单地比较一下它们两在序列化方面的强弱吧。数据量XStream占优势，时间性能上Toplink 
-				Jaxb占明显优势 JAXB: 优点【J2EE标准、运行时间比XStream少】 缺点 用起来不方便：需要把手动的把business object转换成schema 
-				object，当然也可以直接将schema object作为business object，或者采用反射的方法。 有一定的局限性：需要schema或者annotation、数据量稍大 
-				XStream优点：用起来方便，不需要schema，拿过来就转、数据量稍小。 缺点：非标准、时间性能差 -->
-			<dependency>
-				<groupId>org.apache.commons</groupId>
-				<artifactId>commons-digester3</artifactId>
-				<version>3.2</version>
-			</dependency>
-			<dependency>
-				<groupId>com.thoughtworks.xstream</groupId>
-				<artifactId>xstream</artifactId>
-				<version>1.4.9</version>
-			</dependency>
-			<dependency>
-				<groupId>dom4j</groupId>
-				<artifactId>dom4j</artifactId>
-				<version>1.6.1</version>
-			</dependency>
-			<!--3、Codec 提供了一些公共的编解码实现，比如Base64, Hex, MD5,Phonetic and URLs等等。 -->
-			<dependency>
-				<groupId>commons-codec</groupId>
-				<artifactId>commons-codec</artifactId>
-				<version>1.10</version>
-			</dependency>
-			<!--4、Collections 对java.util的扩展封装，处理数据还是挺灵活的。 -->
-			<dependency>
-				<groupId>commons-collections</groupId>
-				<artifactId>commons-collections</artifactId>
-				<version>3.2.2</version>
-			</dependency>
-			<!--5、Compress commons compress中的打包、压缩类库。 -->
-			<dependency>
-				<groupId>org.apache.commons</groupId>
-				<artifactId>commons-compress</artifactId>
-				<version>1.13</version>
-			</dependency>
-			<!--6、Configuration 用来帮助处理配置文件的，支持很多种存储方式。 -->
-			<dependency>
-				<groupId>commons-configuration</groupId>
-				<artifactId>commons-configuration</artifactId>
-				<version>1.10</version>
-			</dependency>
-			<!--7、DbUtils Apache组织提供的一个资源JDBC工具类库，它是对JDBC的简单封装，对传统操作数据库的类进行二次封装，可以把结果集转化成List。，同时也不影响程序的性能。 -->
-			<dependency>
-				<groupId>commons-dbutils</groupId>
-				<artifactId>commons-dbutils</artifactId>
-				<version>1.6</version>
-			</dependency>
-			<!--8、基于HttpCore实 现的一个HTTP/1.1兼容的HTTP客户端，它提供了一系列可重用的客户端身份验证、HTTP状态保持、HTTP连接管理module。 -->
-			<dependency>
-				<groupId>org.apache.httpcomponents</groupId>
-				<artifactId>httpclient</artifactId>
-				<version>4.5.3</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.httpcomponents</groupId>
-				<artifactId>httpmime</artifactId>
-				<version>4.5.3</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.httpcomponents</groupId>
-				<artifactId>httpcore</artifactId>
-				<version>4.4.6</version>
-			</dependency>
-			<!--9、IO 对java.io的扩展 操作文件非常方便。 -->
-			<dependency>
-				<groupId>commons-io</groupId>
-				<artifactId>commons-io</artifactId>
-				<version>2.5</version>
-			</dependency>
-			<!--10、Lang 主要是一些公共的工具集合，比如对字符、数组的操作等等。 -->
-			<dependency>
-				<groupId>org.apache.commons</groupId>
-				<artifactId>commons-lang3</artifactId>
-				<version>3.5</version>
-			</dependency>
-			<!--11、FTP -->
-			<dependency>
-				<groupId>commons-net</groupId>
-				<artifactId>commons-net</artifactId>
-				<version>3.6</version>
-			</dependency>
-			<!--12、Logging 提供的是一个Java 的日志接口,同时兼顾轻量级和不依赖于具体的日志实现工具。 -->
-			<dependency>
-				<groupId>commons-logging</groupId>
-				<artifactId>commons-logging</artifactId>
-				<version>1.2</version>
-			</dependency>
-			<!--日志 -->
-			<dependency>
-				<groupId>log4j</groupId>
-				<artifactId>log4j</artifactId>
-				<version>1.2.17</version>
-			</dependency>
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-api</artifactId>
-				<version>1.7.24</version>
-			</dependency>
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-log4j12</artifactId>
-				<version>1.7.24</version>
-			</dependency>
-			<!--JSON -->
-			<dependency>
-				<groupId>com.alibaba</groupId>
-				<artifactId>fastjson</artifactId>
-				<version>1.2.28</version>
-			</dependency>
-			<dependency>
-				<groupId>com.fasterxml.jackson.core</groupId>
-				<artifactId>jackson-core</artifactId>
-				<version>2.8.7</version>
-			</dependency>
-			<dependency>
-				<groupId>com.fasterxml.jackson.core</groupId>
-				<artifactId>jackson-annotations</artifactId>
-				<version>2.8.7</version>
-			</dependency>
-			<dependency>
-				<groupId>com.fasterxml.jackson.core</groupId>
-				<artifactId>jackson-databind</artifactId>
-				<version>2.8.7</version>
-			</dependency>
-			<dependency>
-				<groupId>org.aspectj</groupId>
-				<artifactId>aspectjrt</artifactId>
-				<version>1.8.10</version>
-			</dependency>
-			<dependency>
-				<groupId>org.aspectj</groupId>
-				<artifactId>aspectjweaver</artifactId>
-				<version>1.8.10</version>
-			</dependency>
-			<!--<dependency> -->
-			<!--<groupId>org.aspectj</groupId> -->
-			<!--<artifactId>aspectjtools</artifactId> -->
-			<!--<version>1.8.10</version> -->
-			<!--</dependency> -->
-			<dependency>
-				<groupId>org.quartz-scheduler</groupId>
-				<artifactId>quartz</artifactId>
-				<version>2.2.3</version>
-			</dependency>
-			<!-- 上传Excel文件 -->
-			<dependency>
-				<groupId>org.apache.poi</groupId>
-				<artifactId>poi</artifactId>
-				<version>3.15</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.poi</groupId>
-				<artifactId>poi-ooxml</artifactId>
-				<version>3.15</version>
-			</dependency>
-			<dependency>
-				<groupId>org.freemarker</groupId>
-				<artifactId>freemarker</artifactId>
-				<version>2.3.23</version>
-			</dependency>
+            <!--web =================================================================================== -->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>3.1.0</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>javax.servlet.jsp</groupId>
+                <artifactId>javax.servlet.jsp-api</artifactId>
+                <version>2.3.1</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>javax.el</groupId>
+                <artifactId>javax.el-api</artifactId>
+                <version>3.0.0</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>jstl</artifactId>
+                <version>1.2</version>
+            </dependency>
+            <dependency>
+                <groupId>taglibs</groupId>
+                <artifactId>standard</artifactId>
+                <version>1.1.2</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-fileupload</groupId>
+                <artifactId>commons-fileupload</artifactId>
+                <version>1.3.2</version>
+            </dependency>
+            <!--SSH spring mybatis =================================================================================== -->
+            <!--Spring -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aop</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aspects</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-beans</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context-support</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-expression</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jdbc</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-orm</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-oxm</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-tx</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-validator</artifactId>
+                <version>5.4.0.Final</version>
+            </dependency>
+            <!--Mybatis -->
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>3.4.2</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-core</artifactId>
+                <version>1.3.5</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis-spring</artifactId>
+                <version>1.3.1</version>
+            </dependency>
+            <!--Mybati 集成通用Mapper -->
+            <dependency>
+                <groupId>tk.mybatis</groupId>
+                <artifactId>mapper</artifactId>
+                <version>3.3.9</version>
+            </dependency>
+            <!--分页插件 -->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper</artifactId>
+                <version>4.1.6</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.jsqlparser</groupId>
+                <artifactId>jsqlparser</artifactId>
+                <version>0.9.6</version>
+            </dependency>
 
-			<!--test testNG mockito =================================================================================== -->
-			<dependency>
-				<groupId>org.testng</groupId>
-				<artifactId>testng</artifactId>
-				<version>6.11</version>   <!--jdk1.5 最高版本5.11 -->
-				<scope>test</scope>
-				<!-- 很多人对classifier会有点陌生，事实上maven的包名是这样构成的 <artifactId>-<version>-<classifier>.<packaging> 
-					（这里仅仅是针对编译后的jar包，如果是sources或者javadoc，则会变成 <artifactId>-<version>-<classifier>-<type>.<packaging>,这里<type>可以替换成sources或者javadoc）。 
-					那么按照这个规则，testng在maven仓库里完整的包名就应该是：testng-5.11-jdk15.jar classifier主要是用来区分不同环境或者不同jdk版本的。 -->
-				<!--<classifier>jdk15</classifier> -->
-			</dependency>
-			<dependency>
-				<groupId>org.hamcrest</groupId>
-				<artifactId>hamcrest-core</artifactId>
-				<version>1.3</version>
-				<scope>test</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.hamcrest</groupId>
-				<artifactId>hamcrest-all</artifactId>
-				<version>1.3</version>
-				<scope>test</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.mockito</groupId>
-				<artifactId>mockito-core</artifactId>
-				<version>2.7.17</version>
-				<scope>test</scope>
-			</dependency>
-			<!--test testNG mockito =================================================================================== -->
-		</dependencies>
-	</dependencyManagement>
+            <!--database connector =================================================================================== -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>5.1.41</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>1.0.29</version>
+            </dependency>
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>2.9.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mongodb</groupId>
+                <artifactId>mongo-java-driver</artifactId>
+                <version>3.4.2</version>
+            </dependency>
 
 
-	<build>
-		<finalName>${project.artifactId}</finalName>
+            <!--common jar=================================================================================== -->
+            <dependency>
+                <groupId>javax.mail</groupId>
+                <artifactId>mail</artifactId>
+                <version>1.4.7</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.inject</groupId>
+                <artifactId>javax.inject</artifactId>
+                <version>1</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.persistence</groupId>
+                <artifactId>persistence-api</artifactId>
+                <version>1.0.2</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.validation</groupId>
+                <artifactId>validation-api</artifactId>
+                <version>1.1.0.Final</version>
+            </dependency>
+            <!--1、BeanUtils 提供了对于JavaBean进行各种操作， 比如对象,属性复制等等。 -->
+            <dependency>
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils</artifactId>
+                <version>1.9.3</version>
+            </dependency>
+            <!--ReflectASM 使用字节码生成的方式实现了更为高效的反射机制。执行时会生成一个存取类来 set/get 字段，访问方法或创建实例。一看到
+                ASM 就能领悟到 ReflectASM 会用字节码生成的方式，而不是依赖于 Java 本身的反射机制来实现的，所以它更快，并且避免了访问原始类型因自动装箱而产生的问题。 -->
+            <dependency>
+                <groupId>com.esotericsoftware</groupId>
+                <artifactId>reflectasm</artifactId>
+                <version>1.11.3</version>
+            </dependency>
+            <!--2、XML -->
+            <!-- Java 领域 XML 文件的技术大致分为两类： XML API 和 OXMapping 。 XML API 是 XML 处理的基础，可选技术包括
+                JDOM 、 Dom4j 等； OXMapping 是 Object-XML Mapping 的简称，这种技术隐藏了 XML 底层操作的细节，可以将
+                XML 文件映射成一个 JavaBean 对象，也可以把一个 JavaBean 对象保存成一个 XML 文件， 可选技术 XStream 、 Digester
+                、 Castor 等。 XML API 和 OXMapping 的关系类似于 JDBC 和 ORMaping 的关系， OXMapping 内部实现使用
+                XML API 来完成，两种实现技术从不同的层面实现了 XML 的处理。 Dom4j是一个易用的、开源的库，用于XML，XPath和XSLT。它应用于Java平台，采用了Java集合框架并完全支持DOM，SAX和JAXP。Dom4j
+                支持 XPath 等高级特性； OXMapping 框架，包括 XStream 、 Digester 、 Castor 等。 XStream 和
+                Digester 把映射的过程在代码中完成，而 Castor 则需要写一个和 hibernate 中 cfg.xml 类似的映射配置文件。 XML三种解析方式比较
+                DOM【系统自带】 优缺点：实现 W3C 标准，有多种编程语言支持这种解析方式，并且这种方法本身操作上简单快捷，十分易于初学者掌握。其处理方式是将
+                XML 整个作为类似树结构的方式读入内存中以便操作及解析，因此支持应用程序对 XML 数据的内容和结构进行修改，但是同时由于其需要在处理开始时将整个
+                XML 文件读入到内存中去进行分析，因此其在解析大数据量的 XML 文件时会遇到类似于内存泄露以及程序崩溃的风险，请对这点多加注意。 适用范围：小型
+                XML 文件解析、需要全解析或者大部分解析 XML、需要修改 XML 树内容以生成自己的对象模型 SAX【系统自带】 SAX 从根本上解决了 DOM
+                在解析 XML 文档时产生的占用大量资源的问题。其实现是通过类似于流解析的技术，通读整个 XML 文档树，通过事件处理器来响应程序员对于 XML
+                数据解析的需求。由于其不需要将整个 XML 文档读入内存当中，它对系统资源的节省是十分显而易见的，它在一些需要处理大型 XML 文档以及性能要求较高的场合有起了十分重要的作用。支持
+                XPath 查询的 SAX 使得开发人员更加灵活，处理起 XML 来更加的得心应手。但是同时，其仍然有一些不足之处也困扰广大的开发人员：首先是它十分复杂的
+                API 接口令人望而生畏，其次由于其是属于类似流解析的文件扫描方式，因此不支持应用程序对于 XML 树内容结构等的修改，可能会有不便之处。 适用范围：大型
+                XML 文件解析、只需要部分解析或者只想取得部分 XML 树内容、有 XPath 查询需求、有自己生成特定 XML 树对象模型的需求 Digester【apache】/JAXB2【系统自带】
+                优缺点 : 由于其是在上述两者的基础上衍生出来的工具类，为的是满足将 XML 转换为 JavaBean 的特殊需求，故而没有什么特别明显的优缺点。作为大名鼎鼎的开源框架
+                Struts 的 XML 解析工具 Digester，为我们带来了将 XML 转换为 JavaBean 的可靠方法。 适用范围 : 有将 XML
+                文档直接转换为 JavaBean 需求。 Digester底层实现原理就是Stax JAXB vs XStream 这两东东本质上是有差别的，JAXB称为OX
+                binding工具，XStream应该算序列化工具，但OX binding工具也会marshall和unmarshall，所以包含了序列化这一部分。
+                序列化工具不一定需要提供binding的功能。既然都玩序列化，那就简单地比较一下它们两在序列化方面的强弱吧。数据量XStream占优势，时间性能上Toplink
+                Jaxb占明显优势 JAXB: 优点【J2EE标准、运行时间比XStream少】 缺点 用起来不方便：需要把手动的把business object转换成schema
+                object，当然也可以直接将schema object作为business object，或者采用反射的方法。 有一定的局限性：需要schema或者annotation、数据量稍大
+                XStream优点：用起来方便，不需要schema，拿过来就转、数据量稍小。 缺点：非标准、时间性能差 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-digester3</artifactId>
+                <version>3.2</version>
+            </dependency>
+            <dependency>
+                <groupId>com.thoughtworks.xstream</groupId>
+                <artifactId>xstream</artifactId>
+                <version>1.4.9</version>
+            </dependency>
+            <dependency>
+                <groupId>dom4j</groupId>
+                <artifactId>dom4j</artifactId>
+                <version>1.6.1</version>
+            </dependency>
+            <!--3、Codec 提供了一些公共的编解码实现，比如Base64, Hex, MD5,Phonetic and URLs等等。 -->
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>1.10</version>
+            </dependency>
+            <!--4、Collections 对java.util的扩展封装，处理数据还是挺灵活的。 -->
+            <dependency>
+                <groupId>commons-collections</groupId>
+                <artifactId>commons-collections</artifactId>
+                <version>3.2.2</version>
+            </dependency>
+            <!--5、Compress commons compress中的打包、压缩类库。 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-compress</artifactId>
+                <version>1.13</version>
+            </dependency>
+            <!--6、Configuration 用来帮助处理配置文件的，支持很多种存储方式。 -->
+            <dependency>
+                <groupId>commons-configuration</groupId>
+                <artifactId>commons-configuration</artifactId>
+                <version>1.10</version>
+            </dependency>
+            <!--7、DbUtils Apache组织提供的一个资源JDBC工具类库，它是对JDBC的简单封装，对传统操作数据库的类进行二次封装，可以把结果集转化成List。，同时也不影响程序的性能。 -->
+            <dependency>
+                <groupId>commons-dbutils</groupId>
+                <artifactId>commons-dbutils</artifactId>
+                <version>1.6</version>
+            </dependency>
+            <!--8、基于HttpCore实 现的一个HTTP/1.1兼容的HTTP客户端，它提供了一系列可重用的客户端身份验证、HTTP状态保持、HTTP连接管理module。 -->
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>4.5.3</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpmime</artifactId>
+                <version>4.5.3</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpcore</artifactId>
+                <version>4.4.6</version>
+            </dependency>
+            <!--9、IO 对java.io的扩展 操作文件非常方便。 -->
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>2.5</version>
+            </dependency>
+            <!--10、Lang 主要是一些公共的工具集合，比如对字符、数组的操作等等。 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>3.5</version>
+            </dependency>
+            <!--11、FTP -->
+            <dependency>
+                <groupId>commons-net</groupId>
+                <artifactId>commons-net</artifactId>
+                <version>3.6</version>
+            </dependency>
+            <!--12、Logging 提供的是一个Java 的日志接口,同时兼顾轻量级和不依赖于具体的日志实现工具。 -->
+            <dependency>
+                <groupId>commons-logging</groupId>
+                <artifactId>commons-logging</artifactId>
+                <version>1.2</version>
+            </dependency>
+            <!--日志 -->
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>1.2.17</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>1.7.24</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>1.7.24</version>
+            </dependency>
+            <!--JSON -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>1.2.28</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>2.8.7</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>2.8.7</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>2.8.7</version>
+            </dependency>
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjrt</artifactId>
+                <version>1.8.10</version>
+            </dependency>
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>1.8.10</version>
+            </dependency>
+            <!--<dependency> -->
+            <!--<groupId>org.aspectj</groupId> -->
+            <!--<artifactId>aspectjtools</artifactId> -->
+            <!--<version>1.8.10</version> -->
+            <!--</dependency> -->
+            <dependency>
+                <groupId>org.quartz-scheduler</groupId>
+                <artifactId>quartz</artifactId>
+                <version>2.2.3</version>
+            </dependency>
+            <!-- 上传Excel文件 -->
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi</artifactId>
+                <version>3.15</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml</artifactId>
+                <version>3.15</version>
+            </dependency>
+            <dependency>
+                <groupId>org.freemarker</groupId>
+                <artifactId>freemarker</artifactId>
+                <version>2.3.23</version>
+            </dependency>
 
-		<resources>
-			<resource>
-				<directory>src/main/resources</directory>
-				<!--资源根目录排除各环境的配置，使用单独的资源目录来指定 -->
-				<excludes>
-					<exclude>environment/dev/*</exclude>
-					<exclude>environment/prod1/*</exclude>
-					<exclude>environment/prod2/*</exclude>
-					<exclude>environment/test/*</exclude>
-					<exclude>environment/template/*</exclude>
-				</excludes>
-			</resource>
-			<!--<resource> -->
-			<!--<directory>src/main/resources/environment/${env}</directory> -->
-			<!--</resource> -->
-		</resources>
-
-		<pluginManagement>
-			<plugins>
-				<!--jrebel 热部署插件,用来生成rebel.xml文件 -->
-				<plugin>
-					<groupId>org.zeroturnaround</groupId>
-					<artifactId>jrebel-maven-plugin</artifactId>
-					<version>1.1.6</version>
-					<configuration>
-						<addResourcesDirToRebelXml>true</addResourcesDirToRebelXml>
-						<alwaysGenerate>true</alwaysGenerate>
-						<showGenerated>true</showGenerated>
-						<!-- 指定生成的jrebel.xml放在哪里， 要求放在web应用的 classpath下 -->
-						<rebelXmlDirectory>${basedir}/target/classes</rebelXmlDirectory>
-					</configuration>
-					<executions>
-						<execution>
-							<id>generate-rebel-xml</id>
-							<phase>process-resources</phase>
-							<goals>
-								<goal>generate</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
-
-
-				<!--jetty-maven-plugin -->
-				<plugin>
-					<groupId>org.eclipse.jetty</groupId>
-					<artifactId>jetty-maven-plugin</artifactId>
-					<version>9.4.2.v20170220</version>
-					<configuration>
-						<httpConnector>                         <!--端口配置 -->
-							<port>8080</port>                   <!--连接器监听的端口号。 默认情况下它是8080。 -->
-							<idleTimeout>60000</idleTimeout>    <!--最大空闲时间联系。 -->
-						</httpConnector>
-						<stopPort>8888</stopPort>               <!--stopPort 可选。端口用于监听停止命令。运行stop或者run-forked目标时使用。 -->
-						<stopKey>shutdown</stopKey>             <!--stopKey 可选。用于和stopPort联合使用，用于停止jetty。运行stop或者run-forked目标时使用。 -->
-
-						<!--热部署 |scanIntervalSeconds | 扫描webapp变化的间隔，单位秒，当扫描到变化后，将执行自动热重部署。默认是0，表示停止热部署扫描。配置值大于0激活它。 
-							|reload 默认值“automatic”，与scanIntervalSeconds联合使用，表示当改变发生时，自动热重部署。 | 设置到“manual”，表示你需要在控制台执行换行来触发插件执行扫描。这有时候是有用的，当你一次做一系列的改变，你想忽略中间的改变时，就可以使用reload参数。 
-							| -->
-						<scanIntervalSeconds>0</scanIntervalSeconds>
-						<reload>automatic</reload>
-
-						<webApp><!--配置你的WebApp -->
-							<contextPath>/${project.artifactId}</contextPath> <!--你的应用的上下文路径。 默认情况下,这个设置/。 -->
-							<!--descriptor：web.xml文件的路径。 -->
-							<!--baseResource：Jetty提供静态资源的路径，默认是src/main/webapp。 -->
-							<!--resourceBases：用于代替baseResource提供静态资源，是一个数组，可以提供多个提供静态资源的文件夹。 -->
-							<!--webAppSourceDirectory 默认情况下,这个设置${project.basedir}/src/main/webapp 
-								。 如果你的静态资源在不同的位置,设置相应的参数。 -->
-							<defaultsDescriptor>src/test/resources/webdefault.xml</defaultsDescriptor><!--webdefault.xml的路径，在web.xml之前使用。如果你不提供，Jetty用一个默认文件，在jetty-webapp.jar中。 -->
-
-							<!-- 设置其他项目extraClasspath，多个用";"隔开。启动的时候，会直接编译依赖模块的target/classes，就直接忽略了clean 
-								install产生的jar -->
-							<extraClasspath>../fleet-core/target/classes;../fleet-service/target/classes;</extraClasspath>
-						</webApp>
-
-						<!--scanTargets 可选的。除了插件自动扫描的文件和目录之外，还要定期扫描的文件和目录列表。 -->
-						<scanTargets>
-							<scanTarget>../fleet-core/target/classes;</scanTarget>
-							<scanTarget>../fleet-service/target/classes;</scanTarget>
-						</scanTargets>
-						<!--scanTargetPatterns 可选的。如果您有一个长列表的额外文件，你想扫描，更方便的使用模式匹配表达式来指定它们，而不是使用scanTargetPatterns的scanTargetsList枚举它们，每个组成一个目录，包括和/或排除参数指定文件匹配模式。指定额外需要监控变化的文件或文件夹，主要用于热部署中的识别文件更新 -->
-						<!--scanClassesPattern 自9.3.0。可选的。包含和排除可应用于classesDirectory以用于扫描目的的模式，它不会影响类路径。如果文件或目录被模式排除，那么将忽略该文件（或在目录的情况下为子树）的更改，并且不会导致webapp重新部署。模式被指定为使用类似于glob的语法的相对路径，如FileSystem.getPathMatcher的javadoc中所述。 -->
-						<!--scanTestClassesPattern 自9.3.0。可选的。包括和排除可应用于testClassesDirectory以便进行扫描的模式，它不会影响类路径。如果文件或目录被模式排除，那么将忽略该文件（或在目录的情况下为子树）的更改，并且不会导致webapp重新部署。模式被指定为使用类似于glob的语法的相对路径，如FileSystem.getPathMatcher的javadoc中所述。 -->
-					</configuration>
-					<dependencies>
-						<dependency>
-							<groupId>org.eclipse.jetty</groupId>
-							<artifactId>jetty-webapp</artifactId>
-							<version>9.4.2.v20170220</version>
-						</dependency>
-					</dependencies>
-				</plugin>
-				<!--tomcat-maven-plugin -->
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>tomcat-maven-plugin</artifactId>
-					<version>1.1</version>
-					<configuration>
-						<url>${tomcat-maven-plugin.manager.url}</url>
-						<username>${tomcat-maven-plugin.manager.username}</username>
-						<password>${tomcat-maven-plugin.manager.password}</password>
-						<uriEncoding>UTF-8</uriEncoding>        <!--uriEncoding URL按UTF-8进行编码，这样就解决了中文参数乱码。 -->
-					</configuration>
-				</plugin>
-				<!--添加sql-maven-plugin插件 <executions> <execution> <id>drop-db-before-test-if-any</id> 
-					<phase>process-test-resources</phase> <goals> &lt;!&ndash;suppress MybatisMapperXmlInspection 
-					&ndash;&gt; <goal>execute</goal> </goals> <configuration> <autocommit>true</autocommit> 
-					<sqlCommand>DROP DATABASE IF EXISTS fleet_supeng;</sqlCommand> &lt;!&ndash;<onError>continue</onError>&ndash;&gt; 
-					</configuration> </execution> &lt;!&ndash;创建数据库&ndash;&gt; <execution> <id>create-db</id> 
-					<phase>process-test-resources</phase> <goals> &lt;!&ndash;suppress MybatisMapperXmlInspection 
-					&ndash;&gt; <goal>execute</goal> </goals> <configuration> <autocommit>true</autocommit> 
-					<sqlCommand>CREATE DATABASE IF NOT EXISTS fleet_supeng DEFAULT CHARSET utf8 
-					COLLATE utf8_general_ci; </sqlCommand> </configuration> </execution> &lt;!&ndash;创建数据表&ndash;&gt; 
-					<execution> &lt;!&ndash;<id>default-cli</id>&ndash;&gt; <id>create-schema</id> 
-					<phase>process-test-resources</phase> <goals> &lt;!&ndash;suppress MybatisMapperXmlInspection 
-					&ndash;&gt; <goal>execute</goal> </goals> <configuration> <url>jdbc:mysql://192.168.1.10:3306/fleet_supeng?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;allowMultiQueries=true</url> 
-					<autocommit>true</autocommit> <srcFiles> <srcFile>src/main/resources/dbscript/create_all_tables.sql</srcFile> 
-					<srcFile>src/main/resources/dbscript/patch.sql</srcFile> </srcFiles> </configuration> 
-					</execution> <execution> <id>insert-data</id> <phase>process-test-resources</phase> 
-					<goals> &lt;!&ndash;suppress MybatisMapperXmlInspection &ndash;&gt; <goal>execute</goal> 
-					</goals> <configuration> <url>jdbc:mysql://192.168.1.10:3306/fleet_supeng?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;allowMultiQueries=true</url> 
-					<autocommit>true</autocommit> <orderFile>ascending</orderFile> &lt;!&ndash;<srcFiles>&ndash;&gt; 
-					&lt;!&ndash;<srcFile>src/test/resources/init-TestData.sql</srcFile>&ndash;&gt; 
-					&lt;!&ndash;<srcFile>src/test/resources/init-TestData-latlngdata.sql</srcFile>&ndash;&gt; 
-					&lt;!&ndash;</srcFiles>&ndash;&gt; <fileset> <basedir>${basedir}</basedir> 
-					<includes> <include>src/test/resources/init-TestData.sql</include> </includes> 
-					</fileset> </configuration> </execution> </executions> -->
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>sql-maven-plugin</artifactId>
-					<version>1.5</version>
-					<!-- specify the dependent JDBC driver here 因为该实例中用到的数据库是mysql,故需依赖于mysql连接驱动 -->
-					<dependencies>
-						<dependency>
-							<groupId>mysql</groupId>
-							<artifactId>mysql-connector-java</artifactId>
-							<version>5.1.41</version>
-						</dependency>
-					</dependencies>
-					<!--为该插件配置数据库连接信息 -->
-					<configuration>
-						<forceMojoExecution>true</forceMojoExecution>
-						<driver>com.mysql.jdbc.Driver</driver>
-						<url>${sql-maven-plugin.url}</url>
-						<username>${sql-maven-plugin.username}</username>
-						<password>${sql-maven-plugin.password}</password>
-						<encoding>utf-8</encoding>
-						<!--动作执行如果发现一个错误。 可能的值是 中止abort 和 继续continue 。默认的 : 中止abort -->
-						<onError>abort</onError>
-						<!--<printResultSet>true</printResultSet> -->
-					</configuration>
-				</plugin>
-				<plugin><!--mybatis-generator-maven-plugin 生成mybatis映射 -->
-					<groupId>org.mybatis.generator</groupId>
-					<artifactId>mybatis-generator-maven-plugin</artifactId>
-					<version>1.3.2</version>
-					<dependencies>
-						<dependency>
-							<groupId>mysql</groupId>
-							<artifactId>mysql-connector-java</artifactId>
-							<version>5.1.41</version>
-						</dependency>
-						<dependency>
-							<groupId>org.mybatis.generator</groupId>
-							<artifactId>mybatis-generator-core</artifactId>
-							<version>1.3.5</version>
-						</dependency>
-						<dependency>
-							<groupId>tk.mybatis</groupId>
-							<artifactId>mapper</artifactId>
-							<version>3.3.9</version>
-						</dependency>
-					</dependencies>
-					<configuration>
-						<verbose>true</verbose>
-						<overwrite>true</overwrite>
-						<configurationFile>${project.basedir}/src/main/resources/generatorConfig.xml
-						</configurationFile>
-					</configuration>
-				</plugin>
-
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-resources-plugin</artifactId>
-					<version>3.0.2</version>
-					<configuration>
-						<encoding>UTF-8</encoding>
-					</configuration>
-				</plugin>
-
-				<!--maven-compiler-plugin 编译配置 | 1、默认绑定到 compile phase。 | 2、当前版本的maven默认使用jdk1.5，使用更新的java版本必须手动配置。 
-					| 3、指定编码格式，否则在DOS下运行mvn compile命令时会出现莫名的错误，因为系统默认使用GBK编码 -->
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.6.1</version>
-					<configuration>
-						<source>1.8</source>
-						<target>1.8</target>
-						<compilerVersion>1.8</compilerVersion>
-						<encoding>UTF-8</encoding>
-					</configuration>
-				</plugin>
-				<!--maven-surefire-plugin 单元测试 | surefire 插件用来在maven构建生命周期的test phase执行一个应用的单元测试。它会产生两种不同形式的测试结果报告： 
-					| 1）.纯文本 | 2）.xml文件格式的 | 默认情况下，这些文件生成在工程的${basedir}/target/surefire-reports，目录下（basedir指的是pom文件所在的目录）。 
-					| 它可以运行任何testNG,Junit,pojo写的单元测试 | 1、默认绑定到test阶段。 | 2、测试有失败用例时，是否继续构建 <testFailureIgnore>true</testFailureIgnore> 
-					| 3、是否跳过测试阶段，ture 会跳过测试和编译阶段 <skip>false</skip> | 4、是否跳过测试阶段，true 会跳过测试，但仍然进行编译 
-					<skipTests>false</skipTests> | -->
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-surefire-plugin</artifactId>
-					<version>2.19.1</version>
-					<configuration>
-						<argLine>-Dfile.encoding=UTF-8</argLine>
-						<!--forkMode 可设置值有 “never”， “once”， “always” 和 “pertest”。 | pretest： 
-							每一个测试创建一个新进程，为每个测试创建新的JVM是单独测试的最彻底方式，但也是最慢的，不适合hudson上持续回归。 | once：在一个进程中进行所有测试。once为默认设置，在Hudson上持续回归时建议使用默认设置。 
-							| always：在一个进程中并行的运行脚本，Junit4.7以上版本才可以使用，surefire的版本要在2.6以上提供这个功能，其中 | threadCount：执行时，指定可分配的线程数量。只和参数parallel配合使用有效。默认：5。 
-							| <threadCount>10</threadCount> | <parallel>true</parallel> | -->
-						<!--<forkMode>always</forkMode> -->
-						<!--<threadCount>5</threadCount> -->
-						<!--<parallel>true</parallel> -->
-						<includes>
-							<include>**/*Test.java</include>
-						</includes>
-
-						<!--额外的类路径元素 | 如果你需要把更多的东西在您的类路径中成功的执行(e。 g一些时髦的资源或一个容器特定的JAR),我们通常建议你将它添加到您的类路径依赖。 
-							考虑部署远程共享jar私人库为您的组织。 | 但是,如果你一定要,你可以使用 additionalClasspathElements 元素自定义资源/ 
-							jar添加到您的类路径中。 | 这将被视为绝对文件系统路径,所以您可能希望使用$ { basedir }或另一个属性加上一个相对路径。 | 注意,其他类路径元素被添加到类路径中,所以你不能使用这些覆盖项目依赖关系或资源。 
-							| -->
-						<!--<additionalClasspathElements> -->
-						<!--<additionalClasspathElement>${project.basedir}/src/test/resources/environment/${env}</additionalClasspathElement> -->
-						<!--</additionalClasspathElements> -->
-					</configuration>
-				</plugin>
-				<!--maven-jar-plugin -->
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-jar-plugin</artifactId>
-					<version>3.0.2</version>
-					<configuration>
-						<excludes>
-							<exclude>**/*.properties</exclude>
-						</excludes>
-					</configuration>
-				</plugin>
-				<!--maven-source-plugin -->
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-source-plugin</artifactId>
-					<version>3.0.1</version>
-					<!--<executions><execution><phase>compile</phase><goals><goal>jar</goal><goal>test-jar</goal></goals></execution></executions> -->
-				</plugin>
-				<!--maven-javadoc-plugin -->
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-javadoc-plugin</artifactId>
-					<version>2.10.4</version>
-					<!--<executions><execution><phase>compile</phase><goals><goal>javadoc</goal><goal>test-javadoc</goal></goals></execution></executions> -->
-					<configuration>
-						<show>private</show>
-						<nohelp>true</nohelp>
-						<encoding>UTF-8</encoding>
-					</configuration>
-				</plugin>
-				<!--maven-war-plugin -->
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-war-plugin</artifactId>
-					<version>3.0.0</version>
-					<!--<configuration> -->
-					<!--<webResources> -->
-					<!--<resource> -->
-					<!--<directory>src/main/resources/environment/${env}</directory> -->
-					<!--<targetPath>WEB-INF/classes</targetPath> -->
-					<!--<filtering>true</filtering> -->
-					<!--</resource> -->
-					<!--</webResources> -->
-					<!--</configuration> -->
-				</plugin>
-
-				<!--maven-assembly-plugin 的用途是制作项目分发包， | 该分发包可能包含了项目的可执行文件、源代码、readme、平台脚本等等。 
-					| maven-assembly-plugin支持各种主流的格式如zip、tar.gz、jar和war等， | 具体打包哪些文件是高度可控的，例如用户可以 
-					按文件级别的粒度、文件集级别的粒度、模块级别的粒度、以及依赖级别的粒度控制打包， | 此外，包含和排除配置也是支持的。maven-assembly- 
-					plugin要求用户使用一个名为assembly.xml的元数据文件来表述打包， | 它的single目标可以直接在命令行调用，也可以被绑定至生命周期。 
-					| -->
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-assembly-plugin</artifactId>
-					<version>3.0.0</version>
-					<configuration>
-						<descriptors>
-							<descriptor>src/test/resources/assembly/package.xml</descriptor>
-						</descriptors>
-					</configuration>
-					<executions>
-						<execution>
-							<id>make-assembly</id>
-							<phase>package</phase>
-							<goals>
-								<goal>single</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>exec-maven-plugin</artifactId>
-					<version>1.6.0</version>
-				</plugin>
-
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-eclipse-plugin</artifactId>
-					<version>2.10</version>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-idea-plugin</artifactId>
-					<version>2.2.1</version>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-eclipse-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-idea-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.zeroturnaround</groupId>
-				<artifactId>jrebel-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
+            <!--test testNG mockito =================================================================================== -->
+            <dependency>
+                <groupId>org.testng</groupId>
+                <artifactId>testng</artifactId>
+                <version>6.11</version>   <!--jdk1.5 最高版本5.11 -->
+                <scope>test</scope>
+                <!-- 很多人对classifier会有点陌生，事实上maven的包名是这样构成的 <artifactId>-<version>-<classifier>.<packaging>
+                    （这里仅仅是针对编译后的jar包，如果是sources或者javadoc，则会变成 <artifactId>-<version>-<classifier>-<type>.<packaging>,这里<type>可以替换成sources或者javadoc）。
+                    那么按照这个规则，testng在maven仓库里完整的包名就应该是：testng-5.11-jdk15.jar classifier主要是用来区分不同环境或者不同jdk版本的。 -->
+                <!--<classifier>jdk15</classifier> -->
+            </dependency>
+            <dependency>
+                <groupId>org.hamcrest</groupId>
+                <artifactId>hamcrest-core</artifactId>
+                <version>1.3</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.hamcrest</groupId>
+                <artifactId>hamcrest-all</artifactId>
+                <version>1.3</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>2.7.17</version>
+                <scope>test</scope>
+            </dependency>
+            <!--test testNG mockito =================================================================================== -->
+        </dependencies>
+    </dependencyManagement>
 
 
-	<profiles>
-		<profile>
-			<!-- 本地开发环境 -->
-			<id>dev</id>
-			<properties>
-				<env>dev</env>
-				<tomcat-maven-plugin.manager.url>http://192.168.1.10:8080/manager/text</tomcat-maven-plugin.manager.url>
-				<tomcat-maven-plugin.manager.username>root</tomcat-maven-plugin.manager.username>
-				<tomcat-maven-plugin.manager.password>root123456</tomcat-maven-plugin.manager.password>
-				<sql-maven-plugin.url>jdbc:mysql://192.168.1.10:3306/?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;allowMultiQueries=true</sql-maven-plugin.url>
-				<sql-maven-plugin.username>root</sql-maven-plugin.username>
-				<sql-maven-plugin.password>root123456</sql-maven-plugin.password>
-			</properties>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-		</profile>
-		<profile>
-			<!-- 测试环境 -->
-			<id>test</id>
-			<properties>
-				<env>test</env>
-				<tomcat-maven-plugin.manager.url>http://192.168.1.10:8080/manager/text</tomcat-maven-plugin.manager.url>
-				<tomcat-maven-plugin.manager.username>root</tomcat-maven-plugin.manager.username>
-				<tomcat-maven-plugin.manager.password>root123456</tomcat-maven-plugin.manager.password>
-				<sql-maven-plugin.url>jdbc:mysql://192.168.1.10:3306/?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;allowMultiQueries=true</sql-maven-plugin.url>
-				<sql-maven-plugin.username>root</sql-maven-plugin.username>
-				<sql-maven-plugin.password>root123456</sql-maven-plugin.password>
-			</properties>
-		</profile>
-		<profile>
-			<!-- 生产环境1 -->
-			<id>prod1</id>
-			<properties>
-				<env>prod1</env>
-				<tomcat-maven-plugin.manager.url>http://127.0.0.1:8080/manager/text</tomcat-maven-plugin.manager.url>
-				<tomcat-maven-plugin.manager.username>root</tomcat-maven-plugin.manager.username>
-				<tomcat-maven-plugin.manager.password>root123456</tomcat-maven-plugin.manager.password>
-				<sql-maven-plugin.url>jdbc:mysql://mysql.comodin.cn:3306/?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;allowMultiQueries=true</sql-maven-plugin.url>
-				<sql-maven-plugin.username>fleet</sql-maven-plugin.username>
-				<sql-maven-plugin.password>Comodin520</sql-maven-plugin.password>
-			</properties>
-		</profile>
-		<profile>
-			<!-- 生产环境2 -->
-			<id>prod2</id>
-			<properties>
-				<env>prod2</env>
-				<tomcat-maven-plugin.manager.url>http://127.0.0.1:8080/manager/text</tomcat-maven-plugin.manager.url>
-				<tomcat-maven-plugin.manager.username>root</tomcat-maven-plugin.manager.username>
-				<tomcat-maven-plugin.manager.password>root123456</tomcat-maven-plugin.manager.password>
-				<sql-maven-plugin.url>jdbc:mysql://mysql.demo.comodin.cn:3306/?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;allowMultiQueries=true</sql-maven-plugin.url>
-				<sql-maven-plugin.username>fleet</sql-maven-plugin.username>
-				<sql-maven-plugin.password>Comodin520</sql-maven-plugin.password>
-			</properties>
-		</profile>
+    <build>
+        <finalName>${project.artifactId}</finalName>
 
-		<profile>
-			<!-- 本地开发环境 -->
-			<id>local</id>
-			<properties>
-				<env>dev</env>
-				<tomcat-maven-plugin.manager.url>http://localhost:8080/manager/text</tomcat-maven-plugin.manager.url>
-				<tomcat-maven-plugin.manager.username>root</tomcat-maven-plugin.manager.username>
-				<tomcat-maven-plugin.manager.password>root123456</tomcat-maven-plugin.manager.password>
-				<sql-maven-plugin.url>jdbc:mysql://localhost:3306/?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;allowMultiQueries=true</sql-maven-plugin.url>
-				<sql-maven-plugin.username>root</sql-maven-plugin.username>
-				<sql-maven-plugin.password>root123456</sql-maven-plugin.password>
-			</properties>
-		</profile>
-	</profiles>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <!--资源根目录排除各环境的配置，使用单独的资源目录来指定 -->
+                <excludes>
+                    <exclude>environment/dev/*</exclude>
+                    <exclude>environment/prod1/*</exclude>
+                    <exclude>environment/prod2/*</exclude>
+                    <exclude>environment/test/*</exclude>
+                    <exclude>environment/template/*</exclude>
+                </excludes>
+            </resource>
+            <!--<resource> -->
+            <!--<directory>src/main/resources/environment/${env}</directory> -->
+            <!--</resource> -->
+        </resources>
+
+        <pluginManagement>
+            <plugins>
+                <!--jrebel 热部署插件,用来生成rebel.xml文件 -->
+                <plugin>
+                    <groupId>org.zeroturnaround</groupId>
+                    <artifactId>jrebel-maven-plugin</artifactId>
+                    <version>1.1.6</version>
+                    <configuration>
+                        <addResourcesDirToRebelXml>true</addResourcesDirToRebelXml>
+                        <alwaysGenerate>true</alwaysGenerate>
+                        <showGenerated>true</showGenerated>
+                        <!-- 指定生成的jrebel.xml放在哪里， 要求放在web应用的 classpath下 -->
+                        <rebelXmlDirectory>${basedir}/target/classes</rebelXmlDirectory>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>generate-rebel-xml</id>
+                            <phase>process-resources</phase>
+                            <goals>
+                                <goal>generate</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+
+                <!--jetty-maven-plugin -->
+                <plugin>
+                    <groupId>org.eclipse.jetty</groupId>
+                    <artifactId>jetty-maven-plugin</artifactId>
+                    <version>9.4.2.v20170220</version>
+                    <configuration>
+                        <httpConnector>                         <!--端口配置 -->
+                            <port>8080</port>                   <!--连接器监听的端口号。 默认情况下它是8080。 -->
+                            <idleTimeout>60000</idleTimeout>    <!--最大空闲时间联系。 -->
+                        </httpConnector>
+                        <stopPort>8888</stopPort>               <!--stopPort 可选。端口用于监听停止命令。运行stop或者run-forked目标时使用。 -->
+                        <stopKey>shutdown</stopKey>             <!--stopKey 可选。用于和stopPort联合使用，用于停止jetty。运行stop或者run-forked目标时使用。 -->
+
+                        <!--热部署 |scanIntervalSeconds | 扫描webapp变化的间隔，单位秒，当扫描到变化后，将执行自动热重部署。默认是0，表示停止热部署扫描。配置值大于0激活它。
+                            |reload 默认值“automatic”，与scanIntervalSeconds联合使用，表示当改变发生时，自动热重部署。 | 设置到“manual”，表示你需要在控制台执行换行来触发插件执行扫描。这有时候是有用的，当你一次做一系列的改变，你想忽略中间的改变时，就可以使用reload参数。
+                            | -->
+                        <scanIntervalSeconds>0</scanIntervalSeconds>
+                        <reload>automatic</reload>
+
+                        <webApp><!--配置你的WebApp -->
+                            <contextPath>/${project.artifactId}</contextPath> <!--你的应用的上下文路径。 默认情况下,这个设置/。 -->
+                            <!--descriptor：web.xml文件的路径。 -->
+                            <!--baseResource：Jetty提供静态资源的路径，默认是src/main/webapp。 -->
+                            <!--resourceBases：用于代替baseResource提供静态资源，是一个数组，可以提供多个提供静态资源的文件夹。 -->
+                            <!--webAppSourceDirectory 默认情况下,这个设置${project.basedir}/src/main/webapp
+                                。 如果你的静态资源在不同的位置,设置相应的参数。 -->
+                            <defaultsDescriptor>src/test/resources/webdefault.xml</defaultsDescriptor><!--webdefault.xml的路径，在web.xml之前使用。如果你不提供，Jetty用一个默认文件，在jetty-webapp.jar中。 -->
+
+                            <!-- 设置其他项目extraClasspath，多个用";"隔开。启动的时候，会直接编译依赖模块的target/classes，就直接忽略了clean
+                                install产生的jar -->
+                            <extraClasspath>../fleet-core/target/classes;../fleet-service/target/classes;</extraClasspath>
+                        </webApp>
+
+                        <!--scanTargets 可选的。除了插件自动扫描的文件和目录之外，还要定期扫描的文件和目录列表。 -->
+                        <scanTargets>
+                            <scanTarget>../fleet-core/target/classes;</scanTarget>
+                            <scanTarget>../fleet-service/target/classes;</scanTarget>
+                        </scanTargets>
+                        <!--scanTargetPatterns 可选的。如果您有一个长列表的额外文件，你想扫描，更方便的使用模式匹配表达式来指定它们，而不是使用scanTargetPatterns的scanTargetsList枚举它们，每个组成一个目录，包括和/或排除参数指定文件匹配模式。指定额外需要监控变化的文件或文件夹，主要用于热部署中的识别文件更新 -->
+                        <!--scanClassesPattern 自9.3.0。可选的。包含和排除可应用于classesDirectory以用于扫描目的的模式，它不会影响类路径。如果文件或目录被模式排除，那么将忽略该文件（或在目录的情况下为子树）的更改，并且不会导致webapp重新部署。模式被指定为使用类似于glob的语法的相对路径，如FileSystem.getPathMatcher的javadoc中所述。 -->
+                        <!--scanTestClassesPattern 自9.3.0。可选的。包括和排除可应用于testClassesDirectory以便进行扫描的模式，它不会影响类路径。如果文件或目录被模式排除，那么将忽略该文件（或在目录的情况下为子树）的更改，并且不会导致webapp重新部署。模式被指定为使用类似于glob的语法的相对路径，如FileSystem.getPathMatcher的javadoc中所述。 -->
+                    </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.eclipse.jetty</groupId>
+                            <artifactId>jetty-webapp</artifactId>
+                            <version>9.4.2.v20170220</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+                <!--tomcat-maven-plugin -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>tomcat-maven-plugin</artifactId>
+                    <version>1.1</version>
+                    <configuration>
+                        <url>${tomcat-maven-plugin.manager.url}</url>
+                        <username>${tomcat-maven-plugin.manager.username}</username>
+                        <password>${tomcat-maven-plugin.manager.password}</password>
+                        <uriEncoding>UTF-8</uriEncoding>        <!--uriEncoding URL按UTF-8进行编码，这样就解决了中文参数乱码。 -->
+                    </configuration>
+                </plugin>
+                <!--添加sql-maven-plugin插件 <executions> <execution> <id>drop-db-before-test-if-any</id>
+                    <phase>process-test-resources</phase> <goals> &lt;!&ndash;suppress MybatisMapperXmlInspection
+                    &ndash;&gt; <goal>execute</goal> </goals> <configuration> <autocommit>true</autocommit>
+                    <sqlCommand>DROP DATABASE IF EXISTS fleet_supeng;</sqlCommand> &lt;!&ndash;<onError>continue</onError>&ndash;&gt;
+                    </configuration> </execution> &lt;!&ndash;创建数据库&ndash;&gt; <execution> <id>create-db</id>
+                    <phase>process-test-resources</phase> <goals> &lt;!&ndash;suppress MybatisMapperXmlInspection
+                    &ndash;&gt; <goal>execute</goal> </goals> <configuration> <autocommit>true</autocommit>
+                    <sqlCommand>CREATE DATABASE IF NOT EXISTS fleet_supeng DEFAULT CHARSET utf8
+                    COLLATE utf8_general_ci; </sqlCommand> </configuration> </execution> &lt;!&ndash;创建数据表&ndash;&gt;
+                    <execution> &lt;!&ndash;<id>default-cli</id>&ndash;&gt; <id>create-schema</id>
+                    <phase>process-test-resources</phase> <goals> &lt;!&ndash;suppress MybatisMapperXmlInspection
+                    &ndash;&gt; <goal>execute</goal> </goals> <configuration> <url>jdbc:mysql://192.168.1.10:3306/fleet_supeng?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;allowMultiQueries=true</url>
+                    <autocommit>true</autocommit> <srcFiles> <srcFile>src/main/resources/dbscript/create_all_tables.sql</srcFile>
+                    <srcFile>src/main/resources/dbscript/patch.sql</srcFile> </srcFiles> </configuration>
+                    </execution> <execution> <id>insert-data</id> <phase>process-test-resources</phase>
+                    <goals> &lt;!&ndash;suppress MybatisMapperXmlInspection &ndash;&gt; <goal>execute</goal>
+                    </goals> <configuration> <url>jdbc:mysql://192.168.1.10:3306/fleet_supeng?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;allowMultiQueries=true</url>
+                    <autocommit>true</autocommit> <orderFile>ascending</orderFile> &lt;!&ndash;<srcFiles>&ndash;&gt;
+                    &lt;!&ndash;<srcFile>src/test/resources/init-TestData.sql</srcFile>&ndash;&gt;
+                    &lt;!&ndash;<srcFile>src/test/resources/init-TestData-latlngdata.sql</srcFile>&ndash;&gt;
+                    &lt;!&ndash;</srcFiles>&ndash;&gt; <fileset> <basedir>${basedir}</basedir>
+                    <includes> <include>src/test/resources/init-TestData.sql</include> </includes>
+                    </fileset> </configuration> </execution> </executions> -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>sql-maven-plugin</artifactId>
+                    <version>1.5</version>
+                    <!-- specify the dependent JDBC driver here 因为该实例中用到的数据库是mysql,故需依赖于mysql连接驱动 -->
+                    <dependencies>
+                        <dependency>
+                            <groupId>mysql</groupId>
+                            <artifactId>mysql-connector-java</artifactId>
+                            <version>5.1.41</version>
+                        </dependency>
+                    </dependencies>
+                    <!--为该插件配置数据库连接信息 -->
+                    <configuration>
+                        <forceMojoExecution>true</forceMojoExecution>
+                        <driver>com.mysql.jdbc.Driver</driver>
+                        <url>${sql-maven-plugin.url}</url>
+                        <username>${sql-maven-plugin.username}</username>
+                        <password>${sql-maven-plugin.password}</password>
+                        <encoding>utf-8</encoding>
+                        <!--动作执行如果发现一个错误。 可能的值是 中止abort 和 继续continue 。默认的 : 中止abort -->
+                        <onError>abort</onError>
+                        <!--<printResultSet>true</printResultSet> -->
+                    </configuration>
+                </plugin>
+                <plugin><!--mybatis-generator-maven-plugin 生成mybatis映射 -->
+                    <groupId>org.mybatis.generator</groupId>
+                    <artifactId>mybatis-generator-maven-plugin</artifactId>
+                    <version>1.3.2</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>mysql</groupId>
+                            <artifactId>mysql-connector-java</artifactId>
+                            <version>5.1.41</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.mybatis.generator</groupId>
+                            <artifactId>mybatis-generator-core</artifactId>
+                            <version>1.3.5</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>tk.mybatis</groupId>
+                            <artifactId>mapper</artifactId>
+                            <version>3.3.9</version>
+                        </dependency>
+                    </dependencies>
+                    <configuration>
+                        <verbose>true</verbose>
+                        <overwrite>true</overwrite>
+                        <configurationFile>${project.basedir}/src/main/resources/generatorConfig.xml
+                        </configurationFile>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.0.2</version>
+                    <configuration>
+                        <encoding>UTF-8</encoding>
+                    </configuration>
+                </plugin>
+
+                <!--maven-compiler-plugin 编译配置 | 1、默认绑定到 compile phase。 | 2、当前版本的maven默认使用jdk1.5，使用更新的java版本必须手动配置。
+                    | 3、指定编码格式，否则在DOS下运行mvn compile命令时会出现莫名的错误，因为系统默认使用GBK编码 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.6.1</version>
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                        <compilerVersion>1.8</compilerVersion>
+                        <encoding>UTF-8</encoding>
+                    </configuration>
+                </plugin>
+                <!--maven-surefire-plugin 单元测试 | surefire 插件用来在maven构建生命周期的test phase执行一个应用的单元测试。它会产生两种不同形式的测试结果报告：
+                    | 1）.纯文本 | 2）.xml文件格式的 | 默认情况下，这些文件生成在工程的${basedir}/target/surefire-reports，目录下（basedir指的是pom文件所在的目录）。
+                    | 它可以运行任何testNG,Junit,pojo写的单元测试 | 1、默认绑定到test阶段。 | 2、测试有失败用例时，是否继续构建 <testFailureIgnore>true</testFailureIgnore>
+                    | 3、是否跳过测试阶段，ture 会跳过测试和编译阶段 <skip>false</skip> | 4、是否跳过测试阶段，true 会跳过测试，但仍然进行编译
+                    <skipTests>false</skipTests> | -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.19.1</version>
+                    <configuration>
+                        <argLine>-Dfile.encoding=UTF-8</argLine>
+                        <!--forkMode 可设置值有 “never”， “once”， “always” 和 “pertest”。 | pretest：
+                            每一个测试创建一个新进程，为每个测试创建新的JVM是单独测试的最彻底方式，但也是最慢的，不适合hudson上持续回归。 | once：在一个进程中进行所有测试。once为默认设置，在Hudson上持续回归时建议使用默认设置。
+                            | always：在一个进程中并行的运行脚本，Junit4.7以上版本才可以使用，surefire的版本要在2.6以上提供这个功能，其中 | threadCount：执行时，指定可分配的线程数量。只和参数parallel配合使用有效。默认：5。
+                            | <threadCount>10</threadCount> | <parallel>true</parallel> | -->
+                        <!--<forkMode>always</forkMode> -->
+                        <!--<threadCount>5</threadCount> -->
+                        <!--<parallel>true</parallel> -->
+                        <includes>
+                            <include>**/*Test.java</include>
+                        </includes>
+
+                        <!--额外的类路径元素 | 如果你需要把更多的东西在您的类路径中成功的执行(e。 g一些时髦的资源或一个容器特定的JAR),我们通常建议你将它添加到您的类路径依赖。
+                            考虑部署远程共享jar私人库为您的组织。 | 但是,如果你一定要,你可以使用 additionalClasspathElements 元素自定义资源/
+                            jar添加到您的类路径中。 | 这将被视为绝对文件系统路径,所以您可能希望使用$ { basedir }或另一个属性加上一个相对路径。 | 注意,其他类路径元素被添加到类路径中,所以你不能使用这些覆盖项目依赖关系或资源。
+                            | -->
+                        <!--<additionalClasspathElements> -->
+                        <!--<additionalClasspathElement>${project.basedir}/src/test/resources/environment/${env}</additionalClasspathElement> -->
+                        <!--</additionalClasspathElements> -->
+                    </configuration>
+                </plugin>
+                <!--maven-jar-plugin -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>3.0.2</version>
+                    <configuration>
+                        <excludes>
+                            <exclude>**/*.properties</exclude>
+                        </excludes>
+                    </configuration>
+                </plugin>
+                <!--maven-source-plugin -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>3.0.1</version>
+                    <!--<executions><execution><phase>compile</phase><goals><goal>jar</goal><goal>test-jar</goal></goals></execution></executions> -->
+                </plugin>
+                <!--maven-javadoc-plugin -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>2.10.4</version>
+                    <!--<executions><execution><phase>compile</phase><goals><goal>javadoc</goal><goal>test-javadoc</goal></goals></execution></executions> -->
+                    <configuration>
+                        <show>private</show>
+                        <nohelp>true</nohelp>
+                        <encoding>UTF-8</encoding>
+                    </configuration>
+                </plugin>
+                <!--maven-war-plugin -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>3.0.0</version>
+                    <!--<configuration> -->
+                    <!--<webResources> -->
+                    <!--<resource> -->
+                    <!--<directory>src/main/resources/environment/${env}</directory> -->
+                    <!--<targetPath>WEB-INF/classes</targetPath> -->
+                    <!--<filtering>true</filtering> -->
+                    <!--</resource> -->
+                    <!--</webResources> -->
+                    <!--</configuration> -->
+                </plugin>
+
+                <!--maven-assembly-plugin 的用途是制作项目分发包， | 该分发包可能包含了项目的可执行文件、源代码、readme、平台脚本等等。
+                    | maven-assembly-plugin支持各种主流的格式如zip、tar.gz、jar和war等， | 具体打包哪些文件是高度可控的，例如用户可以
+                    按文件级别的粒度、文件集级别的粒度、模块级别的粒度、以及依赖级别的粒度控制打包， | 此外，包含和排除配置也是支持的。maven-assembly-
+                    plugin要求用户使用一个名为assembly.xml的元数据文件来表述打包， | 它的single目标可以直接在命令行调用，也可以被绑定至生命周期。
+                    | -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>3.0.0</version>
+                    <configuration>
+                        <descriptors>
+                            <descriptor>src/test/resources/assembly/package.xml</descriptor>
+                        </descriptors>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>make-assembly</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>single</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <version>1.6.0</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-eclipse-plugin</artifactId>
+                    <version>2.10</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-idea-plugin</artifactId>
+                    <version>2.2.1</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-eclipse-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-idea-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.zeroturnaround</groupId>
+                <artifactId>jrebel-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+
+    <profiles>
+        <profile>
+            <!-- 本地开发环境 -->
+            <id>dev</id>
+            <properties>
+                <env>dev</env>
+                <tomcat-maven-plugin.manager.url>http://192.168.1.10:8080/manager/text</tomcat-maven-plugin.manager.url>
+                <tomcat-maven-plugin.manager.username>root</tomcat-maven-plugin.manager.username>
+                <tomcat-maven-plugin.manager.password>root123456</tomcat-maven-plugin.manager.password>
+                <sql-maven-plugin.url>jdbc:mysql://192.168.1.10:3306/?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;allowMultiQueries=true</sql-maven-plugin.url>
+                <sql-maven-plugin.username>root</sql-maven-plugin.username>
+                <sql-maven-plugin.password>root123456</sql-maven-plugin.password>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <!-- 测试环境 -->
+            <id>test</id>
+            <properties>
+                <env>test</env>
+                <tomcat-maven-plugin.manager.url>http://192.168.1.10:8080/manager/text</tomcat-maven-plugin.manager.url>
+                <tomcat-maven-plugin.manager.username>root</tomcat-maven-plugin.manager.username>
+                <tomcat-maven-plugin.manager.password>root123456</tomcat-maven-plugin.manager.password>
+                <sql-maven-plugin.url>jdbc:mysql://192.168.1.10:3306/?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;allowMultiQueries=true</sql-maven-plugin.url>
+                <sql-maven-plugin.username>root</sql-maven-plugin.username>
+                <sql-maven-plugin.password>root123456</sql-maven-plugin.password>
+            </properties>
+        </profile>
+        <profile>
+            <!-- 生产环境1 -->
+            <id>prod1</id>
+            <properties>
+                <env>prod1</env>
+                <tomcat-maven-plugin.manager.url>http://127.0.0.1:8080/manager/text</tomcat-maven-plugin.manager.url>
+                <tomcat-maven-plugin.manager.username>root</tomcat-maven-plugin.manager.username>
+                <tomcat-maven-plugin.manager.password>root123456</tomcat-maven-plugin.manager.password>
+                <sql-maven-plugin.url>jdbc:mysql://mysql.comodin.cn:3306/?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;allowMultiQueries=true</sql-maven-plugin.url>
+                <sql-maven-plugin.username>fleet</sql-maven-plugin.username>
+                <sql-maven-plugin.password>Comodin520</sql-maven-plugin.password>
+            </properties>
+        </profile>
+        <profile>
+            <!-- 生产环境2 -->
+            <id>prod2</id>
+            <properties>
+                <env>prod2</env>
+                <tomcat-maven-plugin.manager.url>http://127.0.0.1:8080/manager/text</tomcat-maven-plugin.manager.url>
+                <tomcat-maven-plugin.manager.username>root</tomcat-maven-plugin.manager.username>
+                <tomcat-maven-plugin.manager.password>root123456</tomcat-maven-plugin.manager.password>
+                <sql-maven-plugin.url>jdbc:mysql://mysql.demo.comodin.cn:3306/?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;allowMultiQueries=true</sql-maven-plugin.url>
+                <sql-maven-plugin.username>fleet</sql-maven-plugin.username>
+                <sql-maven-plugin.password>Comodin520</sql-maven-plugin.password>
+            </properties>
+        </profile>
+
+        <profile>
+            <!-- 本地开发环境 -->
+            <id>local</id>
+            <properties>
+                <env>dev</env>
+                <tomcat-maven-plugin.manager.url>http://localhost:8080/manager/text</tomcat-maven-plugin.manager.url>
+                <tomcat-maven-plugin.manager.username>root</tomcat-maven-plugin.manager.username>
+                <tomcat-maven-plugin.manager.password>root123456</tomcat-maven-plugin.manager.password>
+                <sql-maven-plugin.url>jdbc:mysql://localhost:3306/?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;allowMultiQueries=true</sql-maven-plugin.url>
+                <sql-maven-plugin.username>root</sql-maven-plugin.username>
+                <sql-maven-plugin.password>root123456</sql-maven-plugin.password>
+            </properties>
+        </profile>
+    </profiles>
 </project>
