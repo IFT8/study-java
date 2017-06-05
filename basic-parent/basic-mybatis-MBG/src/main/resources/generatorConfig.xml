@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+    <!--引入配置文件
+                可以用于加载配置项或者配置文件，在整个配置文件中就可以使用${propertyKey}的方式来引用配置项
+                resource：配置资源加载地址，使用resource，MBG从classpath开始找，比如com/myproject/generatorConfig.properties
+                url：配置资源加载地质，使用URL的方式，比如file:///C:/myfolder/generatorConfig.properties.
+                注意，两个属性只能选址一个;
+                另外，如果使用了mybatis-generator-maven-plugin，那么在pom.xml中定义的properties都可以直接在generatorConfig.xml中使用-->
+    <properties resource="generatorConfig.properties"/>
+
+    <!--context:生成一组对象的环境
+                id:必选，上下文id，用于在生成错误时提示
+                defaultModelType:指定生成对象的样式
+                    1，conditional：类似hierarchical；
+                    2，flat：所有内容（主键，blob）等全部生成在一个对象中；
+                    3，hierarchical：主键生成一个XXKey对象(key class)，Blob等单独生成一个对象，其他简单属性在一个对象中(record class)
+                targetRuntime:
+                    1，MyBatis3：默认的值，生成基于MyBatis3.x以上版本的内容，包括XXXBySample；
+                    2，MyBatis3Simple：类似MyBatis3，只是不生成XXXBySample；
+                introspectedColumnImpl：类全限定名，用于扩展MBG-->
+    <context id="MySQLTables" defaultModelType="flat" targetRuntime="MyBatis3Simple">
+        <!-- 自动识别数据库关键字，默认false，如果设置为true，根据SqlReservedWords中定义的关键字列表；一般保留默认值，遇到数据库关键字（Java关键字），使用columnOverride覆盖-->
+        <!--<property name="autoDelimitKeywords" value="false"/>-->
+        <!-- 生成的Java文件的编码 -->
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <!-- 格式化java代码 -->
+        <property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter"/>
+        <!-- 格式化XML代码 -->
+        <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
+        <!-- beginningDelimiter和endingDelimiter：指明数据库的用于标记数据库对象名的符号，比如ORACLE就是双引号，MYSQL默认是`反引号； -->
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+
+        <!--org.mybatis.generator.plugins.SerializablePlugin
+            这个插件给由MBG生成的Javas添加了java.io.Serializable标记接口。这个插件给实体类增加了serialVersionUID字段。
+            重要提示：这是一个简单的实现java.io.Serializable并且不会尝试做任何版本的类。
+            这个插件接受两个属性：
+                addGWTInterface（可选的）True/False.。如果为true，插件将给实体对象增加谷歌Web工具包（GWT）的 IsSerializable接口。默认值是false。
+                suppressJavaInterface（必须的）True/False。如果为true，插件将不添加java.io.Serializable接口。这是对于其中对象应该是可序列化的GWT，但不是严格意义上的Java的场景。默认值是false。-->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin">
+            <property name="addGWTInterface" value="false"/>
+            <property name="suppressJavaInterface" value="false"/>
+        </plugin>
+
+        <!--suppress MybatisGenerateCustomPluginInspection -->
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <!--建议创建一个自己的通用接口，方便将来的自由扩展和搭配-->
+            <!--<property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>-->
+            <property name="mappers" value="${dao.mappers}"/>
+            <!-- caseSensitive默认false，当数据库表名区分大小写时，可以将该属性设置为true -->
+            <property name="caseSensitive" value="true"/>
+        </plugin>
+
+        <plugin type="com.comodin.basic.mybatis.generator.plugins.HibernateValidatorPlugin">
+            <property name="" value=""/>
+        </plugin>
+
+        <!--1、注释
+                元素：suppressAllComments     **阻止**生成注释，默认为false
+                元素：suppressDate            **阻止**生成的注释包含时间戳，默认为false-->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+
+        <!-- 必须要有的，使用这个配置链接数据库 -->
+        <jdbcConnection driverClass="${jdbc.driverClass}" connectionURL="${jdbc.url}" userId="${jdbc.username}" password="${jdbc.password}"/>
+
+
+        <!--3、java类型处理器 类型转换非必需，类型处理器，在数据库类型和java类型之间的转换控制
+                用于处理DB中的类型到Java中的类型，默认使用JavaTypeResolverDefaultImpl；
+                注意一点，默认会先尝试使用Integer，Long，Short等来对应DECIMAL和 NUMERIC数据类型；
+                该元素最多可以配置一个。
+                这个元素的配置用来指定JDBC类型和Java类型如何转换。
+                该元素提供了一个可选的属性type，和<commentGenerator>比较类型，提供了默认的实现DEFAULT，一般情况下使用默认即可，需要特殊处理的情况可以通过其他元素配置来解决，不建议修改该属性。
+                该属性还有一个可以配置的<property>元素。
+                可以配置的属性为forceBigDecimals，该属性可以控制是否强制DECIMAL和NUMERIC类型的字段转换为Java类型的java.math.BigDecimal,默认值为false，一般不需要配置。
+
+                默认情况下的转换规则为：
+                                如果精度>0或者长度>18，就会使用java.math.BigDecimal
+                                如果精度=0并且10<=长度<=18，就会使用java.lang.Long
+                                如果精度=0并且5<=长度<=9，就会使用java.lang.Integer
+                                如果精度=0并且长度<5，就会使用java.lang.Short
+                元素：bigDecimal，false可自动转化以下类型（Long,Integer,Short,etc.）
+                        true：使用BigDecimal对应DECIMAL和 NUMERIC数据类型
+                        false：默认,
+                                scale>0;length>18：使用BigDecimal;
+                                scale=0;length[10,18]：使用Long；
+                                scale=0;length[5,9]：使用Integer；
+                                scale=0;length<5：使用Short；-->
+        <javaTypeResolver type="org.mybatis.generator.internal.types.JavaTypeResolverDefaultImpl">
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+
+        <!--4、java模型创建器，是必须要的元素    用来生成含有主键key的类，记录类以及查询Example类
+                负责：
+                        1，key类（见context的defaultModelType）；
+                        2，java类；
+                        3，查询类。
+                targetPackage：生成的类要放的包，真实的包受enableSubPackages属性控制；
+                targetProject：目标项目，指定一个存在的目录下，生成的内容会放到指定目录中，如果目录不存在，MBG不会自动建目录
+
+                元素：constructorBased     自动为每一个生成的类创建一个构造方法，构造方法包含了所有的field；而不是使用setter；
+                元素：enableSubPackages    在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false
+                元素：immutable            是否创建一个不可变的类，如果为true，那么MBG会创建一个没有setter方法的类，取而代之的是类似constructorBased的类
+                元素：rootClass            给Model添加一个父类
+                                               如果设置了这个根对象，那么生成的keyClass或者recordClass会继承这个类；在Table的rootClass属性中可以覆盖该选项
+                                               注意：如果在key class或者record class中有root class相同的属性，MBG就不会重新生成这些属性了，
+                                               包括：1，属性名相同，类型相同，有相同的getter/setter方法；
+                元素：trimStrings          设置是否在getter方法中，对String类型字段调用trim()方法-->
+        <javaModelGenerator targetPackage="${model.package}" targetProject="${src_main_java}">
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+
+        <!--5、生成SQL map的XML文件生成器
+                生成所在的目录为每一个数据库的表生成对应的SqlMap文件
+                注意，
+                        在Mybatis3之后，我们可以使用mapper.xml文件+Mapper接口（或者不用mapper接口），或者只使用Mapper接口+Annotation；
+                        所以，如果 javaClientGenerator配置中配置了需要生成XML的话，这个元素就必须配置
+
+                元素：enableSubPackages            在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false-->
+        <sqlMapGenerator targetPackage="${xml.mapper.package}" targetProject="${src_main_resources}"/>
+
+
+        <!--6、生成的Dao接口      生成易于使用的针对Model对象和XML配置文件的代码
+                对于mybatis来说，即生成Mapper接口，注意，如果没有配置该元素，那么默认不会生成Mapper接口。
+                targetPackage/targetProject:同javaModelGenerator
+                type：选择怎么生成mapper接口（在MyBatis3/MyBatis3Simple下）：
+                        1，ANNOTATEDMAPPER：       会生成使用Mapper接口+Annotation的方式创建（SQL生成在annotation中），不会生成对应的XML；
+                        2，MIXEDMAPPER：           使用混合配置，会生成Mapper接口，并适当添加合适的Annotation，但是XML会生成在XML中；
+                        3，XMLMAPPER：会           生成Mapper接口，接口完全依赖XML；
+                        注意，如果context是MyBatis3Simple：只支持ANNOTATEDMAPPER和XMLMAPPER
+
+                元素：enableSubPackages            在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false
+                元素：rootInterface                可以为所有生成的接口添加一个父接口，但是MBG只负责生成，不负责检查
+                元素：exampleMethodVisibility      定义Maper.java源代码中的ByExample()方法的可视性，可选的值有：public;private;protected;default。注意：如果targetRuntime="MyBatis3",此参数被忽略
+                元素：methodNameCalculator         方法名计数器  重要的提示：如果目标运行时MyBatis3这个属性被忽略-->
+        <javaClientGenerator targetPackage="${dao.package}" targetProject="${src_main_java}" type="XMLMAPPER"/>
+
+
+        <!--7   table，根据表生成    要生成那些表(更改 tableName 和 domainObjectName 就可以)
+            选择一个table来生成相关文件，可以有一个或多个table，必须要有table元素
+                    选择的table会生成一下文件：
+                                1，SQL map文件
+                                2，生成一个主键类；
+                                3，除了BLOB和主键的其他字段的类；
+                                4，包含BLOB的类；
+                                5，一个用户生成动态查询的条件类（selectByExample, deleteByExample），可选；
+                                6，Mapper接口（可选）
+
+            tableName（必要）：要生成对象的表名；  tableName：指定要生成的表名，可以使用SQL通配符(%)匹配多个表。
+                    注意：大小写敏感问题。正常情况下，MBG会自动的去识别数据库标识符的大小写敏感度，在一般情况下，MBG会
+                    根据设置的schema，catalog或tablename去查询数据表，按照下面的流程：
+                                1，如果schema，catalog或tablename中有空格，那么设置的是什么格式，就精确的使用指定的大小写格式去查询；
+                                2，否则，如果数据库的标识符使用大写的，那么MBG自动把表名变成大写再查找；
+                                3，否则，如果数据库的标识符使用小写的，那么MBG自动把表名变成小写再查找；
+                                4，否则，使用指定的大小写格式查询；
+                                另外的，如果在创建表的时候，使用的""把数据库对象规定大小写，就算数据库标识符是使用的大写，在这种情况下也会使用给定的大小写来创建表名；
+                                这个时候，请设置delimitIdentifiers="true"即可保留大小写格式；
+
+            <table tableName="t_customer" domainObjectName="Customer"
+                enableInsert="true"
+                enableSelectByPrimaryKey="true"
+                enableSelectByExample="true"
+                selectByExampleQueryId="true"
+                enableUpdateByPrimaryKey="true"
+                enableUpdateByExample="true"
+                enableDeleteByPrimaryKey="true"
+                enableDeleteByExample="true"
+                enableCountByExample="true">
+                <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="int"/>
+            </table>
+            可选：
+                    1，schema：数据库的schema；
+                    2，catalog：数据库的catalog；
+                    3，alias：为数据表设置的别名，如果设置了alias，那么生成的所有的SELECT SQL语句中，列名会变成：alias_actualColumnName
+                    4，domainObjectName：生成的domain类的名字，如果不设置，直接使用表名作为domain类的名字；可以设置为somepck.domainName，那么会自动把domainName类再放到somepck包里面；
+                    5，enableInsert（默认true）：指定是否生成insert语句；
+                    6，enableSelectByPrimaryKey（默认true）：指定是否生成按照主键查询对象的语句（就是getById或get）；
+                    7，enableSelectByExample（默认true）：MyBatis3Simple为false，指定是否生成动态查询语句；
+                    8，enableUpdateByPrimaryKey（默认true）：指定是否生成按照主键修改对象的语句（即update)；
+                    9，enableDeleteByPrimaryKey（默认true）：指定是否生成按照主键删除对象的语句（即delete）；
+                    10，enableDeleteByExample（默认true）：MyBatis3Simple为false，指定是否生成动态删除语句；
+                    11，enableCountByExample（默认true）：MyBatis3Simple为false，指定是否生成动态查询总条数语句（用于分页的总条数查询）；
+                    12，enableUpdateByExample（默认true）：MyBatis3Simple为false，指定是否生成动态修改语句（只修改对象中不为空的属性）；
+                    13，modelType：参考context元素的defaultModelType，相当于覆盖；
+                    14，delimitIdentifiers：参考tableName的解释，注意，默认的delimitIdentifiers是双引号，如果类似MYSQL这样的数据库，使用的是`（反引号，那么还需要设置context的beginningDelimiter和endingDelimiter属性）
+                    15，delimitAllColumns：设置是否所有生成的SQL中的列名都使用标识符引起来。默认为false，delimitIdentifiers参考context的属性
+                    注意，table里面很多参数都是对javaModelGenerator，context等元素的默认属性的一个复写；
+
+
+            元素：generatedKey
+                <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="int"/>
+                identity        自动生成的键值（identity,或者序列值）
+                                如果指定此元素，MBG将会生成<selectKey>元素，然后将此元素插入到SQL Map的<insert> 元素之中，
+                                如果为true， 则列被标记为标识列和生成的<selectKey元素>元素将插入（标识列）后放置。
+                                如果为flase，那么生成的<selectKey元素>将被插入（通常为一个序列）之前。
+
+                sqlStatement    的语句将会返回新的值。如果是一个自增主键的话，你可以使用预定义的语句,或者添加自定义的SQL语句.
+                                预定义的值如下:
+                                DB2:                                  VALUES IDENTITY_VAL_LOCAL()
+                                DB2_MF:                               SELECT IDENTITY_VAL_LOCAL() FROM SYSIBM.SYSDUMMY1
+                                Derby:                                VALUES IDENTITY_VAL_LOCAL()
+                                HSQLDB:                               CALL IDENTITY()
+                                Informix:                             select dbinfo('sqlca.sqlerrd1') from systables where tabid=1
+                                MySql:                                SELECT LAST_INSERT_ID()
+                                SqlServer:                            SELECT SCOPE_IDENTITY()
+                                SYBASE:                               SELECT @@IDENTITY
+
+
+            元素：columnRenamingRule
+                <columnRenamingRule searchString="" replaceString=""/>
+                                        MBG使用<columnRenamingRule>元素在计算列名的对应名称之前，先对列名进行重命名，
+                                        作用：一般需要对BUSI_CLIENT_NO前的BUSI_进行过滤   支持正在表达式
+                searchString            表示要被换掉的字符串
+                replaceString           则是要换成的字符串，默认情况下为空字符串，可选
+
+
+            元素：ignoreColumn          告诉MBG忽略某一列
+                <ignoreColumn column="PLAN_ID"  delimitedColumnName="true" />
+                delimitedColumnName     true,匹配column的值和数据库列的名称大小写完全匹配，false忽略大小写匹配；是否限定表的列名，即固定表列在Model中的名称
+
+
+            元素：columnOverride        覆盖MBG对Model的生成规则
+                <columnOverride column="" javaType=""    jdbcType="" typeHandler=""  delimitedColumnName="" />
+                column                  数据库的列名
+                javaType                对应的Java数据类型的完全限定名 在必要的时候可以覆盖由JavaTypeResolver计算得到的java数据类型
+                jdbcType                该列的JDBC数据类型(INTEGER,DECIMAL,NUMERIC,VARCHAR,etc.) 该列可以覆盖由JavaTypeResolver计算得到的Jdbc类型，对某些数据库而言，对于处理特定的JDBC驱动癖好很有必要
+                typeHandler-->
+
+        <table tableName="cm_cassette_status" domainObjectName="CmCassetteStatusBean">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+            <columnOverride column="terminalid" property="terminalId"/>
+            <columnOverride column="slotid" property="slotId"/>
+            <columnOverride column="cassetteid" property="cassetteId"/>
+            <columnOverride column="status" property="status"/>
+            <columnOverride column="currency" property="currencyType"/>
+            <columnOverride column="denomination" property="currencyDenomination"/>
+            <columnOverride column="amount" property="currencyAmount"/>
+            <columnOverride column="count" property="currencyCount"/>
+            <columnOverride column="detail" property="detail"/>
+            <columnOverride column="updatetime" property="updateTime"/>
+            <columnOverride column="syncflag" property="syncFlag"/>
+        </table>
+        <table tableName="cm_device_status" domainObjectName="CmDeviceStatusBean">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+            <columnOverride column="terminalid" property="terminalId"/>
+            <columnOverride column="termstatus" property="terminalStatus"/>
+            <columnOverride column="mainstatus" property="terminalMainStatus"/>
+            <columnOverride column="leftdeposit" property="leftDepositStatus"/>
+            <columnOverride column="deposit" property="depositStatus"/>
+            <columnOverride column="receipt" property="receiptStatus"/>
+            <columnOverride column="journal" property="journalStatus"/>
+            <columnOverride column="invoice" property="invoiceStatus"/>
+            <columnOverride column="ups" property="upsStatus"/>
+            <columnOverride column="card" property="cardStatus"/>
+            <columnOverride column="iccard" property="icCardStatus"/>
+            <columnOverride column="safedoor" property="safeDoorStatus"/>
+            <columnOverride column="edoor" property="electronicDoorStatus"/>
+            <columnOverride column="envelope" property="envelopeStatus"/>
+            <columnOverride column="updatetime" property="updateTime"/>
+            <columnOverride column="syncflag" property="syncFlag"/>
+            <columnOverride column="totalmem" property="memoryTotal"/>
+            <columnOverride column="memusage" property="memoryUsage"/>
+            <columnOverride column="freestorage" property="diskStorage"/>
+            <columnOverride column="cpuusage" property="cpuUsage"/>
+            <columnOverride column="livetime" property="liveTime"/>
+        </table>
+
+        <table tableName="t_bank_atm" domainObjectName="BankAtmBean">
+            <generatedKey column="atm_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="atm_" replaceString=""/>
+        </table>
+        <table tableName="t_bank_atm_code" domainObjectName="BankAtmCodeBean">
+            <generatedKey column="code_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="code_" replaceString=""/>
+        </table>
+        <table tableName="t_bank_atm_log" domainObjectName="BankAtmLogBean">
+            <generatedKey column="atm_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="atm_" replaceString=""/>
+        </table>
+
+
+        <table tableName="t_client" domainObjectName="ClientBean">
+            <generatedKey column="client_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="client_" replaceString=""/>
+        </table>
+        <!--<table tableName="t_client_bank_account" domainObjectName="ClientBankAccountBean">-->
+        <!--<generatedKey column="bank_account_id" sqlStatement="Mysql" identity="true"/>-->
+        <!--<columnRenamingRule searchString="bank_account_" replaceString=""/>-->
+        <!--</table>-->
+        <table tableName="t_client_branch" domainObjectName="ClientBranchBean">
+            <generatedKey column="branch_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="branch_" replaceString=""/>
+        </table>
+
+
+        <table tableName="t_comprobantes" domainObjectName="ComprobantesBean">
+            <generatedKey column="comprobantes_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="comprobantes_" replaceString=""/>
+        </table>
+        <table tableName="t_comprobantes_banknote" domainObjectName="ComprobantesBankNoteBean">
+            <generatedKey column="banknote_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="banknote_" replaceString=""/>
+        </table>
+
+
+        <table tableName="t_crew" domainObjectName="CrewBean">
+            <generatedKey column="crew_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="crew_" replaceString=""/>
+        </table>
+        <table tableName="t_crew_work_shift" domainObjectName="CrewWorkShiftBean">
+            <generatedKey column="shift_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="shift_" replaceString=""/>
+        </table>
+
+        <table tableName="t_currency" domainObjectName="CurrencyBean">
+            <generatedKey column="currency_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="currency_" replaceString=""/>
+        </table>
+
+        <table tableName="t_department" domainObjectName="DepartmentBean">
+            <generatedKey column="department_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="department_" replaceString=""/>
+        </table>
+        <table tableName="t_department_role_relation" domainObjectName="DepartmentRoleRelationBean">
+            <generatedKey column="relation_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="relation_" replaceString=""/>
+        </table>
+
+
+        <!--<table tableName="t_latlng_vehicle" domainObjectName="LatLngVehicleBean">-->
+        <!--<generatedKey column="latlng_id" sqlStatement="Mysql" identity="true"/>-->
+        <!--<columnRenamingRule searchString="latlng_" replaceString=""/>-->
+        <!--</table>-->
+
+
+        <table tableName="t_log" domainObjectName="LogBean">
+            <generatedKey column="log_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="log_" replaceString=""/>
+        </table>
+
+        <table tableName="t_privilege" domainObjectName="PrivilegeBean">
+            <generatedKey column="privilege_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="privilege_" replaceString=""/>
+        </table>
+        <table tableName="t_role" domainObjectName="RoleBean">
+            <generatedKey column="role_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="role_" replaceString=""/>
+        </table>
+
+
+        <table tableName="t_setting" domainObjectName="SettingBean">
+            <generatedKey column="setting_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="setting_" replaceString=""/>
+        </table>
+
+        <table tableName="t_sio_task" domainObjectName="SioTaskBean">
+            <generatedKey column="task_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="task_" replaceString=""/>
+            <columnOverride column="task_task_id" property="taskId"/>
+            <columnOverride column="task_task_original_complex_id" property="taskOriginalComplexId"/>
+            <columnOverride column="task_inter_change_task_id" property="interChangeTaskId"/>
+        </table>
+        <table tableName="t_sio_task_comprobantes" domainObjectName="SioTaskComprobantesBean">
+            <generatedKey column="comprobantes_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="comprobantes_" replaceString=""/>
+        </table>
+
+        <table tableName="t_system_status" domainObjectName="SystemStatusBean">
+            <generatedKey column="system_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="system_" replaceString=""/>
+        </table>
+
+
+        <table tableName="t_task" domainObjectName="TaskBean">
+            <generatedKey column="task_pk_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="task_" replaceString=""/>
+            <columnOverride column="task_pk_id" property="pkId"/>
+            <columnOverride column="task_id" property="taskId"/>
+            <columnOverride column="task_source_task_id" property="sourceTaskId"/>
+            <columnOverride column="task_source_task_complex_id" property="sourceTaskOriginalComplexId"/>
+            <columnOverride column="task_last_generate_xml_task_status" property="lastGenerateXmlTaskStatus"/>
+        </table>
+        <table tableName="t_task_contract" domainObjectName="TaskContractBean">
+            <generatedKey column="contract_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="contract_" replaceString=""/>
+        </table>
+        <table tableName="t_task_plan" domainObjectName="TaskPlanBean">
+            <generatedKey column="task_pk_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="task_" replaceString=""/>
+            <columnOverride column="task_pk_id" property="pkId"/>
+            <columnOverride column="task_id" property="taskId"/>
+            <columnOverride column="task_source_task_id" property="sourceTaskId"/>
+            <columnOverride column="task_source_task_complex_id" property="sourceTaskComplexId"/>
+            <columnOverride column="task_last_generate_xml_task_status" property="lastGenerateXmlTaskStatus"/>
+        </table>
+        <table tableName="t_task_transaction" domainObjectName="TaskTransactionBean">
+            <generatedKey column="transaction_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="transaction_" replaceString=""/>
+        </table>
+
+        <table tableName="t_upgrade" domainObjectName="UpgradeBean">
+            <generatedKey column="upgrade_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="upgrade_" replaceString=""/>
+        </table>
+
+        <table tableName="t_user" domainObjectName="UserBean">
+            <generatedKey column="user_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="user_" replaceString=""/>
+        </table>
+
+        <table tableName="t_vehicle" domainObjectName="VehicleBean">
+            <generatedKey column="vehicle_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="vehicle_" replaceString=""/>
+        </table>
+
+    </context>
+</generatorConfiguration>
