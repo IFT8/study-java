@@ -83,7 +83,6 @@
                 <version>3.1.8</version>
             </dependency>
 
-
             <!--web =================================================================================== -->
             <dependency>
                 <groupId>javax.servlet</groupId>
@@ -517,32 +516,32 @@
     <build>
         <finalName>${project.artifactId}</finalName>
 
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <excludes><!--资源根目录排除各环境的配置，使用单独的资源目录来指定-->
-                    <!--<exclude>*.properties</exclude>-->
-                    <exclude>environment/</exclude>
-                </excludes>
-            </resource>
-            <resource>
-                <directory>../fleet-core/src/main/resources/environment/${env}</directory>
-            </resource>
+        <!--<resources>-->
             <!--<resource>-->
-            <!--<directory>src/main/resources/environment/${env}</directory>-->
+                <!--<directory>src/main/resources</directory>-->
+                <!--<excludes>&lt;!&ndash;资源根目录排除各环境的配置，使用单独的资源目录来指定&ndash;&gt;-->
+                    <!--<exclude>*.properties</exclude>-->
+                    <!--<exclude>environment/</exclude>-->
+                <!--</excludes>-->
             <!--</resource>-->
-            <resource>
-                <directory>src/main/resources/environment/${env}</directory>
-                <includes>
-                    <include>baseConfig.properties</include>
-                </includes>
-            </resource>
-        </resources>
-        <testResources>
-            <testResource>
-                <directory>src/test/resources</directory>
-            </testResource>
-        </testResources>
+            <!--<resource>-->
+                <!--<directory>../fleet-core/src/main/resources/environment/${env}</directory>-->
+            <!--</resource>-->
+            <!--&lt;!&ndash;<resource>&ndash;&gt;-->
+            <!--&lt;!&ndash;<directory>src/main/resources/environment/${env}</directory>&ndash;&gt;-->
+            <!--&lt;!&ndash;</resource>&ndash;&gt;-->
+            <!--<resource>-->
+                <!--<directory>src/main/resources/environment/${env}</directory>-->
+                <!--<includes>-->
+                    <!--<include>baseConfig.properties</include>-->
+                <!--</includes>-->
+            <!--</resource>-->
+        <!--</resources>-->
+        <!--<testResources>-->
+            <!--<testResource>-->
+                <!--<directory>src/test/resources</directory>-->
+            <!--</testResource>-->
+        <!--</testResources>-->
 
         <pluginManagement>
             <plugins>
@@ -591,7 +590,7 @@
                             <!--baseResource：Jetty提供静态资源的路径，默认是src/main/webapp。-->
                             <!--resourceBases：用于代替baseResource提供静态资源，是一个数组，可以提供多个提供静态资源的文件夹。-->
                             <!--webAppSourceDirectory   默认情况下,这个设置${project.basedir}/src/main/webapp 。 如果你的静态资源在不同的位置,设置相应的参数。-->
-                            <defaultsDescriptor>src/test/resources/webdefault.xml</defaultsDescriptor><!--webdefault.xml的路径，在web.xml之前使用。如果你不提供，Jetty用一个默认文件，在jetty-webapp.jar中。-->
+                            <!--<defaultsDescriptor>src/test/resources/webdefault.xml</defaultsDescriptor>&lt;!&ndash;webdefault.xml的路径，在web.xml之前使用。如果你不提供，Jetty用一个默认文件，在jetty-webapp.jar中。&ndash;&gt;-->
                             <!-- 设置其他项目extraClasspath，多个用";"隔开。启动的时候，会直接编译依赖模块的target/classes，就直接忽略了clean install产生的jar-->
                             <extraClasspath>../fleet-core/target/classes;../fleet-service/target/classes;</extraClasspath>
                         </webApp>
@@ -909,6 +908,32 @@
                     <artifactId>maven-idea-plugin</artifactId>
                     <version>2.2.1</version>
                 </plugin>
+                <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+                <plugin>
+                    <groupId>org.eclipse.m2e</groupId>
+                    <artifactId>lifecycle-mapping</artifactId>
+                    <version>1.0.0</version>
+                    <configuration>
+                        <lifecycleMappingMetadata>
+                            <pluginExecutions>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>org.zeroturnaround</groupId>
+                                        <artifactId>jrebel-maven-plugin</artifactId>
+                                        <versionRange>1.1.7</versionRange>
+                                        <goals>
+                                            <goal>generate</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <!--suppress CheckTagEmptyBody -->
+                                        <ignore></ignore>
+                                    </action>
+                                </pluginExecution>
+                            </pluginExecutions>
+                        </lifecycleMappingMetadata>
+                    </configuration>
+                </plugin>
             </plugins>
         </pluginManagement>
 
@@ -952,6 +977,7 @@
         </plugins>
     </build>
 
+
     <profiles>
         <profile>
             <!-- 本地开发环境 -->
@@ -983,10 +1009,10 @@
             </properties>
         </profile>
         <profile>
-            <!-- 10 vehicle forward 服务环境 -->
-            <id>10-vehicle-forward</id>
+            <!-- vehicle-forward-10 服务环境 -->
+            <id>vehicle-forward-10</id>
             <properties>
-                <env>10-vehicle-forward</env>
+                <env>vehicle-forward-10</env>
                 <tomcat-maven-plugin.manager.url>http://192.168.1.10:8080/manager/text</tomcat-maven-plugin.manager.url>
                 <tomcat-maven-plugin.manager.username>root</tomcat-maven-plugin.manager.username>
                 <tomcat-maven-plugin.manager.password>root123456</tomcat-maven-plugin.manager.password>
@@ -1009,10 +1035,10 @@
             </properties>
         </profile>
         <profile>
-            <!-- test vehicle forward 服务环境 -->
-            <id>test2-vehicle-forward</id>
+            <!-- vehicle-forward-test2 服务环境 -->
+            <id>vehicle-forward-test2</id>
             <properties>
-                <env>test2-vehicle-forward</env>
+                <env>vehicle-forward-test2</env>
                 <tomcat-maven-plugin.manager.url>http://127.0.0.1:8080/manager/text</tomcat-maven-plugin.manager.url>
                 <tomcat-maven-plugin.manager.username>root</tomcat-maven-plugin.manager.username>
                 <tomcat-maven-plugin.manager.password>root123456</tomcat-maven-plugin.manager.password>
@@ -1048,6 +1074,20 @@
             </properties>
         </profile>
         <profile>
+            <!-- tameme -->
+            <id>expo</id>
+            <properties>
+                <env>expo</env>
+                <tomcat-maven-plugin.manager.url>http://127.0.0.1:8080/manager/text</tomcat-maven-plugin.manager.url>
+                <tomcat-maven-plugin.manager.username>root</tomcat-maven-plugin.manager.username>
+                <tomcat-maven-plugin.manager.password>root123456</tomcat-maven-plugin.manager.password>
+                <sql-maven-plugin.url>jdbc:mysql://127.0.0.1:3306/?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;allowMultiQueries=true</sql-maven-plugin.url>
+                <sql-maven-plugin.username>fleet</sql-maven-plugin.username>
+                <sql-maven-plugin.password>Comodin520</sql-maven-plugin.password>
+            </properties>
+        </profile>
+
+        <profile>
             <!-- 本地开发环境 -->
             <id>local</id>
             <properties>
@@ -1061,5 +1101,4 @@
             </properties>
         </profile>
     </profiles>
-
 </project>
