@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>study-java-parent</artifactId>
+        <groupId>cn.assupg.study</groupId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>study_opencv-demo</artifactId>
+    <packaging>war</packaging>
+    <name>study_opencv-demo Maven Webapp</name>
+
+    <dependencies>
+
+        <!--问题一、使用maven加载本地opencv-300.jar文件-->
+        <!--问题二、加载opencv动态链接库
+                    当然，你可以直接将opencv的动态库直接放到tomcat/bin下，这样Tomcat容器启动后会加载该库到jvm中，但是这样会增加运维成本，本文使用动态加载opencv库，当spring容器启动时，将opencv库加载到jvm中。
+                    首先将opencv动态库放到wepapp目录下，即web工程的根目录，使用下面的函数，将opencv动态库所在的路径加载到环境变量中。-->
+        <dependency>
+            <groupId>opencv-300.jar</groupId>
+            <artifactId>opencv-300.jar</artifactId>
+            <version>1.0</version>
+            <!--注意此处添加的依赖必须要指明scope。scope为system时，表示需显式的提供包含依赖的jar包，maven不会再去Repository中查找该依赖。-->
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/opencv-320.jar</systemPath>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>tomcat-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>
