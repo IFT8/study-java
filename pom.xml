@@ -37,20 +37,6 @@
         <module>study_opencv/study_opencv-demo</module>
     </modules>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy-all</artifactId>
-            <version>2.4.9</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <version>2.0.0.CR2</version>
-            <!--<version>2.0.0-SNAPSHOT</version>-->
-        </dependency>
-    </dependencies>
-
     <properties>
         <java.version>1.8</java.version>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -519,30 +505,30 @@
         <finalName>${project.artifactId}</finalName>
 
         <!--<resources>-->
-            <!--<resource>-->
-                <!--<directory>src/main/resources</directory>-->
-                <!--<excludes>&lt;!&ndash;资源根目录排除各环境的配置，使用单独的资源目录来指定&ndash;&gt;-->
-                    <!--<exclude>*.properties</exclude>-->
-                    <!--<exclude>environment/</exclude>-->
-                <!--</excludes>-->
-            <!--</resource>-->
-            <!--<resource>-->
-                <!--<directory>../fleet-core/src/main/resources/environment/${env}</directory>-->
-            <!--</resource>-->
-            <!--&lt;!&ndash;<resource>&ndash;&gt;-->
-            <!--&lt;!&ndash;<directory>src/main/resources/environment/${env}</directory>&ndash;&gt;-->
-            <!--&lt;!&ndash;</resource>&ndash;&gt;-->
-            <!--<resource>-->
-                <!--<directory>src/main/resources/environment/${env}</directory>-->
-                <!--<includes>-->
-                    <!--<include>baseConfig.properties</include>-->
-                <!--</includes>-->
-            <!--</resource>-->
+        <!--<resource>-->
+        <!--<directory>src/main/resources</directory>-->
+        <!--<excludes>&lt;!&ndash;资源根目录排除各环境的配置，使用单独的资源目录来指定&ndash;&gt;-->
+        <!--<exclude>*.properties</exclude>-->
+        <!--<exclude>environment/</exclude>-->
+        <!--</excludes>-->
+        <!--</resource>-->
+        <!--<resource>-->
+        <!--<directory>../fleet-core/src/main/resources/environment/${env}</directory>-->
+        <!--</resource>-->
+        <!--&lt;!&ndash;<resource>&ndash;&gt;-->
+        <!--&lt;!&ndash;<directory>src/main/resources/environment/${env}</directory>&ndash;&gt;-->
+        <!--&lt;!&ndash;</resource>&ndash;&gt;-->
+        <!--<resource>-->
+        <!--<directory>src/main/resources/environment/${env}</directory>-->
+        <!--<includes>-->
+        <!--<include>baseConfig.properties</include>-->
+        <!--</includes>-->
+        <!--</resource>-->
         <!--</resources>-->
         <!--<testResources>-->
-            <!--<testResource>-->
-                <!--<directory>src/test/resources</directory>-->
-            <!--</testResource>-->
+        <!--<testResource>-->
+        <!--<directory>src/test/resources</directory>-->
+        <!--</testResource>-->
         <!--</testResources>-->
 
         <pluginManagement>

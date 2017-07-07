@@ -20,12 +20,17 @@
                     当然，你可以直接将opencv的动态库直接放到tomcat/bin下，这样Tomcat容器启动后会加载该库到jvm中，但是这样会增加运维成本，本文使用动态加载opencv库，当spring容器启动时，将opencv库加载到jvm中。
                     首先将opencv动态库放到wepapp目录下，即web工程的根目录，使用下面的函数，将opencv动态库所在的路径加载到环境变量中。-->
         <dependency>
-            <groupId>opencv-300.jar</groupId>
-            <artifactId>opencv-300.jar</artifactId>
+            <groupId>opencv-320.jar</groupId>
+            <artifactId>opencv-320.jar</artifactId>
             <version>1.0</version>
             <!--注意此处添加的依赖必须要指明scope。scope为system时，表示需显式的提供包含依赖的jar包，maven不会再去Repository中查找该依赖。-->
             <scope>system</scope>
             <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/opencv-320.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
         </dependency>
     </dependencies>
 
