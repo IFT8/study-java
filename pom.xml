@@ -8,10 +8,10 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
+        <module>basic-parent/basic-core</module>
         <module>basic-parent/basic-demo</module>
         <module>basic-parent/basic-mybatis-MBG</module>
-        <module>basic-parent/basic-core</module>
-        <module>basic-parent/basic-util</module>
+
 
         <module>study_java/sp_java-Basic</module>
         <module>study_java/sp_java-Xml</module>

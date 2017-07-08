@@ -9,7 +9,7 @@ public class Entity {
     private String javaPackage;// 实体所在的包名
     private String className;// 实体类名
     private String superClass;// 父类名
-    List<Property> propertyList;// 属性集合
+    List<EntityProperty> propertyList;// 属性集合
     private boolean constructors;    // 是否有构造函数
 
     public String getJavaPackage() {
@@ -39,11 +39,11 @@ public class Entity {
         return this;
     }
 
-    public List<Property> getPropertyList() {
+    public List<EntityProperty> getPropertyList() {
         return propertyList;
     }
 
-    public Entity setPropertyList(List<Property> propertyList) {
+    public Entity setPropertyList(List<EntityProperty> propertyList) {
         this.propertyList = propertyList;
         return this;
     }

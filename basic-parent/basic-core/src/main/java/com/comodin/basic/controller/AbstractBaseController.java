@@ -6,7 +6,7 @@ import com.comodin.basic.constant.BaseConstants;
 import com.comodin.basic.exception.BusinessLogicException;
 import com.comodin.basic.exception.ParameterException;
 import com.comodin.basic.service.IBaseService;
-import com.comodin.basic.validation.IBaseValid;
+import com.comodin.basic.validation.IBaseValidGroup;
 import com.comodin.basic.vo.BaseVo;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -92,7 +92,7 @@ public abstract class AbstractBaseController<T extends Serializable, VO extends 
     @ResponseBody
     @RequestMapping(value = "/add" + BaseConstants.INTERCEPTOR_URL_SUFFIX, method = RequestMethod.POST)
     public ResultEntity add_POST(HttpServletRequest request, HttpServletResponse response,
-                                 @Validated(value = IBaseValid.Add.class) T bean, BindingResult bindingResult) {
+                                 @Validated(value = IBaseValidGroup.Add.class) T bean, BindingResult bindingResult) {
         //先检查，使用hiberante检验框架，是否包含对应Bean的校验失败的字段，并且根据国际化处理消息内容
         //FleetUtil.webRequestParametersValidation(bindingResult);
 
@@ -129,7 +129,7 @@ public abstract class AbstractBaseController<T extends Serializable, VO extends 
     @ResponseBody
     @RequestMapping(value = "/addAndMultipart" + BaseConstants.INTERCEPTOR_URL_SUFFIX, method = RequestMethod.POST)
     public ResultEntity addAndMultipart_POST(HttpServletRequest request, HttpServletResponse response,
-                                             @Validated(value = IBaseValid.Add.class) T bean, BindingResult bindingResult,
+                                             @Validated(value = IBaseValidGroup.Add.class) T bean, BindingResult bindingResult,
                                              @RequestParam(value = "files", required = false) MultipartFile... files) {
         //log.info("BaseController.addAndMultipart_POST ======>>> req_params: " + request.getParameterMap().toString());
 
@@ -229,7 +229,7 @@ public abstract class AbstractBaseController<T extends Serializable, VO extends 
     @RequestMapping(value = "/update" + BaseConstants.INTERCEPTOR_URL_SUFFIX, method = RequestMethod.POST)
     public ResultEntity update_POST(HttpServletRequest request, HttpServletResponse response,
                                     @RequestParam(value = "primaryKey", required = false) Object primaryKey,
-                                    @Validated(value = IBaseValid.Update.class) T bean, BindingResult bindingResult) {
+                                    @Validated(value = IBaseValidGroup.Update.class) T bean, BindingResult bindingResult) {
         //log.info("BaseController.update_POST ======>>> req_params: " + request.getParameterMap().toString());
 
         //先检查，使用hiberante检验框架，是否包含对应Bean的校验失败的字段，并且根据国际化处理消息内容
@@ -269,7 +269,7 @@ public abstract class AbstractBaseController<T extends Serializable, VO extends 
     @RequestMapping(value = "/updateAndMultipart" + BaseConstants.INTERCEPTOR_URL_SUFFIX, method = RequestMethod.POST)
     public ResultEntity updateAndMultipart_POST(HttpServletRequest request, HttpServletResponse response,
                                                 @RequestParam(value = "primaryKey", required = false) Object primaryKey,
-                                                @Validated(value = IBaseValid.Update.class) T bean, BindingResult bindingResult,
+                                                @Validated(value = IBaseValidGroup.Update.class) T bean, BindingResult bindingResult,
                                                 @RequestParam(value = "files", required = false) MultipartFile... files) {
         //先检查，使用hiberante检验框架，是否包含对应Bean的校验失败的字段，并且根据国际化处理消息内容
         //FleetUtil.webRequestParametersValidation(bindingResult);

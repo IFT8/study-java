@@ -1,0 +1,51 @@
+package com.comodin.basic.util.db.rw;
+
+import org.apache.log4j.Logger;
+
+/**
+ * <pre>
+ *  读/写动态数据库 决策者
+ *  根据DataSourceType是write/read 来决定是使用读/写数据库
+ *  通过ThreadLocal绑定实现选择功能
+ * </pre>
+ */
+public class ReadWriteDataSourceDecision {
+    private static final Logger log = Logger.getLogger(ReadWriteDataSourceDecision.class);
+
+    public enum DataSourceType {
+        write, read;
+    }
+
+    private static final ThreadLocal<DataSourceType> contextHolder = new ThreadLocal<DataSourceType>();
+
+    public static void setDbTypeMaster() {
+        String dbContextTypeBefore = (contextHolder.get() == null) ? " null" : contextHolder.get().name();
+        contextHolder.set(DataSourceType.write);
+        String dbContextTypeAfter = (contextHolder.get() == null) ? " null" : contextHolder.get().name();
+        log.info(String.format("ReadWriteDataSourceDecision setDbTypeMaster dbContextType Before:%s <===> After: %s", dbContextTypeBefore, dbContextTypeAfter));
+    }
+
+    public static void setDbTypeSlave() {
+        String dbContextTypeBefore = (contextHolder.get() == null) ? " null" : contextHolder.get().name();
+        contextHolder.set(DataSourceType.read);
+        String dbContextTypeAfter = (contextHolder.get() == null) ? " null" : contextHolder.get().name();
+        log.info(String.format("ReadWriteDataSourceDecision setDbTypeSlave dbContextType Before:%s <===> After: %s", dbContextTypeBefore, dbContextTypeAfter));
+    }
+
+    public static void reset() {
+        contextHolder.set(null);
+    }
+
+    public static boolean isChoiceNone() {
+        return null == contextHolder.get();
+    }
+
+    public static boolean isChoiceWrite() {
+        return DataSourceType.write == contextHolder.get();
+    }
+
+    public static boolean isChoiceRead() {
+        return DataSourceType.read == contextHolder.get();
+    }
+
+}

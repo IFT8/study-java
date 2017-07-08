@@ -3,7 +3,6 @@ package com.comodin.basic.service;
 import com.comodin.basic.dao.IBaseDao;
 import com.comodin.basic.exception.BusinessLogicException;
 import com.comodin.basic.exception.ParameterException;
-import com.comodin.basic.util.AnnotationUtil;
 import com.comodin.basic.vo.BaseVo;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -155,14 +154,14 @@ public abstract class AbstractBaseService<T extends Serializable, VO extends Bas
      */
     @Override
     public void deleteByPrimaryKeys(Class<T> tClass, Object... primaryKeys) throws ParameterException, BusinessLogicException {
-        String beanIdFieldName;
-        try {
-            beanIdFieldName = AnnotationUtil.getBeanPrimarykeyFieldName(tClass);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        Example example = new Example(tClass.getClass());
-        Example.Criteria criteria = example.createCriteria();
+        //String beanIdFieldName;
+        //try {
+        //    beanIdFieldName = AnnotationUtil.getBeanPrimarykeyFieldName(tClass);
+        //} catch (ClassNotFoundException e) {
+        //    e.printStackTrace();
+        //}
+        //Example example = new Example(tClass.getClass());
+        //Example.Criteria criteria = example.createCriteria();
 
     }
 
@@ -177,14 +176,14 @@ public abstract class AbstractBaseService<T extends Serializable, VO extends Bas
      */
     @Override
     public void deleteFlagByPrimaryKeys(Class<T> tClass, Object... primaryKeys) throws ParameterException, BusinessLogicException {
-        String beanIdFieldName;
-        try {
-            beanIdFieldName = AnnotationUtil.getBeanPrimarykeyFieldName(tClass);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        Example example = new Example(tClass.getClass());
-        Example.Criteria criteria = example.createCriteria();
+        //String beanIdFieldName;
+        //try {
+        //    beanIdFieldName = AnnotationUtil.getBeanPrimarykeyFieldName(tClass);
+        //} catch (ClassNotFoundException e) {
+        //    e.printStackTrace();
+        //}
+        //Example example = new Example(tClass.getClass());
+        //Example.Criteria criteria = example.createCriteria();
 
     }
 

@@ -1,37 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.comodin.fleet.core.mapper.CrewBeanMapper">
-  <resultMap id="BaseResultMap" type="com.comodin.fleet.core.bean.CrewBean">
+<mapper namespace="com.comodin.fleet.dao.CrewBeanMapper">
+  <resultMap id="BaseResultMap" type="com.comodin.fleet.bean.CrewBean">
     <!--
       WARNING - @mbg.generated
     -->
     <id column="crew_id" jdbcType="BIGINT" property="id" />
     <result column="crew_internal_id" jdbcType="VARCHAR" property="internalId" />
     <result column="crew_username" jdbcType="VARCHAR" property="username" />
-    <result column="crew_password" jdbcType="VARCHAR" property="password" />
-    <result column="crew_password_salt" jdbcType="CHAR" property="passwordSalt" />
-    <result column="crew_password_plaintext" jdbcType="CHAR" property="passwordPlaintext" />
     <result column="crew_branch_id" jdbcType="BIGINT" property="branchId" />
-    <result column="crew_department_id" jdbcType="VARCHAR" property="departmentId" />
-    <result column="crew_roles" jdbcType="VARCHAR" property="roles" />
-    <result column="crew_first_name" jdbcType="VARCHAR" property="firstName" />
-    <result column="crew_last_name" jdbcType="VARCHAR" property="lastName" />
-    <result column="crew_phone" jdbcType="VARCHAR" property="phone" />
-    <result column="crew_tele_phone" jdbcType="VARCHAR" property="telePhone" />
     <result column="crew_email" jdbcType="VARCHAR" property="email" />
-    <result column="crew_gender" jdbcType="CHAR" property="gender" />
     <result column="crew_birthday" jdbcType="DATE" property="birthday" />
-    <result column="crew_curp_id" jdbcType="VARCHAR" property="curpId" />
-    <result column="crew_photo" jdbcType="VARCHAR" property="photo" />
-    <result column="crew_address" jdbcType="VARCHAR" property="address" />
-    <result column="crew_description" jdbcType="VARCHAR" property="description" />
-    <result column="crew_skills" jdbcType="VARCHAR" property="skills" />
-    <result column="crew_weapons" jdbcType="VARCHAR" property="weapons" />
-    <result column="crew_last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
-    <result column="crew_last_login_ip" jdbcType="VARCHAR" property="lastLoginIp" />
-    <result column="crew_organization_id" jdbcType="INTEGER" property="organizationId" />
     <result column="crew_status" jdbcType="CHAR" property="status" />
-    <result column="crew_create_by" jdbcType="VARCHAR" property="createBy" />
     <result column="crew_create_timestamp" jdbcType="TIMESTAMP" property="createTimestamp" />
     <result column="crew_delete_flag" jdbcType="CHAR" property="deleteFlag" />
   </resultMap>

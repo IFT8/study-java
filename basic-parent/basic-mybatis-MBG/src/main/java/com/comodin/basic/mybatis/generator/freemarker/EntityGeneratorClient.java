@@ -72,19 +72,17 @@ public class EntityGeneratorClient {
         user.setConstructors(true); // 是否创建构造函数
         // user.setSuperclass(person);
 
-        List<Property> propertyList = new ArrayList<Property>();
+        List<EntityProperty> propertyList = new ArrayList<EntityProperty>();
 
         // 创建实体属性一 
-        Property attribute1 = new Property();
-        attribute1.setJavaType("String");
-        attribute1.setPropertyName("name");
-        attribute1.setPropertyEnumType(PropertyEnumType.String);
+        EntityProperty attribute1 = new EntityProperty();
+        attribute1.setName("name");
+        attribute1.setType(EntityPropertyType.String);
 
         // 创建实体属性二
-        Property attribute2 = new Property();
-        attribute2.setJavaType("int");
-        attribute2.setPropertyName("age");
-        attribute2.setPropertyEnumType(PropertyEnumType.Int);
+        EntityProperty attribute2 = new EntityProperty();
+        attribute2.setName("age");
+        attribute2.setType(EntityPropertyType.Integer);
 
         propertyList.add(attribute1);
         propertyList.add(attribute2);

@@ -1,14 +1,22 @@
 package com.comodin.basic.bean;
 
 public class ResultEntity {
-    private Integer resultCode;
+    private String resultCode;
     private Object resultMsg;
 
-    public Integer getResultCode() {
+    public ResultEntity() {
+    }
+
+    public ResultEntity(String resultCode, Object resultMsg) {
+        this.resultCode = resultCode;
+        this.resultMsg = resultMsg;
+    }
+
+    public String getResultCode() {
         return resultCode;
     }
 
-    public ResultEntity setResultCode(Integer resultCode) {
+    public ResultEntity setResultCode(String resultCode) {
         this.resultCode = resultCode;
         return this;
     }

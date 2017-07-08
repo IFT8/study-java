@@ -48,7 +48,7 @@
         <!--<property name="caseSensitive" value="true"/>-->
         <!--</plugin>-->
 
-        <plugin type="com.comodin.basic.mybatis.generator.plugins.HibernateValidatorPlugin">
+        <plugin type="com.comodin.basic.mybatis.generator.plugins.ComodinPlugin">
             <!--建议创建一个自己的通用接口，方便将来的自由扩展和搭配-->
             <!--<property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>-->
             <property name="mappers" value="${dao.mappers}"/>
@@ -233,7 +233,6 @@
         <table tableName="t_crew" domainObjectName="CrewBean">
             <generatedKey column="crew_id" sqlStatement="Mysql" identity="true"/>
             <columnRenamingRule searchString="crew_" replaceString=""/>
-            <columnOverride column="task_inter_change_task_id" property="interChangeTaskId"/>
         </table>
     </context>
 </generatorConfiguration>
