@@ -2,8 +2,8 @@ package com.comodin.basic.mybatis.generator.plugins;
 
 
 import com.alibaba.fastjson.JSON;
-import com.comodin.basic.mybatis.generator.freemarker.EntityProperty;
-import com.comodin.basic.mybatis.generator.freemarker.EntityPropertyType;
+import com.comodin.basic.util.freemarker.EntityProperty;
+import com.comodin.basic.util.freemarker.EntityPropertyType;
 import com.comodin.basic.util.MyStringUtils;
 import org.mybatis.generator.api.CommentGenerator;
 import org.mybatis.generator.api.IntrospectedColumn;
@@ -31,7 +31,7 @@ public class ComodinCommentGenerator implements CommentGenerator {
     private FullyQualifiedJavaType dateUtil = new FullyQualifiedJavaType("com.comodin.basic.util.date.DateUtil");
 
     private static Map<String, String> internationalizedMap = new HashMap<>();
-    private static List<EntityProperty> applicationConstantMap = new ArrayList<>();
+    private static Set<EntityProperty> applicationConstantSet = new HashSet<>();
 
     /**
      * Adds properties for this instance from any properties configured in the
@@ -378,7 +378,7 @@ public class ComodinCommentGenerator implements CommentGenerator {
                         .setName(constantName)
                         .setValue(data)
                         .setRemarks(introspectedColumn.getRemarks());
-                applicationConstantMap.add(entityProperty);
+                applicationConstantSet.add(entityProperty);
             }
         });
         String substring = stringBuffer.substring(0, stringBuffer.length() - 1);
@@ -481,7 +481,7 @@ public class ComodinCommentGenerator implements CommentGenerator {
         return internationalizedMap;
     }
 
-    public static List<EntityProperty> getApplicationConstantMap() {
-        return applicationConstantMap;
+    public static Set<EntityProperty> getApplicationConstantSet() {
+        return applicationConstantSet;
     }
 }

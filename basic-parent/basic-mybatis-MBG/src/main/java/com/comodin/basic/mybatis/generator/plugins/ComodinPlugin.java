@@ -1,11 +1,8 @@
 package com.comodin.basic.mybatis.generator.plugins;
 
-import com.comodin.basic.mybatis.generator.freemarker.Entity;
-import com.comodin.basic.mybatis.generator.freemarker.EntityProperty;
-import freemarker.template.Configuration;
-import freemarker.template.DefaultObjectWrapper;
-import freemarker.template.Template;
-import freemarker.template.TemplateException;
+import com.comodin.basic.util.freemarker.Entity;
+import com.comodin.basic.util.freemarker.EntityType;
+import com.comodin.basic.util.freemarker.FreeMarkerUtils;
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.PluginAdapter;
@@ -19,7 +16,7 @@ import org.mybatis.generator.config.Context;
 import org.mybatis.generator.internal.util.StringUtility;
 import tk.mybatis.mapper.MapperException;
 
-import java.io.*;
+import java.io.File;
 import java.util.*;
 
 /**
@@ -151,11 +148,13 @@ public class ComodinPlugin extends PluginAdapter {
             topLevelClass.addAnnotation("@Table(name = \"" + getDelimiterName(tableName) + "\")");
         }
 
-        generateInternationalizedFile("", introspectedTable);
-        generateInternationalizedFile("en_US", introspectedTable);
-        generateInternationalizedFile("zh_CN", introspectedTable);
-        generateInternationalizedFile("es_MX", introspectedTable);
+        generateApplicationInternationalizedFile("", introspectedTable);
+        generateApplicationInternationalizedFile("en_US", introspectedTable);
+        generateApplicationInternationalizedFile("zh_CN", introspectedTable);
+        generateApplicationInternationalizedFile("es_MX", introspectedTable);
         generateApplicationConstantFile(introspectedTable);
+        generateApplicationServiceInterfaceFile(introspectedTable);
+        generateApplicationServiceImplementsFile(introspectedTable);
     }
 
     /**
@@ -349,107 +348,109 @@ public class ComodinPlugin extends PluginAdapter {
     }
 
 
-    private void generateInternationalizedFile(String language, IntrospectedTable introspectedTable) {
-        String templateDir = "D:\\ideaProjects\\study-java\\basic-parent\\basic-mybatis-MBG\\src\\main\\resources\\template";
-
-        // 创建.java类文件
-        String fileRootDir = "D:\\ideaProjects\\study-java\\basic-parent\\basic-mybatis-MBG\\src\\main\\resources\\i18n";
-        File outDirFile = new File(fileRootDir);
-        if (!outDirFile.exists()) {
-            outDirFile.mkdir();
-        }
-
-        File javaFile;
+    private void generateApplicationInternationalizedFile(String language, IntrospectedTable introspectedTable) {
         String javaBeanName = introspectedTable.getFullyQualifiedTable().getDomainObjectName();
+
+        String outFileRootDir = "D:\\ideaProjects\\study-java\\basic-parent\\basic-mybatis-MBG\\src\\main\\resources\\i18n";
+        String outFileNamePrefix = "";
+        String outFileNameSuffix = "";
+        String outFileExtensionName = ".properties";
+        String outFileName;
         if (language == null || "".equals(language.trim())) {
-            javaFile = new File(fileRootDir, javaBeanName + ".properties");
+            outFileName = String.format("%s%s%s", outFileNamePrefix, javaBeanName, outFileNameSuffix);
         } else {
-            javaFile = new File(fileRootDir, javaBeanName + "_" + language + ".properties");
+            outFileName = String.format("%s%s%s_%s", outFileNamePrefix, javaBeanName, outFileNameSuffix, language);
         }
+        File outFile = new File(outFileRootDir, String.format("%s%s", outFileName, outFileExtensionName));
 
-        Configuration cfg = new Configuration(Configuration.VERSION_2_3_23);
-        try {
-            // 步骤一：指定 模板文件从何处加载的数据源，这里设置一个文件目录
-            cfg.setDirectoryForTemplateLoading(new File(templateDir));
-            cfg.setObjectWrapper(new DefaultObjectWrapper(Configuration.VERSION_2_3_23));
+        Map<String, Map<String, String>> dataModel = new HashMap<>();
+        dataModel.put("dataModel", ComodinCommentGenerator.getInternationalizedMap());
 
-            // 步骤二：获取 模板文件
-            Template template = cfg.getTemplate("bean-i18n.ftl");
-
-            // 步骤三：创建 数据模型
-            Map<String, Map<String, String>> root = new HashMap<>();
-            root.put("javaBeanFieldsMaps", ComodinCommentGenerator.getInternationalizedMap());
-
-            // 步骤四：合并 模板 和 数据模型
-            // 创建.java类文件
-            if (javaFile != null) {
-                Writer javaWriter = new FileWriter(javaFile);
-                template.process(root, javaWriter);
-                javaWriter.flush();
-                System.out.println("文件生成路径： " + javaFile.getCanonicalPath());
-
-                javaWriter.close();
-            }
-            // 输出到Console控制台
-            Writer out = new OutputStreamWriter(System.out);
-            template.process(root, out);
-            out.flush();
-            out.close();
-        } catch (IOException | TemplateException e) {
-            e.printStackTrace();
-        }
+        FreeMarkerUtils freeMarkerUtils = FreeMarkerUtils.getInstance("/template");
+        freeMarkerUtils.crateFile(dataModel, "freemarker-template-i18n.ftl", outFile.getPath());
     }
 
     private void generateApplicationConstantFile(IntrospectedTable introspectedTable) {
-        String templateDir = "D:\\ideaProjects\\study-java\\basic-parent\\basic-mybatis-MBG\\src\\main\\resources\\template";
-
-        // 创建.java类文件
-        String fileRootDir = "D:\\ideaProjects\\study-java\\basic-parent\\basic-mybatis-MBG\\src\\main\\java\\com\\comodin\\fleet\\constant";
-        File outDirFile = new File(fileRootDir);
-        if (!outDirFile.exists()) {
-            outDirFile.mkdir();
-        }
 
         String javaBeanName = introspectedTable.getFullyQualifiedTable().getDomainObjectName();
-        File javaFile = new File(fileRootDir, javaBeanName + "Constant" + ".java");
+
+        String outFileRootDir = "D:\\ideaProjects\\study-java\\basic-parent\\basic-mybatis-MBG\\src\\main\\java\\com\\comodin\\fleet\\constant";
+        String outFileNamePrefix = "";
+        String outFileNameSuffix = "Constant";
+        String outFileExtensionName = ".java";
+        String outFileName = String.format("%s%s%s", outFileNamePrefix, javaBeanName, outFileNameSuffix);
+        File outFile = new File(outFileRootDir, String.format("%s%s", outFileName, outFileExtensionName));
+
+        Map<String, Entity> dataModel = new HashMap<>();
+        Entity entity = new Entity(EntityType.Class);
+        entity.setPackageName("com.comodin.fleet.constant");
+        entity.setClassName(outFileName);
+        entity.setGeneratedConstructors(false);
+        entity.setStaticPropertyList(ComodinCommentGenerator.getApplicationConstantSet());
+        dataModel.put("dataModel", entity);
+
+        FreeMarkerUtils freeMarkerUtils = FreeMarkerUtils.getInstance("/template");
+        freeMarkerUtils.crateFile(dataModel, "freemarker-template-java.ftl", outFile.getPath());
+    }
 
 
-        Configuration cfg = new Configuration(Configuration.VERSION_2_3_23);
-        try {
-            // 步骤一：指定 模板文件从何处加载的数据源，这里设置一个文件目录
-            cfg.setDirectoryForTemplateLoading(new File(templateDir));
-            cfg.setObjectWrapper(new DefaultObjectWrapper(Configuration.VERSION_2_3_23));
+    private void generateApplicationServiceInterfaceFile(IntrospectedTable introspectedTable) {
 
-            // 步骤二：获取 模板文件
-            Template template = cfg.getTemplate("bean-constant.ftl");
+        String javaBeanName = introspectedTable.getFullyQualifiedTable().getDomainObjectName();
 
-            // 步骤三：创建 数据模型
-            Map<String, Object> root = new HashMap<>();
-            Entity user = new Entity();
-            user.setJavaPackage("com.comodin.fleet.constant");  // 创建包名
-            user.setClassName(javaBeanName + "Constant");       // 创建类名
-            user.setConstructors(false);                        // 是否创建构造函数
-            List<EntityProperty> propertyList = ComodinCommentGenerator.getApplicationConstantMap();
-            user.setPropertyList(propertyList);
-            root.put("entity", user);
+        String outFileRootDir = "D:\\ideaProjects\\study-java\\basic-parent\\basic-mybatis-MBG\\src\\main\\java\\com\\comodin\\fleet\\service";
+        String outFileNamePrefix = "I";
+        String outFileNameSuffix = "Service";
+        String outFileExtensionName = ".java";
+        String outFileName = String.format("%s%s%s", outFileNamePrefix, javaBeanName, outFileNameSuffix);
+        File outFile = new File(outFileRootDir, String.format("%s%s", outFileName, outFileExtensionName));
 
-            // 步骤四：合并 模板 和 数据模型
-            // 创建.java类文件
-            if (javaFile != null) {
-                Writer javaWriter = new FileWriter(javaFile);
-                template.process(root, javaWriter);
-                javaWriter.flush();
-                System.out.println("文件生成路径： " + javaFile.getCanonicalPath());
+        Set<String> importPackageSet = new HashSet<>();
+        importPackageSet.add("com.comodin.basic.service.IBaseService");
+        importPackageSet.add("com.comodin.basic.vo.BaseVo");
+        importPackageSet.add("com.comodin.fleet.bean.CrewBean");
 
-                javaWriter.close();
-            }
-            // 输出到Console控制台
-            Writer out = new OutputStreamWriter(System.out);
-            template.process(root, out);
-            out.flush();
-            out.close();
-        } catch (IOException | TemplateException e) {
-            e.printStackTrace();
-        }
+        Map<String, Entity> dataModel = new HashMap<>();
+        Entity entity = new Entity(EntityType.Interface);
+        entity.setPackageName("com.comodin.fleet.service");
+        entity.setClassName(outFileName);
+        entity.setImportPackageSet(importPackageSet);
+        entity.setSuperClass("IBaseService<CrewBean, BaseVo<CrewBean>>");
+        dataModel.put("dataModel", entity);
+
+        FreeMarkerUtils freeMarkerUtils = FreeMarkerUtils.getInstance("/template");
+        freeMarkerUtils.crateFile(dataModel, "freemarker-template-java.ftl", outFile.getPath());
+    }
+
+    private void generateApplicationServiceImplementsFile(IntrospectedTable introspectedTable) {
+
+        String javaBeanName = introspectedTable.getFullyQualifiedTable().getDomainObjectName();
+
+        String outFileRootDir = "D:\\ideaProjects\\study-java\\basic-parent\\basic-mybatis-MBG\\src\\main\\java\\com\\comodin\\fleet\\service\\impl";
+        String outFileNamePrefix = "";
+        String outFileNameSuffix = "Service";
+        String outFileExtensionName = ".java";
+        String outFileName = String.format("%s%s%s", outFileNamePrefix, javaBeanName, outFileNameSuffix);
+        File outFile = new File(outFileRootDir, String.format("%s%s", outFileName, outFileExtensionName));
+
+        Set<String> importPackageSet = new HashSet<>();
+        importPackageSet.add("com.comodin.basic.service.AbstractBaseService");
+        importPackageSet.add("com.comodin.basic.vo.BaseVo");
+        importPackageSet.add("com.comodin.fleet.bean.CrewBean");
+        importPackageSet.add("com.comodin.fleet.service.ICrewBeanService");
+        importPackageSet.add("org.springframework.stereotype.Service");
+
+        Map<String, Entity> dataModel = new HashMap<>();
+        Entity entity = new Entity(EntityType.Class);
+        entity.setPackageName("com.comodin.fleet.service.impl");
+        entity.setClassName(outFileName);
+        entity.setImportPackageSet(importPackageSet);
+        entity.setClassAnnotationSet(new HashSet<String>(Collections.singletonList("@Service")));
+        entity.setSuperClass("AbstractBaseService<CrewBean, BaseVo<CrewBean>>");
+        entity.setImplementsInterfaceClassSet(new HashSet<String>(Collections.singletonList("ICrewBeanService")));
+        dataModel.put("dataModel", entity);
+
+        FreeMarkerUtils freeMarkerUtils = FreeMarkerUtils.getInstance("/template");
+        freeMarkerUtils.crateFile(dataModel, "freemarker-template-java.ftl", outFile.getPath());
     }
 }

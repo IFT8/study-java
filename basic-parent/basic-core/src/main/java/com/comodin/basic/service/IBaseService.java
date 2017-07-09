@@ -11,14 +11,18 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * 通用接口
+ * service层 通用基类接口
  *
- * @param <T> the type parameter
+ * @param <T>  实体bean
+ * @param <VO> VO,即
  */
+@SuppressWarnings({"UnusedReturnValue", "unused"})
 public interface IBaseService<T extends Serializable, VO extends BaseVo> {
 
     /**
-     * 保存一个实体，null的属性也会保存，不会使用数据库默认值
+     * <pre>
+     *      业务功能：保存一个实体，null的属性也会保存，不会使用数据库默认值
+     * </pre>
      *
      * @param entity 要保存的实体对象
      *
@@ -27,11 +31,11 @@ public interface IBaseService<T extends Serializable, VO extends BaseVo> {
      * @throws ParameterException     若必需参数不合法，抛出
      * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
      */
-    T save(T entity) throws ParameterException, BusinessLogicException;
+    T insert(T entity) throws ParameterException, BusinessLogicException;
 
     /**
      * <pre>
-     *      业务功能：保存一个实体，并针对上传的文件流进行，保存
+     *      业务功能：保存一个实体，null的属性也会保存，不会使用数据库默认值
      *      注意事项：此接口方法，默认实现为空，需要各模块，自己重写业务逻辑。
      * </pre>
      *
@@ -43,10 +47,12 @@ public interface IBaseService<T extends Serializable, VO extends BaseVo> {
      * @throws ParameterException     若必需参数不合法，抛出
      * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
      */
-    T save(T entity, MultipartFile... multipartFiles) throws ParameterException, BusinessLogicException;
+    T insert(T entity, MultipartFile... multipartFiles) throws ParameterException, BusinessLogicException;
 
     /**
-     * 保存一个实体，null的属性不会保存，会使用数据库默认值
+     * <pre>
+     *      业务功能：保存一个实体，null的属性不会保存，会使用数据库默认值
+     * </pre>
      *
      * @param entity 要保存的实体对象
      *
@@ -55,12 +61,17 @@ public interface IBaseService<T extends Serializable, VO extends BaseVo> {
      * @throws ParameterException     若必需参数不合法，抛出
      * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
      */
-    T saveSelective(T entity) throws ParameterException, BusinessLogicException;
-
+    T insertSelective(T entity) throws ParameterException, BusinessLogicException;
 
     /**
-     * 批量保存，只会返回插入到数据中的条数；entityList中对应的实体对象并不会对应的ID
-     * SQL格式：INSERT INTO table (字段名, 字段名, ......) VALUES (值, 值, ......), (值, 值, ......), (值, 值, ......), ....;
+     * <pre>
+     *      业务功能：批量保存，只会返回插入到数据中的条数；entityList中对应的实体对象并不会对应的ID
+     *      SQL格式：INSERT INTO table (字段名1,字段名2,字段名3,......) VALUES
+     *                                (字段名1值,字段名2值,字段名3值),
+     *                                (字段名1值,字段名2值,字段名3值),
+     *                                (字段名1值,字段名2值,字段名3值),
+     *                                 ....;
+     * </pre>
      *
      * @param entityList 要保存的实体对象列表集合
      *
@@ -69,90 +80,200 @@ public interface IBaseService<T extends Serializable, VO extends BaseVo> {
      * @throws ParameterException     若必需参数不合法，抛出
      * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
      */
-    int saveList(List<T> entityList) throws ParameterException, BusinessLogicException;
-
-    int saveList(List<T> entityList, Integer batchNumber) throws ParameterException, BusinessLogicException;
+    int insertList(List<T> entityList) throws ParameterException, BusinessLogicException;
 
     /**
-     * 根据ID，删除当前对象
+     * <pre>
+     *      业务功能：批量保存，只会返回插入到数据中的条数；entityList 中对应的实体对象并不会对应的ID
+     *      注意事项：指定批次插入条数，若整个 entityList 的条数少于指定 batchNumber，即一次写入，若多条指定 batchNumber，分批次进行写入
+     *      SQL格式：INSERT INTO table (字段名1,字段名2,字段名3,......) VALUES
+     *                                (字段名1值,字段名2值,字段名3值),
+     *                                (字段名1值,字段名2值,字段名3值),
+     *                                (字段名1值,字段名2值,字段名3值),
+     *                                 ....;
+     * </pre>
      *
-     * @param primaryKey 要删除的ID
+     * @param entityList      要保存的实体对象列表集合
+     * @param eachBatchNumber 指定批次插入条数，若整个 entityList 的条数少于指定 batchNumber，即一次写入，若多条指定 batchNumber，分批次进行写入
+     *
+     * @return 总结插入数据库中的记录数
      *
      * @throws ParameterException     若必需参数不合法，抛出
      * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
      */
-    void deleteByPrimaryKey(Object primaryKey) throws ParameterException, BusinessLogicException;
+    int insertList(List<T> entityList, Integer eachBatchNumber) throws ParameterException, BusinessLogicException;
 
     /**
-     * 批量删除，根据主键，需要自己在 *Mapper.xml 文件中自己实现. 因各模块的ID字段名可能不一样，所以需要实现
+     * <pre>
+     *      业务功能：指定表名批量插入数据，主要用于数据库分表，表名不同
+     * </pre>
      *
-     * @param primaryKeys 要删除业务逻辑的ids
+     * @param entityList 要保存的实体对象列表集合
+     * @param tableName  对应的表名
+     *
+     * @return 总结插入数据库中的记录数
      *
      * @throws ParameterException     若必需参数不合法，抛出
      * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
      */
-    void deleteByPrimaryKeys(Class<T> tClass, Object... primaryKeys) throws ParameterException, BusinessLogicException;
+    int insertListByTableName(List<T> entityList, String tableName) throws ParameterException, BusinessLogicException;
 
     /**
-     * 批量业务逻辑上删除，根据 主键，需要自己在 *Mapper.xml 文件中自己实现.
+     * <pre>
+     *      业务功能：根据主键，删除当前对象
+     * </pre>
      *
-     * @param primaryKeys 要删除业务逻辑的ids
+     * @param primaryKey 主键
+     *
+     * @return 返回删除成功的记录数
      *
      * @throws ParameterException     若必需参数不合法，抛出
      * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
      */
-    void deleteFlagByPrimaryKeys(Class<T> tClass, Object... primaryKeys) throws ParameterException, BusinessLogicException;
-
+    int deleteByPrimaryKey(Object primaryKey) throws ParameterException, BusinessLogicException;
 
     /**
-     * 更新方法，依据主键，进行更新全部字段，若字段值为null，也会更新为null
+     * <pre>
+     *     业务功能：根据实体record中的属性进行查询，删除符合的记录
+     * </pre>
+     *
+     * @param record 实体record中的属性进行查询
+     *
+     * @return 返回删除成功的记录数
+     *
+     * @throws ParameterException     若必需参数不合法，抛出
+     * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
+     */
+    int delete(T record) throws ParameterException, BusinessLogicException;
+
+    /**
+     * <pre>
+     *      业务功能：【根据条件工具类example中的条件进行查询】，进行删除
+     * </pre>
+     *
+     * @param example 条件工具类example中的条件进行查询
+     *
+     * @return 返回删除成功的记录数
+     *
+     * @throws ParameterException     若必需参数不合法，抛出
+     * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
+     */
+    int deleteByExample(Object example) throws ParameterException, BusinessLogicException;
+
+    /**
+     * <pre>
+     *      业务功能：批量删除，根据主键
+     * </pre>
+     *
+     * @param primaryKeys 多主键
+     *
+     * @return 返回删除成功的记录数
+     *
+     * @throws ParameterException     若必需参数不合法，抛出
+     * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
+     */
+    int batchDeleteByPrimaryKeys(Object... primaryKeys) throws ParameterException, BusinessLogicException;
+
+    /**
+     * <pre>
+     *      业务功能：实现业务逻辑删除功能，此处需在数据库对应的表中
+     * </pre>
+     *
+     * @param primaryKeys 要删除业务逻辑的主键，可以是多个
+     *
+     * @throws ParameterException     若必需参数不合法，抛出
+     * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
+     */
+    int batchDeleteFlagByPrimaryKeys(Object... primaryKeys) throws ParameterException, BusinessLogicException;
+
+    /**
+     * <pre>
+     *      业务功能：依据主键，进行更新全部字段，若字段值为null，也会更新为null
+     * </pre>
      *
      * @param entity 更新对象【必需要含主键信息】
      *
      * @throws ParameterException     若必需参数不合法，抛出
      * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
      */
-    int updateAll(T entity) throws ParameterException, BusinessLogicException;
-
-    /**
-     * 更新方法，依据主键，进行更新，字段不为空的数据
-     *
-     * @param entity 更新对象【必需要含主键信息】
-     *
-     * @throws ParameterException     若必需参数不合法，抛出
-     * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
-     */
-    int updateNotNull(T entity) throws ParameterException, BusinessLogicException;
+    int updateByPrimaryKey(T entity) throws ParameterException, BusinessLogicException;
 
     /**
      * <pre>
      *      业务功能：更新方法，并针对上传的文件流进行，保存
-     *      注意事项：此接口方法，默认实现为空，需要各模块，自己重写业务逻辑。
      * </pre>
      *
-     * @param primaryKey     要更新的对应的，主键
-     * @param entity         要保存的实体对象
+     * @param entity         更新对象【必需要含主键信息】
      * @param multipartFiles 文件流
      *
-     * @return T                      返回当前传递的实体对象，其中包含了当前保存对象，在数据库中对应的ID
+     * @return 返回更新数
      *
      * @throws ParameterException     若必需参数不合法，抛出
      * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
      */
-    int updateNotNull(Object primaryKey, T entity, MultipartFile... multipartFiles) throws ParameterException, BusinessLogicException;
+    int updateByPrimaryKey(T entity, MultipartFile... multipartFiles) throws ParameterException, BusinessLogicException;
 
-    int updateByExample(T entity, Object example) throws ParameterException, BusinessLogicException;
-
-    int updateByExampleSelective(T entity, Object example) throws ParameterException, BusinessLogicException;
-
+    /**
+     * <pre>
+     *      业务功能：依据主键，进行更新，字段不为空的数据
+     * </pre>
+     *
+     * @param entity 更新对象【必需要含主键信息】
+     *
+     * @return 返回更新数
+     *
+     * @throws ParameterException     若必需参数不合法，抛出
+     * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
+     */
     int updateByPrimaryKeySelective(T entity) throws ParameterException, BusinessLogicException;
 
     /**
-     * 查询方法，根据主键，进行查询
+     * <pre>
+     *      业务功能：根据example条件，进行更新全部字段，若字段值为null，也会更新为null
+     * </pre>
+     *
+     * @param entity  更新对象【必需要含主键信息】
+     * @param example 更新的条件
+     *
+     * @return 返回更新数
+     *
+     * @throws ParameterException     若必需参数不合法，抛出
+     * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
+     */
+    int updateByExample(T entity, Object example) throws ParameterException, BusinessLogicException;
+
+    /**
+     * <pre>
+     *      业务功能：根据example条件，进行更新，字段不为空的数据
+     * </pre>
+     *
+     * @param entity  更新对象【必需要含主键信息】
+     * @param example 更新的条件
+     *
+     * @return 返回更新数
+     *
+     * @throws ParameterException     若必需参数不合法，抛出
+     * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
+     */
+    int updateByExampleSelective(T entity, Object example) throws ParameterException, BusinessLogicException;
+
+    /**
+     * <pre>
+     *      业务功能：查询所有数据
+     * </pre>
+     *
+     * @return 返回当前数据库所有的记录
+     */
+    List<T> selectAll();
+
+    /**
+     * <pre>
+     *      业务功能：根据主键，进行查询
+     * </pre>
      *
      * @param primaryKey 主键
      *
-     * @return 返回当前ID的实体对象；
+     * @return 返回当前主键，对应的实体对象
      *
      * @throws ParameterException     若必需参数不合法，抛出
      * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
@@ -160,14 +281,9 @@ public interface IBaseService<T extends Serializable, VO extends BaseVo> {
     T selectByPrimaryKey(Object primaryKey) throws ParameterException, BusinessLogicException;
 
     /**
-     * 查询所有数据
-     *
-     * @return 返回当前数据库所有的记录
-     */
-    List<T> selectAll();
-
-    /**
-     * 查询所有数据，根据 Bean的条件进行查询
+     * <pre>
+     *      业务功能：【根据实体record中的属性进行查询，对应的属性不为空的条件】，进行查询所符合的实体列表
+     * </pre>
      *
      * @param record 当前实体需要查询的条件
      *
@@ -178,15 +294,10 @@ public interface IBaseService<T extends Serializable, VO extends BaseVo> {
      */
     List<T> select(T record) throws ParameterException, BusinessLogicException;
 
-
-    List<T> selectByExample(Object example) throws ParameterException, BusinessLogicException;
-
-    List<T> selectByExampleAndRowBounds(Object example, RowBounds rowBounds) throws ParameterException, BusinessLogicException;
-
-    List<T> selectByRowBounds(T record, RowBounds rowBounds) throws ParameterException, BusinessLogicException;
-
     /**
-     * 根据实体中的属性进行查询，只能有一个返回值，有多个结果是抛出异常，查询条件使用等号
+     * <pre>
+     *      业务功能：【根据实体record中的属性进行查询，对应的属性不为空的条件】，只能有一个返回值，有多个结果是抛出异常，查询条件使用等号
+     * </pre>
      *
      * @param record 当前实体需要查询的条件
      *
@@ -198,9 +309,55 @@ public interface IBaseService<T extends Serializable, VO extends BaseVo> {
     T selectOne(T record) throws ParameterException, BusinessLogicException;
 
     /**
-     * 统计符合，查询条件总数
+     * <pre>
+     *     业务功能：【根据条件工具类example中的条件进行查询】，进行查询所符合的实体列表
+     * </pre>
      *
-     * @param record 当前实体需要查询的条件
+     * @param example 条件工具类example中的条件进行查询
+     *
+     * @return 返回当当前符合条件，对象列表
+     *
+     * @throws ParameterException     若必需参数不合法，抛出
+     * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
+     */
+    List<T> selectByExample(Object example) throws ParameterException, BusinessLogicException;
+
+    /**
+     * <pre>
+     *      业务功能：【根据实体record中的属性进行查询，对应的属性不为空的条件，并且指定分页】，进行查询所符合的实体列表
+     * </pre>
+     *
+     * @param record    实体record中的属性进行查询
+     * @param rowBounds 分页bean
+     *
+     * @return 返回当当前符合条件，对象列表
+     *
+     * @throws ParameterException     若必需参数不合法，抛出
+     * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
+     */
+    List<T> selectByRowBounds(T record, RowBounds rowBounds) throws ParameterException, BusinessLogicException;
+
+    /**
+     * <pre>
+     *     业务功能：【根据条件工具类example中的条件进行查询，并且指定分页】，进行查询所符合的实体列表
+     * </pre>
+     *
+     * @param example   条件工具类example中的条件进行查询
+     * @param rowBounds 分页bean
+     *
+     * @return 返回当当前符合条件，对象列表
+     *
+     * @throws ParameterException     若必需参数不合法，抛出
+     * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
+     */
+    List<T> selectByExampleAndRowBounds(Object example, RowBounds rowBounds) throws ParameterException, BusinessLogicException;
+
+    /**
+     * <pre>
+     *      业务功能：统计符合，查询条件总数
+     * </pre>
+     *
+     * @param record 实体record中的属性进行查询
      *
      * @return list 返回当前符合条件，对象集合
      *
@@ -209,12 +366,24 @@ public interface IBaseService<T extends Serializable, VO extends BaseVo> {
      */
     int selectCount(T record) throws ParameterException, BusinessLogicException;
 
+    /**
+     * <pre>
+     *      业务功能：【根据条件工具类example中的条件进行查询】，统计总数
+     * </pre>
+     *
+     * @param example 条件工具类example中的条件进行查询
+     *
+     * @return 返回当当前符合条件，对象列表
+     *
+     * @throws ParameterException     若必需参数不合法，抛出
+     * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
+     */
     int selectCountByExample(Object example) throws ParameterException, BusinessLogicException;
 
     /**
      * <pre>
-     * 带参数查询，结合了分页参数；此方法需要，各模块自己根据业务需求，重新 BaseService.getListByVo 方法；
-     * 分页参数，必需参数；
+     *      业务功能：带参数查询，结合了分页参数；此方法需要，各模块自己根据业务需求，重新 BaseService.getListByVo 方法；
+     *              分页参数，必需参数；
      *
      * 例：
      * log.info("service parameters vo JSON: " + JSON.toJSONString(vo));
@@ -241,10 +410,10 @@ public interface IBaseService<T extends Serializable, VO extends BaseVo> {
      * //组装查询参数，需要自己自身实现
      * if (StringUtils.isNotBlank(vo.getCompositeQuery())) {
      *      StringBuilder sb = new StringBuilder(100);
-     *                      sb.append(" crew_id LIKE '" + FleetBasiUtil.likePercent(vo.getCompositeQuery().trim()) + "' ")
-     *                          .append(" OR crew_first_name LIKE '" + FleetBasiUtil.likePercent(vo.getCompositeQuery().trim()) + "' ")
-     *                          .append(" OR crew_last_name LIKE '" + FleetBasiUtil.likePercent(vo.getCompositeQuery().trim()) + "' ")
-     *                          .append(" OR crew_phone LIKE '" + FleetBasiUtil.likePercent(vo.getCompositeQuery().trim()) + "' ");
+     *                      sb.append(" crew_id LIKE '" + FleetBasicUtil.likePercent(vo.getCompositeQuery().trim()) + "' ")
+     *                          .append(" OR crew_first_name LIKE '" + FleetBasicUtil.likePercent(vo.getCompositeQuery().trim()) + "' ")
+     *                          .append(" OR crew_last_name LIKE '" + FleetBasicUtil.likePercent(vo.getCompositeQuery().trim()) + "' ")
+     *                          .append(" OR crew_phone LIKE '" + FleetBasicUtil.likePercent(vo.getCompositeQuery().trim()) + "' ");
      *      criteria.andCondition(sb.toString());
      * }
      *
@@ -267,8 +436,10 @@ public interface IBaseService<T extends Serializable, VO extends BaseVo> {
     List<T> getListByVo(VO vo) throws ParameterException, BusinessLogicException;
 
     /**
-     * 带参数查询，结合了分页参数；此方法需要，各模块自己根据业务需求，重新 BaseService.getListByVo 方法；
-     * 分页参数，必需参数；
+     * <pre>
+     *      业务功能：带参数查询，结合了分页参数；此方法需要，各模块自己根据业务需求，重新 BaseService.getListByVo 方法；
+     *              分页参数，必需参数；
+     * </pre>
      *
      * @param example 在调用者，组装查询参数，需要自己自身实现
      * @param vo      vo包含了查询参数，和必需的，分页参数。
@@ -279,4 +450,9 @@ public interface IBaseService<T extends Serializable, VO extends BaseVo> {
      * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
      */
     List<T> getListByVo(VO vo, Example example) throws ParameterException, BusinessLogicException;
+
+
+    //Map<String, T> batchSaveOrUpdateListByPropertyName(Map<String, T> mapInsertBeanList, Map<String, T> mapUpdateBeanList, String propertyName, Class<T> beanEntityClass) throws ParameterException, BusinessLogicException;
+    //
+    //Map<String, T> batchSaveOrUpdateListByPropertyName(Map<String, T> mapInsertBeanList, Map<String, T> mapUpdateBeanList, String propertyName, Example example) throws ParameterException, BusinessLogicException;
 }

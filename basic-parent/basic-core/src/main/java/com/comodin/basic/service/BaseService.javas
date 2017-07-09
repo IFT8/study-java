@@ -1,0 +1,681 @@
+package com.comodin.basic.service;
+
+import com.comodin.basic.dao.IBaseDao;
+import com.comodin.basic.dao.SqlMapper;
+import com.comodin.basic.exception.BusinessLogicException;
+import com.comodin.basic.exception.ParameterException;
+import com.comodin.basic.util.reflect.AnnotationUtil;
+import com.comodin.basic.util.date.DateUtil;
+import com.comodin.basic.vo.BaseVo;
+import com.comodin.fleet.constants.ConstantsFinalValue;
+import com.comodin.fleet.util.TableNameUtil;
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.ibatis.session.RowBounds;
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.jdbc.BadSqlGrammarException;
+import org.springframework.web.multipart.MultipartFile;
+import tk.mybatis.mapper.entity.Example;
+
+import javax.inject.Inject;
+import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
+import java.util.*;
+import java.util.stream.Collectors;
+
+/**
+ * The type Base Service.
+ *
+ * @param <T> the type parameter
+ */
+public abstract class BaseService<T extends Serializable, V extends BaseVo> implements IBaseService<T, V> {
+    protected final Log log = LogFactory.getLog(this.getClass());
+
+    @Inject
+    protected IBaseDao<T> mapper;
+
+    @Inject
+    protected SqlSession sqlSession;
+
+
+    /**
+     * 保存一个实体，null的属性也会保存，不会使用数据库默认值
+     *
+     * @param entity 要保存的实体对象
+     *
+     * @return T                      返回当前传递的实体对象，其中包含了当前保存对象，在数据库中对应的ID
+     *
+     * @throws ParameterException     若必需参数不合法，抛出
+     * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
+     */
+    @Override
+    public T insert(T entity) throws ParameterException, BusinessLogicException {
+        mapper.insert(entity);
+        return entity;
+    }
+
+    /**
+     * <pre>
+     *      业务功能：保存一个实体，并针对上传的文件流进行，保存
+     *      注意事项：此接口方法，默认实现为空，需要各模块，自己重写业务逻辑。
+     * </pre>
+     *
+     * @param entity         要保存的实体对象
+     * @param multipartFiles 文件流
+     *
+     * @return T                      返回当前传递的实体对象，其中包含了当前保存对象，在数据库中对应的ID
+     *
+     * @throws ParameterException     若必需参数不合法，抛出
+     * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
+     */
+    @Override
+    public T save(T entity, MultipartFile... multipartFiles) throws ParameterException, BusinessLogicException {
+        return null;
+    }
+
+    /**
+     * 保存一个实体，null的属性不会保存，会使用数据库默认值
+     *
+     * @param entity 要保存的实体对象
+     *
+     * @return T                      返回当前传递的实体对象，其中包含了当前保存对象，在数据库中对应的ID
+     *
+     * @throws ParameterException     若必需参数不合法，抛出
+     * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
+     */
+    @Override
+    public T saveSelective(T entity) throws ParameterException, BusinessLogicException {
+        mapper.insertSelective(entity);
+        return entity;
+    }
+
+    /**
+     * 批量保存，只会返回插入到数据中的条数；recordList 中对应的实体对象并不会对应的ID
+     * SQL格式：INSERT INTO table (字段名, 字段名, ......) VALUES (值, 值, ......), (值, 值, ......), (值, 值, ......), ....;
+     *
+     * @param recordList 要保存的实体对象列表集合
+     *
+     * @return 总结插入数据库中的记录数
+     *
+     * @throws ParameterException     若必需参数不合法，抛出
+     * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
+     */
+    @Override
+    public int saveList(List<T> recordList) throws ParameterException, BusinessLogicException {
+        return mapper.insertList(recordList);
+    }
+
+    @Override
+    public int saveList(List<T> recordList, Integer eachBatchNumber) throws ParameterException, BusinessLogicException {
+        if (recordList == null || recordList.isEmpty()) {
+            return 0;
+        }
+
+        eachBatchNumber = Objects.isNull(eachBatchNumber) ? 100 : eachBatchNumber;  //批量每次最多条数，默认：100
+        Integer recordListSize = recordList.size();                                    //批量插入的总数
+        int batchNumber = recordListSize / eachBatchNumber;                            //分批数【批量插入的总数/批量每次最多条数】
+        log.info("Service.saveList======>>> parameters recordList size: " + recordListSize + " , Divided into: " + (batchNumber + 1) + " Batch.");
+
+        //若插入的总数，小于每批次的就直接提交
+        if (recordListSize < eachBatchNumber) {
+            int insertCount = mapper.insertList(recordList);
+            log.info("Service.saveList======>>> return     success   Count: " + insertCount + "The " + batchNumber + " batch");
+            return insertCount;
+        }
+
+        int batchInsertCount = 0;
+        for (int i = 0; i < batchNumber; i++) {
+            List<T> taskBeanList = recordList.subList(0, eachBatchNumber);
+
+            int insertCount = mapper.insertList(taskBeanList);
+            log.info("Service.saveList======>>> return     success   Count: " + insertCount + "The " + (i + 1) + " batch");
+            batchInsertCount = batchInsertCount + insertCount;
+
+            recordList.subList(0, eachBatchNumber).clear();//剔除
+        }
+
+        if (!recordList.isEmpty()) {
+            int insertCount = mapper.insertList(recordList);
+            log.info("Service.saveList======>>> return     success   Count: " + insertCount + "The " + (eachBatchNumber + 1) + " batch");
+            batchInsertCount = batchInsertCount + insertCount;
+        }
+        return batchInsertCount;
+    }
+
+    /**
+     * 根据ID，删除当前对象
+     *
+     * @param primaryKey 要删除的ID
+     *
+     * @throws ParameterException     若必需参数不合法，抛出
+     * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
+     */
+    @Override
+    public void deleteByPrimaryKey(Object primaryKey) throws ParameterException, BusinessLogicException {
+        mapper.deleteByPrimaryKey(primaryKey);
+    }
+
+    /**
+     * 批量删除，根据主键，需要自己在 *Mapper.xml 文件中自己实现. 因各模块的ID字段名可能不一样，所以需要实现
+     *
+     * @param primaryKeys 要删除业务逻辑的ids
+     *
+     * @throws ParameterException     若必需参数不合法，抛出
+     * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
+     */
+    @Override
+    public void batchDeleteByPrimaryKeys(Object... primaryKeys) throws ParameterException, BusinessLogicException {
+        mapper.batchDeleteByPrimaryKeys(primaryKeys);
+    }
+
+    /**
+     * 批量业务逻辑上删除，根据 主键，需要自己在 *Mapper.xml 文件中自己实现.
+     *
+     * @param primaryKeys 要删除业务逻辑的ids
+     *
+     * @throws ParameterException     若必需参数不合法，抛出
+     * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
+     */
+    @Override
+    public void batchDeleteFlagByPrimaryKeys(Object... primaryKeys) throws ParameterException, BusinessLogicException {
+        mapper.batchDeleteFlagByPrimaryKeys(primaryKeys);
+    }
+
+    /**
+     * 更新方法，依据主键，进行更新全部字段，若字段值为null，也会更新为null
+     *
+     * @param entity 更新对象【必需要含主键信息】
+     *
+     * @throws ParameterException     若必需参数不合法，抛出
+     * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
+     */
+    @Override
+    public int updateAll(T entity) throws ParameterException, BusinessLogicException {
+        int count = mapper.updateByPrimaryKey(entity);
+        return count;
+    }
+
+    /**
+     * 更新方法，依据主键，进行更新，字段不为空的数据
+     *
+     * @param entity 更新对象【必需要含主键信息】
+     *
+     * @throws ParameterException     若必需参数不合法，抛出
+     * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
+     */
+    @Override
+    public int updateNotNull(T entity) throws ParameterException, BusinessLogicException {
+        int count = mapper.updateByPrimaryKeySelective(entity);
+        return count;
+    }
+
+    /**
+     * <pre>
+     *      业务功能：更新方法，并针对上传的文件流进行，保存
+     *      注意事项：此接口方法，默认实现为空，需要各模块，自己重写业务逻辑。
+     * </pre>
+     *
+     * @param primaryKey     要更新的对应的，主键
+     * @param entity         要保存的实体对象
+     * @param multipartFiles 文件流
+     *
+     * @return T                      返回当前传递的实体对象，其中包含了当前保存对象，在数据库中对应的ID
+     *
+     * @throws ParameterException     若必需参数不合法，抛出
+     * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
+     */
+    public int updateNotNull(Object primaryKey, T entity, MultipartFile... multipartFiles) throws ParameterException, BusinessLogicException {
+        return 0;
+    }
+
+    @Override
+    public int updateByExample(T entity, Object example) throws ParameterException, BusinessLogicException {
+        int count = mapper.updateByExample(entity, example);
+        return count;
+    }
+
+    @Override
+    public int updateByExampleSelective(T entity, Object example) throws ParameterException, BusinessLogicException {
+        int count = mapper.updateByExampleSelective(entity, example);
+        return count;
+    }
+
+    @Override
+    public int updateByPrimaryKeySelective(T entity) throws ParameterException, BusinessLogicException {
+        int count = mapper.updateByPrimaryKeySelective(entity);
+        return count;
+    }
+
+
+    /**
+     * 查询所有数据
+     *
+     * @return 返回当前数据库所有的记录
+     */
+    @Override
+    public List<T> selectAll() {
+        List<T> list = mapper.selectAll();
+        return (list != null) ? list : new ArrayList<>();
+    }
+
+    /**
+     * 查询方法，根据主键，进行查询
+     *
+     * @param primaryKey 主键
+     *
+     * @return 返回当前ID的实体对象；
+     *
+     * @throws ParameterException     若必需参数不合法，抛出
+     * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
+     */
+    @Override
+    public T selectByPrimaryKey(Object primaryKey) throws ParameterException, BusinessLogicException {
+        return mapper.selectByPrimaryKey(primaryKey);
+    }
+
+    /**
+     * 查询所有数据，根据 Bean的条件进行查询
+     *
+     * @param record 当前实体需要查询的条件
+     *
+     * @return list 返回当前符合条件，对象集合
+     *
+     * @throws ParameterException     若必需参数不合法，抛出
+     * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
+     */
+    @Override
+    public List<T> select(T record) throws ParameterException, BusinessLogicException {
+        List<T> list = mapper.select(record);
+        return (list != null) ? list : new ArrayList<>();
+    }
+
+    @Override
+    public List<T> selectByExample(Object example) throws ParameterException, BusinessLogicException {
+        List<T> list = mapper.selectByExample(example);
+        return (list != null) ? list : new ArrayList<>();
+    }
+
+    @Override
+    public List<T> selectByExampleAndRowBounds(Object example, RowBounds rowBounds) throws ParameterException, BusinessLogicException {
+        List<T> list = mapper.selectByExampleAndRowBounds(example, rowBounds);
+        return (list != null) ? list : new ArrayList<>();
+    }
+
+    @Override
+    public List<T> selectByRowBounds(T record, RowBounds rowBounds) throws ParameterException, BusinessLogicException {
+        List<T> list = mapper.selectByRowBounds(record, rowBounds);
+        return (list != null) ? list : new ArrayList<>();
+    }
+
+    /**
+     * 根据实体中的属性进行查询，只能有一个返回值，有多个结果是抛出异常，查询条件使用等号
+     *
+     * @param record 当前实体需要查询的条件
+     *
+     * @return 返回当当前符合条件，对象
+     *
+     * @throws ParameterException     若必需参数不合法，抛出
+     * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
+     */
+    @Override
+    public T selectOne(T record) throws ParameterException, BusinessLogicException {
+        return mapper.selectOne(record);
+    }
+
+    /**
+     * 统计符合，查询条件总数
+     *
+     * @param record 当前实体需要查询的条件
+     *
+     * @return list 返回当前符合条件，对象集合
+     *
+     * @throws ParameterException     若必需参数不合法，抛出
+     * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
+     */
+    @Override
+    public int selectCount(T record) throws ParameterException, BusinessLogicException {
+        return mapper.selectCount(record);
+    }
+
+    @Override
+    public int selectCountByExample(Object example) throws ParameterException, BusinessLogicException {
+        return mapper.selectCountByExample(example);
+    }
+
+    /**
+     * <pre>
+     * 带参数查询，结合了分页参数；此方法需要，各模块自己根据业务需求，重新 BaseService.getListByVo 方法；
+     * 分页参数，必需参数；
+     *
+     * 例：
+     * log.info("service parameters vo JSON: " + JSON.toJSONString(vo));
+     *
+     * if (vo == null || vo.getStart() == null || vo.getLength() == null) {
+     *          log.info("Query param, check paging start length");
+     *          throw new ParameterException("Query param, check paging start length");
+     * }
+     *
+     * Example example = new Example(CrewBean.class);
+     * Example.Criteria criteria = example.createCriteria();
+     *
+     * //组装分页参数
+     * RowBounds rowBounds = new RowBounds(vo.getStart(), vo.getLength());
+     * //组装排序参数
+     * if (StringUtils.isNotBlank(vo.getOrderColumn())) {
+     *      if (StringUtils.isNotBlank(vo.getOrderDir()) && "DESC".equalsIgnoreCase(vo.getOrderDir())) {
+     *              example.orderBy(vo.getOrderColumn()).desc();
+     *      } else {
+     *              example.orderBy(vo.getOrderColumn()).asc();
+     *      }
+     * }
+     *
+     * //组装查询参数，需要自己自身实现
+     * if (StringUtils.isNotBlank(vo.getCompositeQuery())) {
+     *      StringBuilder sb = new StringBuilder(100);
+     *                      sb.append(" crew_id LIKE '" + FleetBasiUtil.likePercent(vo.getCompositeQuery().trim()) + "' ")
+     *                          .append(" OR crew_first_name LIKE '" + FleetBasiUtil.likePercent(vo.getCompositeQuery().trim()) + "' ")
+     *                          .append(" OR crew_last_name LIKE '" + FleetBasiUtil.likePercent(vo.getCompositeQuery().trim()) + "' ")
+     *                          .append(" OR crew_phone LIKE '" + FleetBasiUtil.likePercent(vo.getCompositeQuery().trim()) + "' ");
+     *      criteria.andCondition(sb.toString());
+     * }
+     *
+     * if (StringUtils.isNotBlank(vo.getCreateTimestampStartTime())) {
+     *      criteria.andGreaterThanOrEqualTo("createTimestamp", vo.getCreateTimestampStartTime().trim());
+     * }
+     * if (StringUtils.isNotBlank(vo.getCreateTimestampEndTime())) {
+     *      criteria.andLessThanOrEqualTo("createTimestamp", vo.getCreateTimestampEndTime().trim());
+     * }
+     * criteria.andEqualTo("deleteFlag", ConstantsFinalValue.DELETE_FLAG_N);
+     *
+     * return mapper.selectByExampleAndRowBounds(example, new RowBounds(vo.getStart(), vo.getLength()));
+     * </pre>
+     *
+     * @param vo vo包含了查询参数，和必需的，分页参数【start、length】。
+     *
+     * @throws ParameterException     若必需参数不合法，抛出
+     * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
+     */
+    @Override
+    public List<T> getListByVo(V vo) throws ParameterException, BusinessLogicException {
+        return null;
+    }
+
+    /**
+     * 带参数查询，结合了分页参数；此方法需要，各模块自己根据业务需求，重新 BaseService.getListByVo 方法；
+     * 分页参数，必需参数；
+     *
+     * @param example 在调用者，组装查询参数，需要自己自身实现
+     * @param vo      vo包含了查询参数，和必需的，分页参数【start、length】。
+     *
+     * @return 返回符合的 对象列表
+     *
+     * @throws ParameterException     若必需参数不合法，抛出
+     * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
+     */
+    @Override
+    public List<T> getListByVo(V vo, Example example) throws ParameterException, BusinessLogicException {
+        if (vo == null || vo.getStart() == null || vo.getLength() == null) {
+            log.info("Query param, check paging start length");
+            throw new ParameterException("Query param, check paging start length");
+        }
+        //组装分页参数
+        RowBounds rowBounds = new RowBounds(vo.getStart(), vo.getLength());
+
+        //组装排序参数
+        if (StringUtils.isNotBlank(vo.getOrderColumn())) {
+            if (StringUtils.isNotBlank(vo.getOrderDir()) && "DESC".equalsIgnoreCase(vo.getOrderDir())) {
+                example.orderBy(vo.getOrderColumn()).desc();
+            } else {
+                example.orderBy(vo.getOrderColumn()).asc();
+            }
+        }
+
+        //组装查询参数，需要自己自身实现
+        List<T> list = mapper.selectByExampleAndRowBounds(example, rowBounds);
+        return (list != null) ? list : new ArrayList<>();
+    }
+
+    @Override
+    public int insertListByName(List<T> records, String name) {
+        try {
+            mapper.insertListByName(records, name);
+        } catch (BadSqlGrammarException e) {
+            //因为不能直接捕获MySQLSyntaxErrorException,此异常当操作数据库时表不存在时抛出,
+            //所以采用捕获子异常再判断其父类是否是MySQLSyntaxErrorException
+            String exception = e.getCause().getClass().toString();
+            if (exception != null && exception.contains("MySQLSyntaxErrorException")) {//含有该字段，证明属于表不存在，进行建表再插入
+                String message = e.getLocalizedMessage();
+                if (message.contains(" doesn't exist")) {
+                    //建表
+                    createAssignNameTableAndInitIdIncrementValue(name);
+                    //再次插入
+                    mapper.insertListByName(records, name);
+                } else {
+                    e.printStackTrace();
+                }
+            } else {
+                e.printStackTrace();
+            }
+        }
+        return mapper.insertListByName(records, name);
+
+    }
+
+    /**
+     * 根据新表名称获取到->旧表名（复制结构），后缀日期（自增长主键起始值）
+     * 如：t_latlng_vehicle_20161122  ->> 旧表名：t_latlng_vehicle,主键起始值 new Date(20161122).getTime()
+     *
+     * @param newName
+     */
+    private void createAssignNameTableAndInitIdIncrementValue(String newName) {
+        int index = newName.lastIndexOf(TableNameUtil.CONNECT_SYMBOL);
+
+        if (index <= 0) {
+            throw new BusinessLogicException("create New Table :: newName is  Illegal. ->> newName=" + newName);
+        }
+
+        //旧表名
+        String oldTableName = newName.substring(0, index);
+
+        //主键起始值
+        String dateString = newName.substring(index + 1, newName.length());
+        Date date = DateUtil.StringToDate(dateString, TableNameUtil.TABLE_SUFFIX_PATTERN);
+
+        /**
+         * 拼装sql 成结果如下形式
+         * CREATE TABLE ${tableName} like t_latlng_vehicle;
+         * alter table ${tableName} auto_increment=#{id};
+         */
+        StringBuilder sql = new StringBuilder();
+        sql.append(" CREATE TABLE ");
+        sql.append(" " + newName + " ");
+        sql.append(" " + "like" + " ");
+        sql.append(" " + oldTableName + " ");
+        sql.append(" " + ";" + " ");
+
+        sql.append(" ALTER TABLE ");
+        sql.append(" " + newName + " ");
+        sql.append(" " + "AUTO_INCREMENT" + " ");
+        sql.append(" " + "=" + " ");
+        sql.append(" " + date.getTime() + " ");
+        sql.append(" " + ";" + " ");
+
+        SqlMapper mapper = new SqlMapper(sqlSession);
+        mapper.update(sql.toString());
+    }
+
+    @Deprecated
+    @Override
+    public Map<String, T> batchSaveOrUpdateListByPropertyName(List<T> insertBeanList, String propertyName, Class<T> beanEntityClass) throws ParameterException, BusinessLogicException {
+        if (insertBeanList == null || insertBeanList.isEmpty()) {
+            throw new ParameterException("param insertBeanList Can not be empty.");
+        }
+
+        Set<String> propertyValueSet = new HashSet<>();
+        insertBeanList.forEach(insertBean -> {
+            String propertyValue;
+            try {
+                propertyValue = BeanUtils.getProperty(insertBean, propertyName);
+            } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+                throw new ParameterException("insertBeanList of bean Unknown property '" + propertyName + "'", e);
+            }
+            if (StringUtils.isBlank(propertyValue)) {
+                throw new ParameterException("The insertBeanList contains empty " + propertyName + ".");
+            } else {
+                propertyValueSet.add(propertyValue.trim());
+            }
+        });
+
+        Example example = new Example(beanEntityClass);
+        Example.Criteria exampleClientBeanCriteria = example.createCriteria();
+        exampleClientBeanCriteria.andEqualTo(ConstantsFinalValue.DELETE_FLAG_MARK, ConstantsFinalValue.DELETE_FLAG_N);
+        exampleClientBeanCriteria.andIn(propertyName, propertyValueSet);
+
+        return batchSaveOrUpdateListByPropertyName(insertBeanList, propertyName, example);
+    }
+
+
+    @Deprecated
+    @Override
+    public Map<String, T> batchSaveOrUpdateListByPropertyName(List<T> insertBeanList, String propertyName, Example example) throws ParameterException, BusinessLogicException {
+        if (insertBeanList == null || insertBeanList.isEmpty()) {
+            throw new ParameterException("param insertBeanList Can not be empty.");
+        }
+
+        Map<String, T> stringTMap = new HashMap<>();
+        insertBeanList.forEach(insertBean -> {
+            String propertyValue;
+            try {
+                propertyValue = BeanUtils.getProperty(insertBean, propertyName);
+            } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+                throw new ParameterException("insertBeanList of bean Unknown property '" + propertyName + "'", e);
+            }
+            if (StringUtils.isBlank(propertyValue)) {
+                throw new ParameterException("The insertBeanList contains empty " + propertyName + ".");
+            } else {
+                stringTMap.put(propertyValue.trim(), insertBean);
+            }
+        });
+
+
+        if (example == null) {
+            throw new BusinessLogicException("param example Can not be empty.");
+        }
+        List<T> dbBeanList = mapper.selectByExample(example);
+
+        Map<String, T> dbExistBeanListMap = new HashMap<>();
+        Map<String, T> dbNotExistBeanListMap = new HashMap<>();
+        //遍历dbBeanList 若数据库中没有任务记录，即代表还没有一条记录。直接将传递的BeanList，存入dbNotExistClientBeanListMap容器中。
+        if (dbBeanList.isEmpty()) {
+            dbNotExistBeanListMap.putAll(stringTMap);
+        } else {
+            //将数据库中，存在的 clientName 记录，写入到临时容器Map中，key: clientName
+            dbBeanList.forEach(dbClientBean -> {
+                try {
+                    dbExistBeanListMap.put(BeanUtils.getProperty(dbClientBean, propertyName), dbClientBean);
+                } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+                    throw new ParameterException("insertBeanList of bean Unknown property '" + propertyName + "'", e);
+                }
+            });
+            //进行遍历原有excel文件中对应的 clientName，与数据库中以存在的 clientName，记录在数据库没有对应 clientName 的记录
+            stringTMap.forEach((mapKeyPropertyValue, insertBean) -> {
+                if (!dbExistBeanListMap.containsKey(mapKeyPropertyValue)) {
+                    dbNotExistBeanListMap.put(mapKeyPropertyValue, insertBean);
+                }
+            });
+        }
+
+        //临时Map容器，没有在数据库有记录 insertBean的记录，进行插入数据库操作
+        if (!dbNotExistBeanListMap.isEmpty()) {
+            this.saveList(dbNotExistBeanListMap.values().stream().collect(Collectors.toList()), 100);
+            //此处，将批量插入到数据库的，clientName 记录所对应的ID；
+            dbExistBeanListMap.putAll(dbNotExistBeanListMap);
+        }
+        return dbExistBeanListMap;
+    }
+
+    @Override
+    public Map<String, T> batchSaveOrUpdateListByPropertyName(Map<String, T> mapInsertBeanList, Map<String, T> mapUpdateBeanList, String propertyName, Class<T> beanEntityClass) throws ParameterException, BusinessLogicException {
+        if (mapInsertBeanList == null || mapInsertBeanList.isEmpty()) {
+            throw new ParameterException("param mapInsertBeanList Can not be empty.");
+        }
+
+        Example example = new Example(beanEntityClass);
+        Example.Criteria exampleClientBeanCriteria = example.createCriteria();
+        exampleClientBeanCriteria.andEqualTo(ConstantsFinalValue.DELETE_FLAG_MARK, ConstantsFinalValue.DELETE_FLAG_N);
+        exampleClientBeanCriteria.andIn(propertyName, mapInsertBeanList.keySet());
+
+        return batchSaveOrUpdateListByPropertyName(mapInsertBeanList, mapUpdateBeanList, propertyName, example);
+    }
+
+
+    @SuppressWarnings("Duplicates")
+    @Override
+    public Map<String, T> batchSaveOrUpdateListByPropertyName(Map<String, T> mapInsertBeanList, Map<String, T> mapUpdateBeanList, String propertyName, Example example) throws ParameterException, BusinessLogicException {
+        if (mapInsertBeanList == null || mapInsertBeanList.isEmpty()) {
+            throw new ParameterException("param mapInsertBeanList Can not be empty.");
+        }
+
+        if (example == null) {
+            throw new BusinessLogicException("param example Can not be empty.");
+        }
+
+        List<T> dbBeanList = mapper.selectByExample(example);
+        //dbBeanList.stream().collect(MyCollectors.toMap(p -> {
+        //    try {
+        //        return BeanUtils.getProperty(p, propertyName);
+        //    } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+        //        throw new ParameterException("param mapInsertBeanList Can not be empty1.");
+        //    }
+        //}, p -> p));
+
+        Map<String, T> dbNotExistBeanListMap = new HashMap<>();
+        Map<String, T> dbExistBeanListMap = new HashMap<>();
+        //遍历dbBeanList 若数据库中没有任务记录，即代表还没有一条记录。直接将传递的BeanList，存入dbNotExistClientBeanListMap容器中。
+        if (dbBeanList.isEmpty()) {
+            dbNotExistBeanListMap.putAll(mapInsertBeanList);
+        } else {
+            //将数据库中，存在的 clientName 记录，写入到临时容器Map中，key: clientName
+            dbBeanList.forEach(dbClientBean -> {
+                try {
+                    dbExistBeanListMap.put(BeanUtils.getProperty(dbClientBean, propertyName), dbClientBean);
+                } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+                    throw new ParameterException("insertBeanList of bean Unknown property '" + propertyName + "'", e);
+                }
+            });
+
+            //进行遍历原有excel文件中对应的 clientName，与数据库中以存在的 clientName，记录在数据库没有对应 clientName 的记录
+            mapInsertBeanList.forEach((mapKeyPropertyValue, insertBean) -> {
+                if (!dbExistBeanListMap.containsKey(mapKeyPropertyValue)) {
+                    dbNotExistBeanListMap.put(mapKeyPropertyValue, insertBean);
+                }
+            });
+        }
+
+        //数据库已经存在的记录，需要更新
+        if (!dbExistBeanListMap.isEmpty()) {
+            dbExistBeanListMap.forEach((mapKeyPropertyValue, dbExistBean) -> {
+                T waitUpdateBean = mapUpdateBeanList.get(mapKeyPropertyValue);
+                try {
+                    String beanPrimaryKeyName = AnnotationUtil.getBeanIdFieldName(waitUpdateBean.getClass());
+                    String beanPrimaryKeyValue = BeanUtils.getProperty(dbExistBean, beanPrimaryKeyName);
+                    BeanUtils.setProperty(waitUpdateBean, beanPrimaryKeyName, beanPrimaryKeyValue);
+                    this.updateByPrimaryKeySelective(waitUpdateBean);
+                    dbExistBeanListMap.put(mapKeyPropertyValue, mapper.selectOne(waitUpdateBean));
+                } catch (ClassNotFoundException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+                    log.error(e.getMessage(), e);
+                }
+            });
+        }
+
+        //临时Map容器，没有在数据库有记录 insertBean的记录，进行插入数据库操作
+        if (!dbNotExistBeanListMap.isEmpty()) {
+            this.saveList(new ArrayList<>(dbNotExistBeanListMap.values()), 100);
+            //此处，将批量插入到数据库的，clientName 记录所对应的ID；
+            dbExistBeanListMap.putAll(dbNotExistBeanListMap);
+        }
+        return dbExistBeanListMap;
+    }
+}

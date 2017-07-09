@@ -1,4 +1,4 @@
-package com.comodin.basic.mybatis.generator.freemarker;
+package com.comodin.basic.util.freemarker;
 
 /**
  * 属性类型枚举类

@@ -1,0 +1,100 @@
+package com.comodin.basic.service;
+
+import com.comodin.basic.exception.UploadDataErrorException;
+import com.comodin.basic.util.xml.XmlUtil;
+import com.comodin.fleet.util.FleetUtil;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.xml.sax.SAXException;
+
+import javax.xml.bind.JAXBException;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.*;
+import java.lang.reflect.ParameterizedType;
+import java.util.Arrays;
+import java.util.Collections;
+
+public abstract class AbstractBaseUploadXmlService<XML_BEAN extends Serializable> implements IBaseUploadXmlService<XML_BEAN> {
+    protected final Log log = LogFactory.getLog(this.getClass());
+
+    private XML_BEAN XMLBEANJavaBean;
+
+    /**
+     * 需要各实现类，各个注入其他 Validate Xml Schema File
+     * <pre>
+     *  File schemaFile;
+     *  try {
+     *      schemaFile = new File(URLDecoder.decode(this.getClass().getResource(ConstantsFinalValue.WS_TASK_SIO_ORDEN_XSD_VERSION_FILE_PATH).getFile(), "UTF-8"));
+     *  } catch (UnsupportedEncodingException e) {
+     *      throw new BusinessLogicException(" sio task xml Validate Xml Schema File Not found.");
+     *  }
+     *  return schemaFile;
+     * <pre>
+     */
+    protected abstract File getValidateXmlSchemaFile();
+
+    /**
+     * 处理 xml文件业务逻辑入口方法
+     * 1、先调用  validateXml
+     * 2、将XML解析成 bean 再调用 checkBusinessLogicByXmlDataBean
+     * 3、处理自己的业务代码
+     *
+     * @param xmlFile             xml文件流
+     * @param xmlOriginalFilename xml文件原始名字
+     * @param xmlDataInfoPrefix   //
+     *
+     * @throws UploadDataErrorException
+     */
+    @Override
+    public void uploadByXml(File xmlFile, String xmlOriginalFilename, String xmlDataInfoPrefix) throws UploadDataErrorException {
+        //第一步：校验 xml 文件
+        //第二步：xml文件，转换为 JavaBean
+        //第三步：针对JavaBean，初步检查业务逻辑
+        if (getValidateXmlSchemaFile() != null) {
+            validateXml(xmlFile, getValidateXmlSchemaFile(), xmlOriginalFilename, xmlDataInfoPrefix);
+        }
+        XMLBEANJavaBean = xmlFileToJavaBean(xmlFile, xmlOriginalFilename, xmlDataInfoPrefix);
+        checkBusinessLogicByXmlBean(XMLBEANJavaBean, xmlOriginalFilename, xmlDataInfoPrefix);
+    }
+
+    @Override
+    public void validateXml(File xmlFile, File schemaFile, String xmlOriginalFilename, String xmlDataInfoPrefix) throws UploadDataErrorException {
+        try {
+            XmlUtil.validateXml(schemaFile, xmlFile);
+        } catch (SAXException | IOException e) {
+            String errorDetailStr = String.format("XSD Examine Fail. Upload Xml File: %s Error detail: %s", xmlOriginalFilename, e.getMessage());
+
+            FleetUtil.sendEmailToAdministrator(errorDetailStr, errorDetailStr + Arrays.toString(e.getStackTrace()), Arrays.asList(schemaFile, xmlFile));
+
+            throw new UploadDataErrorException("-15", errorDetailStr, e);
+        }
+    }
+
+    @Override
+    public XML_BEAN xmlFileToJavaBean(File xmlFile, String xmlOriginalFilename, String xmlDataInfoPrefix) throws UploadDataErrorException {
+        try {
+            return XmlUtil.jaxbXmlToJavaBean(new FileInputStream(xmlFile), getXMLTClass());
+        } catch (JAXBException | ParserConfigurationException | SAXException | FileNotFoundException e) {
+            String errorDetailStr = String.format("Resolve XML fail. upload xml file: %s", xmlOriginalFilename);
+
+            FleetUtil.sendEmailToAdministrator(errorDetailStr, errorDetailStr + Arrays.toString(e.getStackTrace()), Collections.singletonList(xmlFile));
+
+            throw new UploadDataErrorException("-16", errorDetailStr, e);
+        }
+    }
+
+    @Override
+    public void checkBusinessLogicByXmlBean(XML_BEAN xmlBean, String xmlOriginalFilename, String xmlDataInfoPrefix) throws UploadDataErrorException {
+
+    }
+
+    protected XML_BEAN getXmlJavaBean() {
+        return XMLBEANJavaBean;
+    }
+
+
+    @SuppressWarnings("unchecked")
+    private Class<XML_BEAN> getXMLTClass() {
+        return (Class<XML_BEAN>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+    }
+}

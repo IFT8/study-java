@@ -96,7 +96,7 @@ public abstract class AbstractBaseController<T extends Serializable, VO extends 
         //先检查，使用hiberante检验框架，是否包含对应Bean的校验失败的字段，并且根据国际化处理消息内容
         //FleetUtil.webRequestParametersValidation(bindingResult);
 
-        service.save(bean);
+        service.insert(bean);
 
         //实现国际信息
         String message = new RequestContext(request, response).getMessage(BaseConstants.GLOBAL_I18N_CRUD_ADD_SUCCESS);

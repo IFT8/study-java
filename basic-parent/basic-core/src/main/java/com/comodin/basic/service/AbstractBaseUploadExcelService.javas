@@ -1,0 +1,127 @@
+package com.comodin.basic.service;
+
+import com.comodin.basic.exception.UploadDataErrorException;
+import com.comodin.basic.util.excel.ExcelUtils;
+import com.comodin.fleet.util.FleetUtil;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.Serializable;
+import java.lang.reflect.ParameterizedType;
+import java.util.List;
+import java.util.Map;
+
+public abstract class AbstractBaseUploadExcelService<EXCEL_BEAN extends Serializable> implements IBaseUploadExcelService<EXCEL_BEAN> {
+    protected final Log log = LogFactory.getLog(this.getClass());
+
+    private List<EXCEL_BEAN> excelBeanList;
+    private String excelOriginalFilename;
+    private String excelVersion;
+
+    /**
+     * 处理 Excel文件业务逻辑入口方法
+     * 1、将 excel文件，解析 javaBean
+     * 2、对javaBean 进行数据校验
+     * 3、处理自己的业务代码
+     *
+     * @param excelInputStream      excel文件流
+     * @param excelOriginalFilename excel文件原始名字
+     * @param excelVersion          excel文件版本【此作用于，针对Excel中的数据，进行版本迭代问题】
+     *
+     * @throws UploadDataErrorException 抛出异常===对外抛出的异常错误代码范围【-101 至 -1000】
+     */
+    @Override
+    public void uploadByExcel(InputStream excelInputStream, String excelOriginalFilename, String excelVersion) throws UploadDataErrorException {
+        this.excelOriginalFilename = excelOriginalFilename;
+        this.excelVersion = excelVersion;
+        byte[] bytes;
+        try {
+            bytes = IOUtils.toByteArray(excelInputStream);
+        } catch (IOException e) {
+            throw new UploadDataErrorException("-11", "unknown error.", String.format("handle excel excelInputStream to toByteArray IO error. %s", e.getMessage()), e);
+        }
+        try (ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes)) {
+            this.saveExcelFile(byteArrayInputStream);
+        } catch (IOException e) {
+            throw new UploadDataErrorException("-12", "unknown error.", String.format("handle excel excelInputStream to saveExcelFile byteArrayInputStream IO error. %s", e.getMessage()), e);
+        }
+        try (ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes)) {
+            excelBeanList = this.dataAnalysisToJavaBeanByExcelInputStream(byteArrayInputStream);
+        } catch (IOException e) {
+            throw new UploadDataErrorException("-13", "unknown error.", String.format("handle excel excelInputStream to dataAnalysisToJavaBeanByExcelInputStream byteArrayInputStream IO error. %s", e.getMessage()), e);
+        }
+        this.dataValidateByExcelBean(excelBeanList);
+    }
+
+    /**
+     * 需要各实现类，各个指明其上传的Excel文件类型，以便调用 saveExcelFile，进行保存文件
+     */
+    protected abstract String getUploadExcelType();
+
+    /**
+     * 需要各实现类，提供 Excel标题与 EXCEL_BEAN 对应的属性关系对
+     *
+     * @return 以Map excelTitle,EXCEL_BEAN.property
+     */
+    protected abstract Map<String, String> getMapExcelTitleToPropertyMapping();
+
+    /**
+     * 需要各实现类，指定 ExcelSheetName，若为null 即代表读写Excel中第1个Sheet中的数据
+     *
+     * @return 指定 ExcelSheetName，若为null 即代表读写Excel中第1个Sheet中的数据
+     */
+    protected abstract String getExcelSheetName();
+
+
+    /**
+     * 将excelFile保存到服务中【本地/Ftp服务器】
+     *
+     * @param excelInputStream excel文件流
+     *
+     * @throws UploadDataErrorException 抛出异常===对外抛出的异常错误代码范围【-1101 至 -1200】
+     */
+    @Override
+    public String saveExcelFile(InputStream excelInputStream) throws UploadDataErrorException {
+        return FleetUtil.uploadExcelToLocal(this.getUploadExcelType(), excelInputStream, this.getExcelOriginalFilename());
+    }
+
+    /**
+     * 将 excelFile 解析成javaBean
+     *
+     * @param excelInputStream excel文件流
+     *
+     * @return 返回 被解析成的javaBean List集合
+     *
+     * @throws UploadDataErrorException 抛出异常===对外抛出的异常错误代码范围【-1201 至 -1300】
+     */
+    @Override
+    public List<EXCEL_BEAN> dataAnalysisToJavaBeanByExcelInputStream(InputStream excelInputStream) throws UploadDataErrorException {
+        ExcelUtils excelUtils = ExcelUtils.getInstance();
+        List<EXCEL_BEAN> excelBeanList = excelUtils.readExcel2BeanByInputStream(excelInputStream, this.getEXCEL_BEAN_Class());
+        if (excelUtils.hasError()) {
+            throw new UploadDataErrorException("-1204", excelUtils.getError().toString());
+        }
+        return excelBeanList;
+    }
+
+    protected List<EXCEL_BEAN> getExcelBeanList() {
+        return excelBeanList;
+    }
+
+    protected String getExcelVersion() {
+        return (excelVersion == null) ? null : excelVersion.trim();
+    }
+
+    protected String getExcelOriginalFilename() {
+        return (excelOriginalFilename == null) ? null : excelOriginalFilename.trim();
+    }
+
+    @SuppressWarnings("unchecked")
+    private Class<EXCEL_BEAN> getEXCEL_BEAN_Class() {
+        return (Class<EXCEL_BEAN>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+    }
+}

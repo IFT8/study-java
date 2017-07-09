@@ -1,5 +1,8 @@
 package com.comodin.basic.mybatis.generator.freemarker;
 
+import com.comodin.basic.util.freemarker.Entity;
+import com.comodin.basic.util.freemarker.EntityProperty;
+import com.comodin.basic.util.freemarker.EntityPropertyType;
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;
 import freemarker.template.Template;
