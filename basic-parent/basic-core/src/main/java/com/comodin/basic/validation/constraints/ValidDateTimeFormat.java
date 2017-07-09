@@ -33,6 +33,7 @@ public @interface ValidDateTimeFormat {
     Class<? extends Payload>[] payload() default {};
 
 
+    @SuppressWarnings("Duplicates")
     class Validator implements ConstraintValidator<ValidDateTimeFormat, Object> {
         String pattern;
 

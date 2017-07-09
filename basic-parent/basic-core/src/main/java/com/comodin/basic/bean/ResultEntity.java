@@ -1,5 +1,6 @@
 package com.comodin.basic.bean;
 
+@SuppressWarnings("unused")
 public class ResultEntity {
     private String resultCode;
     private Object resultMsg;

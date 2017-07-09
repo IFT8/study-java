@@ -4,8 +4,8 @@
 <generatorConfiguration>
     <!--引入配置文件
                 可以用于加载配置项或者配置文件，在整个配置文件中就可以使用${propertyKey}的方式来引用配置项
-                resource：配置资源加载地址，使用resource，MBG从classpath开始找，比如com/myproject/generatorConfig.properties
-                url：配置资源加载地质，使用URL的方式，比如file:///C:/myfolder/generatorConfig.properties.
+                resource：配置资源加载地址，使用resource，MBG从classpath开始找，比如com/myProject/generatorConfig.properties
+                url：配置资源加载地质，使用URL的方式，比如file:///C:/folder/generatorConfig.properties.
                 注意，两个属性只能选址一个;
                 另外，如果使用了mybatis-generator-maven-plugin，那么在pom.xml中定义的properties都可以直接在generatorConfig.xml中使用-->
     <properties resource="generatorConfig.properties"/>
@@ -127,7 +127,7 @@
 
                 元素：enableSubPackages            在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false
                 元素：rootInterface                可以为所有生成的接口添加一个父接口，但是MBG只负责生成，不负责检查
-                元素：exampleMethodVisibility      定义Maper.java源代码中的ByExample()方法的可视性，可选的值有：public;private;protected;default。注意：如果targetRuntime="MyBatis3",此参数被忽略
+                元素：exampleMethodVisibility      定义Mapper.java源代码中的ByExample()方法的可视性，可选的值有：public;private;protected;default。注意：如果targetRuntime="MyBatis3",此参数被忽略
                 元素：methodNameCalculator         方法名计数器  重要的提示：如果目标运行时MyBatis3这个属性被忽略-->
         <javaClientGenerator targetPackage="${dao.package}" targetProject="${src_main_java}" type="XMLMAPPER"/>
 
@@ -144,8 +144,8 @@
 
             tableName（必要）：要生成对象的表名；  tableName：指定要生成的表名，可以使用SQL通配符(%)匹配多个表。
                     注意：大小写敏感问题。正常情况下，MBG会自动的去识别数据库标识符的大小写敏感度，在一般情况下，MBG会
-                    根据设置的schema，catalog或tablename去查询数据表，按照下面的流程：
-                                1，如果schema，catalog或tablename中有空格，那么设置的是什么格式，就精确的使用指定的大小写格式去查询；
+                    根据设置的schema，catalog或tableName去查询数据表，按照下面的流程：
+                                1，如果schema，catalog或tableName中有空格，那么设置的是什么格式，就精确的使用指定的大小写格式去查询；
                                 2，否则，如果数据库的标识符使用大写的，那么MBG自动把表名变成大写再查找；
                                 3，否则，如果数据库的标识符使用小写的，那么MBG自动把表名变成小写再查找；
                                 4，否则，使用指定的大小写格式查询；
@@ -188,7 +188,7 @@
                 identity        自动生成的键值（identity,或者序列值）
                                 如果指定此元素，MBG将会生成<selectKey>元素，然后将此元素插入到SQL Map的<insert> 元素之中，
                                 如果为true， 则列被标记为标识列和生成的<selectKey元素>元素将插入（标识列）后放置。
-                                如果为flase，那么生成的<selectKey元素>将被插入（通常为一个序列）之前。
+                                如果为false，那么生成的<selectKey元素>将被插入（通常为一个序列）之前。
 
                 sqlStatement    的语句将会返回新的值。如果是一个自增主键的话，你可以使用预定义的语句,或者添加自定义的SQL语句.
                                 预定义的值如下:

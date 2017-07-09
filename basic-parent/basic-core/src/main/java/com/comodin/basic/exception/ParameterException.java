@@ -1,5 +1,6 @@
 package com.comodin.basic.exception;
 
+@SuppressWarnings("unused")
 public class ParameterException extends RuntimeException {
 	
 	/**
@@ -8,6 +9,7 @@ public class ParameterException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 	private String [] strings;
 	
+    @SuppressWarnings("WeakerAccess")
     public String[] getStrings() {
 		return strings;
 	}
@@ -17,7 +19,7 @@ public class ParameterException extends RuntimeException {
 	}
 
 	/**
-     * Instantiates a new paramexception.
+     * Instantiates a new paramException.
      *
      * @param message the message
      */
@@ -28,14 +30,14 @@ public class ParameterException extends RuntimeException {
 	
 	
 	/**
-     * Instantiates a new paramexception.
+     * Instantiates a new paramException.
      */
     public ParameterException() {
         super();
     }
     
     /**
-     * Instantiates a new paramexception.
+     * Instantiates a new paramException.
      *
      * @param message the message
      */
@@ -44,7 +46,7 @@ public class ParameterException extends RuntimeException {
     }
     
     /**
-     * Instantiates a new paramexception.
+     * Instantiates a new paramException.
      *
      * @param message the message
      * @param cause   the cause
@@ -54,7 +56,7 @@ public class ParameterException extends RuntimeException {
     }
 
     /**
-     * Instantiates a new paramexception.
+     * Instantiates a new paramException.
      *
      * @param cause the cause
      */
@@ -63,7 +65,7 @@ public class ParameterException extends RuntimeException {
     }
 
     /**
-     * Instantiates a new paramexception.
+     * Instantiates a new paramException.
      *
      * @param message            the message
      * @param cause              the cause

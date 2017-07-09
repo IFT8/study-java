@@ -34,6 +34,7 @@ public @interface ValidAllowData {
     Class<? extends Payload>[] payload() default {};
 
 
+    @SuppressWarnings("Duplicates")
     class Validator implements ConstraintValidator<ValidAllowData, Object> {
         boolean allowBlank;
         String[] allowDataArray;

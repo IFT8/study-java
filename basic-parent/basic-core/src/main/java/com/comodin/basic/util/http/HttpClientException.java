@@ -1,5 +1,6 @@
 package com.comodin.basic.util.http;
 
+@SuppressWarnings({"WeakerAccess", "unused"})
 public class HttpClientException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 

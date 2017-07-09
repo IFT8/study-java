@@ -13,7 +13,7 @@ import java.util.Properties;
 /**
  * The type Properties util.
  */
-@SuppressWarnings("Duplicates")
+@SuppressWarnings({"Duplicates", "WeakerAccess", "Convert2Diamond", "unused"})
 public class PropertiesUtil {
     private static PropertiesUtil util = null;
     private static Map<String, Properties> maps = new HashMap<String, Properties>();
@@ -49,9 +49,7 @@ public class PropertiesUtil {
             Properties prop = new Properties();
             try {
                 prop.load(PropertiesUtil.class.getResourceAsStream("/" + name + ".properties"));
-                prop.forEach((key, value) -> {
-                    log.info("key=value:\t\t" + key + "=" + value);
-                });
+                prop.forEach((key, value) -> log.info("key=value:\t\t" + key + "=" + value));
                 maps.put(name, prop);
                 return prop;
             } catch (IOException e) {
@@ -62,10 +60,10 @@ public class PropertiesUtil {
     }
 
     /**
-     * @param propertiesName
+     * @param propertiesName  //
      * @param inStream       路径的最后一定要增加/，xxx/
      *
-     * @return
+     * @return  //
      */
     public Properties load(String propertiesName, InputStream inStream) {
         if (maps.get(propertiesName) != null) {
@@ -83,10 +81,10 @@ public class PropertiesUtil {
     }
 
     /**
-     * @param propertiesName
+     * @param propertiesName  //
      * @param propertiesFile 路径的最后一定要增加/，xxx/
      *
-     * @return
+     * @return  //
      */
     public Properties load(String propertiesName, File propertiesFile) {
         if (maps.get(propertiesName) != null) {

@@ -47,6 +47,7 @@ public class ExcelHeader implements Comparable<ExcelHeader> {
         this.validGroups = validGroups;
     }
 
+    @SuppressWarnings("NullableProblems")
     public int compareTo(ExcelHeader o) {
         return order > o.order ? 1 : (order < o.order ? -1 : 0);
     }

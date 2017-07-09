@@ -1,24 +1,20 @@
 package com.comodin.basic.exception;
 
-/**
- * Created by supeng on 4/15/2016.
- */
+@SuppressWarnings("unused")
 public class BusinessLogicException extends RuntimeException {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private String [] strings;
-	
-    public String[] getStrings() {
-		return strings;
-	}
 
-	public void setStrings(String[] strings) {
-		this.strings = strings;
-	}
-	
+    private static final long serialVersionUID = 1L;
+    private String[] strings;
+
+    @SuppressWarnings("WeakerAccess")
+    public String[] getStrings() {
+        return strings;
+    }
+
+    public void setStrings(String[] strings) {
+        this.strings = strings;
+    }
+
     /**
      * Constructs a new runtime exception with {@code null} as its
      * detail message.  The cause is not initialized, and may subsequently be
@@ -27,15 +23,17 @@ public class BusinessLogicException extends RuntimeException {
     public BusinessLogicException() {
         super();
     }
+
     /**
-     * Instantiates a new paramexception.
+     * Instantiates a new paramException.
      *
      * @param message the message
      */
-    public BusinessLogicException(String message,String[] strings) {
-    	super(message);
-    	this.strings = strings;
+    public BusinessLogicException(String message, String[] strings) {
+        super(message);
+        this.strings = strings;
     }
+
     /**
      * Constructs a new runtime exception with the specified detail message.
      * The cause is not initialized, and may subsequently be initialized by a
@@ -60,6 +58,7 @@ public class BusinessLogicException extends RuntimeException {
      *                {@link #getCause()} method).  (A <tt>null</tt> value is
      *                permitted, and indicates that the cause is nonexistent or
      *                unknown.)
+     *
      * @since 1.4
      */
     public BusinessLogicException(String message, Throwable cause) {
@@ -71,12 +70,13 @@ public class BusinessLogicException extends RuntimeException {
      * detail message of <tt>(cause==null ? null : cause.toString())</tt>
      * (which typically contains the class and detail message of
      * <tt>cause</tt>).  This constructor is useful for runtime exceptions
-     * that are little more than wrappers for other throwables.
+     * that are little more than wrappers for other throwable s.
      *
      * @param cause the cause (which is saved for later retrieval by the
      *              {@link #getCause()} method).  (A <tt>null</tt> value is
      *              permitted, and indicates that the cause is nonexistent or
      *              unknown.)
+     *
      * @since 1.4
      */
     public BusinessLogicException(Throwable cause) {
@@ -95,6 +95,7 @@ public class BusinessLogicException extends RuntimeException {
      *                           or disabled
      * @param writableStackTrace whether or not the stack trace should
      *                           be writable
+     *
      * @since 1.7
      */
     protected BusinessLogicException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {

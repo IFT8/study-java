@@ -83,6 +83,7 @@ public @interface ValidRepeat {
     Class<? extends Payload>[] payload() default {};
 
 
+    @SuppressWarnings("Duplicates")
     class Validator implements ConstraintValidator<ValidRepeat, Object> {
         private static ThreadLocal<Map<Object, Set<Object>>> notRepeatSetContainer = new ThreadLocal<>();
         private static ThreadLocal<Map<Object, Set<Object>>> onlyOneSetContainer = new ThreadLocal<>();

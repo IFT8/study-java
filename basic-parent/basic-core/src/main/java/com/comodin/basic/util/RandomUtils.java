@@ -7,6 +7,7 @@ import java.util.*;
  *
  * @author XuJijun
  */
+@SuppressWarnings({"WeakerAccess", "unused"})
 public class RandomUtils {
     private static Random random;
 
@@ -26,8 +27,9 @@ public class RandomUtils {
     /**
      * 获得一个[0,max)之间的整数。
      *
-     * @param max
-     * @return
+     * @param max  //
+     *
+     * @return  //
      */
     public static int getRandomInt(int max) {
         return Math.abs(getRandom().nextInt()) % max;
@@ -36,8 +38,9 @@ public class RandomUtils {
     /**
      * 获得一个[0,max)之间的整数。
      *
-     * @param max
-     * @return
+     * @param max //
+     *
+     * @return //
      */
     public static long getRandomLong(long max) {
         return Math.abs(getRandom().nextInt()) % max;
@@ -46,8 +49,9 @@ public class RandomUtils {
     /**
      * 从list中随机取得一个元素
      *
-     * @param list
-     * @return
+     * @param list //
+     *
+     * @return //
      */
     public static Object getRandomElement(List<Object> list) {
         return list.get(getRandomInt(list.size()));
@@ -56,8 +60,9 @@ public class RandomUtils {
     /**
      * 从set中随机取得一个元素
      *
-     * @param set
-     * @return
+     * @param set //
+     *
+     * @return //
      */
     public static <E> E getRandomElement(Set<E> set) {
         int rn = getRandomInt(set.size());
@@ -74,8 +79,9 @@ public class RandomUtils {
     /**
      * 从map中随机取得一个key
      *
-     * @param map
-     * @return
+     * @param map //
+     *
+     * @return //
      */
     public static <K> K getRandomKeyFromMap(Map<K, ?> map) {
         int rn = getRandomInt(map.size());
@@ -92,8 +98,9 @@ public class RandomUtils {
     /**
      * 从map中随机取得一个value
      *
-     * @param map
-     * @return
+     * @param map //
+     *
+     * @return //
      */
     public static <V> V getRandomValueFromMap(Map<?, V> map) {
         int rn = getRandomInt(map.size());

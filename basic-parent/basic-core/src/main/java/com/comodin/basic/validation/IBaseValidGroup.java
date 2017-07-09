@@ -20,12 +20,15 @@ public interface IBaseValidGroup {
     interface Upload {
     }
 
+    @SuppressWarnings("unused")
     interface UploadExcel {
     }
 
+    @SuppressWarnings("unused")
     interface UploadXML {
     }
 
+    @SuppressWarnings("unused")
     interface ValidExcelMultipleIf {
     }
 }

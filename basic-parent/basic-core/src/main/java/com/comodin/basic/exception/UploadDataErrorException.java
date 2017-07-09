@@ -3,6 +3,7 @@ package com.comodin.basic.exception;
 /**
  * 此功能，主要针对上传数据明，错误日志对外显示
  */
+@SuppressWarnings("unused")
 public class UploadDataErrorException extends RuntimeException {
     /**
      * 主要用于，对外显示的错误代码，以便快带查找
@@ -56,6 +57,7 @@ public class UploadDataErrorException extends RuntimeException {
         this.systemMessage = systemMessage;
     }
 
+    @SuppressWarnings("WeakerAccess")
     public String getExternalErrorCode() {
         return (externalErrorCode == null) ? null : externalErrorCode.trim();
     }
@@ -65,6 +67,7 @@ public class UploadDataErrorException extends RuntimeException {
         return this;
     }
 
+    @SuppressWarnings("WeakerAccess")
     public String getExternalErrorMessage() {
         return (externalErrorMessage == null) ? null : externalErrorMessage.trim();
     }
@@ -74,6 +77,7 @@ public class UploadDataErrorException extends RuntimeException {
         return this;
     }
 
+    @SuppressWarnings("WeakerAccess")
     public String getSystemMessage() {
         return (systemMessage == null) ? null : systemMessage.trim();
     }

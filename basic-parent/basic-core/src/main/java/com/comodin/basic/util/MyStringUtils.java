@@ -3,6 +3,7 @@ package com.comodin.basic.util;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@SuppressWarnings("WeakerAccess")
 public class MyStringUtils {
 
     public static final char UNDERLINE = '_';
@@ -10,9 +11,9 @@ public class MyStringUtils {
     /**
      * 驼峰格式字符串转换为下划线格式字符串
      *
-     * @param param
+     * @param param //
      *
-     * @return
+     * @return //
      */
     public static String camelToUnderline(String param) {
         if (param == null || "".equals(param.trim())) {
@@ -39,9 +40,9 @@ public class MyStringUtils {
     /**
      * 下划线格式字符串转换为驼峰格式字符串
      *
-     * @param param
+     * @param param //
      *
-     * @return
+     * @return  //
      */
     public static String underlineToCamel(String param) {
         if (param == null || "".equals(param.trim())) {

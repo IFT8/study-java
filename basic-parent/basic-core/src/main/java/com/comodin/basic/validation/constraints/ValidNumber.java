@@ -50,6 +50,7 @@ public @interface ValidNumber {
 
     Class<? extends Payload>[] payload() default {};
 
+    @SuppressWarnings("Duplicates")
     class Validator implements ConstraintValidator<ValidNumber, Object> {
 
         private static final Map<String, String> typeToMessageMapContainer = new HashMap<>();

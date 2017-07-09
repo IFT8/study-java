@@ -5,6 +5,7 @@ import java.util.Set;
 /**
  * 生成 实体类 模版
  */
+@SuppressWarnings({"UnusedReturnValue", "unused"})
 public class Entity {
     private String packageName;            // 实体所在的包名
     private Set<String> importPackageSet;       // 导入包列表
@@ -95,6 +96,7 @@ public class Entity {
         return generatedConstructors;
     }
 
+    @SuppressWarnings("SameParameterValue")
     public Entity setGeneratedConstructors(boolean generatedConstructors) {
         this.generatedConstructors = generatedConstructors;
         return this;

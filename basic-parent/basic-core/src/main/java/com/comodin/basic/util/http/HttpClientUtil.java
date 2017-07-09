@@ -34,7 +34,7 @@ import java.util.*;
  * //log.info(" ==> Server Params: " + JSON.toJSONString(paramMap));
  * //log.info(" <== Server Result: " + responseResult);
  */
-@SuppressWarnings("Duplicates")
+@SuppressWarnings({"Duplicates", "WeakerAccess", "unused"})
 public class HttpClientUtil {
     private static Log log = LogFactory.getLog(HttpClientUtil.class);
 

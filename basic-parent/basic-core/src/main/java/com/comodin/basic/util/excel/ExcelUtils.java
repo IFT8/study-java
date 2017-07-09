@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 
-@SuppressWarnings({"Convert2Diamond", "unused"})
+@SuppressWarnings({"Convert2Diamond", "unused", "Duplicates"})
 public class ExcelUtils {
     private Logger log = Logger.getLogger(this.getClass());
     private static ExcelUtils instance = new ExcelUtils();
@@ -88,6 +88,7 @@ public class ExcelUtils {
     /**
      * @return true 存在错误，false 不存在错误
      */
+    @SuppressWarnings("WeakerAccess")
     public boolean hasError() {
         return error.capacity() > 0;
     }
@@ -291,13 +292,11 @@ public class ExcelUtils {
                 if (clazz.isAnnotationPresent(ValidExcelMultipleIf.class)) {
                     //Map[propertyName,Map[violationAnnotationSimpleName,message]]
                     Map<String, Map<String, String>> stringMapMap = HibernateValidatorUtils.getInstance().validateBean(instance, clazz.getAnnotation(ValidExcelMultipleIf.class).groups());
-                    stringMapMap.forEach((propertyName, stringStringMap) -> {
-                        stringStringMap.forEach((violationAnnotationSimpleName, message) -> {
-                            if (ValidExcelMultipleIf.class.getSimpleName().equals(violationAnnotationSimpleName)) {
-                                throw new UploadDataErrorException(instance.getClass().getAnnotation(ValidExcelMultipleIf.class).errorCode(), message);
-                            }
-                        });
-                    });
+                    stringMapMap.forEach((propertyName, stringStringMap) -> stringStringMap.forEach((violationAnnotationSimpleName, message) -> {
+                        if (ValidExcelMultipleIf.class.getSimpleName().equals(violationAnnotationSimpleName)) {
+                            throw new UploadDataErrorException(instance.getClass().getAnnotation(ValidExcelMultipleIf.class).errorCode(), message);
+                        }
+                    }));
                 }
 
                 result.add(instance);

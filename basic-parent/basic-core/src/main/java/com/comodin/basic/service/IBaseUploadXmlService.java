@@ -5,6 +5,7 @@ import com.comodin.basic.exception.UploadDataErrorException;
 import java.io.File;
 import java.io.Serializable;
 
+@SuppressWarnings("unused")
 public interface IBaseUploadXmlService<XML_BEAN extends Serializable> {
     /**
      * 处理 xml文件业务逻辑入口方法
@@ -15,7 +16,7 @@ public interface IBaseUploadXmlService<XML_BEAN extends Serializable> {
      * @param xmlFile             xml文件流
      * @param xmlOriginalFilename xml文件原始名字
      *
-     * @throws UploadDataErrorException
+     * @throws UploadDataErrorException //
      */
     void uploadByXml(final File xmlFile, final String xmlOriginalFilename, final String xmlDataInfoPrefix) throws UploadDataErrorException;
 

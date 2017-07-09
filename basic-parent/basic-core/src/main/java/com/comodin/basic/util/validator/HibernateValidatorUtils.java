@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "Duplicates"})
 public class HibernateValidatorUtils {
     private static Validator validator;
     private static HibernateValidatorUtils instance = new HibernateValidatorUtils();

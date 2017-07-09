@@ -18,6 +18,7 @@ import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 import java.io.*;
 
+@SuppressWarnings({"Duplicates", "unused"})
 public class XmlUtil {
 
     private static final String encoding = "UTF-8";
@@ -26,9 +27,9 @@ public class XmlUtil {
      * JavaBean转换成xml
      * 默认编码UTF-8
      *
-     * @param javaBean
+     * @param javaBean  //
      *
-     * @return
+     * @return  //
      */
     public static String jaxbBeanToXml(Object javaBean) throws JAXBException {
         JAXBContext context = JAXBContext.newInstance(javaBean.getClass());
@@ -65,24 +66,25 @@ public class XmlUtil {
     /**
      * xml转换成JavaBean
      *
-     * @param xmlStr
-     * @param tClass
+     * @param xmlStr    //
+     * @param tClass    //
      *
-     * @return
+     * @return  //
      */
     public static <T> T jaxbXmlToJavaBean(final String xmlStr, Class<T> tClass) throws JAXBException {
         JAXBContext context = JAXBContext.newInstance(tClass);
         Unmarshaller unmarshaller = context.createUnmarshaller();
+        //noinspection unchecked
         return (T) unmarshaller.unmarshal(new StringReader(xmlStr));
     }
 
     /**
      * xml转换成JavaBean
      *
-     * @param is
-     * @param tClass
+     * @param is    //
+     * @param tClass    //
      *
-     * @return
+     * @return  //
      */
     public static <T> T jaxbXmlToJavaBean(final InputStream is, Class<T> tClass) throws JAXBException, ParserConfigurationException, SAXException {
         JAXBContext context = JAXBContext.newInstance(tClass);
@@ -93,6 +95,8 @@ public class XmlUtil {
         XMLReader xmlReader = sax.newSAXParser().getXMLReader();
 
         Source source = new SAXSource(xmlReader, new InputSource(is));
+
+        //noinspection unchecked
         return (T) unmarshaller.unmarshal(source);
     }
 
@@ -101,10 +105,12 @@ public class XmlUtil {
         return validateXml(new File(schemaFile), new File(xmlFile));
     }
 
+    @SuppressWarnings("WeakerAccess")
     public static boolean validateXml(File schemaFile, File xmlFile) throws SAXException, IOException {
         return validateXml(new FileInputStream(schemaFile), new FileInputStream(xmlFile));
     }
 
+    @SuppressWarnings("WeakerAccess")
     public static boolean validateXml(InputStream schemaFile, InputStream xmlFile) throws SAXException, IOException {
         // 建立schema工厂
         SchemaFactory schemaFactory = SchemaFactory.newInstance("http://www.w3.org/2001/XMLSchema");

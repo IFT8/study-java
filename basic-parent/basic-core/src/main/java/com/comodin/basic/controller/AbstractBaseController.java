@@ -127,7 +127,7 @@ public abstract class AbstractBaseController<T extends Serializable, VO extends 
         BaeUtils.webRequestParametersValidation(bindingResult);
 
         if (files == null || files.length < 1) {
-            throw new ParameterException(BaseConstants.GLOBAL_I18N_CRUD_UPLOAD_ERROR_NOTBLANK);
+            throw new ParameterException(BaseConstants.GLOBAL_I18N_CRUD_UPLOAD_ERROR_NOT_BLANK);
         }
 
         baseService.insert(bean, files);
@@ -247,7 +247,7 @@ public abstract class AbstractBaseController<T extends Serializable, VO extends 
         BaeUtils.webRequestParametersValidation(bindingResult);
 
         if (files == null || files.length < 1) {
-            throw new ParameterException(BaseConstants.GLOBAL_I18N_CRUD_UPLOAD_ERROR_NOTBLANK);
+            throw new ParameterException(BaseConstants.GLOBAL_I18N_CRUD_UPLOAD_ERROR_NOT_BLANK);
         }
 
         baseService.updateByPrimaryKey(bean, files);
@@ -347,7 +347,7 @@ public abstract class AbstractBaseController<T extends Serializable, VO extends 
     public ResultEntity upload_POST(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "files", required = false) MultipartFile... files) {
 
         if (files == null || files.length < 1) {
-            throw new ParameterException(BaseConstants.GLOBAL_I18N_CRUD_UPLOAD_ERROR_NOTBLANK);
+            throw new ParameterException(BaseConstants.GLOBAL_I18N_CRUD_UPLOAD_ERROR_NOT_BLANK);
         }
 
         //实现国际信息
@@ -418,7 +418,7 @@ public abstract class AbstractBaseController<T extends Serializable, VO extends 
     public ResultEntity list_POST(HttpServletRequest request, HttpServletResponse response, VO vo) {
         List<T> list = baseService.getListByVo(vo);
 
-        Map<String, Object> stringObjectMap = BaeUtils.webBricolageReturnResultByList(list, vo.getDraw());
+        Map<String, Object> stringObjectMap = BaeUtils.webAssemblyReturnResultByList(list, vo.getDraw());
 
         return BaeUtils.webAssemblySuccessResultEntity(stringObjectMap);
     }

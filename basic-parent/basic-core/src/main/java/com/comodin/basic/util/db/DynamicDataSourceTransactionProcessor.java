@@ -16,6 +16,7 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressWarnings({"Duplicates", "unused"})
 public class DynamicDataSourceTransactionProcessor implements BeanPostProcessor {
     private final Log log = LogFactory.getLog(this.getClass());
 
@@ -100,10 +101,7 @@ public class DynamicDataSourceTransactionProcessor implements BeanPostProcessor 
             return false;
         }
         Boolean isForceChoiceRead = writeMethodMap.get(bestNameMatch);
-        if (isForceChoiceRead == Boolean.TRUE) {
-            return false;
-        }
-        return true;
+        return isForceChoiceRead != Boolean.TRUE;
     }
 
     @Override
@@ -121,6 +119,7 @@ public class DynamicDataSourceTransactionProcessor implements BeanPostProcessor 
             NameMatchTransactionAttributeSource transactionAttributeSource = (NameMatchTransactionAttributeSource) bean;
             Field nameMapField = ReflectionUtils.findField(NameMatchTransactionAttributeSource.class, "nameMap");
             nameMapField.setAccessible(true);
+            //noinspection unchecked
             Map<String, TransactionAttribute> nameMap = (Map<String, TransactionAttribute>) nameMapField.get(transactionAttributeSource);
 
             nameMap.forEach((methodName, transactionAttribute) -> {

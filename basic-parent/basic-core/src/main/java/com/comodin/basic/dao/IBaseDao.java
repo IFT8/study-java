@@ -5,6 +5,7 @@ import tk.mybatis.mapper.common.MySqlMapper;
 
 import java.io.Serializable;
 
+@SuppressWarnings("unused")
 public interface IBaseDao<T extends Serializable> extends Mapper<T>, MySqlMapper<T> {
 
 

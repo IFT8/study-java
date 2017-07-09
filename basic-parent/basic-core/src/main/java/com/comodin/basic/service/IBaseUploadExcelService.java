@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.util.List;
 
+@SuppressWarnings("unused")
 public interface IBaseUploadExcelService<EXCEL_BEAN extends Serializable> {
     /**
      * 处理 Excel文件业务逻辑入口方法

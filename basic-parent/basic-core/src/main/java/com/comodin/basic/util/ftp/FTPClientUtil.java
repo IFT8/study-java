@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+@SuppressWarnings({"Duplicates", "WeakerAccess"})
 public class FTPClientUtil {
     private static Logger log = Logger.getLogger(FTPClientUtil.class);
 
@@ -29,8 +30,8 @@ public class FTPClientUtil {
      *
      * @return //
      *
-     * @throws FTPClientException
-     * @throws IOException
+     * @throws FTPClientException //
+     * @throws IOException        //
      */
     private static FTPClient getFTPClient() throws FTPClientException, IOException {
         if (ftpClientThreadLocal.get() != null && ftpClientThreadLocal.get().isConnected()) {
@@ -57,11 +58,7 @@ public class FTPClientUtil {
         }
     }
 
-    /**
-     * @throws FTPClientException
-     * @throws IOException
-     * @description 设置文件传输类型
-     */
+
     private static void setFileType(FTPClient ftpClient) throws FTPClientException, IOException {
         if (ftpClientConfigBeanThreadLocal.get().isBinaryTransfer()) {
             ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
@@ -70,11 +67,7 @@ public class FTPClientUtil {
         }
     }
 
-    /**
-     * @throws FTPClientException
-     * @throws IOException
-     * @description 断开ftp连接
-     */
+
     public static void disconnect() throws FTPClientException, IOException {
         FTPClient ftpClient = getFTPClient();
         ftpClient.logout();
@@ -97,9 +90,9 @@ public class FTPClientUtil {
     public static boolean deleteRemoteFiles(String[] delFiles) throws FTPClientException, IOException {
         List<String> list = listNames();//获取所有的文件名
         for (String filename : delFiles) {
-            for (String filepath : list) {
-                if (filepath.contains(filename)) {//如果该路径包含该文件名则删除
-                    boolean result = getFTPClient().deleteFile(filepath);
+            for (String filePath : list) {
+                if (filePath.contains(filename)) {//如果该路径包含该文件名则删除
+                    boolean result = getFTPClient().deleteFile(filePath);
                     if (!result) {
                         return false;
                     }
@@ -112,14 +105,14 @@ public class FTPClientUtil {
     /**
      * @return 远程默认目录下所有文件名的列表，目录不存在或者目录下没有文件时返回0长度的数组
      *
-     * @throws FTPClientException
-     * @throws IOException
-     * @description 列出远程默认目录下所有的文件
+     * @throws FTPClientException //
+     * @throws IOException        //
      */
     public static List<String> listNames() throws FTPClientException, IOException {
         return listNames(null);
     }
 
+    @SuppressWarnings("SameParameterValue")
     public static List<String> listNames(String remotePath) throws FTPClientException, IOException {
         return listNames(remotePath, true);
     }
@@ -130,10 +123,10 @@ public class FTPClientUtil {
      *
      * @return 远程目录下所有文件名的列表，目录不存在或者目录下没有文件时返回0长度的数组
      *
-     * @throws FTPClientException
-     * @throws IOException
-     * @description 列出远程目录下所有的文件
+     * @throws FTPClientException //
+     * @throws IOException        //
      */
+    @SuppressWarnings("SameParameterValue")
     public static List<String> listNames(String remotePath, boolean containSubdirectory) throws FTPClientException, IOException {
         if (null == remotePath) {
             remotePath = "." + File.separator;
@@ -308,13 +301,13 @@ public class FTPClientUtil {
         List<String> list = listNames();
         OutputStream out;
         try {
-            for (String filepath : list) {
-                if (filepath.contains(filename)) {
-                    String remoteFilePath = filepath.substring(1, filepath.length());
+            for (String filePath : list) {
+                if (filePath.contains(filename)) {
+                    String remoteFilePath = filePath.substring(1, filePath.length());
                     File file = new File(localPath + remoteFilePath);
                     new File(file.getParent()).mkdirs();
                     out = new FileOutputStream(localPath + remoteFilePath);
-                    getFTPClient().retrieveFile(filepath, out); // \u4E0B\u8F7D
+                    getFTPClient().retrieveFile(filePath, out); // \u4E0B\u8F7D
                     out.close();
                 }
             }

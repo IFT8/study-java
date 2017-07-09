@@ -46,6 +46,7 @@ public @interface ValidExcelMultipleIf {
     Class<? extends Payload>[] payload() default {};
 
 
+    @SuppressWarnings("Duplicates")
     class Validator implements ConstraintValidator<ValidExcelMultipleIf, Object> {
         private final Log log = LogFactory.getLog(this.getClass());
         String[] propertyNameArray;

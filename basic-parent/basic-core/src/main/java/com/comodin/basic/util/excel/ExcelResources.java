@@ -36,7 +36,7 @@ import static java.lang.annotation.ElementType.METHOD;
  * @Range(min=,max=,message=) 被注释的元素必须在合适的范围内
  */
 @SuppressWarnings("JavaDoc")
-@Target({FIELD,METHOD})
+@Target({FIELD, METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ExcelResources {
 

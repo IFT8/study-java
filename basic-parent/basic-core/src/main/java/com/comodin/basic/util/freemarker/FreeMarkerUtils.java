@@ -15,6 +15,7 @@ import java.util.Map;
 /**
  * FreeMarkerUtil 工具类
  */
+@SuppressWarnings("unused")
 public class FreeMarkerUtils {
 
     private static final Logger log = Logger.getLogger(PropertiesUtil.class);
@@ -51,6 +52,7 @@ public class FreeMarkerUtils {
      *
      * @return FreeMarkerUtil 工具类
      */
+    @SuppressWarnings("SameParameterValue")
     public static FreeMarkerUtils getInstance(String templatePath) {
 
         if (null == cfg) {
@@ -95,6 +97,7 @@ public class FreeMarkerUtils {
 
             StringWriter stringWriter = new StringWriter();
 
+            //noinspection ConstantConditions
             getTemplate(templateName).process(dataModel, stringWriter);
 
             stringWriter.flush();
@@ -118,6 +121,7 @@ public class FreeMarkerUtils {
      * @param templateName 输出模版
      * @param outFilePath  输出文件路径
      */
+    @SuppressWarnings("UnusedReturnValue")
     public File crateFile(Map<String, ?> dataModel, String templateName, String outFilePath) {
 
         BufferedWriter bufWrite = null;
@@ -125,12 +129,14 @@ public class FreeMarkerUtils {
             // 创建文件目录
             File file = new File(outFilePath);
             if (!file.getParentFile().exists()) {
+                //noinspection ResultOfMethodCallIgnored
                 file.getParentFile().mkdirs();
             }
 
             bufWrite = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outFilePath), FreeMarkerUtils.ENCODING));
 
             // 处理模版
+            //noinspection ConstantConditions
             this.getTemplate(templateName).process(dataModel, bufWrite);
             bufWrite.flush();
             return file;
@@ -177,7 +183,7 @@ public class FreeMarkerUtils {
                 // 定义缓存流，用于存储图片输出流
                 byte[] buffer = new byte[1024];
 
-                int len = 0;
+                int len;
 
                 // 图片输出流循环写入
                 while ((len = inStream.read(buffer)) != -1) {

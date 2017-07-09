@@ -4,6 +4,7 @@ import javax.persistence.Id;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
+@SuppressWarnings("unused")
 public class AnnotationUtil {
 
 

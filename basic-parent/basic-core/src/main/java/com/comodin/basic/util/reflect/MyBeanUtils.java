@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 
+@SuppressWarnings({"Duplicates", "unused", "Convert2Diamond"})
 public class MyBeanUtils {
     private static Map<Class, MethodAccess> methodMap = new HashMap<Class, MethodAccess>();
 
@@ -17,6 +18,7 @@ public class MyBeanUtils {
 
     private static Map<Class, List<String>> fieldMap = new HashMap<Class, List<String>>();
 
+    @SuppressWarnings("SpellCheckingInspection")
     public static void copyProperties(final Object dest, final Object orig) {
         MethodAccess descMethodAccess = methodMap.get(dest.getClass());
         if (descMethodAccess == null) {
@@ -61,6 +63,7 @@ public class MyBeanUtils {
 
     // 单例模式
     private static MethodAccess cache(Object orig) {
+        //noinspection SynchronizationOnGetClass
         synchronized (orig.getClass()) {
             MethodAccess methodAccess = MethodAccess.get(orig.getClass());
             Field[] fields = orig.getClass().getDeclaredFields();
@@ -94,6 +97,7 @@ public class MyBeanUtils {
     }
 
     //首字母转大写
+    @SuppressWarnings("WeakerAccess")
     public static String toUpperCaseFirstOne(String s) {
         if (Character.isUpperCase(s.charAt(0)))
             return s;

@@ -11,8 +11,10 @@ import java.util.Properties;
 /**
  * 邮件工具类
  */
+@SuppressWarnings({"Duplicates", "unused"})
 public class MailUtil {
 
+    @SuppressWarnings({"WeakerAccess", "SameParameterValue"})
     public static void send(final String host, final String username, final String password, final Mail mail) throws MessagingException, IOException {
         send(host, "465", "SMTP", username, password, mail);
     }
@@ -27,9 +29,10 @@ public class MailUtil {
      * @param password 发件者，邮箱密码
      * @param mail     邮件信息封装对象
      *
-     * @throws MessagingException
-     * @throws IOException
+     * @throws MessagingException //
+     * @throws IOException        //
      */
+    @SuppressWarnings({"WeakerAccess", "SameParameterValue"})
     public static void send(final String host, final String port, final String protocol, final String username, final String password, final Mail mail) throws MessagingException, IOException {
 
         Properties props = new Properties();

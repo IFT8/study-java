@@ -12,6 +12,7 @@ import java.util.*;
 /**
  * The type Date util.
  */
+@SuppressWarnings({"WeakerAccess", "Duplicates", "unused", "Convert2Diamond"})
 public class DateUtil {
     private static final Logger log = Logger.getLogger(DateUtil.class);
 
@@ -44,9 +45,9 @@ public class DateUtil {
         specifiedTimeZoneSimpleDateFormat.setTimeZone(TimeZone.getTimeZone(targetTimeZone));
 
         //log.info("getSpecifiedTimeZoneCurrentTime method===> specifiedTimeZone: " + targetTimeZone +
-        //        "\ndefaultTimeZone: " + defaultTimeZoneSimpleDateFormat.getTimeZone().getID() + "[" + defaultTimeZoneSimpleDateFormat.format(date) + "]" +
+        //        "\n defaultTimeZone: " + defaultTimeZoneSimpleDateFormat.getTimeZone().getID() + "[" + defaultTimeZoneSimpleDateFormat.format(date) + "]" +
         //        "\tUTC TimeZone: " + utcTimeZoneSimpleDateFormat.getTimeZone().getID() + "[" + utcTimeZoneSimpleDateFormat.format(date) + "]" +
-        //        "\tspecifiedTimeZone: " + specifiedTimeZoneSimpleDateFormat.getTimeZone().getID() + "[" + specifiedTimeZoneSimpleDateFormat.format(date) + "]");
+        //        "\t specifiedTimeZone: " + specifiedTimeZoneSimpleDateFormat.getTimeZone().getID() + "[" + specifiedTimeZoneSimpleDateFormat.format(date) + "]");
 
         return targetSimpleDateFormat.format(date);
     }
@@ -73,9 +74,9 @@ public class DateUtil {
         specifiedTimeZoneSimpleDateFormat.setTimeZone(TimeZone.getTimeZone(targetTimeZone));
 
         //log.info("conversionDateTimeBySpecifiedTimeZone method===> sourceTimeZone: " + sourceTimeZone + " sourceDateTimeStr[" + sourceDateTimeStr + "]\t" +
-        //        "\ndefaultTimeZone: " + defaultTimeZoneSimpleDateFormat.getTimeZone().getID() + "[" + defaultTimeZoneSimpleDateFormat.format(sourceDate) + "]" +
+        //        "\n defaultTimeZone: " + defaultTimeZoneSimpleDateFormat.getTimeZone().getID() + "[" + defaultTimeZoneSimpleDateFormat.format(sourceDate) + "]" +
         //        "\tUTC TimeZone: " + utcTimeZoneSimpleDateFormat.getTimeZone().getID() + "[" + utcTimeZoneSimpleDateFormat.format(sourceDate) + "]" +
-        //        "\tspecifiedTimeZone: " + specifiedTimeZoneSimpleDateFormat.getTimeZone().getID() + "[" + specifiedTimeZoneSimpleDateFormat.format(sourceDate) + "]");
+        //        "\t specifiedTimeZone: " + specifiedTimeZoneSimpleDateFormat.getTimeZone().getID() + "[" + specifiedTimeZoneSimpleDateFormat.format(sourceDate) + "]");
 
         return sourceDate;
     }
@@ -114,7 +115,7 @@ public class DateUtil {
      * @param sourcePattern  字符串时间,原格式
      * @param newPattern     返回新的格式
      *
-     * @return
+     * @return  //
      */
     public static String getUTCTimeStr(String sourceDateStr, String sourceTimeZone, String sourcePattern, String newPattern) {
         return conversionDateTimeBySpecifiedTimeZone(sourceDateStr, sourceTimeZone, sourcePattern, DateUtil.DATE_TIMEZONE_UTC, newPattern);
@@ -282,6 +283,7 @@ public class DateUtil {
      *
      * @throws RuntimeException 异常：非法日期格式
      */
+    @SuppressWarnings("DeprecatedIsStillUsed")
     @Deprecated
     public static SimpleDateFormat getDateFormat(String pattern) throws RuntimeException {
         SimpleDateFormat dateFormat = threadLocal.get();
@@ -619,15 +621,15 @@ public class DateUtil {
      * 将日期字符串转化为另一日期字符串。失败返回null。
      *
      * @param date         旧日期字符串
-     * @param olddPattern  旧日期格式
+     * @param oldPattern  旧日期格式
      * @param newDateStyle 新日期风格
      *
      * @return 新日期字符串 string
      */
-    public static String StringToString(String date, String olddPattern, DateStyle newDateStyle) {
+    public static String StringToString(String date, String oldPattern, DateStyle newDateStyle) {
         String dateString = null;
         if (newDateStyle != null) {
-            dateString = StringToString(date, olddPattern, newDateStyle.getValue());
+            dateString = StringToString(date, oldPattern, newDateStyle.getValue());
         }
         return dateString;
     }
@@ -974,6 +976,7 @@ public class DateUtil {
 
         DateStyle dateStyle = getDateStyle(date);
         if (dateStyle != null) {
+            //noinspection deprecation
             Date myDate = StringToDate(date, dateStyle);
             weekNumber = getWeekPressCalendar(myDate);
         }

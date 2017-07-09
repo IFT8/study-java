@@ -3,6 +3,7 @@ package com.comodin.basic.vo;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 
+@SuppressWarnings("unused")
 public class BaseVo<T extends Serializable> {
     //通用，
     private Integer draw;
@@ -21,7 +22,7 @@ public class BaseVo<T extends Serializable> {
     private String searchDateTimeEndStr;
     private Long searchDateTimestampEnd;
 
-    T bean;
+    private T bean;
 
     public Integer getDraw() {
         return draw;
@@ -142,10 +143,11 @@ public class BaseVo<T extends Serializable> {
 
     /**
      * Java中没法得到泛型参数化类型，因为在编译期没法确定泛型参数化类型，也就找不到对应的类字节码文件，自然就不行了
-     * 泛型反射的关键是获取ParameterizedType，再调用它的getActualTypeArguments()方法获得实际绑定的类型。
+     * 泛型反射的关键是获取 ParamType ，再调用它的getActualTypeArguments()方法获得实际绑定的类型。
      * 但注意public class BookManager<Book>是不能被反射的，因为擦拭法的缘故。
-     * 只有在Superclass 或者成员变量(Field.getGenericType())等有函数返回ParameterizedType的时候才能成功反射，
-     * @return
+     * 只有在Superclass 或者成员变量(Field.getGenericType())等有函数返回 ParamType 的时候才能成功反射，
+     *
+     * @return //
      */
     @SuppressWarnings("unchecked")
     private Class<T> getTClass() {

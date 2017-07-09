@@ -1,5 +1,6 @@
 package com.comodin.basic.util.ftp;
 
+@SuppressWarnings({"WeakerAccess", "unused"})
 public class FTPClientConfigBean {
     private String host;
     private int port = 21;

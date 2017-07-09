@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
 
-@SuppressWarnings("Duplicates")
+@SuppressWarnings({"unused", "Duplicates", "UnusedReturnValue"})
 public class BaeUtils {
 
     private static final Logger log = Logger.getLogger(BaeUtils.class);
@@ -42,7 +42,7 @@ public class BaeUtils {
      *
      * @return 返回 ，带分页信息的结果集 Map集合
      */
-    public static Map<String, Object> webBricolageReturnResultByList(List<?> resultList, Integer draw) {
+    public static Map<String, Object> webAssemblyReturnResultByList(List<?> resultList, Integer draw) {
         Map<String, Object> map = new HashMap<>();
         PageInfo<?> page = new PageInfo<>(resultList);// 用PageInfo对结果进行包装
         // PageInfo包含了非常全面的分页属性
@@ -61,7 +61,7 @@ public class BaeUtils {
      *
      * @return 返回 ，带分页信息的结果集 Map集合
      */
-    public static Map<String, Object> webBricolageReturnResultByPageInfo(PageInfo<?> pageInfo, Integer draw) {
+    public static Map<String, Object> webAssemblyReturnResultByPageInfo(PageInfo<?> pageInfo, Integer draw) {
         Map<String, Object> map = new HashMap<>();
         // PageInfo包含了非常全面的分页属性
         map.put("draw", draw);
@@ -84,9 +84,10 @@ public class BaeUtils {
      * @param request    //
      * @param response   //
      *
-     * @throws IOException
-     * @throws ServletException
+     * @throws IOException      //
+     * @throws ServletException //
      */
+    @SuppressWarnings("WeakerAccess")
     public static void webRequestDispatcherLoginPageByAjaxOrForward(String content, String forwardUrl, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         if (request.getHeader("x-requested-with") != null && request.getHeader("x-requested-with").equalsIgnoreCase("XMLHttpRequest")) {
             // 如果是ajax请求响应头会有，x-requested-with
@@ -119,6 +120,7 @@ public class BaeUtils {
      *
      * @throws IOException 抛出
      */
+    @SuppressWarnings("WeakerAccess")
     public static void webSendResponseMessageByJSON(String resultCode, Object messageObj, HttpServletResponse response) throws IOException {
         ResultEntity resultEntity = new ResultEntity(resultCode, JSONObject.toJSONString(messageObj));
         String jsonString = JSON.toJSONString(resultEntity);

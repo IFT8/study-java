@@ -33,6 +33,7 @@ public @interface ValidLength {
     Class<? extends Payload>[] payload() default {};
 
 
+    @SuppressWarnings("Duplicates")
     class Validator implements ConstraintValidator<ValidLength, Object> {
         int min;
         int max;

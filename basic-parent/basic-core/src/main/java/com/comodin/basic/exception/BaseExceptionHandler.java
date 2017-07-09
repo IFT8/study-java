@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@SuppressWarnings("unused")
 public abstract class BaseExceptionHandler {
     protected static final Logger log = Logger.getLogger(BaseExceptionHandler.class);
     private static final Logger subTableLog = Logger.getLogger("com.comodin.subTable");
@@ -70,6 +71,7 @@ public abstract class BaseExceptionHandler {
     public abstract void handleUserLoginFailException(Exception ex, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException;
 
 
+    @SuppressWarnings("WeakerAccess")
     protected String getIn18NMessage(Exception ex, HttpServletRequest request, HttpServletResponse response) {
         String messageIn18Key = ex.getMessage();
         try {
@@ -83,6 +85,7 @@ public abstract class BaseExceptionHandler {
         return messageIn18Key;
     }
 
+    @SuppressWarnings("WeakerAccess")
     protected String getIn18NMessage(Exception ex, String[] strings, HttpServletRequest request, HttpServletResponse response) {
         String messageIn18Key = ex.getMessage();
         try {
