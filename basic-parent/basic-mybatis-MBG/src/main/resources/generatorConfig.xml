@@ -39,15 +39,7 @@
             <property name="suppressJavaInterface" value="false"/>
         </plugin>
 
-        <!--&lt;!&ndash;suppress MybatisGenerateCustomPluginInspection &ndash;&gt;-->
-        <!--<plugin type="tk.mybatis.mapper.generator.MapperPlugin">-->
-        <!--&lt;!&ndash;建议创建一个自己的通用接口，方便将来的自由扩展和搭配&ndash;&gt;-->
-        <!--&lt;!&ndash;<property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>&ndash;&gt;-->
-        <!--<property name="mappers" value="${dao.mappers}"/>-->
-        <!--&lt;!&ndash; caseSensitive默认false，当数据库表名区分大小写时，可以将该属性设置为true &ndash;&gt;-->
-        <!--<property name="caseSensitive" value="true"/>-->
-        <!--</plugin>-->
-
+        <!--suppress MybatisGenerateCustomPluginInspection -->
         <plugin type="com.comodin.basic.mybatis.generator.plugins.ComodinPlugin">
             <!--建议创建一个自己的通用接口，方便将来的自由扩展和搭配-->
             <!--<property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>-->
@@ -235,8 +227,8 @@
             <columnRenamingRule searchString="crew_" replaceString=""/>
         </table>
         <!--<table tableName="t_client" domainObjectName="ClientBean">-->
-            <!--<generatedKey column="client_id" sqlStatement="Mysql" identity="true"/>-->
-            <!--<columnRenamingRule searchString="client_" replaceString=""/>-->
+        <!--<generatedKey column="client_id" sqlStatement="Mysql" identity="true"/>-->
+        <!--<columnRenamingRule searchString="client_" replaceString=""/>-->
         <!--</table>-->
     </context>
 </generatorConfiguration>
