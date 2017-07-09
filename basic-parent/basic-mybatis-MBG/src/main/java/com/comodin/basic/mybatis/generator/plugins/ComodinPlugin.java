@@ -35,9 +35,50 @@ public class ComodinPlugin extends PluginAdapter {
     private String endingDelimiter = "";
     //数据库模式
     private String schema;
-
     //注释生成器
     private CommentGeneratorConfiguration commentCfg;
+
+    private String applicationBeanPackage = "com.comodin.fleet.bean";
+    private String applicationBeanFileNamePrefix = "";
+    private String applicationBeanFileNameSuffix = "Bean";
+
+    private String applicationConstantPackage = "com.comodin.fleet.constant";
+    private String applicationConstantFileNamePrefix = "";
+    private String applicationConstantFileNameSuffix = "Constant";
+
+    private String applicationDaoInterfacePackage = "com.comodin.fleet.dao";
+    private String applicationDaoInterfaceFileNamePrefix = "";
+    private String applicationDaoInterfaceFileNameSuffix = "Mapper";
+
+    private String applicationDaoImplementsPackage = "/src/main/resources/sqlMapper";
+    private String applicationDaoImplementsFileNamePrefix = "";
+    private String applicationDaoImplementsFileNameSuffix = "";
+
+    private String applicationServiceInterfacePackage = "com.comodin.fleet.service";
+    private String applicationServiceInterfaceFileNamePrefix = "I";
+    private String applicationServiceInterfaceFileNameSuffix = "Service";
+
+    private String applicationServiceImplementsPackage = "com.comodin.fleet.service.impl";
+    private String applicationServiceImplementsFileNamePrefix = "";
+    private String applicationServiceImplementsFileNameSuffix = "Service";
+
+    private String applicationControllerPackage = "com.comodin.fleet.controller";
+    private String applicationControllerFileNamePrefix = "";
+    private String applicationControllerFileNameSuffix = "Controller";
+
+    private Set<String> applicationInternationalizedLanguages = new HashSet<>();
+    private String applicationInternationalizedPackage = "/src/main/resources/i18n";
+    private String applicationInternationalizedFileNamePrefix = "i18n-";
+    private String applicationInternationalizedFileNameSuffix = "";
+
+    private String applicationJspPackage = "/src/main/webapp/WEB-INF/jsp";
+    private String applicationJspFileNamePrefix = "";
+    private String applicationJspFileNameSuffix = "";
+
+    private String applicationJsPackage = "/src/main/webapp/resources/js";
+    private String applicationJsFileNamePrefix = "";
+    private String applicationJsFileNameSuffix = "";
+
 
     @Override
     public void setContext(Context context) {
@@ -474,7 +515,6 @@ public class ComodinPlugin extends PluginAdapter {
         importPackageSet.add("com.comodin.fleet.bean.CrewBean");
         importPackageSet.add("org.springframework.stereotype.Controller;");
         importPackageSet.add("org.springframework.web.bind.annotation.RequestMapping");
-
 
         Map<String, Entity> dataModel = new HashMap<>();
         Entity entity = new Entity(EntityType.Class);
