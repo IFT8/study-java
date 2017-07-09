@@ -19,8 +19,10 @@ public class Entity {
     private boolean generatedConstructors;               // 是否有构造函数
     private boolean generatedGetSetMethod;      // 是否有构造函数
 
-    private Set<EntityProperty> staticPropertyList;    // 类静态属性集合
-    private Set<EntityProperty> entityPropertyList;          // 属性集合
+    private Set<EntityProperty> staticPropertySet;    // 类静态属性集合
+    private Set<EntityProperty> entityPropertySet;          // 属性集合
+
+    private Set<String> temporaryMethodBodySet;
 
     public Entity(EntityType classType) {
         this.classType = classType;
@@ -107,21 +109,30 @@ public class Entity {
         return this;
     }
 
-    public Set<EntityProperty> getStaticPropertyList() {
-        return staticPropertyList;
+    public Set<EntityProperty> getStaticPropertySet() {
+        return staticPropertySet;
     }
 
-    public Entity setStaticPropertyList(Set<EntityProperty> staticPropertyList) {
-        this.staticPropertyList = staticPropertyList;
+    public Entity setStaticPropertySet(Set<EntityProperty> staticPropertySet) {
+        this.staticPropertySet = staticPropertySet;
         return this;
     }
 
-    public Set<EntityProperty> getEntityPropertyList() {
-        return entityPropertyList;
+    public Set<EntityProperty> getEntityPropertySet() {
+        return entityPropertySet;
     }
 
-    public Entity setEntityPropertyList(Set<EntityProperty> entityPropertyList) {
-        this.entityPropertyList = entityPropertyList;
+    public Entity setEntityPropertySet(Set<EntityProperty> entityPropertySet) {
+        this.entityPropertySet = entityPropertySet;
+        return this;
+    }
+
+    public Set<String> getTemporaryMethodBodySet() {
+        return temporaryMethodBodySet;
+    }
+
+    public Entity setTemporaryMethodBodySet(Set<String> temporaryMethodBodySet) {
+        this.temporaryMethodBodySet = temporaryMethodBodySet;
         return this;
     }
 }

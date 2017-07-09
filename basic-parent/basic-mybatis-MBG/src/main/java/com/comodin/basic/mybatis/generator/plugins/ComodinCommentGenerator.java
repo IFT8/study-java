@@ -2,6 +2,7 @@ package com.comodin.basic.mybatis.generator.plugins;
 
 
 import com.alibaba.fastjson.JSON;
+import com.comodin.basic.mybatis.generator.json.RemarksJSON;
 import com.comodin.basic.util.freemarker.EntityProperty;
 import com.comodin.basic.util.freemarker.EntityPropertyType;
 import com.comodin.basic.util.MyStringUtils;
@@ -30,7 +31,7 @@ public class ComodinCommentGenerator implements CommentGenerator {
     private FullyQualifiedJavaType customizeValidatorBaseValidGroup = new FullyQualifiedJavaType("com.comodin.basic.validation.IBaseValidGroup");
     private FullyQualifiedJavaType dateUtil = new FullyQualifiedJavaType("com.comodin.basic.util.date.DateUtil");
 
-    private static Map<String, String> internationalizedMap = new HashMap<>();
+    private static Set<EntityProperty> internationalizedMap = new HashSet<>();
     private static Set<EntityProperty> applicationConstantSet = new HashSet<>();
 
     /**
@@ -346,20 +347,20 @@ public class ComodinCommentGenerator implements CommentGenerator {
         //introspectedColumn.getJavaProperty()              java 字段名      id
         //introspectedColumn.getFullyQualifiedJavaType()    java，字段，类型    java.lang.Long
 
-        SQLCommentJSON sqlCommentJSON = extractSQLCommentJSON(introspectedColumn.getRemarks());
+        RemarksJSON RemarksJSON = extractRemarksJSON(introspectedColumn);
         String javaBeanNameByCamelToUnderline = MyStringUtils.camelToUnderline(introspectedTable.getFullyQualifiedTable().getDomainObjectName());
         String fieldNameByCamelToUnderline = MyStringUtils.camelToUnderline(field.getName());
 
-        processAnnotationValidAllowData(javaBeanNameByCamelToUnderline, fieldNameByCamelToUnderline, sqlCommentJSON, field, introspectedTable, introspectedColumn);
-        processAnnotationEmail(javaBeanNameByCamelToUnderline, fieldNameByCamelToUnderline, sqlCommentJSON, field, introspectedTable, introspectedColumn);
-        processAnnotationValidDateTimeFormat(javaBeanNameByCamelToUnderline, fieldNameByCamelToUnderline, sqlCommentJSON, field, introspectedTable, introspectedColumn);
-        processAnnotationNotNullOrNotBlank(javaBeanNameByCamelToUnderline, fieldNameByCamelToUnderline, sqlCommentJSON, field, introspectedTable, introspectedColumn);
-        processAnnotationLengthOrValidLength(javaBeanNameByCamelToUnderline, fieldNameByCamelToUnderline, sqlCommentJSON, field, introspectedTable, introspectedColumn);
+        processAnnotationValidAllowData(javaBeanNameByCamelToUnderline, fieldNameByCamelToUnderline, RemarksJSON, field, introspectedTable, introspectedColumn);
+        processAnnotationEmail(javaBeanNameByCamelToUnderline, fieldNameByCamelToUnderline, RemarksJSON, field, introspectedTable, introspectedColumn);
+        processAnnotationValidDateTimeFormat(javaBeanNameByCamelToUnderline, fieldNameByCamelToUnderline, RemarksJSON, field, introspectedTable, introspectedColumn);
+        processAnnotationNotNullOrNotBlank(javaBeanNameByCamelToUnderline, fieldNameByCamelToUnderline, RemarksJSON, field, introspectedTable, introspectedColumn);
+        processAnnotationLengthOrValidLength(javaBeanNameByCamelToUnderline, fieldNameByCamelToUnderline, RemarksJSON, field, introspectedTable, introspectedColumn);
     }
 
 
-    private void processAnnotationValidAllowData(String javaBeanNameByCamelToUnderline, String fieldNameByCamelToUnderline, SQLCommentJSON sqlCommentJSON, Field field, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn) {
-        if (sqlCommentJSON == null || sqlCommentJSON.getDataList() == null || sqlCommentJSON.getDataList().isEmpty()) {
+    private void processAnnotationValidAllowData(String javaBeanNameByCamelToUnderline, String fieldNameByCamelToUnderline, RemarksJSON RemarksJSON, Field field, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn) {
+        if (RemarksJSON == null || RemarksJSON.getDataList() == null || RemarksJSON.getDataList().isEmpty()) {
             return;
         }
 
@@ -367,7 +368,7 @@ public class ComodinCommentGenerator implements CommentGenerator {
         String validAllowDataMessageVal = "Only as follows {allowDataArray}.";
 
         StringBuffer stringBuffer = new StringBuffer();
-        sqlCommentJSON.getDataList().forEach(data -> {
+        RemarksJSON.getDataList().forEach(data -> {
             String constantBeanName = String.format("%s%s", introspectedTable.getFullyQualifiedTable().getDomainObjectName(), "Constant");
             String constantName = String.format("%s_%s_%s", javaBeanNameByCamelToUnderline, fieldNameByCamelToUnderline, data).toUpperCase();
 
@@ -383,22 +384,22 @@ public class ComodinCommentGenerator implements CommentGenerator {
         });
         String substring = stringBuffer.substring(0, stringBuffer.length() - 1);
         field.addAnnotation("@ValidAllowData(allowDataArray = {" + substring + "}, message = \"{" + validAllowDataMessageKey + "}\", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})");
-        internationalizedMap.put(validAllowDataMessageKey, validAllowDataMessageVal);
+        internationalizedMap.add(new EntityProperty().setName(validAllowDataMessageKey).setValue(validAllowDataMessageVal).setRemarks(extractRemarksDescription(introspectedColumn)));
     }
 
 
-    private void processAnnotationEmail(String javaBeanNameByCamelToUnderline, String fieldNameByCamelToUnderline, SQLCommentJSON sqlCommentJSON, Field field, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn) {
-        if (sqlCommentJSON == null || sqlCommentJSON.getEmail() == null || !sqlCommentJSON.getEmail()) {
+    private void processAnnotationEmail(String javaBeanNameByCamelToUnderline, String fieldNameByCamelToUnderline, RemarksJSON RemarksJSON, Field field, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn) {
+        if (RemarksJSON == null || RemarksJSON.getEmail() == null || !RemarksJSON.getEmail()) {
             return;
         }
         String emailMessageKey = String.format("%s_%s_EMAIL", javaBeanNameByCamelToUnderline, fieldNameByCamelToUnderline).toUpperCase();
         String emailMessageVal = "not a well-formed email address.";
         field.addAnnotation("@Email(message = \"{" + emailMessageKey + "}\", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})");
-        internationalizedMap.put(emailMessageKey, emailMessageVal);
+        internationalizedMap.add(new EntityProperty().setName(emailMessageKey).setValue(emailMessageVal).setRemarks(extractRemarksDescription(introspectedColumn)));
     }
 
-    private void processAnnotationValidDateTimeFormat(String javaBeanNameByCamelToUnderline, String fieldNameByCamelToUnderline, SQLCommentJSON sqlCommentJSON, Field field, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn) {
-        String pattern = sqlCommentJSON != null && sqlCommentJSON.getPattern() != null && "".equals(sqlCommentJSON.getPattern().trim()) ? sqlCommentJSON.getPattern().trim() : null;
+    private void processAnnotationValidDateTimeFormat(String javaBeanNameByCamelToUnderline, String fieldNameByCamelToUnderline, RemarksJSON RemarksJSON, Field field, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn) {
+        String pattern = RemarksJSON != null && RemarksJSON.getPattern() != null && "".equals(RemarksJSON.getPattern().trim()) ? RemarksJSON.getPattern().trim() : null;
 
         String dateTimeFormatMessageKey = String.format("%s_%s_DATE_TIME_FORMAT", javaBeanNameByCamelToUnderline, fieldNameByCamelToUnderline).toUpperCase();
         String dateTimeFormatMessageVal = "Invalid time or date format error. pattern: {pattern}.";
@@ -406,16 +407,16 @@ public class ComodinCommentGenerator implements CommentGenerator {
         if (Date.class.getTypeName().equals(field.getType().getFullyQualifiedName())) {
             if ("TIMESTAMP".equals(introspectedColumn.getJdbcTypeName())) {
                 field.addAnnotation("@ValidDateTimeFormat(pattern = " + (pattern != null ? "\"pattern\"" : "DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS") + " , message = \"{" + dateTimeFormatMessageKey + "}\", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})");
-                internationalizedMap.put(dateTimeFormatMessageKey, dateTimeFormatMessageVal);
+                internationalizedMap.add(new EntityProperty().setName(dateTimeFormatMessageKey).setValue(dateTimeFormatMessageVal).setRemarks(extractRemarksDescription(introspectedColumn)));
             } else if ("DATE".equals(introspectedColumn.getJdbcTypeName())) {
                 field.addAnnotation("@ValidDateTimeFormat(pattern = " + (pattern != null ? "\"pattern\"" : "DateUtil.DATE_PATTERN_YYYY_MM_DD") + " , message = \"{" + dateTimeFormatMessageKey + "}\", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})");
-                internationalizedMap.put(dateTimeFormatMessageKey, dateTimeFormatMessageVal);
+                internationalizedMap.add(new EntityProperty().setName(dateTimeFormatMessageKey).setValue(dateTimeFormatMessageVal).setRemarks(extractRemarksDescription(introspectedColumn)));
             }
         }
     }
 
 
-    private void processAnnotationNotNullOrNotBlank(String javaBeanNameByCamelToUnderline, String fieldNameByCamelToUnderline, SQLCommentJSON sqlCommentJSON, Field field, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn) {
+    private void processAnnotationNotNullOrNotBlank(String javaBeanNameByCamelToUnderline, String fieldNameByCamelToUnderline, RemarksJSON RemarksJSON, Field field, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn) {
         boolean isNullable = introspectedColumn.isNullable();
         if (isNullable) {
             return;
@@ -428,22 +429,22 @@ public class ComodinCommentGenerator implements CommentGenerator {
 
         if (Date.class.getTypeName().equals(field.getType().getFullyQualifiedName())) {
             field.addAnnotation("@NotNull(message = \"{" + notNullMessageKey + "}\", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})");
-            internationalizedMap.put(notNullMessageKey, notNullMessageVal);
+            internationalizedMap.add(new EntityProperty().setName(notNullMessageKey).setValue(notNullMessageVal).setRemarks(extractRemarksDescription(introspectedColumn)));
         } else if (Integer.class.getTypeName().equals(field.getType().getFullyQualifiedName())) {
             field.addAnnotation("@NotNull(message = \"{" + notNullMessageKey + "}\", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})");
-            internationalizedMap.put(notNullMessageKey, notNullMessageVal);
+            internationalizedMap.add(new EntityProperty().setName(notNullMessageKey).setValue(notNullMessageVal).setRemarks(extractRemarksDescription(introspectedColumn)));
         } else if (Long.class.getTypeName().equals(field.getType().getFullyQualifiedName())) {
             field.addAnnotation("@NotNull(message = \"{" + notNullMessageKey + "}\", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})");
-            internationalizedMap.put(notNullMessageKey, notNullMessageVal);
+            internationalizedMap.add(new EntityProperty().setName(notNullMessageKey).setValue(notNullMessageVal).setRemarks(extractRemarksDescription(introspectedColumn)));
         } else if (String.class.getTypeName().equals(field.getType().getFullyQualifiedName())) {
             field.addAnnotation("@NotBlank(message = \"{" + notBlankMessageKey + "}\", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})");
-            internationalizedMap.put(notBlankMessageKey, notBlankMessageVal);
+            internationalizedMap.add(new EntityProperty().setName(notBlankMessageKey).setValue(notBlankMessageVal).setRemarks(extractRemarksDescription(introspectedColumn)));
         }
     }
 
-    private void processAnnotationLengthOrValidLength(String javaBeanNameByCamelToUnderline, String fieldNameByCamelToUnderline, SQLCommentJSON sqlCommentJSON, Field field, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn) {
-        Integer lengthMin = sqlCommentJSON != null && sqlCommentJSON.getMin() != null ? sqlCommentJSON.getMin() : null;
-        Integer lengthMax = sqlCommentJSON != null && sqlCommentJSON.getMax() != null ? sqlCommentJSON.getMax() : introspectedColumn.getLength();
+    private void processAnnotationLengthOrValidLength(String javaBeanNameByCamelToUnderline, String fieldNameByCamelToUnderline, RemarksJSON RemarksJSON, Field field, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn) {
+        Integer lengthMin = RemarksJSON != null && RemarksJSON.getMin() != null ? RemarksJSON.getMin() : null;
+        Integer lengthMax = RemarksJSON != null && RemarksJSON.getMax() != null ? RemarksJSON.getMax() : introspectedColumn.getLength();
 
         String validLengthMessageKey = String.format("%s_%s_Length", javaBeanNameByCamelToUnderline, fieldNameByCamelToUnderline).toUpperCase();
         String validLengthMessageVal = "data length must be between {min} and {max} bit.";
@@ -453,18 +454,32 @@ public class ComodinCommentGenerator implements CommentGenerator {
 
         if (Integer.class.getTypeName().equals(field.getType().getFullyQualifiedName())) {
             field.addAnnotation("@ValidLength(" + (lengthMin != null ? "min = " + lengthMin + ", " : "") + "max = " + lengthMax + ", message = \"{" + validLengthMessageKey + "}\", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})");
-            internationalizedMap.put(validLengthMessageKey, validLengthMessageVal);
+            internationalizedMap.add(new EntityProperty().setName(validLengthMessageKey).setValue(validLengthMessageVal).setRemarks(extractRemarksDescription(introspectedColumn)));
         } else if (Long.class.getTypeName().equals(field.getType().getFullyQualifiedName())) {
             field.addAnnotation("@ValidLength(" + (lengthMin != null ? "min = " + lengthMin + ", " : "") + "max = " + lengthMax + ", message = \"{" + validLengthMessageKey + "}\", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})");
-            internationalizedMap.put(validLengthMessageKey, validLengthMessageVal);
+            internationalizedMap.add(new EntityProperty().setName(validLengthMessageKey).setValue(validLengthMessageVal).setRemarks(extractRemarksDescription(introspectedColumn)));
         } else if (String.class.getTypeName().equals(field.getType().getFullyQualifiedName())) {
             field.addAnnotation("@Length(" + (lengthMin != null ? "min = " + lengthMin + ", " : "") + "max = " + lengthMax + ", message = \"{" + lengthMessageKey + "}\", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})");
-            internationalizedMap.put(lengthMessageKey, lengthMessageVal);
+            internationalizedMap.add(new EntityProperty().setName(lengthMessageKey).setValue(lengthMessageVal).setRemarks(extractRemarksDescription(introspectedColumn)));
         }
     }
 
 
-    private SQLCommentJSON extractSQLCommentJSON(String introspectedColumnRemarks) {
+    private String extractRemarksDescription(IntrospectedColumn introspectedColumn) {
+        if (introspectedColumn == null || "".equals(introspectedColumn.getRemarks().trim())) {
+            return "";
+        }
+
+        int indexOfPrefix = introspectedColumn.getRemarks().indexOf("{");
+        if (indexOfPrefix < 0) {
+            return introspectedColumn.getRemarks();
+        } else {
+            return introspectedColumn.getRemarks().substring(0, indexOfPrefix);
+        }
+    }
+
+    private RemarksJSON extractRemarksJSON(IntrospectedColumn introspectedColumn) {
+        String introspectedColumnRemarks = introspectedColumn.getRemarks();
         if (introspectedColumnRemarks == null || "".equals(introspectedColumnRemarks.trim())) {
             return null;
         }
@@ -474,10 +489,10 @@ public class ComodinCommentGenerator implements CommentGenerator {
             return null;
         }
         String extractSQLCommentJSONStr = introspectedColumnRemarks.substring(introspectedColumnRemarks.indexOf("{"), (introspectedColumnRemarks.indexOf("}") + 1));
-        return JSON.parseObject(extractSQLCommentJSONStr, SQLCommentJSON.class);
+        return JSON.parseObject(extractSQLCommentJSONStr, RemarksJSON.class);
     }
 
-    public static Map<String, String> getInternationalizedMap() {
+    public static Set<EntityProperty> getInternationalizedMap() {
         return internationalizedMap;
     }
 

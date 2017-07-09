@@ -17,7 +17,7 @@ import java.util.List;
  * @param <VO> VO,即
  */
 @SuppressWarnings({"UnusedReturnValue", "unused"})
-public interface IBaseService<T extends Serializable, VO extends BaseVo> {
+public interface IBaseService<T extends Serializable, VO extends BaseVo<T>> {
 
     /**
      * <pre>

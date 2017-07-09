@@ -14,6 +14,12 @@ public class EntityProperty {
     public EntityProperty() {
     }
 
+    public EntityProperty(String name, String value, String remarks) {
+        this.name = name;
+        this.value = value;
+        this.remarks = remarks;
+    }
+
     public EntityProperty(String name, String value, EntityPropertyType type, String remarks) {
         this.name = name;
         this.value = value;

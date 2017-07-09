@@ -19,4 +19,8 @@ public class BaseConstants {
     public static final String GLOBAL_I18N_CRUD_UPDATE_SUCCESS = "global.Controller.Update.Success";
     public static final String GLOBAL_I18N_CRUD_GET_ERROR = "global.Controller.Get.Error";
     public static final String GLOBAL_I18N_CRUD_UPLOAD_ERROR_NOTBLANK = "global.Controller.Upload.NotBlank";
+
+    public static final String LANGUAGE_EN_US = "en_US";
+    public static final String LANGUAGE_ES_MX = "es_MX";
+    public static final String LANGUAGE_ZH_CN = "zh_CN";
 }

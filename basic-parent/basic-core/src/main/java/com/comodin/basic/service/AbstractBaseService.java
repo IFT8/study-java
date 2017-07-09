@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Objects;
 
 @SuppressWarnings("unused")
-public abstract class AbstractBaseService<T extends Serializable, VO extends BaseVo> implements IBaseService<T, VO> {
+public abstract class AbstractBaseService<T extends Serializable, VO extends BaseVo<T>> implements IBaseService<T, VO> {
 
     @SuppressWarnings({"SpringAutowiredFieldsWarningInspection", "WeakerAccess", "SpringJavaAutowiredMembersInspection"})
     @Autowired

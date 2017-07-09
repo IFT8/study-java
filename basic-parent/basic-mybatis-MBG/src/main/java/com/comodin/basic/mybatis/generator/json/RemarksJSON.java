@@ -1,8 +1,8 @@
-package com.comodin.basic.mybatis.generator.plugins;
+package com.comodin.basic.mybatis.generator.json;
 
 import java.util.Set;
 
-public class SQLCommentJSON {
+public class RemarksJSON {
     private Integer min;
     private Integer max;
     private String pattern;
@@ -13,7 +13,7 @@ public class SQLCommentJSON {
         return min;
     }
 
-    public SQLCommentJSON setMin(Integer min) {
+    public RemarksJSON setMin(Integer min) {
         this.min = min;
         return this;
     }
@@ -22,7 +22,7 @@ public class SQLCommentJSON {
         return max;
     }
 
-    public SQLCommentJSON setMax(Integer max) {
+    public RemarksJSON setMax(Integer max) {
         this.max = max;
         return this;
     }
@@ -31,7 +31,7 @@ public class SQLCommentJSON {
         return (pattern == null) ? null : pattern.trim();
     }
 
-    public SQLCommentJSON setPattern(String pattern) {
+    public RemarksJSON setPattern(String pattern) {
         this.pattern = (pattern == null) ? null : pattern.trim();
         return this;
     }
@@ -40,7 +40,7 @@ public class SQLCommentJSON {
         return isEmail;
     }
 
-    public SQLCommentJSON setEmail(Boolean email) {
+    public RemarksJSON setEmail(Boolean email) {
         isEmail = email;
         return this;
     }
@@ -49,7 +49,7 @@ public class SQLCommentJSON {
         return dataList;
     }
 
-    public SQLCommentJSON setDataList(Set<String> dataList) {
+    public RemarksJSON setDataList(Set<String> dataList) {
         this.dataList = dataList;
         return this;
     }

@@ -1,6 +1,7 @@
 package com.comodin.basic.mybatis.generator.plugins;
 
 import com.comodin.basic.util.freemarker.Entity;
+import com.comodin.basic.util.freemarker.EntityProperty;
 import com.comodin.basic.util.freemarker.EntityType;
 import com.comodin.basic.util.freemarker.FreeMarkerUtils;
 import org.mybatis.generator.api.IntrospectedColumn;
@@ -155,6 +156,7 @@ public class ComodinPlugin extends PluginAdapter {
         generateApplicationConstantFile(introspectedTable);
         generateApplicationServiceInterfaceFile(introspectedTable);
         generateApplicationServiceImplementsFile(introspectedTable);
+        generateApplicationControllerFile(introspectedTable);
     }
 
     /**
@@ -363,11 +365,11 @@ public class ComodinPlugin extends PluginAdapter {
         }
         File outFile = new File(outFileRootDir, String.format("%s%s", outFileName, outFileExtensionName));
 
-        Map<String, Map<String, String>> dataModel = new HashMap<>();
+        Map<String, Set<EntityProperty>> dataModel = new HashMap<>();
         dataModel.put("dataModel", ComodinCommentGenerator.getInternationalizedMap());
 
         FreeMarkerUtils freeMarkerUtils = FreeMarkerUtils.getInstance("/template");
-        freeMarkerUtils.crateFile(dataModel, "freemarker-template-i18n.ftl", outFile.getPath());
+        freeMarkerUtils.crateFile(dataModel, "freemarker-template-java-properties.ftl", outFile.getPath());
     }
 
     private void generateApplicationConstantFile(IntrospectedTable introspectedTable) {
@@ -386,7 +388,7 @@ public class ComodinPlugin extends PluginAdapter {
         entity.setPackageName("com.comodin.fleet.constant");
         entity.setClassName(outFileName);
         entity.setGeneratedConstructors(false);
-        entity.setStaticPropertyList(ComodinCommentGenerator.getApplicationConstantSet());
+        entity.setStaticPropertySet(ComodinCommentGenerator.getApplicationConstantSet());
         dataModel.put("dataModel", entity);
 
         FreeMarkerUtils freeMarkerUtils = FreeMarkerUtils.getInstance("/template");
@@ -440,6 +442,7 @@ public class ComodinPlugin extends PluginAdapter {
         importPackageSet.add("com.comodin.fleet.service.ICrewBeanService");
         importPackageSet.add("org.springframework.stereotype.Service");
 
+
         Map<String, Entity> dataModel = new HashMap<>();
         Entity entity = new Entity(EntityType.Class);
         entity.setPackageName("com.comodin.fleet.service.impl");
@@ -448,6 +451,39 @@ public class ComodinPlugin extends PluginAdapter {
         entity.setClassAnnotationSet(new HashSet<String>(Collections.singletonList("@Service")));
         entity.setSuperClass("AbstractBaseService<CrewBean, BaseVo<CrewBean>>");
         entity.setImplementsInterfaceClassSet(new HashSet<String>(Collections.singletonList("ICrewBeanService")));
+        dataModel.put("dataModel", entity);
+
+        FreeMarkerUtils freeMarkerUtils = FreeMarkerUtils.getInstance("/template");
+        freeMarkerUtils.crateFile(dataModel, "freemarker-template-java.ftl", outFile.getPath());
+    }
+
+    private void generateApplicationControllerFile(IntrospectedTable introspectedTable) {
+
+        String javaBeanName = introspectedTable.getFullyQualifiedTable().getDomainObjectName();
+
+        String outFileRootDir = "D:\\ideaProjects\\study-java\\basic-parent\\basic-mybatis-MBG\\src\\main\\java\\com\\comodin\\fleet\\controller";
+        String outFileNamePrefix = "";
+        String outFileNameSuffix = "Controller";
+        String outFileExtensionName = ".java";
+        String outFileName = String.format("%s%s%s", outFileNamePrefix, javaBeanName, outFileNameSuffix);
+        File outFile = new File(outFileRootDir, String.format("%s%s", outFileName, outFileExtensionName));
+
+        Set<String> importPackageSet = new HashSet<>();
+        importPackageSet.add("com.comodin.basic.controller.AbstractBaseController");
+        importPackageSet.add("com.comodin.basic.vo.BaseVo");
+        importPackageSet.add("com.comodin.fleet.bean.CrewBean");
+        importPackageSet.add("org.springframework.stereotype.Controller;");
+        importPackageSet.add("org.springframework.web.bind.annotation.RequestMapping");
+
+
+        Map<String, Entity> dataModel = new HashMap<>();
+        Entity entity = new Entity(EntityType.Class);
+        entity.setPackageName("com.comodin.fleet.controller");
+        entity.setClassName(outFileName);
+        entity.setImportPackageSet(importPackageSet);
+        entity.setClassAnnotationSet(new HashSet<String>(Arrays.asList("@RequestMapping(\"/crew\")", "@Controller")));
+        entity.setSuperClass("AbstractBaseController<CrewBean, BaseVo<CrewBean>>");
+        entity.setTemporaryMethodBodySet(new HashSet<>(Collections.singletonList("@Override protected String getModuleName() {return \"crew\";}")));
         dataModel.put("dataModel", entity);
 
         FreeMarkerUtils freeMarkerUtils = FreeMarkerUtils.getInstance("/template");

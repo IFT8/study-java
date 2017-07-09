@@ -92,7 +92,7 @@ public class CrewBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD, message = "{CREW_BEAN_BIRTHDAY_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD , message = "{CREW_BEAN_BIRTHDAY_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "crew_birthday")
     private Date birthday;
 
@@ -104,7 +104,7 @@ public class CrewBean implements Serializable {
      * DB defaultValue: ENABLE
      * </pre>
      */
-    @ValidAllowData(allowDataArray = {CrewBeanConstant.CREW_BEAN_STATUS_DISABLE, CrewBeanConstant.CREW_BEAN_STATUS_ENABLE}, message = "{CREW_BEAN_STATUS_ALLOW_DATA}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidAllowData(allowDataArray = {CrewBeanConstant.CREW_BEAN_STATUS_DISABLE,CrewBeanConstant.CREW_BEAN_STATUS_ENABLE}, message = "{CREW_BEAN_STATUS_ALLOW_DATA}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @NotBlank(message = "{CREW_BEAN_STATUS_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 7, message = "{CREW_BEAN_STATUS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "crew_status")
@@ -118,7 +118,7 @@ public class CrewBean implements Serializable {
      * DB defaultValue: CURRENT_TIMESTAMP
      * </pre>
      */
-    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS, message = "{CREW_BEAN_CREATE_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{CREW_BEAN_CREATE_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @NotNull(message = "{CREW_BEAN_CREATE_TIMESTAMP_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "crew_create_timestamp")
     private Date createTimestamp;
@@ -131,7 +131,7 @@ public class CrewBean implements Serializable {
      * DB defaultValue: N
      * </pre>
      */
-    @ValidAllowData(allowDataArray = {CrewBeanConstant.CREW_BEAN_DELETE_FLAG_Y, CrewBeanConstant.CREW_BEAN_DELETE_FLAG_N}, message = "{CREW_BEAN_DELETE_FLAG_ALLOW_DATA}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidAllowData(allowDataArray = {CrewBeanConstant.CREW_BEAN_DELETE_FLAG_Y,CrewBeanConstant.CREW_BEAN_DELETE_FLAG_N}, message = "{CREW_BEAN_DELETE_FLAG_ALLOW_DATA}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @NotBlank(message = "{CREW_BEAN_DELETE_FLAG_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 1, message = "{CREW_BEAN_DELETE_FLAG_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "crew_delete_flag")
