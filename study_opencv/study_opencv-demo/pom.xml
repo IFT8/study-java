@@ -28,6 +28,25 @@
             <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/opencv-320.jar</systemPath>
         </dependency>
 
+        <!--12、Logging 提供的是一个Java 的日志接口,同时兼顾轻量级和不依赖于具体的日志实现工具。-->
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+        </dependency>
+        <!--日志-->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>

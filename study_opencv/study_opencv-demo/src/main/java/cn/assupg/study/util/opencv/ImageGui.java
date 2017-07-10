@@ -70,7 +70,7 @@ public class ImageGui extends JPanel implements KeyListener {
         g.drawImage(out, 0, 0, null);
     }
 
-    public ImageGui imshow() {
+    public ImageGui imShow() {
         if (firstPaint) {
             jframe.setVisible(true);
             firstPaint = false;
