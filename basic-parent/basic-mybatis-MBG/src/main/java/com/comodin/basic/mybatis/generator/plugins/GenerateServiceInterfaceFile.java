@@ -51,7 +51,7 @@ public class GenerateServiceInterfaceFile {
         });
         dataModel.put("dataModel", entity);
 
-        FreeMarkerUtils freeMarkerUtils = FreeMarkerUtils.getInstance("/template");
+        FreeMarkerUtils freeMarkerUtils = FreeMarkerUtils.getInstance("/template/freemarker");
         freeMarkerUtils.crateFile(dataModel, "freemarker-template-java.ftl", outFile.getPath());
     }
 }

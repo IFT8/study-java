@@ -180,6 +180,7 @@ public class ComodinPlugin extends PluginAdapter {
         GenerateI18nFile.generateApplicationI18nFile(topLevelClass, introspectedTable);
         GenerateServiceInterfaceFile.generateApplicationServiceInterfaceFile(topLevelClass, introspectedTable);
         GenerateServiceImplementsFile.generateApplicationServiceImplementsFile(topLevelClass, introspectedTable);
+        GenerateControllerFile.generateApplicationControllerFile(topLevelClass, introspectedTable);
     }
 
     /**

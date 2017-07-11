@@ -2,6 +2,7 @@ package com.comodin.basic.mybatis.generator.plugins;
 
 import com.alibaba.fastjson.JSON;
 import com.comodin.basic.mybatis.generator.json.RemarksJSON;
+import com.comodin.basic.util.MyStringUtils;
 import com.comodin.basic.util.freemarker.EntityProperty;
 import org.apache.commons.lang3.StringUtils;
 import org.mybatis.generator.api.IntrospectedColumn;
@@ -25,7 +26,9 @@ public class PluginsUtils {
     public static final String PACKAGE_CUSTOMIZE_VALIDATOR_BASE_VALID_GROUP = "com.comodin.basic.validation.IBaseValidGroup";
     public static final String PACKAGE_DATE_UTIL = "com.comodin.basic.util.date.DateUtil";
     public static final String PACKAGE_BASE_VO = "com.comodin.basic.vo.BaseVo";
-    public static final String PACKAGE_SPRING_SERVICE_ANNOTATION = "org.springframework.stereotype.Service";
+    public static final String PACKAGE_SPRING_ANNOTATION_SERVICE = "org.springframework.stereotype.Service";
+    public static final String PACKAGE_SPRING_ANNOTATION_CONTROLLER = "org.springframework.stereotype.Controller";
+    public static final String PACKAGE_SPRING_ANNOTATION_REQUEST_MAPPING = "org.springframework.web.bind.annotation.RequestMapping";
 
     private static String beanDir = "";
     private static String daoMappersDir = "";
@@ -52,7 +55,6 @@ public class PluginsUtils {
     private static String i18nDir = "";
     private static String i18nFileNamePrefix = "";
     private static String i18nFileNameSuffix = "";
-    private static String serviceImplementsFileDir;
 
     public static void initCfg(Context context, Properties properties) {
 
@@ -239,5 +241,25 @@ public class PluginsUtils {
 
     public static String getServiceImplementsPackage() {
         return serviceImplementsPackage;
+    }
+
+    public static String getControllerFileDir() {
+        return String.format("%s/%s", beanDir, controllerPackage.replace('.', '/'));
+    }
+
+    public static String getControllerClassName(String javaBeanName) {
+        return String.format("%s%s%s", controllerFileNamePrefix, javaBeanName, controllerFileNameSuffix);
+    }
+
+    public static String getControllerExtendsSubClass() {
+        return controllerExtendsSubClass.trim();
+    }
+
+    public static String getControllerPackage() {
+        return (controllerPackage == null) ? null : controllerPackage.trim();
+    }
+
+    public static String getControllerRequestMappingModuleName(String javaBeanName) {
+        return MyStringUtils.toLowerCaseFirstOne(javaBeanName.replace("Bean", ""));
     }
 }

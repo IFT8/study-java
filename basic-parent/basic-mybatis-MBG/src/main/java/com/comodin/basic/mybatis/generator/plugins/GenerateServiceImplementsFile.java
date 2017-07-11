@@ -36,7 +36,7 @@ public class GenerateServiceImplementsFile {
         //importPackageSet.add("com.comodin.fleet.service.ICrewBeanService");
 
         importPackageSet.add(PluginsUtils.PACKAGE_BASE_VO);
-        importPackageSet.add(PluginsUtils.PACKAGE_SPRING_SERVICE_ANNOTATION);
+        importPackageSet.add(PluginsUtils.PACKAGE_SPRING_ANNOTATION_SERVICE);
         FullyQualifiedJavaType entityType = new FullyQualifiedJavaType(introspectedTable.getBaseRecordType());
         importPackageSet.add(entityType.getFullyQualifiedName());
         importPackageSet.add(PluginsUtils.getServiceImplementsExtendsSubClass());
