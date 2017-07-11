@@ -1,4 +1,4 @@
-package com.example;
+package cn.assupg.study;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class SpringbootMaven151ApplicationTests {
+public class AppTests {
 
 	@Test
 	public void contextLoads() {
