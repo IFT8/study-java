@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.comodin.fleet.dao.CrewBeanMapper">
+  <resultMap id="BaseResultMap" type="com.comodin.fleet.bean.CrewBean">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="crew_id" jdbcType="BIGINT" property="id" />
+    <result column="crew_internal_id" jdbcType="VARCHAR" property="internalId" />
+    <result column="crew_username" jdbcType="VARCHAR" property="username" />
+    <result column="crew_branch_id" jdbcType="BIGINT" property="branchId" />
+    <result column="crew_email" jdbcType="VARCHAR" property="email" />
+    <result column="crew_birthday" jdbcType="DATE" property="birthday" />
+    <result column="crew_status" jdbcType="CHAR" property="status" />
+    <result column="crew_create_timestamp" jdbcType="TIMESTAMP" property="createTimestamp" />
+    <result column="crew_delete_flag" jdbcType="CHAR" property="deleteFlag" />
+  </resultMap>
+</mapper>

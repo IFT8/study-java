@@ -13,6 +13,7 @@ import ${importPackage};
 ${classAnnotation}
     </#list>
 </#if>
+
 <#if dataModel.classType == "Class">
 public class ${dataModel.className} <#if dataModel.superClass?has_content>extends ${dataModel.superClass}</#if> <#if dataModel.implementsInterfaceClassSet?has_content>implements <#list dataModel.implementsInterfaceClassSet as implementsInterfaceClass>${implementsInterfaceClass}<#if implementsInterfaceClass_has_next>,</#if></#list> </#if>{
 <#else>
