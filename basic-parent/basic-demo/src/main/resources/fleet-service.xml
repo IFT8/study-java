@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <import resource="classpath:spring-mybatis.xml"/>
+
+    <!-- 打开Spring的Annotation支持 -->
+    <context:annotation-config/>
+    <context:component-scan base-package="com.comodin.fleet.service"><!-- 扫描注解，除去web层注解，web层注解在mvc配置中扫描 -->
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+        <context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+    </context:component-scan>
+
+    <!-- 配置使Spring采用CGLIB代理 -->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <!-- 配置Spring的事务管理器
+        配置 声明式事务 通过AOP来进行事务管理的 设置pointCut表示哪些方法要加入事务处理 通过advisor来确定具体要加入事务控制的方法
+        拦截器方式配置事务，配置哪些方法要加入事务控制
+                        propagation：    指定事务定义中使用的传播
+                                            REQUIRED：支持当前事务，如果当前没有事务，就新建一个事务。这是最常见的选择。  SUPPORTS：支持当前事务，如果当前没有事务，就以非事务方式执行。
+                                            MANDATORY：支持当前事务，如果当前没有事务，就抛出异常。                    REQUIRES_NEW：新建事务，如果当前存在事务，把当前事务挂起。
+                                            NOT_SUPPORTED：以非事务方式执行操作，如果当前存在事务，就把当前事务挂起。     NEVER：以非事务方式执行，如果当前存在事务，则抛出异常。
+                                            NESTED：支持当前事务，如果当前事务存在，则执行一个嵌套事务，如果当前没有事务，就新建一个事务。
+                        isolation：      设定事务的隔离级别
+                        timeout：        指定事务的超市（秒）100
+                        readOnly：       指定事务的超时
+                        noRollbackFor：  目标方法可抛出的异常所构成的数组，但通知仍会提交事务java.lang.RuntimeException
+                        rollbackFor：    异常所构成的数组，如果目标方法抛出了这些异常，通知就会回滚事务-->
+    <bean id="aopTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <constructor-arg name="dataSource" ref="dataSourceMaster"/>
+    </bean>
+    <aop:config>
+        <aop:pointcut id="aopTransactionPointcut" expression="(execution(* com.comodin.fleet.service.impl.*.*(..))) or (execution(* com.comodin.basic.service.*.*(..)))"/>
+        <aop:advisor advice-ref="aopTransactionAdvice" pointcut-ref="aopTransactionPointcut"/>
+    </aop:config>
+    <tx:advice id="aopTransactionAdvice" transaction-manager="aopTransactionManager">
+        <tx:attributes>
+            <tx:method name="add*" propagation="REQUIRED"/><!-- 以下方法都是可能设计修改的方法，就无法设置为只读 -->
+            <tx:method name="edit*" propagation="REQUIRED"/>
+            <tx:method name="remove*" propagation="REQUIRED"/>
+            <tx:method name="insert*" propagation="REQUIRED"/>
+            <tx:method name="update*" propagation="REQUIRED"/>
+            <tx:method name="delete*" propagation="REQUIRED"/>
+            <tx:method name="save*" propagation="REQUIRED"/>
+            <tx:method name="modify*" propagation="REQUIRED"/>
+            <tx:method name="cancel*" propagation="REQUIRED"/>
+            <tx:method name="batch*" propagation="REQUIRED"/>
+            <tx:method name="upload*" propagation="REQUIRED"/>
+            <tx:method name="generate*" propagation="REQUIRED"/>
+            <tx:method name="operate*" propagation="REQUIRED"/>
+            <tx:method name="login*" propagation="REQUIRED"/>
+            <tx:method name="userLogout" propagation="REQUIRED"/>
+            <tx:method name="upgradeFile" propagation="REQUIRED"/>
+            <tx:method name="*" propagation="NOT_SUPPORTED" read-only="true"/>
+        </tx:attributes>
+    </tx:advice>
+
+</beans>

@@ -16,7 +16,6 @@ import java.util.Objects;
 @SuppressWarnings("unused")
 public abstract class AbstractBaseService<T extends Serializable, VO extends BaseVo<T>> implements IBaseService<T, VO> {
 
-    @SuppressWarnings({"SpringAutowiredFieldsWarningInspection", "WeakerAccess", "SpringJavaAutowiredMembersInspection"})
     @Autowired
     protected IBaseDao<T> baseDao;
 
@@ -528,7 +527,7 @@ public abstract class AbstractBaseService<T extends Serializable, VO extends Bas
      * }
      * criteria.andEqualTo("deleteFlag", ConstantsFinalValue.DELETE_FLAG_N);
      *
-     * return mapper.selectByExampleAndRowBounds(example, new RowBounds(vo.getStart(), vo.getLength()));
+     * return baseDao.selectByExampleAndRowBounds(example, new RowBounds(vo.getStart(), vo.getLength()));
      * </pre>
      *
      * @param vo vo包含了查询参数，和必需的，分页参数。

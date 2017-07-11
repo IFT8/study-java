@@ -2,18 +2,13 @@ package com.comodin.fleet.bean;
 
 import com.comodin.basic.util.date.DateUtil;
 import com.comodin.basic.validation.IBaseValidGroup;
-import com.comodin.basic.validation.constraints.ValidAllowData;
-import com.comodin.basic.validation.constraints.ValidDateTimeFormat;
-import com.comodin.basic.validation.constraints.ValidLength;
-import com.comodin.fleet.constant.CrewBeanConstant;
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import com.comodin.basic.validation.constraints.*;
+import com.comodin.fleet.constant.*;
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.*;
+import javax.validation.constraints.*;
+import org.hibernate.validator.constraints.*;
 
 @SuppressWarnings("unused")
 @Table(name = "t_crew")

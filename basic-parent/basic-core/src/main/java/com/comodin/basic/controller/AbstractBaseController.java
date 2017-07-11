@@ -44,7 +44,6 @@ public abstract class AbstractBaseController<T extends Serializable, VO extends 
 
     protected final Log log = LogFactory.getLog(this.getClass());
 
-    @SuppressWarnings({"SpringAutowiredFieldsWarningInspection", "SpringJavaAutowiredMembersInspection", "WeakerAccess"})
     @Autowired
     protected IBaseService<T, VO> baseService;
 
