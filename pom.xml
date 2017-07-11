@@ -12,7 +12,6 @@
         <module>basic-parent/basic-demo</module>
         <module>basic-parent/basic-mybatis-MBG</module>
 
-
         <module>study_java/sp_java-Basic</module>
         <module>study_java/sp_java-Xml</module>
 
@@ -505,30 +504,30 @@
         <finalName>${project.artifactId}</finalName>
 
         <!--<resources>-->
-        <!--<resource>-->
-        <!--<directory>src/main/resources</directory>-->
-        <!--<excludes>&lt;!&ndash;资源根目录排除各环境的配置，使用单独的资源目录来指定&ndash;&gt;-->
-        <!--<exclude>*.properties</exclude>-->
-        <!--<exclude>environment/</exclude>-->
-        <!--</excludes>-->
-        <!--</resource>-->
-        <!--<resource>-->
-        <!--<directory>../fleet-core/src/main/resources/environment/${env}</directory>-->
-        <!--</resource>-->
-        <!--&lt;!&ndash;<resource>&ndash;&gt;-->
-        <!--&lt;!&ndash;<directory>src/main/resources/environment/${env}</directory>&ndash;&gt;-->
-        <!--&lt;!&ndash;</resource>&ndash;&gt;-->
-        <!--<resource>-->
-        <!--<directory>src/main/resources/environment/${env}</directory>-->
-        <!--<includes>-->
-        <!--<include>baseConfig.properties</include>-->
-        <!--</includes>-->
-        <!--</resource>-->
+            <!--<resource>-->
+                <!--<directory>src/main/resources</directory>-->
+                <!--<excludes>&lt;!&ndash;资源根目录排除各环境的配置，使用单独的资源目录来指定&ndash;&gt;-->
+                    <!--<exclude>*.properties</exclude>-->
+                    <!--<exclude>environment/</exclude>-->
+                <!--</excludes>-->
+            <!--</resource>-->
+            <!--<resource>-->
+                <!--<directory>../fleet-core/src/main/resources/environment/${env}</directory>-->
+            <!--</resource>-->
+            <!--&lt;!&ndash;<resource>&ndash;&gt;-->
+            <!--&lt;!&ndash;<directory>src/main/resources/environment/${env}</directory>&ndash;&gt;-->
+            <!--&lt;!&ndash;</resource>&ndash;&gt;-->
+            <!--<resource>-->
+                <!--<directory>src/main/resources/environment/${env}</directory>-->
+                <!--<includes>-->
+                    <!--<include>baseConfig.properties</include>-->
+                <!--</includes>-->
+            <!--</resource>-->
         <!--</resources>-->
         <!--<testResources>-->
-        <!--<testResource>-->
-        <!--<directory>src/test/resources</directory>-->
-        <!--</testResource>-->
+            <!--<testResource>-->
+                <!--<directory>src/test/resources</directory>-->
+            <!--</testResource>-->
         <!--</testResources>-->
 
         <pluginManagement>
@@ -713,7 +712,7 @@
                 <plugin><!--mybatis-generator-maven-plugin 生成mybatis映射 -->
                     <groupId>org.mybatis.generator</groupId>
                     <artifactId>mybatis-generator-maven-plugin</artifactId>
-                    <version>1.3.2</version>
+                    <version>1.3.5</version>
                     <dependencies>
                         <dependency>
                             <groupId>mysql</groupId>
@@ -725,19 +724,20 @@
                             <artifactId>mybatis-generator-core</artifactId>
                             <version>${mybatis_generator_version}</version>
                         </dependency>
-                        <dependency>
-                            <groupId>tk.mybatis</groupId>
-                            <artifactId>mapper</artifactId>
-                            <version>${mybatis_mapper_version}</version>
-                        </dependency>
                     </dependencies>
                     <configuration>
-                        <verbose>true</verbose>
+                        <!-- -overwrite (可选的) 如果指定了该参数，如果生成的java文件存在已经同名的文件，新生成的文件会覆盖原有的文件。
+                                如果没有指定该参数，如果存在同名的文件，MBG会给新生成的代码文件生成一个唯一的名字(例如： MyClass.java.1, MyClass.java.2 等等)。
+                                重要: 生成器一定会自动合并或覆盖已经生成的XML文件。-->
                         <overwrite>true</overwrite>
-                        <configurationFile>${project.basedir}/src/main/resources/generatorConfig.xml
-                        </configurationFile>
+                        <!-- -verbose (可选的)	如果指定该参数，执行过程会输出到控制台。-->
+                        <verbose>true</verbose>
+                        <!-- -forceJavaLogging (可选的)	如果指定该参数，MBG将会使用JAVA日志记录而不会使用Log4J,即使Log4J在运行时的类路径中。-->
+                        <!--<forceJavaLogging>false</forceJavaLogging>-->
+                        <configurationFile>${project.basedir}/src/main/resources/mybatis-generator/mybatisGeneratorConfig.xml</configurationFile>
                     </configuration>
                 </plugin>
+
 
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
