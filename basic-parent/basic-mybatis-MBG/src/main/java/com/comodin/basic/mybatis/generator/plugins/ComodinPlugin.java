@@ -104,7 +104,7 @@ public class ComodinPlugin extends PluginAdapter {
             this.schema = schema;
         }
 
-        PluginsUtils.initCfg(context,properties);
+        PluginsUtils.initCfg(context, properties);
     }
 
     private String getDelimiterName(String name) {
@@ -177,6 +177,9 @@ public class ComodinPlugin extends PluginAdapter {
         }
 
         GenerateConstantFile.generateApplicationConstantFile(topLevelClass, introspectedTable);
+        GenerateI18nFile.generateApplicationI18nFile(topLevelClass, introspectedTable);
+        GenerateServiceInterfaceFile.generateApplicationServiceInterfaceFile(topLevelClass, introspectedTable);
+        GenerateServiceImplementsFile.generateApplicationServiceImplementsFile(topLevelClass, introspectedTable);
     }
 
     /**

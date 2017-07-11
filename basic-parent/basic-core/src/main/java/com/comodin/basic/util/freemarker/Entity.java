@@ -1,5 +1,6 @@
 package com.comodin.basic.util.freemarker;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -8,22 +9,24 @@ import java.util.Set;
 @SuppressWarnings({"UnusedReturnValue", "unused"})
 public class Entity {
     private String packageName;            // 实体所在的包名
-    private Set<String> importPackageSet;       // 导入包列表
+    private Set<String> importPackageSet = new HashSet<>();       // 导入包列表
 
     private EntityType classType;               // java文件类型，即是class 还是 接口
     private String className;                   // java文件名，也即类名
-    private Set<String> classAnnotationSet;
+    private Set<String> classAnnotationSet = new HashSet<>();
 
-    private String superClass;                  //父类
-    private Set<String> implementsInterfaceClassSet;     //需要实现的接口
+    private String superClass;                                          //父类
+    private Set<String> implementsInterfaceClassSet = new HashSet<>();     //需要实现的接口
+
+    private Set<String> interfaceSuperClassSet = new HashSet<>();     //模版生成是接口，即接口继承的接口集合
 
     private boolean generatedConstructors;               // 是否有构造函数
     private boolean generatedGetSetMethod;      // 是否有构造函数
 
-    private Set<EntityProperty> staticPropertySet;    // 类静态属性集合
-    private Set<EntityProperty> entityPropertySet;          // 属性集合
+    private Set<EntityProperty> staticPropertySet = new HashSet<>();    // 类静态属性集合
+    private Set<EntityProperty> entityPropertySet = new HashSet<>();          // 属性集合
 
-    private Set<String> temporaryMethodBodySet;
+    private Set<String> temporaryMethodBodySet = new HashSet<>();
 
     public Entity(EntityType classType) {
         this.classType = classType;
@@ -135,6 +138,15 @@ public class Entity {
 
     public Entity setTemporaryMethodBodySet(Set<String> temporaryMethodBodySet) {
         this.temporaryMethodBodySet = temporaryMethodBodySet;
+        return this;
+    }
+
+    public Set<String> getInterfaceSuperClassSet() {
+        return interfaceSuperClassSet;
+    }
+
+    public Entity setInterfaceSuperClassSet(Set<String> interfaceSuperClassSet) {
+        this.interfaceSuperClassSet = interfaceSuperClassSet;
         return this;
     }
 }

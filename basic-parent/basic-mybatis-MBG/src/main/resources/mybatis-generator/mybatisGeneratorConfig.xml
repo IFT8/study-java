@@ -278,9 +278,9 @@
             <generatedKey column="crew_id" sqlStatement="Mysql" identity="true"/>
             <columnRenamingRule searchString="crew_" replaceString=""/>
         </table>
-        <!--<table tableName="t_client" domainObjectName="ClientBean">-->
-        <!--<generatedKey column="client_id" sqlStatement="Mysql" identity="true"/>-->
-        <!--<columnRenamingRule searchString="client_" replaceString=""/>-->
-        <!--</table>-->
+        <table tableName="t_client" domainObjectName="ClientBean">
+        <generatedKey column="client_id" sqlStatement="Mysql" identity="true"/>
+        <columnRenamingRule searchString="client_" replaceString=""/>
+        </table>
     </context>
 </generatorConfiguration>

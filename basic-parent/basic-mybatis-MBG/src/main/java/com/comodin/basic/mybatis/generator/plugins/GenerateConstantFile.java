@@ -10,6 +10,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressWarnings({"WeakerAccess", "unused"})
 public class GenerateConstantFile {
 
     public static void generateApplicationConstantFile(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
@@ -17,14 +18,14 @@ public class GenerateConstantFile {
         String javaBeanName = introspectedTable.getFullyQualifiedTable().getDomainObjectName();
 
         //String outFileRootDir = "D:\\ideaProjects\\study-java\\basic-parent\\basic-mybatis-MBG\\src\\main\\java\\com\\comodin\\fleet\\constant";
-        String outFileRootDir = PluginsUtils.getConstantBeanDir();
+        String outFileRootDir = PluginsUtils.getGenerateConstantFileDir();
+        String outFileExtensionName = ".java";
 
         //String outFileNamePrefix = "";
         //String outFileNameSuffix = "Constant";
         //String outFileName = String.format("%s%s%s", outFileNamePrefix, javaBeanName, outFileNameSuffix);
         String outFileName = PluginsUtils.getConstantBeanClassName(javaBeanName);
 
-        String outFileExtensionName = ".java";
         File outFile = new File(outFileRootDir, String.format("%s%s", outFileName, outFileExtensionName));
 
         Map<String, Entity> dataModel = new HashMap<>();

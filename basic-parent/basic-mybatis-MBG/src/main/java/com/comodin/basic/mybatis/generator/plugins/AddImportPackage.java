@@ -9,23 +9,23 @@ public class AddImportPackage {
 
     public static void addModelClassComment(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
         topLevelClass.addAnnotation("@SuppressWarnings(\"unused\")");
-        if (!topLevelClass.getImportedTypes().contains(new FullyQualifiedJavaType(PluginsUtils.javaxPersistencePackage))) {
-            topLevelClass.addImportedType(PluginsUtils.javaxPersistencePackage);
+        if (!topLevelClass.getImportedTypes().contains(new FullyQualifiedJavaType(PluginsUtils.PACKAGE_JAVAX_PERSISTENCE))) {
+            topLevelClass.addImportedType(PluginsUtils.PACKAGE_JAVAX_PERSISTENCE);
         }
-        if (!topLevelClass.getImportedTypes().contains(new FullyQualifiedJavaType(PluginsUtils.javaValidationConstraintsPackage))) {
-            topLevelClass.addImportedType(PluginsUtils.javaValidationConstraintsPackage);
+        if (!topLevelClass.getImportedTypes().contains(new FullyQualifiedJavaType(PluginsUtils.PACKAGE_JAVA_VALIDATION_CONSTRAINTS))) {
+            topLevelClass.addImportedType(PluginsUtils.PACKAGE_JAVA_VALIDATION_CONSTRAINTS);
         }
-        if (!topLevelClass.getImportedTypes().contains(new FullyQualifiedJavaType(PluginsUtils.hibernateValidatorConstraintsPackage))) {
-            topLevelClass.addImportedType(PluginsUtils.hibernateValidatorConstraintsPackage);
+        if (!topLevelClass.getImportedTypes().contains(new FullyQualifiedJavaType(PluginsUtils.PACKAGE_HIBERNATE_VALIDATOR_CONSTRAINTS))) {
+            topLevelClass.addImportedType(PluginsUtils.PACKAGE_HIBERNATE_VALIDATOR_CONSTRAINTS);
         }
-        if (!topLevelClass.getImportedTypes().contains(new FullyQualifiedJavaType(PluginsUtils.customizeValidatorConstraintsPackage))) {
-            topLevelClass.addImportedType(PluginsUtils.customizeValidatorConstraintsPackage);
+        if (!topLevelClass.getImportedTypes().contains(new FullyQualifiedJavaType(PluginsUtils.PACKAGE_CUSTOMIZE_VALIDATOR_CONSTRAINTS))) {
+            topLevelClass.addImportedType(PluginsUtils.PACKAGE_CUSTOMIZE_VALIDATOR_CONSTRAINTS);
         }
-        if (!topLevelClass.getImportedTypes().contains(new FullyQualifiedJavaType(PluginsUtils.customizeValidatorBaseValidGroupPackage))) {
-            topLevelClass.addImportedType(PluginsUtils.customizeValidatorBaseValidGroupPackage);
+        if (!topLevelClass.getImportedTypes().contains(new FullyQualifiedJavaType(PluginsUtils.PACKAGE_CUSTOMIZE_VALIDATOR_BASE_VALID_GROUP))) {
+            topLevelClass.addImportedType(PluginsUtils.PACKAGE_CUSTOMIZE_VALIDATOR_BASE_VALID_GROUP);
         }
-        if (!topLevelClass.getImportedTypes().contains(new FullyQualifiedJavaType(PluginsUtils.dateUtilPackage))) {
-            topLevelClass.addImportedType(PluginsUtils.dateUtilPackage);
+        if (!topLevelClass.getImportedTypes().contains(new FullyQualifiedJavaType(PluginsUtils.PACKAGE_DATE_UTIL))) {
+            topLevelClass.addImportedType(PluginsUtils.PACKAGE_DATE_UTIL);
         }
         if (!topLevelClass.getImportedTypes().contains(new FullyQualifiedJavaType(PluginsUtils.getConstantPackage()))) {
             topLevelClass.addImportedType(PluginsUtils.getConstantPackage() + ".*");

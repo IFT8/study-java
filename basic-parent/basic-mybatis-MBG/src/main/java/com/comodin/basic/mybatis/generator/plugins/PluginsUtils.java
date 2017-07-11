@@ -18,12 +18,14 @@ public class PluginsUtils {
     private static Set<EntityProperty> entityI18nSet = new HashSet<>();
     private static Set<EntityProperty> entityConstantSet = new HashSet<>();
 
-    public static String javaxPersistencePackage = "javax.persistence.*";
-    public static String javaValidationConstraintsPackage = "javax.validation.constraints.*";
-    public static String hibernateValidatorConstraintsPackage = "org.hibernate.validator.constraints.*";
-    public static String customizeValidatorConstraintsPackage = "com.comodin.basic.validation.constraints.*";
-    public static String customizeValidatorBaseValidGroupPackage = "com.comodin.basic.validation.IBaseValidGroup";
-    public static String dateUtilPackage = "com.comodin.basic.util.date.DateUtil";
+    public static final String PACKAGE_JAVAX_PERSISTENCE = "javax.persistence.*";
+    public static final String PACKAGE_JAVA_VALIDATION_CONSTRAINTS = "javax.validation.constraints.*";
+    public static final String PACKAGE_HIBERNATE_VALIDATOR_CONSTRAINTS = "org.hibernate.validator.constraints.*";
+    public static final String PACKAGE_CUSTOMIZE_VALIDATOR_CONSTRAINTS = "com.comodin.basic.validation.constraints.*";
+    public static final String PACKAGE_CUSTOMIZE_VALIDATOR_BASE_VALID_GROUP = "com.comodin.basic.validation.IBaseValidGroup";
+    public static final String PACKAGE_DATE_UTIL = "com.comodin.basic.util.date.DateUtil";
+    public static final String PACKAGE_BASE_VO = "com.comodin.basic.vo.BaseVo";
+    public static final String PACKAGE_SPRING_SERVICE_ANNOTATION = "org.springframework.stereotype.Service";
 
     private static String beanDir = "";
     private static String daoMappersDir = "";
@@ -50,6 +52,7 @@ public class PluginsUtils {
     private static String i18nDir = "";
     private static String i18nFileNamePrefix = "";
     private static String i18nFileNameSuffix = "";
+    private static String serviceImplementsFileDir;
 
     public static void initCfg(Context context, Properties properties) {
 
@@ -161,11 +164,11 @@ public class PluginsUtils {
         }
     }
 
-    public static String getConstantBeanClassName(String domainObjectName) {
-        return String.format("%s%s%s", constantFileNamePrefix, domainObjectName, constantFileNameSuffix);
+    public static String getConstantBeanClassName(String javaBeanName) {
+        return String.format("%s%s%s", constantFileNamePrefix, javaBeanName, constantFileNameSuffix);
     }
 
-    public static String getConstantBeanDir() {
+    public static String getGenerateConstantFileDir() {
         return String.format("%s/%s", beanDir, constantPackage.replace('.', '/'));
     }
 
@@ -184,5 +187,57 @@ public class PluginsUtils {
 
     public static Set<EntityProperty> getEntityI18nSet() {
         return entityI18nSet;
+    }
+
+    public static String getGenerateI18nFileDir() {
+        if (StringUtils.isNotBlank(i18nDir)) {
+            return String.format("%s/%s", daoMappersDir, i18nDir.replace('.', '/'));
+        } else {
+            return daoMappersDir;
+        }
+    }
+
+    public static Set<String> getI18nLanguageSet() {
+        return i18nLanguageSet;
+    }
+
+    public static String getI18nFileNamePrefix() {
+        return i18nFileNamePrefix;
+    }
+
+    public static String getI18nFileNameSuffix() {
+        return i18nFileNameSuffix;
+    }
+
+    public static String getServiceInterfaceFileDir() {
+        return String.format("%s/%s", beanDir, serviceInterfacePackage.replace('.', '/'));
+    }
+
+    public static String getServiceInterfaceClassName(String javaBeanName) {
+        return String.format("%s%s%s", serviceInterfaceFileNamePrefix, javaBeanName, serviceInterfaceFileNameSuffix);
+    }
+
+    public static String getServiceInterfacePackage() {
+        return serviceInterfacePackage;
+    }
+
+    public static Set<String> getServiceInterfaceExtendsInterfaceSet() {
+        return serviceInterfaceExtendsInterfaceSet;
+    }
+
+    public static String getServiceImplementsFileDir() {
+        return String.format("%s/%s", beanDir, serviceImplementsPackage.replace('.', '/'));
+    }
+
+    public static String getServiceImplementsClassName(String javaBeanName) {
+        return String.format("%s%s%s", serviceImplementsFileNamePrefix, javaBeanName, serviceImplementsFileNameSuffix);
+    }
+
+    public static String getServiceImplementsExtendsSubClass() {
+        return serviceImplementsExtendsSubClass;
+    }
+
+    public static String getServiceImplementsPackage() {
+        return serviceImplementsPackage;
     }
 }

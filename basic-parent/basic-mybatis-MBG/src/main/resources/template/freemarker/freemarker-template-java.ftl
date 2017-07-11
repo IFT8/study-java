@@ -12,12 +12,13 @@ import ${importPackage};
     <#list dataModel.classAnnotationSet as classAnnotation>
 ${classAnnotation}
     </#list>
-</#if>
+<#else>
 
+</#if>
 <#if dataModel.classType == "Class">
 public class ${dataModel.className} <#if dataModel.superClass?has_content>extends ${dataModel.superClass}</#if> <#if dataModel.implementsInterfaceClassSet?has_content>implements <#list dataModel.implementsInterfaceClassSet as implementsInterfaceClass>${implementsInterfaceClass}<#if implementsInterfaceClass_has_next>,</#if></#list> </#if>{
 <#else>
-public interface ${dataModel.className} <#if dataModel.superClass?has_content>extends ${dataModel.superClass}</#if> <#if dataModel.implementsInterfaceClassSet?has_content>implements <#list dataModel.implementsInterfaceClassSet as implementsInterfaceClass>${implementsInterfaceClass}<#if implementsInterfaceClass_has_next>,</#if></#list> </#if>{
+public interface ${dataModel.className} <#if dataModel.interfaceSuperClassSet?has_content>extends <#list dataModel.interfaceSuperClassSet as interfaceSuperClass>${interfaceSuperClass}<#if interfaceSuperClass_has_next>,</#if></#list> </#if>{
 </#if>
 <#--********** class attribute ***********-->
 <#if dataModel.staticPropertySet?has_content >
