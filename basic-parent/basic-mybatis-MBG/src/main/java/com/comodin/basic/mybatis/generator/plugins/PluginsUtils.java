@@ -8,16 +8,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.config.Context;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Properties;
-import java.util.Set;
+import java.util.*;
 
-@SuppressWarnings("WeakerAccess")
+@SuppressWarnings({"WeakerAccess", "unused"})
 public class PluginsUtils {
 
-    private static Set<EntityProperty> entityI18nSet = new HashSet<>();
-    private static Set<EntityProperty> entityConstantSet = new HashSet<>();
+    private static Map<String, Set<EntityProperty>> entityI18nToMapByEntityBeanName = new HashMap<>();
+    private static Map<String, Set<EntityProperty>> entityConstantToMapByEntityBeanName = new HashMap<>();
 
     public static final String PACKAGE_JAVAX_PERSISTENCE = "javax.persistence.*";
     public static final String PACKAGE_JAVA_VALIDATION_CONSTRAINTS = "javax.validation.constraints.*";
@@ -175,20 +172,24 @@ public class PluginsUtils {
     }
 
     public static void setFieldI18nToEntityI18nSet(String i18nMessageKey, String i18nMessageValue, IntrospectedColumn introspectedColumn) {
-        entityI18nSet.add(new EntityProperty().setName(i18nMessageKey).setValue(i18nMessageValue).setRemarks(PluginsUtils.extractRemarksDescription(introspectedColumn)));
+        String javaBeanName = introspectedColumn.getIntrospectedTable().getFullyQualifiedTable().getDomainObjectName();
+        if (!entityI18nToMapByEntityBeanName.containsKey(javaBeanName)) {
+            entityI18nToMapByEntityBeanName.put(javaBeanName, new HashSet<>());
+        }
+        entityI18nToMapByEntityBeanName.get(javaBeanName).add(new EntityProperty().setName(i18nMessageKey).setValue(i18nMessageValue).setRemarks(PluginsUtils.extractRemarksDescription(introspectedColumn)));
     }
 
     public static String getConstantPackage() {
         return constantPackage;
     }
 
-    public static Set<EntityProperty> getEntityConstantSet() {
-        return entityConstantSet;
+    public static Map<String, Set<EntityProperty>> getEntityConstantToMapByEntityBeanName() {
+        return entityConstantToMapByEntityBeanName;
     }
 
 
-    public static Set<EntityProperty> getEntityI18nSet() {
-        return entityI18nSet;
+    public static Map<String, Set<EntityProperty>> getEntityI18nToMapByEntityBeanName() {
+        return entityI18nToMapByEntityBeanName;
     }
 
     public static String getGenerateI18nFileDir() {

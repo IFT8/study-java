@@ -9,6 +9,7 @@ import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.dom.java.Field;
 
 import java.util.Date;
+import java.util.HashSet;
 
 @SuppressWarnings({"unused", "WeakerAccess"})
 public class AddValidator {
@@ -40,6 +41,11 @@ public class AddValidator {
             return;
         }
 
+        String javaBeanName = introspectedColumn.getIntrospectedTable().getFullyQualifiedTable().getDomainObjectName();
+        if (!PluginsUtils.getEntityConstantToMapByEntityBeanName().containsKey(javaBeanName)) {
+            PluginsUtils.getEntityConstantToMapByEntityBeanName().put(javaBeanName, new HashSet<>());
+        }
+
         String validAllowDataMessageKey = String.format("%s_%s_ALLOW_DATA", javaBeanNameByCamelToUnderline, fieldNameByCamelToUnderline).toUpperCase();
         String validAllowDataMessageVal = "Only as follows {allowDataArray}.";
 
@@ -51,7 +57,8 @@ public class AddValidator {
             stringBuffer.append(constantBeanName).append(".").append(constantName).append(",");
 
             //组装，生成每个类的常量变量，以便，待会使用freemarker生成，常量文件
-            PluginsUtils.getEntityConstantSet().add(new EntityProperty().setType(EntityPropertyType.valueOf(field.getType().getShortName())).setName(constantName).setValue(data).setRemarks(introspectedColumn.getRemarks()));
+            PluginsUtils.getEntityConstantToMapByEntityBeanName().get(javaBeanName)//
+                    .add(new EntityProperty().setType(EntityPropertyType.valueOf(field.getType().getShortName())).setName(constantName).setValue(data).setRemarks(introspectedColumn.getRemarks()));
         });
         String substring = stringBuffer.substring(0, stringBuffer.length() - 1);
 

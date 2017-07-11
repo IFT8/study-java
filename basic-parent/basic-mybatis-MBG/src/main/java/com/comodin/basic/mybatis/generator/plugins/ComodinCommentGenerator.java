@@ -36,7 +36,7 @@ import org.mybatis.generator.internal.util.StringUtility;
 import java.text.MessageFormat;
 import java.util.Properties;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"WeakerAccess", "unused"})
 public class ComodinCommentGenerator implements CommentGenerator {
     //开始的分隔符，例如mysql为`，sqlServer为[
     private String beginningDelimiter = "";

@@ -44,7 +44,7 @@ import java.util.*;
  *
  * @author supeng
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({"WeakerAccess", "unused"})
 public class ComodinPlugin extends PluginAdapter {
 
     @Override

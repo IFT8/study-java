@@ -11,14 +11,20 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+@SuppressWarnings({"WeakerAccess", "unused"})
 public class GenerateI18nFile {
 
     public static void generateApplicationI18nFile(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
-        if (PluginsUtils.getEntityI18nSet().isEmpty() || PluginsUtils.getI18nLanguageSet().isEmpty()) {
+        if (PluginsUtils.getEntityI18nToMapByEntityBeanName().isEmpty() || PluginsUtils.getI18nLanguageSet().isEmpty()) {
             return;
         }
 
         String javaBeanName = introspectedTable.getFullyQualifiedTable().getDomainObjectName();
+
+        Set<EntityProperty> entityI18nSet = PluginsUtils.getEntityI18nToMapByEntityBeanName().get(javaBeanName);
+        if (entityI18nSet.isEmpty()) {
+            return;
+        }
 
         //String outFileRootDir = "D:\\ideaProjects\\study-java\\basic-parent\\basic-mybatis-MBG\\src\\main\\resources\\i18n";
         String outFileRootDir = PluginsUtils.getGenerateI18nFileDir();
@@ -37,7 +43,7 @@ public class GenerateI18nFile {
             File outFile = new File(outFileRootDir, String.format("%s%s", outFileName, outFileExtensionName));
 
             Map<String, Set<EntityProperty>> dataModel = new HashMap<>();
-            dataModel.put("dataModel", PluginsUtils.getEntityI18nSet());
+            dataModel.put("dataModel", entityI18nSet);
 
             FreeMarkerUtils freeMarkerUtils = FreeMarkerUtils.getInstance("/template/freemarker");
             freeMarkerUtils.crateFile(dataModel, "freemarker-template-java-properties.ftl", outFile.getPath());
