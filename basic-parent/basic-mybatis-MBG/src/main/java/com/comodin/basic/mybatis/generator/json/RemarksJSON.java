@@ -1,5 +1,6 @@
 package com.comodin.basic.mybatis.generator.json;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class RemarksJSON {
@@ -7,7 +8,7 @@ public class RemarksJSON {
     private Integer max;
     private String pattern;
     private Boolean isEmail;
-    private Set<String> dataList;
+    private Set<String> dataList = new HashSet<>();
 
     public Integer getMin() {
         return min;

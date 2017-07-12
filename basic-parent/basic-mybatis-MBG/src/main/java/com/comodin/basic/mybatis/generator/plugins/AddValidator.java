@@ -24,7 +24,7 @@ public class AddValidator {
         //introspectedColumn.getJavaProperty()              java 字段名      id
         //introspectedColumn.getFullyQualifiedJavaType()    java，字段，类型    java.lang.Long
 
-        RemarksJSON RemarksJSON = PluginsUtils.extractRemarksJSON(introspectedColumn);
+        RemarksJSON RemarksJSON = PluginsUtils.extractRemarksJSON(introspectedColumn.getRemarks());
         String javaBeanNameByCamelToUnderline = MyStringUtils.camelToUnderline(introspectedTable.getFullyQualifiedTable().getDomainObjectName());
         String fieldNameByCamelToUnderline = MyStringUtils.camelToUnderline(field.getName());
 

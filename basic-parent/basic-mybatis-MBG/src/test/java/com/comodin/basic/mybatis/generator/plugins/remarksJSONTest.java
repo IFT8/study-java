@@ -23,4 +23,15 @@ public class remarksJSONTest {
         System.out.println(JSON.toJSONString(RemarksJSON));
     }
 
+    @Test
+    public void test001() throws Exception {
+        String s = "1111aa【{\"dataList\":[\"test2\",\"test3\",\"test1\"],\"email\":false,\"min\":10,\"pattern\":\"yyyy-MM-dd HH:mm:ss\"}】";
+        System.out.println(PluginsUtils.extractRemarksDescription(s));
+    }
+
+    @Test
+    public void test002() throws Exception {
+        String s = "1111aa【{\"dataList\":[\"test2\",\"test3\",\"test1\"],\"email\":false,\"min\":10,\"pattern\":\"yyyy-MM-dd HH:mm:ss\"}】111";
+        System.out.println(PluginsUtils.extractRemarksJSON(s));
+    }
 }

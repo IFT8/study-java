@@ -19,7 +19,7 @@ public class GenerateConstantFile {
 
         String javaBeanName = introspectedTable.getFullyQualifiedTable().getDomainObjectName();
         Set<EntityProperty> entityConstantSet = PluginsUtils.getEntityConstantToMapByEntityBeanName().get(javaBeanName);
-        if (entityConstantSet.isEmpty()) {
+        if (entityConstantSet == null || entityConstantSet.isEmpty()) {
             return;
         }
 

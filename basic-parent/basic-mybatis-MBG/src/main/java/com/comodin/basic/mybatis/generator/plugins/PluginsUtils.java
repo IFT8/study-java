@@ -136,30 +136,29 @@ public class PluginsUtils {
         }
     }
 
-    public static RemarksJSON extractRemarksJSON(IntrospectedColumn introspectedColumn) {
-        String introspectedColumnRemarks = introspectedColumn.getRemarks();
-        if (introspectedColumnRemarks == null || "".equals(introspectedColumnRemarks.trim())) {
+    public static RemarksJSON extractRemarksJSON(String columnRemarks) {
+        if (columnRemarks == null || "".equals(columnRemarks.trim())) {
             return null;
         }
-        int indexOfPrefix = introspectedColumnRemarks.indexOf("{");
-        int indexOfSuffix = introspectedColumnRemarks.indexOf("}");
+        int indexOfPrefix = columnRemarks.indexOf("【{");
+        int indexOfSuffix = columnRemarks.indexOf("}】");
         if (indexOfPrefix < 0 || indexOfSuffix < 0) {
             return null;
         }
-        String extractSQLCommentJSONStr = introspectedColumnRemarks.substring(introspectedColumnRemarks.indexOf("{"), (introspectedColumnRemarks.indexOf("}") + 1));
+        String extractSQLCommentJSONStr = columnRemarks.substring((columnRemarks.indexOf("【{") +1), (columnRemarks.indexOf("}】") + 1));
         return JSON.parseObject(extractSQLCommentJSONStr, RemarksJSON.class);
     }
 
-    public static String extractRemarksDescription(IntrospectedColumn introspectedColumn) {
-        if (introspectedColumn == null || "".equals(introspectedColumn.getRemarks().trim())) {
+    public static String extractRemarksDescription(String columnRemarks) {
+        if (columnRemarks == null || "".equals(columnRemarks.trim())) {
             return "";
         }
 
-        int indexOfPrefix = introspectedColumn.getRemarks().indexOf("{");
+        int indexOfPrefix = columnRemarks.indexOf("【{");
         if (indexOfPrefix < 0) {
-            return introspectedColumn.getRemarks();
+            return columnRemarks;
         } else {
-            return introspectedColumn.getRemarks().substring(0, indexOfPrefix);
+            return columnRemarks.substring(0, indexOfPrefix);
         }
     }
 
@@ -176,7 +175,7 @@ public class PluginsUtils {
         if (!entityI18nToMapByEntityBeanName.containsKey(javaBeanName)) {
             entityI18nToMapByEntityBeanName.put(javaBeanName, new HashSet<>());
         }
-        entityI18nToMapByEntityBeanName.get(javaBeanName).add(new EntityProperty().setName(i18nMessageKey).setValue(i18nMessageValue).setRemarks(PluginsUtils.extractRemarksDescription(introspectedColumn)));
+        entityI18nToMapByEntityBeanName.get(javaBeanName).add(new EntityProperty().setName(i18nMessageKey).setValue(i18nMessageValue).setRemarks(PluginsUtils.extractRemarksDescription(introspectedColumn.getRemarks())));
     }
 
     public static String getConstantPackage() {
