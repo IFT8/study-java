@@ -2,13 +2,15 @@ package com.comodin.fleet.bean;
 
 import com.comodin.basic.util.date.DateUtil;
 import com.comodin.basic.validation.IBaseValidGroup;
-import com.comodin.basic.validation.constraints.*;
-import com.comodin.fleet.constant.*;
+import com.comodin.basic.validation.constraints.ValidDateTimeFormat;
+import com.comodin.basic.validation.constraints.ValidLength;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.*;
-import javax.validation.constraints.*;
-import org.hibernate.validator.constraints.*;
 
 @SuppressWarnings("unused")
 @Table(name = "t_task")
@@ -21,6 +23,8 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @NotNull(message = "{TASK_BEAN_PK_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidLength(max = 13, message = "{TASK_BEAN_PK_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Id
     @Column(name = "task_pk_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,6 +38,8 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @NotNull(message = "{TASK_BEAN_TASK_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidLength(max = 13, message = "{TASK_BEAN_TASK_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_id")
     private Long taskId;
 
@@ -45,6 +51,8 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @NotBlank(message = "{TASK_BEAN_SERVICE_DATE_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 10, message = "{TASK_BEAN_SERVICE_DATE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_service_date")
     private String serviceDate;
 
@@ -56,6 +64,8 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @NotBlank(message = "{TASK_BEAN_SERVICE_TYPE_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 20, message = "{TASK_BEAN_SERVICE_TYPE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_service_type")
     private String serviceType;
 
@@ -67,6 +77,8 @@ public class TaskBean implements Serializable {
      * DB defaultValue: NOT_COUNT
      * </pre>
      */
+    @NotBlank(message = "{TASK_BEAN_WHETHER_SITE_COUNTING_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 20, message = "{TASK_BEAN_WHETHER_SITE_COUNTING_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_whether_site_counting")
     private String whetherSiteCounting;
 
@@ -78,6 +90,8 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @NotBlank(message = "{TASK_BEAN_ROUTE_ID_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 10, message = "{TASK_BEAN_ROUTE_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_route_id")
     private String routeId;
 
@@ -89,6 +103,8 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @NotNull(message = "{TASK_BEAN_ROUTE_ORDER_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidLength(max = 10, message = "{TASK_BEAN_ROUTE_ORDER_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_route_order")
     private Integer routeOrder;
 
@@ -100,6 +116,8 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @NotBlank(message = "{TASK_BEAN_STATUS_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 25, message = "{TASK_BEAN_STATUS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_status")
     private String status;
 
@@ -111,6 +129,8 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @NotBlank(message = "{TASK_BEAN_AVAILABILITY_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 7, message = "{TASK_BEAN_AVAILABILITY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_availability")
     private String availability;
 
@@ -122,6 +142,8 @@ public class TaskBean implements Serializable {
      * DB defaultValue: N
      * </pre>
      */
+    @NotBlank(message = "{TASK_BEAN_WHETHER_COMPLETED_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 25, message = "{TASK_BEAN_WHETHER_COMPLETED_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_whether_completed")
     private String whetherCompleted;
 
@@ -133,6 +155,8 @@ public class TaskBean implements Serializable {
      * DB defaultValue: N
      * </pre>
      */
+    @NotBlank(message = "{TASK_BEAN_WHETHER_INTER_CHANGED_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 1, message = "{TASK_BEAN_WHETHER_INTER_CHANGED_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_whether_inter_changed")
     private String whetherInterChanged;
 
@@ -144,6 +168,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 15, message = "{TASK_BEAN_INTER_CHANGE_LATITUDE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_inter_change_latitude")
     private String interChangeLatitude;
 
@@ -155,6 +180,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 15, message = "{TASK_BEAN_INTER_CHANGE_LONGITUDE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_inter_change_longitude")
     private String interChangeLongitude;
 
@@ -166,6 +192,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{TASK_BEAN_APP_VERSION_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_app_version")
     private Date appVersion;
 
@@ -177,6 +204,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{TASK_BEAN_ARRIVAL_TIME_AUTO_CALC_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_arrival_time_auto_calc")
     private Date arrivalTimeAutoCalc;
 
@@ -188,6 +216,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{TASK_BEAN_ARRIVAL_TIME_MANUAL_INPUT_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_arrival_time_manual_input")
     private Date arrivalTimeManualInput;
 
@@ -199,6 +228,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{TASK_BEAN_PROCESS_START_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_process_start_timestamp")
     private Date processStartTimestamp;
 
@@ -210,6 +240,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{TASK_BEAN_PROCESS_END_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_process_end_timestamp")
     private Date processEndTimestamp;
 
@@ -221,6 +252,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 10, message = "{TASK_BEAN_PROCESS_TIMELINESS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_process_timeliness")
     private String processTimeliness;
 
@@ -232,6 +264,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{TASK_BEAN_PARTIAL_ARRIVAL_TIME_AUTO_CALC_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_partial_arrival_time_auto_calc")
     private Date partialArrivalTimeAutoCalc;
 
@@ -243,6 +276,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{TASK_BEAN_PARTIAL_ARRIVAL_TIME_MANUAL_INPUT_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_partial_arrival_time_manual_input")
     private Date partialArrivalTimeManualInput;
 
@@ -254,6 +288,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{TASK_BEAN_PARTIAL_PROCESS_START_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_partial_process_start_timestamp")
     private Date partialProcessStartTimestamp;
 
@@ -265,6 +300,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{TASK_BEAN_PARTIAL_PROCESS_END_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_partial_process_end_timestamp")
     private Date partialProcessEndTimestamp;
 
@@ -276,6 +312,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 10, message = "{TASK_BEAN_PARTIAL_PROCESS_TIMELINESS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_partial_process_timeliness")
     private String partialProcessTimeliness;
 
@@ -287,6 +324,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 10, message = "{TASK_BEAN_CANCEL_RESPONSIBLE_PARTY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_cancel_responsible_party")
     private String cancelResponsibleParty;
 
@@ -298,6 +336,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 20, message = "{TASK_BEAN_CANCEL_SINGLE_RECEIPT_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_cancel_single_receipt")
     private String cancelSingleReceipt;
 
@@ -309,6 +348,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 40, message = "{TASK_BEAN_CANCEL_REASON_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_cancel_reason")
     private String cancelReason;
 
@@ -320,6 +360,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 20, message = "{TASK_BEAN_CANCEL_MONEY_BACK_PARTY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_cancel_money_back_party")
     private String cancelMoneyBackParty;
 
@@ -331,6 +372,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 100, message = "{TASK_BEAN_CANCEL_COMMENT_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_cancel_comment")
     private String cancelComment;
 
@@ -342,6 +384,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @ValidLength(max = 13, message = "{TASK_BEAN_SENDER_CLIENT_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_sender_client_id")
     private Long senderClientId;
 
@@ -353,6 +396,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 15, message = "{TASK_BEAN_SENDER_CLIENT_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_sender_client_internal_id")
     private String senderClientInternalId;
 
@@ -364,6 +408,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 100, message = "{TASK_BEAN_SENDER_CLIENT_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_sender_client_name")
     private String senderClientName;
 
@@ -375,6 +420,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @ValidLength(max = 13, message = "{TASK_BEAN_SENDER_BRANCH_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_sender_branch_id")
     private Long senderBranchId;
 
@@ -386,6 +432,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 15, message = "{TASK_BEAN_SENDER_BRANCH_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_sender_branch_internal_id")
     private String senderBranchInternalId;
 
@@ -397,6 +444,8 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @NotBlank(message = "{TASK_BEAN_SENDER_BRANCH_NAME_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 100, message = "{TASK_BEAN_SENDER_BRANCH_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_sender_branch_name")
     private String senderBranchName;
 
@@ -408,6 +457,8 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @NotBlank(message = "{TASK_BEAN_SENDER_TIME_WINDOW_START_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 8, message = "{TASK_BEAN_SENDER_TIME_WINDOW_START_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_sender_time_window_start")
     private String senderTimeWindowStart;
 
@@ -419,6 +470,8 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @NotBlank(message = "{TASK_BEAN_SENDER_TIME_WINDOW_END_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 8, message = "{TASK_BEAN_SENDER_TIME_WINDOW_END_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_sender_time_window_end")
     private String senderTimeWindowEnd;
 
@@ -430,6 +483,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @ValidLength(max = 10, message = "{TASK_BEAN_SENDER_TIME_WINDOW_DURATION_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_sender_time_window_duration")
     private Integer senderTimeWindowDuration;
 
@@ -441,6 +495,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 15, message = "{TASK_BEAN_SENDER_BRANCH_PHONE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_sender_branch_phone")
     private String senderBranchPhone;
 
@@ -452,6 +507,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 150, message = "{TASK_BEAN_SENDER_BRANCH_ADDRESS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_sender_branch_address")
     private String senderBranchAddress;
 
@@ -463,6 +519,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 15, message = "{TASK_BEAN_SENDER_BRANCH_LATITUDE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_sender_branch_latitude")
     private String senderBranchLatitude;
 
@@ -474,6 +531,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 15, message = "{TASK_BEAN_SENDER_BRANCH_LONGITUDE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_sender_branch_longitude")
     private String senderBranchLongitude;
 
@@ -485,6 +543,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @ValidLength(max = 13, message = "{TASK_BEAN_RECEIVER_CLIENT_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_receiver_client_id")
     private Long receiverClientId;
 
@@ -496,6 +555,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 25, message = "{TASK_BEAN_RECEIVER_CLIENT_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_receiver_client_internal_id")
     private String receiverClientInternalId;
 
@@ -507,6 +567,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 100, message = "{TASK_BEAN_RECEIVER_CLIENT_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_receiver_client_name")
     private String receiverClientName;
 
@@ -518,6 +579,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @ValidLength(max = 13, message = "{TASK_BEAN_RECEIVER_BRANCH_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_receiver_branch_id")
     private Long receiverBranchId;
 
@@ -529,6 +591,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 25, message = "{TASK_BEAN_RECEIVER_BRANCH_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_receiver_branch_internal_id")
     private String receiverBranchInternalId;
 
@@ -540,6 +603,8 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @NotBlank(message = "{TASK_BEAN_RECEIVER_BRANCH_NAME_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 100, message = "{TASK_BEAN_RECEIVER_BRANCH_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_receiver_branch_name")
     private String receiverBranchName;
 
@@ -551,6 +616,8 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @NotBlank(message = "{TASK_BEAN_RECEIVER_TIME_WINDOW_START_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 8, message = "{TASK_BEAN_RECEIVER_TIME_WINDOW_START_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_receiver_time_window_start")
     private String receiverTimeWindowStart;
 
@@ -562,6 +629,8 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @NotBlank(message = "{TASK_BEAN_RECEIVER_TIME_WINDOW_END_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 8, message = "{TASK_BEAN_RECEIVER_TIME_WINDOW_END_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_receiver_time_window_end")
     private String receiverTimeWindowEnd;
 
@@ -573,6 +642,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @ValidLength(max = 10, message = "{TASK_BEAN_RECEIVER_TIME_WINDOW_DURATION_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_receiver_time_window_duration")
     private Integer receiverTimeWindowDuration;
 
@@ -584,6 +654,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 15, message = "{TASK_BEAN_RECEIVER_BRANCH_PHONE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_receiver_branch_phone")
     private String receiverBranchPhone;
 
@@ -595,6 +666,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 150, message = "{TASK_BEAN_RECEIVER_BRANCH_ADDRESS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_receiver_branch_address")
     private String receiverBranchAddress;
 
@@ -606,6 +678,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 15, message = "{TASK_BEAN_RECEIVER_BRANCH_LATITUDE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_receiver_branch_latitude")
     private String receiverBranchLatitude;
 
@@ -617,6 +690,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 15, message = "{TASK_BEAN_RECEIVER_BRANCH_LONGITUDE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_receiver_branch_longitude")
     private String receiverBranchLongitude;
 
@@ -628,6 +702,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @ValidLength(max = 13, message = "{TASK_BEAN_VEHICLE_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_vehicle_id")
     private Long vehicleId;
 
@@ -639,6 +714,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 15, message = "{TASK_BEAN_VEHICLE_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_vehicle_internal_id")
     private String vehicleInternalId;
 
@@ -650,6 +726,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 15, message = "{TASK_BEAN_VEHICLE_TOMTOM_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_vehicle_tomtom_id")
     private String vehicleTomtomId;
 
@@ -661,6 +738,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 20, message = "{TASK_BEAN_VEHICLE_LICENSE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_vehicle_license")
     private String vehicleLicense;
 
@@ -672,6 +750,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 20, message = "{TASK_BEAN_VEHICLE_ARMORED_LEVEL_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_vehicle_armored_level")
     private String vehicleArmoredLevel;
 
@@ -683,6 +762,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 30, message = "{TASK_BEAN_VEHICLE_SERVICE_TYPE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_vehicle_service_type")
     private String vehicleServiceType;
 
@@ -694,6 +774,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 30, message = "{TASK_BEAN_VEHICLE_MODEL_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_vehicle_model")
     private String vehicleModel;
 
@@ -705,6 +786,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 30, message = "{TASK_BEAN_VEHICLE_VIN_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_vehicle_vin")
     private String vehicleVin;
 
@@ -716,6 +798,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 15, message = "{TASK_BEAN_VEHICLE_CURRENCY_CAPACITY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_vehicle_currency_capacity")
     private String vehicleCurrencyCapacity;
 
@@ -727,6 +810,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @ValidLength(max = 10, message = "{TASK_BEAN_SERVICE_PERSON_NUMBER_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_service_person_number")
     private Integer servicePersonNumber;
 
@@ -738,6 +822,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @ValidLength(max = 13, message = "{TASK_BEAN_DRIVER_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_driver_id")
     private Long driverId;
 
@@ -749,6 +834,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 20, message = "{TASK_BEAN_DRIVER_USERNAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_driver_username")
     private String driverUsername;
 
@@ -760,6 +846,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 15, message = "{TASK_BEAN_DRIVER_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_driver_internal_id")
     private String driverInternalId;
 
@@ -771,6 +858,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 50, message = "{TASK_BEAN_DRIVER_FIRST_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_driver_first_name")
     private String driverFirstName;
 
@@ -782,6 +870,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 50, message = "{TASK_BEAN_DRIVER_LAST_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_driver_last_name")
     private String driverLastName;
 
@@ -793,6 +882,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 1, message = "{TASK_BEAN_DRIVER_SHIFT_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_driver_shift")
     private String driverShift;
 
@@ -804,6 +894,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @ValidLength(max = 13, message = "{TASK_BEAN_CASHIER_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_cashier_id")
     private Long cashierId;
 
@@ -815,6 +906,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 20, message = "{TASK_BEAN_CASHIER_USERNAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_cashier_username")
     private String cashierUsername;
 
@@ -826,6 +918,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 15, message = "{TASK_BEAN_CASHIER_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_cashier_internal_id")
     private String cashierInternalId;
 
@@ -837,6 +930,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 50, message = "{TASK_BEAN_CASHIER_FIRST_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_cashier_first_name")
     private String cashierFirstName;
 
@@ -848,6 +942,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 50, message = "{TASK_BEAN_CASHIER_LAST_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_cashier_last_name")
     private String cashierLastName;
 
@@ -859,6 +954,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 1, message = "{TASK_BEAN_CASHIER_SHIFT_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_cashier_shift")
     private String cashierShift;
 
@@ -870,6 +966,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 45, message = "{TASK_BEAN_CASHIER_PASS_CODE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_cashier_pass_code")
     private String cashierPassCode;
 
@@ -881,6 +978,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @ValidLength(max = 13, message = "{TASK_BEAN_SECURITY1_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_security1_id")
     private Long security1Id;
 
@@ -892,6 +990,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 20, message = "{TASK_BEAN_SECURITY1_USERNAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_security1_username")
     private String security1Username;
 
@@ -903,6 +1002,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 15, message = "{TASK_BEAN_SECURITY1_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_security1_internal_id")
     private String security1InternalId;
 
@@ -914,6 +1014,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 50, message = "{TASK_BEAN_SECURITY1_FIRST_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_security1_first_name")
     private String security1FirstName;
 
@@ -925,6 +1026,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 50, message = "{TASK_BEAN_SECURITY1_LAST_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_security1_last_name")
     private String security1LastName;
 
@@ -936,6 +1038,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 1, message = "{TASK_BEAN_SECURITY1_SHIFT_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_security1_shift")
     private String security1Shift;
 
@@ -947,6 +1050,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @ValidLength(max = 13, message = "{TASK_BEAN_SECURITY2_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_security2_id")
     private Long security2Id;
 
@@ -958,6 +1062,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 20, message = "{TASK_BEAN_SECURITY2_USERNAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_security2_username")
     private String security2Username;
 
@@ -969,6 +1074,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 15, message = "{TASK_BEAN_SECURITY2_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_security2_internal_id")
     private String security2InternalId;
 
@@ -980,6 +1086,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 50, message = "{TASK_BEAN_SECURITY2_FIRST_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_security2_first_name")
     private String security2FirstName;
 
@@ -991,6 +1098,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 50, message = "{TASK_BEAN_SECURITY2_LAST_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_security2_last_name")
     private String security2LastName;
 
@@ -1002,6 +1110,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 1, message = "{TASK_BEAN_SECURITY2_SHIFT_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_security2_shift")
     private String security2Shift;
 
@@ -1013,6 +1122,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @ValidLength(max = 13, message = "{TASK_BEAN_SECURITY3_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_security3_id")
     private Long security3Id;
 
@@ -1024,6 +1134,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 20, message = "{TASK_BEAN_SECURITY3_USERNAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_security3_username")
     private String security3Username;
 
@@ -1035,6 +1146,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 15, message = "{TASK_BEAN_SECURITY3_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_security3_internal_id")
     private String security3InternalId;
 
@@ -1046,6 +1158,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 50, message = "{TASK_BEAN_SECURITY3_FIRST_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_security3_first_name")
     private String security3FirstName;
 
@@ -1057,6 +1170,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 50, message = "{TASK_BEAN_SECURITY3_LAST_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_security3_last_name")
     private String security3LastName;
 
@@ -1068,6 +1182,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 1, message = "{TASK_BEAN_SECURITY3_SHIFT_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_security3_shift")
     private String security3Shift;
 
@@ -1079,6 +1194,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @ValidLength(max = 13, message = "{TASK_BEAN_SECURITY4_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_security4_id")
     private Long security4Id;
 
@@ -1090,6 +1206,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 20, message = "{TASK_BEAN_SECURITY4_USERNAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_security4_username")
     private String security4Username;
 
@@ -1101,6 +1218,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 15, message = "{TASK_BEAN_SECURITY4_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_security4_internal_id")
     private String security4InternalId;
 
@@ -1112,6 +1230,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 50, message = "{TASK_BEAN_SECURITY4_FIRST_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_security4_first_name")
     private String security4FirstName;
 
@@ -1123,6 +1242,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 50, message = "{TASK_BEAN_SECURITY4_LAST_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_security4_last_name")
     private String security4LastName;
 
@@ -1134,6 +1254,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 1, message = "{TASK_BEAN_SECURITY4_SHIFT_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_security4_shift")
     private String security4Shift;
 
@@ -1145,6 +1266,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: 670b1472
      * </pre>
      */
+    @Length(max = 175, message = "{TASK_BEAN_NIP_USERNAME_PASS_CODE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_nip_username_pass_code")
     private String nipUsernamePassCode;
 
@@ -1156,6 +1278,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: DEFAULT
      * </pre>
      */
+    @Length(max = 20, message = "{TASK_BEAN_NIP_CONFIRM_USERNAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_nip_confirm_username")
     private String nipConfirmUsername;
 
@@ -1167,6 +1290,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 20, message = "{TASK_BEAN_SERVICE_LINE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_service_line")
     private String serviceLine;
 
@@ -1178,6 +1302,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 1, message = "{TASK_BEAN_SHIFT_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_shift")
     private String shift;
 
@@ -1189,6 +1314,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 20, message = "{TASK_BEAN_ARMORED_LEVEL_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_armored_level")
     private String armoredLevel;
 
@@ -1200,9 +1326,13 @@ public class TaskBean implements Serializable {
      * DB defaultValue: CURRENT_TIMESTAMP
      * </pre>
      */
+    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{TASK_BEAN_CREATE_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotNull(message = "{TASK_BEAN_CREATE_TIMESTAMP_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_create_timestamp")
     private Date createTimestamp;
 
+    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{TASK_BEAN_UPDATE_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotNull(message = "{TASK_BEAN_UPDATE_TIMESTAMP_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_update_timestamp")
     private Date updateTimestamp;
 
@@ -1214,6 +1344,8 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @NotBlank(message = "{TASK_BEAN_CREATE_BY_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 20, message = "{TASK_BEAN_CREATE_BY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_create_by")
     private String createBy;
 
@@ -1225,6 +1357,8 @@ public class TaskBean implements Serializable {
      * DB defaultValue: N
      * </pre>
      */
+    @NotBlank(message = "{TASK_BEAN_DELETE_FLAG_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 1, message = "{TASK_BEAN_DELETE_FLAG_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_delete_flag")
     private String deleteFlag;
 
@@ -1236,6 +1370,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 15, message = "{TASK_BEAN_ATM_EXTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_atm_external_id")
     private String atmExternalId;
 
@@ -1247,6 +1382,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 20, message = "{TASK_BEAN_DEADLINE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_deadline")
     private String deadline;
 
@@ -1258,6 +1394,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 200, message = "{TASK_BEAN_DESCRIPTION_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_description")
     private String description;
 
@@ -1269,6 +1406,8 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @NotBlank(message = "{TASK_BEAN_GENERATE_SOURCE_PARTY_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 7, message = "{TASK_BEAN_GENERATE_SOURCE_PARTY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_generate_source_party")
     private String generateSourceParty;
 
@@ -1280,6 +1419,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 20, message = "{TASK_BEAN_GENERATED_TYPE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_generated_type")
     private String generatedType;
 
@@ -1291,6 +1431,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @ValidLength(max = 13, message = "{TASK_BEAN_SOURCE_COMPANY_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_source_company_id")
     private Long sourceCompanyId;
 
@@ -1302,6 +1443,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 15, message = "{TASK_BEAN_SOURCE_COMPANY_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_source_company_internal_id")
     private String sourceCompanyInternalId;
 
@@ -1313,6 +1455,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 100, message = "{TASK_BEAN_SOURCE_COMPANY_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_source_company_name")
     private String sourceCompanyName;
 
@@ -1324,6 +1467,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 100, message = "{TASK_BEAN_SOURCE_COMPANY_ADDRESS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_source_company_address")
     private String sourceCompanyAddress;
 
@@ -1335,6 +1479,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @ValidLength(max = 13, message = "{TASK_BEAN_SOURCE_BRANCH_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_source_branch_id")
     private Long sourceBranchId;
 
@@ -1346,6 +1491,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 15, message = "{TASK_BEAN_SOURCE_BRANCH_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_source_branch_internal_id")
     private String sourceBranchInternalId;
 
@@ -1357,6 +1503,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 100, message = "{TASK_BEAN_SOURCE_BRANCH_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_source_branch_name")
     private String sourceBranchName;
 
@@ -1368,6 +1515,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 100, message = "{TASK_BEAN_SOURCE_BRANCH_ADDRESS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_source_branch_address")
     private String sourceBranchAddress;
 
@@ -1379,6 +1527,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 15, message = "{TASK_BEAN_SOURCE_BRANCH_PHONE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_source_branch_phone")
     private String sourceBranchPhone;
 
@@ -1390,6 +1539,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 15, message = "{TASK_BEAN_SOURCE_TASK_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_source_task_id")
     private String sourceTaskId;
 
@@ -1401,6 +1551,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 30, message = "{TASK_BEAN_SOURCE_SERVICE_TYPE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_source_task_service_type")
     private String sourceServiceType;
 
@@ -1412,6 +1563,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 20, message = "{TASK_BEAN_SOURCE_SERVICE_CODE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_source_service_code")
     private String sourceServiceCode;
 
@@ -1423,6 +1575,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 20, message = "{TASK_BEAN_SOURCE_SAFE_KEY_NUMBER_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_source_safe_key_number")
     private String sourceSafeKeyNumber;
 
@@ -1434,6 +1587,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 255, message = "{TASK_BEAN_SOURCE_DESCRIPTION_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_source_description")
     private String sourceDescription;
 
@@ -1445,6 +1599,7 @@ public class TaskBean implements Serializable {
      * DB defaultValue: ENABLE
      * </pre>
      */
+    @Length(max = 7, message = "{TASK_BEAN_SOURCE_AVAILABILITY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_source_availability")
     private String sourceAvailability;
 
@@ -1456,9 +1611,11 @@ public class TaskBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
+    @Length(max = 100, message = "{TASK_BEAN_SOURCE_ORIGINAL_COMPLEX_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_source_task_original_complex_id")
     private String sourceOriginalComplexId;
 
+    @Length(max = 25, message = "{TASK_BEAN_LAST_GENERATE_XML_TASK_STATUS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_last_generate_xml_task_status")
     private String lastGenerateXmlTaskStatus;
 

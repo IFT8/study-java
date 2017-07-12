@@ -27,8 +27,13 @@ public class AddImportPackage {
         if (!topLevelClass.getImportedTypes().contains(new FullyQualifiedJavaType(PluginsUtils.PACKAGE_DATE_UTIL))) {
             topLevelClass.addImportedType(PluginsUtils.PACKAGE_DATE_UTIL);
         }
-        if (!topLevelClass.getImportedTypes().contains(new FullyQualifiedJavaType(PluginsUtils.getConstantPackage()))) {
-            topLevelClass.addImportedType(PluginsUtils.getConstantPackage() + ".*");
+
+        String javaBeanName = introspectedTable.getFullyQualifiedTable().getDomainObjectName();
+        if (PluginsUtils.getEntityConstantToMapByEntityBeanName().containsKey(javaBeanName)) {
+            if (!topLevelClass.getImportedTypes().contains(new FullyQualifiedJavaType(PluginsUtils.getConstantPackage()))) {
+                String constantBeanName = PluginsUtils.getConstantBeanClassName(introspectedTable.getFullyQualifiedTable().getDomainObjectName());
+                topLevelClass.addImportedType(PluginsUtils.getConstantPackage() + "." + constantBeanName);
+            }
         }
     }
 }
