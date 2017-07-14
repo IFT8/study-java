@@ -27,6 +27,9 @@ public class AddImportPackage {
         if (!topLevelClass.getImportedTypes().contains(new FullyQualifiedJavaType(PluginsUtils.PACKAGE_DATE_UTIL))) {
             topLevelClass.addImportedType(PluginsUtils.PACKAGE_DATE_UTIL);
         }
+        if (!topLevelClass.getImportedTypes().contains(new FullyQualifiedJavaType(PluginsUtils.PACKAGE_SPRING_DATE_TIME_FORMAT))) {
+            topLevelClass.addImportedType(PluginsUtils.PACKAGE_SPRING_DATE_TIME_FORMAT);
+        }
 
         String javaBeanName = introspectedTable.getFullyQualifiedTable().getDomainObjectName();
         if (PluginsUtils.getEntityConstantToMapByEntityBeanName().containsKey(javaBeanName)) {

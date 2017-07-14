@@ -26,6 +26,7 @@ public class PluginsUtils {
     public static final String PACKAGE_SPRING_ANNOTATION_SERVICE = "org.springframework.stereotype.Service";
     public static final String PACKAGE_SPRING_ANNOTATION_CONTROLLER = "org.springframework.stereotype.Controller";
     public static final String PACKAGE_SPRING_ANNOTATION_REQUEST_MAPPING = "org.springframework.web.bind.annotation.RequestMapping";
+    public static final String PACKAGE_SPRING_DATE_TIME_FORMAT = "org.springframework.format.annotation.DateTimeFormat";
 
     private static String beanDir = "";
     private static String daoMappersDir = "";
@@ -145,7 +146,7 @@ public class PluginsUtils {
         if (indexOfPrefix < 0 || indexOfSuffix < 0) {
             return null;
         }
-        String extractSQLCommentJSONStr = columnRemarks.substring((columnRemarks.indexOf("【{") +1), (columnRemarks.indexOf("}】") + 1));
+        String extractSQLCommentJSONStr = columnRemarks.substring((columnRemarks.indexOf("【{") + 1), (columnRemarks.indexOf("}】") + 1));
         return JSON.parseObject(extractSQLCommentJSONStr, RemarksJSON.class);
     }
 

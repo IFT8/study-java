@@ -90,11 +90,13 @@ public class AddValidator {
             if ("TIMESTAMP".equals(introspectedColumn.getJdbcTypeName())) {
 
                 field.addAnnotation("@ValidDateTimeFormat(pattern = " + (pattern != null ? "\"pattern\"" : "DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS") + " , message = \"{" + dateTimeFormatMessageKey + "}\", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})");
+                field.addAnnotation("@DateTimeFormat(pattern = " + (pattern != null ? "\"pattern\"" : "DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS") + ")");
                 PluginsUtils.setFieldI18nToEntityI18nSet(dateTimeFormatMessageKey, dateTimeFormatMessageVal, introspectedColumn);
 
             } else if ("DATE".equals(introspectedColumn.getJdbcTypeName())) {
 
                 field.addAnnotation("@ValidDateTimeFormat(pattern = " + (pattern != null ? "\"pattern\"" : "DateUtil.DATE_PATTERN_YYYY_MM_DD") + " , message = \"{" + dateTimeFormatMessageKey + "}\", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})");
+                field.addAnnotation("@DateTimeFormat(pattern = " + (pattern != null ? "\"pattern\"" : "DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS") + ")");
                 PluginsUtils.setFieldI18nToEntityI18nSet(dateTimeFormatMessageKey, dateTimeFormatMessageVal, introspectedColumn);
 
             }

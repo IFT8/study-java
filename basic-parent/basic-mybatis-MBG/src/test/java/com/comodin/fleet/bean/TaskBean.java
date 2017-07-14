@@ -6,6 +6,7 @@ import com.comodin.basic.validation.constraints.ValidDateTimeFormat;
 import com.comodin.basic.validation.constraints.ValidLength;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -193,6 +194,7 @@ public class TaskBean implements Serializable {
      * </pre>
      */
     @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{TASK_BEAN_APP_VERSION_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
     @Column(name = "task_app_version")
     private Date appVersion;
 
@@ -205,6 +207,7 @@ public class TaskBean implements Serializable {
      * </pre>
      */
     @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{TASK_BEAN_ARRIVAL_TIME_AUTO_CALC_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
     @Column(name = "task_arrival_time_auto_calc")
     private Date arrivalTimeAutoCalc;
 
@@ -217,6 +220,7 @@ public class TaskBean implements Serializable {
      * </pre>
      */
     @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{TASK_BEAN_ARRIVAL_TIME_MANUAL_INPUT_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
     @Column(name = "task_arrival_time_manual_input")
     private Date arrivalTimeManualInput;
 
@@ -229,6 +233,7 @@ public class TaskBean implements Serializable {
      * </pre>
      */
     @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{TASK_BEAN_PROCESS_START_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
     @Column(name = "task_process_start_timestamp")
     private Date processStartTimestamp;
 
@@ -241,6 +246,7 @@ public class TaskBean implements Serializable {
      * </pre>
      */
     @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{TASK_BEAN_PROCESS_END_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
     @Column(name = "task_process_end_timestamp")
     private Date processEndTimestamp;
 
@@ -265,6 +271,7 @@ public class TaskBean implements Serializable {
      * </pre>
      */
     @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{TASK_BEAN_PARTIAL_ARRIVAL_TIME_AUTO_CALC_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
     @Column(name = "task_partial_arrival_time_auto_calc")
     private Date partialArrivalTimeAutoCalc;
 
@@ -277,6 +284,7 @@ public class TaskBean implements Serializable {
      * </pre>
      */
     @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{TASK_BEAN_PARTIAL_ARRIVAL_TIME_MANUAL_INPUT_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
     @Column(name = "task_partial_arrival_time_manual_input")
     private Date partialArrivalTimeManualInput;
 
@@ -289,6 +297,7 @@ public class TaskBean implements Serializable {
      * </pre>
      */
     @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{TASK_BEAN_PARTIAL_PROCESS_START_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
     @Column(name = "task_partial_process_start_timestamp")
     private Date partialProcessStartTimestamp;
 
@@ -301,6 +310,7 @@ public class TaskBean implements Serializable {
      * </pre>
      */
     @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{TASK_BEAN_PARTIAL_PROCESS_END_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
     @Column(name = "task_partial_process_end_timestamp")
     private Date partialProcessEndTimestamp;
 
@@ -1327,11 +1337,13 @@ public class TaskBean implements Serializable {
      * </pre>
      */
     @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{TASK_BEAN_CREATE_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
     @NotNull(message = "{TASK_BEAN_CREATE_TIMESTAMP_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_create_timestamp")
     private Date createTimestamp;
 
     @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{TASK_BEAN_UPDATE_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
     @NotNull(message = "{TASK_BEAN_UPDATE_TIMESTAMP_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_update_timestamp")
     private Date updateTimestamp;
