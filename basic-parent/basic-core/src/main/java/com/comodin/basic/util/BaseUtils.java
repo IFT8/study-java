@@ -19,9 +19,9 @@ import java.io.IOException;
 import java.util.*;
 
 @SuppressWarnings({"unused", "Duplicates", "UnusedReturnValue"})
-public class BaeUtils {
+public class BaseUtils {
 
-    private static final Logger log = Logger.getLogger(BaeUtils.class);
+    private static final Logger log = Logger.getLogger(BaseUtils.class);
 
     /**
      * 组装，成功返回给客户，实体对象。

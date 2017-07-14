@@ -6,7 +6,7 @@ import com.comodin.basic.constant.BaseConstants;
 import com.comodin.basic.exception.BusinessLogicException;
 import com.comodin.basic.exception.ParameterException;
 import com.comodin.basic.service.IBaseService;
-import com.comodin.basic.util.BaeUtils;
+import com.comodin.basic.util.BaseUtils;
 import com.comodin.basic.validation.IBaseValidGroup;
 import com.comodin.basic.vo.BaseVo;
 import org.apache.commons.logging.Log;
@@ -91,13 +91,13 @@ public abstract class AbstractBaseController<T extends Serializable, VO extends 
     @RequestMapping(value = "/add" + BaseConstants.INTERCEPTOR_URL_SUFFIX, method = RequestMethod.POST)
     public ResultEntity add_POST(HttpServletRequest request, HttpServletResponse response, @Validated(value = IBaseValidGroup.Add.class) T bean, BindingResult bindingResult) {
         //先检查，使用Hibernate检验框架，是否包含对应Bean的校验失败的字段，并且根据国际化处理消息内容
-        BaeUtils.webRequestParametersValidation(bindingResult);
+        BaseUtils.webRequestParametersValidation(bindingResult);
 
         baseService.insert(bean);
 
         //实现国际信息
         String message = new RequestContext(request, response).getMessage(BaseConstants.GLOBAL_I18N_CRUD_ADD_SUCCESS);
-        return BaeUtils.webAssemblySuccessResultEntity(message);
+        return BaseUtils.webAssemblySuccessResultEntity(message);
     }
 
     /**
@@ -123,7 +123,7 @@ public abstract class AbstractBaseController<T extends Serializable, VO extends 
     @RequestMapping(value = "/addAndMultipart" + BaseConstants.INTERCEPTOR_URL_SUFFIX, method = RequestMethod.POST)
     public ResultEntity addAndMultipart_POST(HttpServletRequest request, HttpServletResponse response, @Validated(value = IBaseValidGroup.Add.class) T bean, BindingResult bindingResult, @RequestParam(value = "files", required = false) MultipartFile... files) {
         //先检查，使用Hibernate检验框架，是否包含对应Bean的校验失败的字段，并且根据国际化处理消息内容
-        BaeUtils.webRequestParametersValidation(bindingResult);
+        BaseUtils.webRequestParametersValidation(bindingResult);
 
         if (files == null || files.length < 1) {
             throw new ParameterException(BaseConstants.GLOBAL_I18N_CRUD_UPLOAD_ERROR_NOT_BLANK);
@@ -133,7 +133,7 @@ public abstract class AbstractBaseController<T extends Serializable, VO extends 
 
         //实现国际信息
         String message = new RequestContext(request, response).getMessage(BaseConstants.GLOBAL_I18N_CRUD_ADD_SUCCESS);
-        return BaeUtils.webAssemblySuccessResultEntity(message);
+        return BaseUtils.webAssemblySuccessResultEntity(message);
     }
 
     /**
@@ -157,7 +157,7 @@ public abstract class AbstractBaseController<T extends Serializable, VO extends 
 
         //实现国际信息
         String message = new RequestContext(request, response).getMessage(BaseConstants.GLOBAL_I18N_CRUD_DELETE_SUCCESS);
-        return BaeUtils.webAssemblySuccessResultEntity(message);
+        return BaseUtils.webAssemblySuccessResultEntity(message);
     }
 
     /**
@@ -210,13 +210,13 @@ public abstract class AbstractBaseController<T extends Serializable, VO extends 
     @RequestMapping(value = "/update" + BaseConstants.INTERCEPTOR_URL_SUFFIX, method = RequestMethod.POST)
     public ResultEntity update_POST(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "primaryKey", required = false) Object primaryKey, @Validated(value = IBaseValidGroup.Update.class) T bean, BindingResult bindingResult) {
         //先检查，使用Hibernate检验框架，是否包含对应Bean的校验失败的字段，并且根据国际化处理消息内容
-        BaeUtils.webRequestParametersValidation(bindingResult);
+        BaseUtils.webRequestParametersValidation(bindingResult);
 
         baseService.updateByPrimaryKeySelective(bean);
 
         //实现国际信息
         String message = new RequestContext(request, response).getMessage(BaseConstants.GLOBAL_I18N_CRUD_UPDATE_SUCCESS);
-        return BaeUtils.webAssemblySuccessResultEntity(message);
+        return BaseUtils.webAssemblySuccessResultEntity(message);
     }
 
     /**
@@ -243,7 +243,7 @@ public abstract class AbstractBaseController<T extends Serializable, VO extends 
     @RequestMapping(value = "/updateAndMultipart" + BaseConstants.INTERCEPTOR_URL_SUFFIX, method = RequestMethod.POST)
     public ResultEntity updateAndMultipart_POST(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "primaryKey", required = false) Object primaryKey, @Validated(value = IBaseValidGroup.Update.class) T bean, BindingResult bindingResult, @RequestParam(value = "files", required = false) MultipartFile... files) {
         //先检查，使用 Hibernate 检验框架，是否包含对应Bean的校验失败的字段，并且根据国际化处理消息内容
-        BaeUtils.webRequestParametersValidation(bindingResult);
+        BaseUtils.webRequestParametersValidation(bindingResult);
 
         if (files == null || files.length < 1) {
             throw new ParameterException(BaseConstants.GLOBAL_I18N_CRUD_UPLOAD_ERROR_NOT_BLANK);
@@ -253,7 +253,7 @@ public abstract class AbstractBaseController<T extends Serializable, VO extends 
 
         //实现国际信息
         String message = new RequestContext(request, response).getMessage(BaseConstants.GLOBAL_I18N_CRUD_UPDATE_SUCCESS);
-        return BaeUtils.webAssemblySuccessResultEntity(message);
+        return BaseUtils.webAssemblySuccessResultEntity(message);
     }
 
 
@@ -305,7 +305,7 @@ public abstract class AbstractBaseController<T extends Serializable, VO extends 
             throw new BusinessLogicException(BaseConstants.GLOBAL_I18N_CRUD_GET_ERROR);
         }
 
-        return BaeUtils.webAssemblySuccessResultEntity(bean);
+        return BaseUtils.webAssemblySuccessResultEntity(bean);
     }
 
 
@@ -351,7 +351,7 @@ public abstract class AbstractBaseController<T extends Serializable, VO extends 
 
         //实现国际信息
         String message = new RequestContext(request, response).getMessage(BaseConstants.GLOBAL_I18N_CRUD_ADD_SUCCESS);
-        return BaeUtils.webAssemblySuccessResultEntity(message);
+        return BaseUtils.webAssemblySuccessResultEntity(message);
     }
 
     /**
@@ -417,8 +417,8 @@ public abstract class AbstractBaseController<T extends Serializable, VO extends 
     public ResultEntity list_POST(HttpServletRequest request, HttpServletResponse response, VO vo) {
         List<T> list = baseService.getListByVo(vo);
 
-        Map<String, Object> stringObjectMap = BaeUtils.webAssemblyReturnResultByList(list, vo.getDraw());
+        Map<String, Object> stringObjectMap = BaseUtils.webAssemblyReturnResultByList(list, vo.getDraw());
 
-        return BaeUtils.webAssemblySuccessResultEntity(stringObjectMap);
+        return BaseUtils.webAssemblySuccessResultEntity(stringObjectMap);
     }
 }

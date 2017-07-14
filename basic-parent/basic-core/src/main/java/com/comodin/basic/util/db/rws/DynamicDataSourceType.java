@@ -1,4 +1,4 @@
-package com.comodin.basic.util.db;
+package com.comodin.basic.util.db.rws;
 
 public enum DynamicDataSourceType {
     DATA_SOURCE_MASTER,

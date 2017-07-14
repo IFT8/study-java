@@ -1,4 +1,4 @@
-package com.comodin.basic.util.db;
+package com.comodin.basic.util.db.rws;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -16,9 +16,8 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
-@SuppressWarnings({"Duplicates", "unused"})
 public class DynamicDataSourceTransactionProcessor implements BeanPostProcessor {
-    private final Log log = LogFactory.getLog(this.getClass());
+    private final Log log = LogFactory.getLog(DynamicDataSource.DYNAMIC_DATA_SOURCE_LOG_PACKAGE_NAME);
 
     private boolean forceChoiceReadWhenWrite = false;
     private Map<String, Boolean> writeMethodMap = new HashMap<>();
@@ -101,7 +100,10 @@ public class DynamicDataSourceTransactionProcessor implements BeanPostProcessor 
             return false;
         }
         Boolean isForceChoiceRead = writeMethodMap.get(bestNameMatch);
-        return isForceChoiceRead != Boolean.TRUE;
+        if (isForceChoiceRead == Boolean.TRUE) {
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -119,7 +121,6 @@ public class DynamicDataSourceTransactionProcessor implements BeanPostProcessor 
             NameMatchTransactionAttributeSource transactionAttributeSource = (NameMatchTransactionAttributeSource) bean;
             Field nameMapField = ReflectionUtils.findField(NameMatchTransactionAttributeSource.class, "nameMap");
             nameMapField.setAccessible(true);
-            //noinspection unchecked
             Map<String, TransactionAttribute> nameMap = (Map<String, TransactionAttribute>) nameMapField.get(transactionAttributeSource);
 
             nameMap.forEach((methodName, transactionAttribute) -> {

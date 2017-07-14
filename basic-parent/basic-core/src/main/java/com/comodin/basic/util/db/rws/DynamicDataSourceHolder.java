@@ -1,4 +1,4 @@
-package com.comodin.basic.util.db;
+package com.comodin.basic.util.db.rws;
 
 import com.comodin.basic.util.RandomUtils;
 import org.apache.log4j.Logger;
@@ -6,9 +6,9 @@ import org.apache.log4j.Logger;
 import java.util.HashSet;
 import java.util.Set;
 
-@SuppressWarnings({"WeakerAccess", "Duplicates"})
 public class DynamicDataSourceHolder {
-    private static final Logger log = Logger.getLogger(DynamicDataSourceHolder.class);
+
+    private static final Logger log = Logger.getLogger(DynamicDataSource.DYNAMIC_DATA_SOURCE_LOG_PACKAGE_NAME);
 
     /**
      * 线程threadLocal
@@ -39,7 +39,7 @@ public class DynamicDataSourceHolder {
     /**
      * 设置本线程的dbtype
      *
-     * @param dynamicDataSourceType //
+     * @param dynamicDataSourceType
      */
     public static void setDbType(DynamicDataSourceType dynamicDataSourceType) {
         contextHolder.set(dynamicDataSourceType);
@@ -47,6 +47,9 @@ public class DynamicDataSourceHolder {
 
     /**
      * clearDBType
+     *
+     * @Title: clearDBType
+     * @Description: 清理连接类型
      */
     public static void clearDBType() {
         contextHolder.remove();
