@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue"})
 @Table(name = "t_task")
 public class TaskBean implements Serializable {
     /**
@@ -1461,18 +1461,6 @@ public class TaskBean implements Serializable {
 
     /**
      * <pre>
-     * DB remark: 任务来源的,网点,地址【date:2016-12-12 by:supeng】
-     * DB column: task_source_company_address	VARCHAR(100)	<--->	sourceCompanyAddress	java.lang.String
-     * DB is  Nullable: true
-     * DB defaultValue: null
-     * </pre>
-     */
-    @Length(max = 100, message = "{TASK_BEAN_SOURCE_COMPANY_ADDRESS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_source_company_address")
-    private String sourceCompanyAddress;
-
-    /**
-     * <pre>
      * DB remark: 任务来源的,网点,ID【date:2016-12-12 by:supeng】【{"max":13}】
      * DB column: task_source_branch_id	BIGINT(20)	<--->	sourceBranchId	java.lang.Long
      * DB is  Nullable: true
@@ -1506,30 +1494,6 @@ public class TaskBean implements Serializable {
     @Length(max = 100, message = "{TASK_BEAN_SOURCE_BRANCH_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_source_branch_name")
     private String sourceBranchName;
-
-    /**
-     * <pre>
-     * DB remark: 任务来源的,网点,地址【date:2016-12-12 by:supeng】
-     * DB column: task_source_branch_address	VARCHAR(100)	<--->	sourceBranchAddress	java.lang.String
-     * DB is  Nullable: true
-     * DB defaultValue: null
-     * </pre>
-     */
-    @Length(max = 100, message = "{TASK_BEAN_SOURCE_BRANCH_ADDRESS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_source_branch_address")
-    private String sourceBranchAddress;
-
-    /**
-     * <pre>
-     * DB remark: 任务来源的,网点,电话【date:2016-12-12 by:supeng】
-     * DB column: task_source_branch_phone	VARCHAR(15)	<--->	sourceBranchPhone	java.lang.String
-     * DB is  Nullable: true
-     * DB defaultValue: null
-     * </pre>
-     */
-    @Length(max = 15, message = "{TASK_BEAN_SOURCE_BRANCH_PHONE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_source_branch_phone")
-    private String sourceBranchPhone;
 
     /**
      * <pre>
@@ -3881,25 +3845,6 @@ public class TaskBean implements Serializable {
     }
 
     /**
-     * 获取 任务来源的,网点,地址【date:2016-12-12 by:supeng】
-     *
-     * @return task_source_company_address - 任务来源的,网点,地址【date:2016-12-12 by:supeng】
-     */
-    public String getSourceCompanyAddress() {
-        return sourceCompanyAddress;
-    }
-
-    /**
-     * 设置 任务来源的,网点,地址【date:2016-12-12 by:supeng】
-     *
-     * @param sourceCompanyAddress - 任务来源的,网点,地址【date:2016-12-12 by:supeng】
-     */
-    public TaskBean setSourceCompanyAddress(String sourceCompanyAddress) {
-        this.sourceCompanyAddress = sourceCompanyAddress == null ? null : sourceCompanyAddress.trim();
-        return this;
-    }
-
-    /**
      * 获取 任务来源的,网点,ID【date:2016-12-12 by:supeng】【{"max":13}】
      *
      * @return task_source_branch_id - 任务来源的,网点,ID【date:2016-12-12 by:supeng】【{"max":13}】
@@ -3953,44 +3898,6 @@ public class TaskBean implements Serializable {
      */
     public TaskBean setSourceBranchName(String sourceBranchName) {
         this.sourceBranchName = sourceBranchName == null ? null : sourceBranchName.trim();
-        return this;
-    }
-
-    /**
-     * 获取 任务来源的,网点,地址【date:2016-12-12 by:supeng】
-     *
-     * @return task_source_branch_address - 任务来源的,网点,地址【date:2016-12-12 by:supeng】
-     */
-    public String getSourceBranchAddress() {
-        return sourceBranchAddress;
-    }
-
-    /**
-     * 设置 任务来源的,网点,地址【date:2016-12-12 by:supeng】
-     *
-     * @param sourceBranchAddress - 任务来源的,网点,地址【date:2016-12-12 by:supeng】
-     */
-    public TaskBean setSourceBranchAddress(String sourceBranchAddress) {
-        this.sourceBranchAddress = sourceBranchAddress == null ? null : sourceBranchAddress.trim();
-        return this;
-    }
-
-    /**
-     * 获取 任务来源的,网点,电话【date:2016-12-12 by:supeng】
-     *
-     * @return task_source_branch_phone - 任务来源的,网点,电话【date:2016-12-12 by:supeng】
-     */
-    public String getSourceBranchPhone() {
-        return sourceBranchPhone;
-    }
-
-    /**
-     * 设置 任务来源的,网点,电话【date:2016-12-12 by:supeng】
-     *
-     * @param sourceBranchPhone - 任务来源的,网点,电话【date:2016-12-12 by:supeng】
-     */
-    public TaskBean setSourceBranchPhone(String sourceBranchPhone) {
-        this.sourceBranchPhone = sourceBranchPhone == null ? null : sourceBranchPhone.trim();
         return this;
     }
 

@@ -50,25 +50,76 @@
         <!--<project.parentBasedir>${project.parent.basedir}</project.parentBasedir>-->
     </properties>
 
+    <dependencies>
+        <!--web =================================================================================== -->
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>javax.servlet.jsp-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.el</groupId>
+            <artifactId>javax.el-api</artifactId>
+        </dependency>
+        <!--test  testng mockito =================================================================================== -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-all</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+        </dependency>
+    </dependencies>
+
     <dependencyManagement>
         <dependencies>
+            <!--test  testNG mockito ==================================================================start-->
             <dependency>
-                <groupId>org.apache.cxf</groupId>
-                <artifactId>cxf-rt-frontend-jaxws</artifactId>
-                <version>3.1.8</version>
+                <groupId>org.testng</groupId>
+                <artifactId>testng</artifactId>
+                <version>6.11</version>   <!--jdk1.5 最高版本5.11-->
+                <scope>test</scope>
+                <!--
+                很多人对classifier会有点陌生，事实上maven的包名是这样构成的
+                    <artifactId>-<version>-<classifier>.<packaging>
+                （这里仅仅是针对编译后的jar包，如果是sources或者javadoc，则会变成
+                    <artifactId>-<version>-<classifier>-<type>.<packaging>,这里<type>可以替换成sources或者javadoc）。
+                那么按照这个规则，testng在maven仓库里完整的包名就应该是：testng-5.11-jdk15.jar
+                classifier主要是用来区分不同环境或者不同jdk版本的。-->
+                <!--<classifier>jdk15</classifier>-->
             </dependency>
             <dependency>
-                <groupId>org.apache.cxf</groupId>
-                <artifactId>cxf-rt-transports-http</artifactId>
-                <version>3.1.8</version>
+                <groupId>org.hamcrest</groupId>
+                <artifactId>hamcrest-core</artifactId>
+                <version>1.3</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
-                <groupId>org.apache.cxf</groupId>
-                <artifactId>cxf-rt-transports-http-jetty</artifactId>
-                <version>3.1.8</version>
+                <groupId>org.hamcrest</groupId>
+                <artifactId>hamcrest-all</artifactId>
+                <version>1.3</version>
+                <scope>test</scope>
             </dependency>
-
-            <!--web =================================================================================== -->
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>2.7.17</version>
+                <scope>test</scope>
+            </dependency>
+            <!--test  testNG mockito ==================================================================end-->
+            <!--web ===================================================================================start-->
             <dependency>
                 <groupId>javax.servlet</groupId>
                 <artifactId>javax.servlet-api</artifactId>
@@ -87,6 +138,7 @@
                 <version>3.0.0</version>
                 <scope>provided</scope>
             </dependency>
+            <!--web ===================================================================================end-->
             <dependency>
                 <groupId>javax.servlet</groupId>
                 <artifactId>jstl</artifactId>
@@ -102,16 +154,10 @@
                 <artifactId>commons-fileupload</artifactId>
                 <version>1.3.2</version>
             </dependency>
-            <!--SSH spring mybatis =================================================================================== -->
-            <!--Spring-->
+            <!--SSM spring mybatis ====================================================================start-->
             <dependency>
                 <groupId>org.springframework</groupId>
-                <artifactId>spring-aop</artifactId>
-                <version>${spring_version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-aspects</artifactId>
+                <artifactId>spring-core</artifactId>
                 <version>${spring_version}</version>
             </dependency>
             <dependency>
@@ -131,7 +177,12 @@
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
-                <artifactId>spring-core</artifactId>
+                <artifactId>spring-aop</artifactId>
+                <version>${spring_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aspects</artifactId>
                 <version>${spring_version}</version>
             </dependency>
             <dependency>
@@ -174,12 +225,7 @@
                 <artifactId>spring-test</artifactId>
                 <version>${spring_version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-validator</artifactId>
-                <version>5.4.1.Final</version>
-            </dependency>
-            <!--Mybatis-->
+            <!-- mybatis -->
             <dependency>
                 <groupId>org.mybatis</groupId>
                 <artifactId>mybatis</artifactId>
@@ -195,7 +241,7 @@
                 <artifactId>mybatis-spring</artifactId>
                 <version>1.3.1</version>
             </dependency>
-            <!--mybatis 集成通用Mapper-->
+            <!-- mybatis 集成通用Mapper-->
             <dependency>
                 <groupId>tk.mybatis</groupId>
                 <artifactId>mapper</artifactId>
@@ -212,8 +258,25 @@
                 <artifactId>jsqlparser</artifactId>
                 <version>0.9.7</version>
             </dependency>
-
-            <!--database connector =================================================================================== -->
+            <!--SSM spring mybatis ====================================================================end-->
+            <!--validation ============================================================================start-->
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-validator</artifactId>
+                <version>5.4.1.Final</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.validation</groupId>
+                <artifactId>validation-api</artifactId>
+                <version>1.1.0.Final</version>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.web</groupId>
+                <artifactId>el-impl</artifactId>
+                <version>2.2</version>
+            </dependency>
+            <!--validation ============================================================================end-->
+            <!--db connect ============================================================================start-->
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
@@ -234,9 +297,13 @@
                 <artifactId>mongo-java-driver</artifactId>
                 <version>3.4.2</version>
             </dependency>
-
-
-            <!--common jar=================================================================================== -->
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-mongodb</artifactId>
+                <version>1.10.4.RELEASE</version>
+            </dependency>
+            <!--db connect ============================================================================end-->
+            <!--common jar=============================================================================start-->
             <dependency>
                 <groupId>javax.mail</groupId>
                 <artifactId>mail</artifactId>
@@ -251,11 +318,6 @@
                 <groupId>javax.persistence</groupId>
                 <artifactId>persistence-api</artifactId>
                 <version>1.0.2</version>
-            </dependency>
-            <dependency>
-                <groupId>javax.validation</groupId>
-                <artifactId>validation-api</artifactId>
-                <version>1.1.0.Final</version>
             </dependency>
             <!--1、BeanUtils 提供了对于JavaBean进行各种操作， 比如对象,属性复制等等。-->
             <dependency>
@@ -272,7 +334,7 @@
             <!--2、XML-->
             <!--
                 Java 领域 XML 文件的技术大致分为两类： XML API 和 OXMapping 。
-                    XML API 是 XML 处理的基础，可选技术包括 Jdom 、 Dom4j 等；
+                    XML API 是 XML 处理的基础，可选技术包括 JDOM 、 Dom4j 等；
                     OXMapping 是 Object-XML Mapping 的简称，这种技术隐藏了 XML 底层操作的细节，可以将 XML 文件映射成一个 JavaBean 对象，也可以把一个 JavaBean 对象保存成一个 XML 文件，
                                 可选技术 XStream 、 Digester 、 Castor 等。
                                 XML API 和 OXMapping 的关系类似于 JDBC 和 ORMaping 的关系， OXMapping 内部实现使用 XML API 来完成，两种实现技术从不同的层面实现了 XML 的处理。
@@ -459,43 +521,24 @@
                 <artifactId>freemarker</artifactId>
                 <version>2.3.23</version>
             </dependency>
-
-            <!--test  testNG mockito =================================================================================== -->
             <dependency>
-                <groupId>org.testng</groupId>
-                <artifactId>testng</artifactId>
-                <version>6.11</version>   <!--jdk1.5 最高版本5.11-->
-                <scope>test</scope>
-                <!--
-                很多人对classifier会有点陌生，事实上maven的包名是这样构成的
-                    <artifactId>-<version>-<classifier>.<packaging>
-                （这里仅仅是针对编译后的jar包，如果是sources或者javadoc，则会变成
-                    <artifactId>-<version>-<classifier>-<type>.<packaging>,这里<type>可以替换成sources或者javadoc）。
-                那么按照这个规则，testng在maven仓库里完整的包名就应该是：testng-5.11-jdk15.jar
-                classifier主要是用来区分不同环境或者不同jdk版本的。-->
-                <!--<classifier>jdk15</classifier>-->
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-rt-frontend-jaxws</artifactId>
+                <version>3.1.8</version>
             </dependency>
             <dependency>
-                <groupId>org.hamcrest</groupId>
-                <artifactId>hamcrest-core</artifactId>
-                <version>1.3</version>
-                <scope>test</scope>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-rt-transports-http</artifactId>
+                <version>3.1.8</version>
             </dependency>
             <dependency>
-                <groupId>org.hamcrest</groupId>
-                <artifactId>hamcrest-all</artifactId>
-                <version>1.3</version>
-                <scope>test</scope>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-rt-transports-http-jetty</artifactId>
+                <version>3.1.8</version>
             </dependency>
-            <dependency>
-                <groupId>org.mockito</groupId>
-                <artifactId>mockito-core</artifactId>
-                <version>2.7.17</version>
-                <scope>test</scope>
-            </dependency>
-            <!--test  testNG mockito =================================================================================== -->
         </dependencies>
     </dependencyManagement>
+
 
 
     <build>
@@ -710,7 +753,7 @@
                 <plugin><!--mybatis-generator-maven-plugin 生成mybatis映射 -->
                     <groupId>org.mybatis.generator</groupId>
                     <artifactId>mybatis-generator-maven-plugin</artifactId>
-                    <version>1.3.5</version>
+                    <version>1.3.2</version>
                     <dependencies>
                         <dependency>
                             <groupId>mysql</groupId>
@@ -722,20 +765,19 @@
                             <artifactId>mybatis-generator-core</artifactId>
                             <version>${mybatis_generator_version}</version>
                         </dependency>
+                        <dependency>
+                            <groupId>tk.mybatis</groupId>
+                            <artifactId>mapper</artifactId>
+                            <version>${mybatis_mapper_version}</version>
+                        </dependency>
                     </dependencies>
                     <configuration>
-                        <!-- -overwrite (可选的) 如果指定了该参数，如果生成的java文件存在已经同名的文件，新生成的文件会覆盖原有的文件。
-                                如果没有指定该参数，如果存在同名的文件，MBG会给新生成的代码文件生成一个唯一的名字(例如： MyClass.java.1, MyClass.java.2 等等)。
-                                重要: 生成器一定会自动合并或覆盖已经生成的XML文件。-->
-                        <overwrite>true</overwrite>
-                        <!-- -verbose (可选的)	如果指定该参数，执行过程会输出到控制台。-->
                         <verbose>true</verbose>
-                        <!-- -forceJavaLogging (可选的)	如果指定该参数，MBG将会使用JAVA日志记录而不会使用Log4J,即使Log4J在运行时的类路径中。-->
-                        <!--<forceJavaLogging>false</forceJavaLogging>-->
-                        <configurationFile>${project.basedir}/src/main/resources/mybatis-generator/mybatisGeneratorConfig.xml</configurationFile>
+                        <overwrite>true</overwrite>
+                        <configurationFile>${project.basedir}/src/main/resources/generatorConfig.xml
+                        </configurationFile>
                     </configuration>
                 </plugin>
-
 
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -770,7 +812,7 @@
                  |      它可以运行任何testNG,Junit,pojo写的单元测试
                  |          1、默认绑定到test阶段。
                  |          2、测试有失败用例时，是否继续构建                   <testFailureIgnore>true</testFailureIgnore>
-                 |          3、是否跳过测试阶段，true 会跳过测试和编译阶段       <skip>false</skip>
+                 |          3、是否跳过测试阶段，ture 会跳过测试和编译阶段       <skip>false</skip>
                  |          4、是否跳过测试阶段，true 会跳过测试，但仍然进行编译  <skipTests>false</skipTests>
                  |-->
                 <plugin>

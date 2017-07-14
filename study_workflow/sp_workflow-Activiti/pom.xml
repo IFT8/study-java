@@ -12,11 +12,4 @@
 
     <artifactId>sp_workflow-Activiti</artifactId>
 
-    <dependencies>
-        <!--test  testng mockito =================================================================================== -->
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-        </dependency>
-    </dependencies>
 </project>

@@ -124,12 +124,9 @@
     <result column="task_source_company_id" jdbcType="BIGINT" property="sourceCompanyId" />
     <result column="task_source_company_internal_id" jdbcType="VARCHAR" property="sourceCompanyInternalId" />
     <result column="task_source_company_name" jdbcType="VARCHAR" property="sourceCompanyName" />
-    <result column="task_source_company_address" jdbcType="VARCHAR" property="sourceCompanyAddress" />
     <result column="task_source_branch_id" jdbcType="BIGINT" property="sourceBranchId" />
     <result column="task_source_branch_internal_id" jdbcType="VARCHAR" property="sourceBranchInternalId" />
     <result column="task_source_branch_name" jdbcType="VARCHAR" property="sourceBranchName" />
-    <result column="task_source_branch_address" jdbcType="VARCHAR" property="sourceBranchAddress" />
-    <result column="task_source_branch_phone" jdbcType="VARCHAR" property="sourceBranchPhone" />
     <result column="task_source_task_id" jdbcType="VARCHAR" property="sourceTaskId" />
     <result column="task_source_task_service_type" jdbcType="VARCHAR" property="sourceServiceType" />
     <result column="task_source_service_code" jdbcType="VARCHAR" property="sourceServiceCode" />
