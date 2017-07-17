@@ -24,6 +24,12 @@ public class UploadDataErrorException extends RuntimeException {
         this.externalErrorMessage = externalErrorMessage;
     }
 
+    public UploadDataErrorException(Integer externalErrorCode, String externalErrorMessage) {
+        super(externalErrorMessage);
+        this.externalErrorCode = externalErrorCode != null ? String.valueOf(externalErrorCode) : "";
+        this.externalErrorMessage = externalErrorMessage;
+    }
+
     public UploadDataErrorException(String externalErrorCode, String externalErrorMessage) {
         super(externalErrorMessage);
         this.externalErrorCode = externalErrorCode;
@@ -37,9 +43,22 @@ public class UploadDataErrorException extends RuntimeException {
         this.systemMessage = systemMessage;
     }
 
+    public UploadDataErrorException(Integer externalErrorCode, String externalErrorMessage, String systemMessage) {
+        super(externalErrorMessage);
+        this.externalErrorCode = externalErrorCode != null ? String.valueOf(externalErrorCode) : "";
+        this.externalErrorMessage = externalErrorMessage;
+        this.systemMessage = systemMessage;
+    }
+
     public UploadDataErrorException(String externalErrorCode, String externalErrorMessage, Throwable cause) {
         super(externalErrorMessage, cause);
         this.externalErrorCode = externalErrorCode;
+        this.externalErrorMessage = externalErrorMessage;
+    }
+
+    public UploadDataErrorException(Integer externalErrorCode, String externalErrorMessage, Throwable cause) {
+        super(externalErrorMessage, cause);
+        this.externalErrorCode = externalErrorCode != null ? String.valueOf(externalErrorCode) : "";
         this.externalErrorMessage = externalErrorMessage;
     }
 
@@ -50,9 +69,24 @@ public class UploadDataErrorException extends RuntimeException {
         this.systemMessage = systemMessage;
     }
 
+    public UploadDataErrorException(Integer externalErrorCode, String externalErrorMessage, String systemMessage, Throwable cause) {
+        super(externalErrorMessage, cause);
+        this.externalErrorCode = externalErrorCode != null ? String.valueOf(externalErrorCode) : "";
+        this.externalErrorMessage = externalErrorMessage;
+        this.systemMessage = systemMessage;
+    }
+
+
     protected UploadDataErrorException(String externalErrorCode, String externalErrorMessage, String systemMessage, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(externalErrorMessage, cause, enableSuppression, writableStackTrace);
         this.externalErrorCode = externalErrorCode;
+        this.externalErrorMessage = externalErrorMessage;
+        this.systemMessage = systemMessage;
+    }
+
+    protected UploadDataErrorException(Integer externalErrorCode, String externalErrorMessage, String systemMessage, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+        super(externalErrorMessage, cause, enableSuppression, writableStackTrace);
+        this.externalErrorCode = externalErrorCode != null ? String.valueOf(externalErrorCode) : "";
         this.externalErrorMessage = externalErrorMessage;
         this.systemMessage = systemMessage;
     }
