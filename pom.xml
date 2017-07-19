@@ -32,6 +32,8 @@
         <module>study_ws/sp_ws-Soap/sp_ws-Soap_server</module>
 
         <module>study_opencv/study_opencv-demo</module>
+        <module>study_spring/sp_springboot-jdbc</module>
+        <module>study_spring/sp_springboot-web</module>
     </modules>
 
     <properties>
@@ -331,6 +333,12 @@
                 <artifactId>reflectasm</artifactId>
                 <version>1.11.3</version>
             </dependency>
+            <dependency>
+                <groupId>org.ow2.asm</groupId>
+                <artifactId>asm</artifactId>
+                <version>5.2</version>
+            </dependency>
+
             <!--2、XML-->
             <!--
                 Java 领域 XML 文件的技术大致分为两类： XML API 和 OXMapping 。
@@ -521,25 +529,8 @@
                 <artifactId>freemarker</artifactId>
                 <version>2.3.23</version>
             </dependency>
-            <dependency>
-                <groupId>org.apache.cxf</groupId>
-                <artifactId>cxf-rt-frontend-jaxws</artifactId>
-                <version>3.1.8</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.cxf</groupId>
-                <artifactId>cxf-rt-transports-http</artifactId>
-                <version>3.1.8</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.cxf</groupId>
-                <artifactId>cxf-rt-transports-http-jetty</artifactId>
-                <version>3.1.8</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
-
-
 
     <build>
         <finalName>${project.artifactId}</finalName>
