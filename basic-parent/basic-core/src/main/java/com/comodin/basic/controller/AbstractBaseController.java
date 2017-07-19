@@ -89,7 +89,9 @@ public abstract class AbstractBaseController<T extends Serializable, VO extends 
      */
     @ResponseBody
     @RequestMapping(value = "/add" + BaseConstants.INTERCEPTOR_URL_SUFFIX, method = RequestMethod.POST)
-    public ResultEntity add_POST(HttpServletRequest request, HttpServletResponse response, @Validated(value = IBaseValidGroup.Add.class) T bean, BindingResult bindingResult) {
+    public ResultEntity add_POST(HttpServletRequest request, HttpServletResponse response,
+                                 @Validated(value = IBaseValidGroup.Add.class) T bean, BindingResult bindingResult) {
+
         //先检查，使用Hibernate检验框架，是否包含对应Bean的校验失败的字段，并且根据国际化处理消息内容
         BaseUtils.webRequestParametersValidation(bindingResult);
 
@@ -121,7 +123,10 @@ public abstract class AbstractBaseController<T extends Serializable, VO extends 
      */
     @ResponseBody
     @RequestMapping(value = "/addAndMultipart" + BaseConstants.INTERCEPTOR_URL_SUFFIX, method = RequestMethod.POST)
-    public ResultEntity addAndMultipart_POST(HttpServletRequest request, HttpServletResponse response, @Validated(value = IBaseValidGroup.Add.class) T bean, BindingResult bindingResult, @RequestParam(value = "files", required = false) MultipartFile... files) {
+    public ResultEntity addAndMultipart_POST(HttpServletRequest request, HttpServletResponse response,
+                                             @Validated(value = IBaseValidGroup.Add.class) T bean, BindingResult bindingResult,
+                                             @RequestParam(value = "files", required = false) MultipartFile... files) {
+
         //先检查，使用Hibernate检验框架，是否包含对应Bean的校验失败的字段，并且根据国际化处理消息内容
         BaseUtils.webRequestParametersValidation(bindingResult);
 
@@ -151,7 +156,8 @@ public abstract class AbstractBaseController<T extends Serializable, VO extends 
      */
     @ResponseBody
     @RequestMapping(value = "/delete" + BaseConstants.INTERCEPTOR_URL_SUFFIX, method = RequestMethod.POST)
-    public ResultEntity delete_POST(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "primaryKeys", required = false) Object... primaryKeys) {
+    public ResultEntity delete_POST(HttpServletRequest request, HttpServletResponse response,
+                                    @RequestParam(value = "primaryKeys", required = false) Object... primaryKeys) {
 
         baseService.batchDeleteFlagByPrimaryKeys((Object[]) primaryKeys);
 
@@ -176,7 +182,8 @@ public abstract class AbstractBaseController<T extends Serializable, VO extends 
      * @return /module/update.jsp
      */
     @RequestMapping(value = "/update" + BaseConstants.INTERCEPTOR_URL_SUFFIX, method = RequestMethod.GET)
-    public String update_GET(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "primaryKey", required = false) Object primaryKey) {
+    public String update_GET(HttpServletRequest request, HttpServletResponse response,
+                             @RequestParam(value = "primaryKey", required = false) Object primaryKey) {
 
         T bean = baseService.selectByPrimaryKey(primaryKey);
         if (bean == null) {
@@ -208,7 +215,10 @@ public abstract class AbstractBaseController<T extends Serializable, VO extends 
      */
     @ResponseBody
     @RequestMapping(value = "/update" + BaseConstants.INTERCEPTOR_URL_SUFFIX, method = RequestMethod.POST)
-    public ResultEntity update_POST(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "primaryKey", required = false) Object primaryKey, @Validated(value = IBaseValidGroup.Update.class) T bean, BindingResult bindingResult) {
+    public ResultEntity update_POST(HttpServletRequest request, HttpServletResponse response,
+                                    @RequestParam(value = "primaryKey", required = false) Object primaryKey,
+                                    @Validated(value = IBaseValidGroup.Update.class) T bean, BindingResult bindingResult) {
+
         //先检查，使用Hibernate检验框架，是否包含对应Bean的校验失败的字段，并且根据国际化处理消息内容
         BaseUtils.webRequestParametersValidation(bindingResult);
 
@@ -241,7 +251,10 @@ public abstract class AbstractBaseController<T extends Serializable, VO extends 
      */
     @ResponseBody
     @RequestMapping(value = "/updateAndMultipart" + BaseConstants.INTERCEPTOR_URL_SUFFIX, method = RequestMethod.POST)
-    public ResultEntity updateAndMultipart_POST(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "primaryKey", required = false) Object primaryKey, @Validated(value = IBaseValidGroup.Update.class) T bean, BindingResult bindingResult, @RequestParam(value = "files", required = false) MultipartFile... files) {
+    public ResultEntity updateAndMultipart_POST(HttpServletRequest request, HttpServletResponse response,
+                                                @RequestParam(value = "primaryKey", required = false) Object primaryKey,
+                                                @Validated(value = IBaseValidGroup.Update.class) T bean, BindingResult bindingResult,
+                                                @RequestParam(value = "files", required = false) MultipartFile... files) {
         //先检查，使用 Hibernate 检验框架，是否包含对应Bean的校验失败的字段，并且根据国际化处理消息内容
         BaseUtils.webRequestParametersValidation(bindingResult);
 
@@ -272,7 +285,8 @@ public abstract class AbstractBaseController<T extends Serializable, VO extends 
      * @return /module/detail.jsp
      */
     @RequestMapping(value = "/detail" + BaseConstants.INTERCEPTOR_URL_SUFFIX, method = RequestMethod.GET)
-    public String detail_GET(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "primaryKey", required = false) Object primaryKey) {
+    public String detail_GET(HttpServletRequest request, HttpServletResponse response,
+                             @RequestParam(value = "primaryKey", required = false) Object primaryKey) {
 
         T bean = baseService.selectByPrimaryKey(primaryKey);
         if (bean == null) {
@@ -298,7 +312,8 @@ public abstract class AbstractBaseController<T extends Serializable, VO extends 
      */
     @ResponseBody
     @RequestMapping(value = "/detailJSON" + BaseConstants.INTERCEPTOR_URL_SUFFIX, method = RequestMethod.GET)
-    public ResultEntity detailJSON_GET(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "primaryKey", required = false) Object primaryKey) {
+    public ResultEntity detailJSON_GET(HttpServletRequest request, HttpServletResponse response,
+                                       @RequestParam(value = "primaryKey", required = false) Object primaryKey) {
 
         T bean = baseService.selectByPrimaryKey(primaryKey);
         if (bean == null) {
@@ -343,7 +358,8 @@ public abstract class AbstractBaseController<T extends Serializable, VO extends 
      */
     @ResponseBody
     @RequestMapping(value = "/upload" + BaseConstants.INTERCEPTOR_URL_SUFFIX, method = RequestMethod.POST)
-    public ResultEntity upload_POST(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "files", required = false) MultipartFile... files) {
+    public ResultEntity upload_POST(HttpServletRequest request, HttpServletResponse response,
+                                    @RequestParam(value = "files", required = false) MultipartFile... files) {
 
         if (files == null || files.length < 1) {
             throw new ParameterException(BaseConstants.GLOBAL_I18N_CRUD_UPLOAD_ERROR_NOT_BLANK);
