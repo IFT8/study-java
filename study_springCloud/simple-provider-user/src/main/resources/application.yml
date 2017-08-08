@@ -1,0 +1,20 @@
+server:
+  port: 7900
+spring:
+  jpa:
+    generate-ddl: false
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  datasource:
+    platform: h2
+    #可以不配置，默认会读取 classpath 路径下，名字为 schema.sql data.sql
+    schema: classpath:schema.sql
+    data: classpath:data.sql
+logging:
+  level:
+    root: info
+    org.hibernate: info
+    org.hibernate.type.descriptor.sql.BasicBinder: trace
+    org.hibernate.type.descriptor.sql.BasicExtractor: trace
+    cn.assupg.study: debug

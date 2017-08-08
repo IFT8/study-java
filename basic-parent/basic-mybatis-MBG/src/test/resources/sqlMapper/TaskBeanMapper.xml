@@ -16,8 +16,12 @@
     <result column="task_availability" jdbcType="CHAR" property="availability" />
     <result column="task_whether_completed" jdbcType="CHAR" property="whetherCompleted" />
     <result column="task_whether_inter_changed" jdbcType="CHAR" property="whetherInterChanged" />
+    <result column="task_inter_change_type" jdbcType="CHAR" property="interChangeType" />
+    <result column="task_inter_change_original_task_complex_id" jdbcType="VARCHAR" property="interChangeOriginalComplexId" />
     <result column="task_inter_change_latitude" jdbcType="VARCHAR" property="interChangeLatitude" />
     <result column="task_inter_change_longitude" jdbcType="VARCHAR" property="interChangeLongitude" />
+    <result column="task_complete_latitude" jdbcType="VARCHAR" property="completeLatitude" />
+    <result column="task_complete_longitude" jdbcType="VARCHAR" property="completeLongitude" />
     <result column="task_app_version" jdbcType="TIMESTAMP" property="appVersion" />
     <result column="task_arrival_time_auto_calc" jdbcType="TIMESTAMP" property="arrivalTimeAutoCalc" />
     <result column="task_arrival_time_manual_input" jdbcType="TIMESTAMP" property="arrivalTimeManualInput" />
@@ -75,12 +79,14 @@
     <result column="task_driver_internal_id" jdbcType="VARCHAR" property="driverInternalId" />
     <result column="task_driver_first_name" jdbcType="VARCHAR" property="driverFirstName" />
     <result column="task_driver_last_name" jdbcType="VARCHAR" property="driverLastName" />
+    <result column="task_driver_phone" jdbcType="VARCHAR" property="driverPhone" />
     <result column="task_driver_shift" jdbcType="CHAR" property="driverShift" />
     <result column="task_cashier_id" jdbcType="BIGINT" property="cashierId" />
     <result column="task_cashier_username" jdbcType="VARCHAR" property="cashierUsername" />
     <result column="task_cashier_internal_id" jdbcType="VARCHAR" property="cashierInternalId" />
     <result column="task_cashier_first_name" jdbcType="VARCHAR" property="cashierFirstName" />
     <result column="task_cashier_last_name" jdbcType="VARCHAR" property="cashierLastName" />
+    <result column="task_cashier_phone" jdbcType="VARCHAR" property="cashierPhone" />
     <result column="task_cashier_shift" jdbcType="CHAR" property="cashierShift" />
     <result column="task_cashier_pass_code" jdbcType="VARCHAR" property="cashierPassCode" />
     <result column="task_security1_id" jdbcType="BIGINT" property="security1Id" />
@@ -88,24 +94,28 @@
     <result column="task_security1_internal_id" jdbcType="VARCHAR" property="security1InternalId" />
     <result column="task_security1_first_name" jdbcType="VARCHAR" property="security1FirstName" />
     <result column="task_security1_last_name" jdbcType="VARCHAR" property="security1LastName" />
+    <result column="task_security1_phone" jdbcType="VARCHAR" property="security1Phone" />
     <result column="task_security1_shift" jdbcType="CHAR" property="security1Shift" />
     <result column="task_security2_id" jdbcType="BIGINT" property="security2Id" />
     <result column="task_security2_username" jdbcType="VARCHAR" property="security2Username" />
     <result column="task_security2_internal_id" jdbcType="VARCHAR" property="security2InternalId" />
     <result column="task_security2_first_name" jdbcType="VARCHAR" property="security2FirstName" />
     <result column="task_security2_last_name" jdbcType="VARCHAR" property="security2LastName" />
+    <result column="task_security2_phone" jdbcType="VARCHAR" property="security2Phone" />
     <result column="task_security2_shift" jdbcType="CHAR" property="security2Shift" />
     <result column="task_security3_id" jdbcType="BIGINT" property="security3Id" />
     <result column="task_security3_username" jdbcType="VARCHAR" property="security3Username" />
     <result column="task_security3_internal_id" jdbcType="VARCHAR" property="security3InternalId" />
     <result column="task_security3_first_name" jdbcType="VARCHAR" property="security3FirstName" />
     <result column="task_security3_last_name" jdbcType="VARCHAR" property="security3LastName" />
+    <result column="task_security3_phone" jdbcType="VARCHAR" property="security3Phone" />
     <result column="task_security3_shift" jdbcType="CHAR" property="security3Shift" />
     <result column="task_security4_id" jdbcType="BIGINT" property="security4Id" />
     <result column="task_security4_username" jdbcType="VARCHAR" property="security4Username" />
     <result column="task_security4_internal_id" jdbcType="VARCHAR" property="security4InternalId" />
     <result column="task_security4_first_name" jdbcType="VARCHAR" property="security4FirstName" />
     <result column="task_security4_last_name" jdbcType="VARCHAR" property="security4LastName" />
+    <result column="task_security4_phone" jdbcType="VARCHAR" property="security4Phone" />
     <result column="task_security4_shift" jdbcType="CHAR" property="security4Shift" />
     <result column="task_nip_username_pass_code" jdbcType="VARCHAR" property="nipUsernamePassCode" />
     <result column="task_nip_confirm_username" jdbcType="VARCHAR" property="nipConfirmUsername" />

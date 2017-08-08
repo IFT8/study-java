@@ -275,12 +275,12 @@
         <!--</table>-->
 
         <!--<table tableName="t_crew" domainObjectName="CrewBean">-->
-            <!--<generatedKey column="crew_id" sqlStatement="Mysql" identity="true"/>-->
-            <!--<columnRenamingRule searchString="crew_" replaceString=""/>-->
+        <!--<generatedKey column="crew_id" sqlStatement="Mysql" identity="true"/>-->
+        <!--<columnRenamingRule searchString="crew_" replaceString=""/>-->
         <!--</table>-->
         <!--<table tableName="t_client" domainObjectName="ClientBean">-->
-            <!--<generatedKey column="client_id" sqlStatement="Mysql" identity="true"/>-->
-            <!--<columnRenamingRule searchString="client_" replaceString=""/>-->
+        <!--<generatedKey column="client_id" sqlStatement="Mysql" identity="true"/>-->
+        <!--<columnRenamingRule searchString="client_" replaceString=""/>-->
         <!--</table>-->
 
         <table tableName="t_task" domainObjectName="TaskBean">
@@ -291,6 +291,11 @@
             <columnOverride column="task_source_task_id" property="sourceTaskId"/>
             <columnOverride column="task_source_task_complex_id" property="sourceTaskOriginalComplexId"/>
             <columnOverride column="task_last_generate_xml_task_status" property="lastGenerateXmlTaskStatus"/>
+        </table>
+
+        <table tableName="t_task_inter_change" domainObjectName="TaskInterChangeBean">
+            <generatedKey column="ic_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="ic_" replaceString=""/>
         </table>
     </context>
 </generatorConfiguration>

@@ -2,16 +2,13 @@ package com.comodin.fleet.bean;
 
 import com.comodin.basic.util.date.DateUtil;
 import com.comodin.basic.validation.IBaseValidGroup;
-import com.comodin.basic.validation.constraints.ValidDateTimeFormat;
-import com.comodin.basic.validation.constraints.ValidLength;
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import com.comodin.basic.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.*;
+import javax.validation.constraints.*;
+import org.hibernate.validator.constraints.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue"})
 @Table(name = "t_task")
@@ -163,6 +160,30 @@ public class TaskBean implements Serializable {
 
     /**
      * <pre>
+     * DB remark: interchange,["",ORIG,DEST]【date:2017-07-28 by:supeng】
+     * DB column: task_inter_change_type	CHAR(4)	<--->	interChangeType	java.lang.String
+     * DB is  Nullable: true
+     * DB defaultValue: null
+     * </pre>
+     */
+    @Length(max = 4, message = "{TASK_BEAN_INTER_CHANGE_TYPE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Column(name = "task_inter_change_type")
+    private String interChangeType;
+
+    /**
+     * <pre>
+     * DB remark: interchange,原先的任务复合ID，组成方式【|4|26|20161118|1101|1|】【|SIO公司内部ID|SIO公司网点内部ID|路线日期[yyyyMMdd]|路线ID|任务ID|】【date:2017-07-28 by:supeng】
+     * DB column: task_inter_change_original_task_complex_id	VARCHAR(100)	<--->	interChangeOriginalComplexId	java.lang.String
+     * DB is  Nullable: true
+     * DB defaultValue: null
+     * </pre>
+     */
+    @Length(max = 100, message = "{TASK_BEAN_INTER_CHANGE_ORIGINAL_COMPLEX_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Column(name = "task_inter_change_original_task_complex_id")
+    private String interChangeOriginalComplexId;
+
+    /**
+     * <pre>
      * DB remark: interchange任务时地址坐标纬度,浮点型
      * DB column: task_inter_change_latitude	VARCHAR(15)	<--->	interChangeLatitude	java.lang.String
      * DB is  Nullable: true
@@ -184,6 +205,30 @@ public class TaskBean implements Serializable {
     @Length(max = 15, message = "{TASK_BEAN_INTER_CHANGE_LONGITUDE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_inter_change_longitude")
     private String interChangeLongitude;
+
+    /**
+     * <pre>
+     * DB remark: 完成任务（或者部分完成任务）时地址坐标纬度,浮点型
+     * DB column: task_complete_latitude	VARCHAR(15)	<--->	completeLatitude	java.lang.String
+     * DB is  Nullable: true
+     * DB defaultValue: null
+     * </pre>
+     */
+    @Length(max = 15, message = "{TASK_BEAN_COMPLETE_LATITUDE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Column(name = "task_complete_latitude")
+    private String completeLatitude;
+
+    /**
+     * <pre>
+     * DB remark: 完成任务（或者部分完成任务）时地址坐标经度,浮点型
+     * DB column: task_complete_longitude	VARCHAR(15)	<--->	completeLongitude	java.lang.String
+     * DB is  Nullable: true
+     * DB defaultValue: null
+     * </pre>
+     */
+    @Length(max = 15, message = "{TASK_BEAN_COMPLETE_LONGITUDE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Column(name = "task_complete_longitude")
+    private String completeLongitude;
 
     /**
      * <pre>
@@ -886,6 +931,18 @@ public class TaskBean implements Serializable {
 
     /**
      * <pre>
+     * DB remark: 司机电话,与t_crew.crew_phone字段关联
+     * DB column: task_driver_phone	VARCHAR(15)	<--->	driverPhone	java.lang.String
+     * DB is  Nullable: true
+     * DB defaultValue: null
+     * </pre>
+     */
+    @Length(max = 15, message = "{TASK_BEAN_DRIVER_PHONE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Column(name = "task_driver_phone")
+    private String driverPhone;
+
+    /**
+     * <pre>
      * DB remark: 司机shift,与shift_week_start_date,对应【应在生成计划任务,根据人员安排时,设置值也要注意在变更路线时,设置值】
      * DB column: task_driver_shift	CHAR(1)	<--->	driverShift	java.lang.String
      * DB is  Nullable: true
@@ -955,6 +1012,18 @@ public class TaskBean implements Serializable {
     @Length(max = 50, message = "{TASK_BEAN_CASHIER_LAST_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_cashier_last_name")
     private String cashierLastName;
+
+    /**
+     * <pre>
+     * DB remark: 收银员电话,与t_crew.crew_phone字段关联
+     * DB column: task_cashier_phone	VARCHAR(15)	<--->	cashierPhone	java.lang.String
+     * DB is  Nullable: true
+     * DB defaultValue: null
+     * </pre>
+     */
+    @Length(max = 15, message = "{TASK_BEAN_CASHIER_PHONE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Column(name = "task_cashier_phone")
+    private String cashierPhone;
 
     /**
      * <pre>
@@ -1042,6 +1111,18 @@ public class TaskBean implements Serializable {
 
     /**
      * <pre>
+     * DB remark: 保镖1电话,与t_crew.crew_phone字段关联
+     * DB column: task_security1_phone	VARCHAR(15)	<--->	security1Phone	java.lang.String
+     * DB is  Nullable: true
+     * DB defaultValue: null
+     * </pre>
+     */
+    @Length(max = 15, message = "{TASK_BEAN_SECURITY1_PHONE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Column(name = "task_security1_phone")
+    private String security1Phone;
+
+    /**
+     * <pre>
      * DB remark: 保镖1班次,与shift_week_start_date,对应;【应在生成计划任务,根据人员安排时,设置值也要注意在变更路线时,设置值】
      * DB column: task_security1_shift	CHAR(1)	<--->	security1Shift	java.lang.String
      * DB is  Nullable: true
@@ -1111,6 +1192,18 @@ public class TaskBean implements Serializable {
     @Length(max = 50, message = "{TASK_BEAN_SECURITY2_LAST_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_security2_last_name")
     private String security2LastName;
+
+    /**
+     * <pre>
+     * DB remark: 保镖2电话,与t_crew.crew_phone字段关联
+     * DB column: task_security2_phone	VARCHAR(15)	<--->	security2Phone	java.lang.String
+     * DB is  Nullable: true
+     * DB defaultValue: null
+     * </pre>
+     */
+    @Length(max = 15, message = "{TASK_BEAN_SECURITY2_PHONE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Column(name = "task_security2_phone")
+    private String security2Phone;
 
     /**
      * <pre>
@@ -1186,6 +1279,18 @@ public class TaskBean implements Serializable {
 
     /**
      * <pre>
+     * DB remark: 保镖3电话,与t_crew.crew_phone字段关联
+     * DB column: task_security3_phone	VARCHAR(15)	<--->	security3Phone	java.lang.String
+     * DB is  Nullable: true
+     * DB defaultValue: null
+     * </pre>
+     */
+    @Length(max = 15, message = "{TASK_BEAN_SECURITY3_PHONE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Column(name = "task_security3_phone")
+    private String security3Phone;
+
+    /**
+     * <pre>
      * DB remark: 保镖3班次,与shift_week_start_date,对应;【应在生成计划任务,根据人员安排时,设置值也要注意在变更路线时,设置值】
      * DB column: task_security3_shift	CHAR(1)	<--->	security3Shift	java.lang.String
      * DB is  Nullable: true
@@ -1255,6 +1360,18 @@ public class TaskBean implements Serializable {
     @Length(max = 50, message = "{TASK_BEAN_SECURITY4_LAST_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_security4_last_name")
     private String security4LastName;
+
+    /**
+     * <pre>
+     * DB remark: 保镖4电话,与t_crew.crew_phone字段关联
+     * DB column: task_security4_phone	VARCHAR(15)	<--->	security4Phone	java.lang.String
+     * DB is  Nullable: true
+     * DB defaultValue: null
+     * </pre>
+     */
+    @Length(max = 15, message = "{TASK_BEAN_SECURITY4_PHONE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Column(name = "task_security4_phone")
+    private String security4Phone;
 
     /**
      * <pre>
@@ -1412,14 +1529,14 @@ public class TaskBean implements Serializable {
 
     /**
      * <pre>
-     * DB remark: 任务来源哪一方生成的任务【SIO[SIO公司导入进来]，COMODIN[comodin手工创建]，EXCEL[excel批量导入]】
-     * DB column: task_generate_source_party	VARCHAR(7)	<--->	generateSourceParty	java.lang.String
+     * DB remark: 任务来源哪一方生成的任务【SIO公司导入进来分两种：[SIO_0_KIOSKOLIN、SIO_1_COMODIN]，COMODIN[comodin手工创建]，EXCEL[excel批量导入]】
+     * DB column: task_generate_source_party	VARCHAR(20)	<--->	generateSourceParty	java.lang.String
      * DB is  Nullable: false
      * DB defaultValue: null
      * </pre>
      */
     @NotBlank(message = "{TASK_BEAN_GENERATE_SOURCE_PARTY_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 7, message = "{TASK_BEAN_GENERATE_SOURCE_PARTY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 20, message = "{TASK_BEAN_GENERATE_SOURCE_PARTY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "task_generate_source_party")
     private String generateSourceParty;
 
@@ -1807,6 +1924,44 @@ public class TaskBean implements Serializable {
     }
 
     /**
+     * 获取 interchange,["",ORIG,DEST]【date:2017-07-28 by:supeng】
+     *
+     * @return task_inter_change_type - interchange,["",ORIG,DEST]【date:2017-07-28 by:supeng】
+     */
+    public String getInterChangeType() {
+        return interChangeType;
+    }
+
+    /**
+     * 设置 interchange,["",ORIG,DEST]【date:2017-07-28 by:supeng】
+     *
+     * @param interChangeType - interchange,["",ORIG,DEST]【date:2017-07-28 by:supeng】
+     */
+    public TaskBean setInterChangeType(String interChangeType) {
+        this.interChangeType = interChangeType == null ? null : interChangeType.trim();
+        return this;
+    }
+
+    /**
+     * 获取 interchange,原先的任务复合ID，组成方式【|4|26|20161118|1101|1|】【|SIO公司内部ID|SIO公司网点内部ID|路线日期[yyyyMMdd]|路线ID|任务ID|】【date:2017-07-28 by:supeng】
+     *
+     * @return task_inter_change_original_task_complex_id - interchange,原先的任务复合ID，组成方式【|4|26|20161118|1101|1|】【|SIO公司内部ID|SIO公司网点内部ID|路线日期[yyyyMMdd]|路线ID|任务ID|】【date:2017-07-28 by:supeng】
+     */
+    public String getInterChangeOriginalComplexId() {
+        return interChangeOriginalComplexId;
+    }
+
+    /**
+     * 设置 interchange,原先的任务复合ID，组成方式【|4|26|20161118|1101|1|】【|SIO公司内部ID|SIO公司网点内部ID|路线日期[yyyyMMdd]|路线ID|任务ID|】【date:2017-07-28 by:supeng】
+     *
+     * @param interChangeOriginalComplexId - interchange,原先的任务复合ID，组成方式【|4|26|20161118|1101|1|】【|SIO公司内部ID|SIO公司网点内部ID|路线日期[yyyyMMdd]|路线ID|任务ID|】【date:2017-07-28 by:supeng】
+     */
+    public TaskBean setInterChangeOriginalComplexId(String interChangeOriginalComplexId) {
+        this.interChangeOriginalComplexId = interChangeOriginalComplexId == null ? null : interChangeOriginalComplexId.trim();
+        return this;
+    }
+
+    /**
      * 获取 interchange任务时地址坐标纬度,浮点型
      *
      * @return task_inter_change_latitude - interchange任务时地址坐标纬度,浮点型
@@ -1841,6 +1996,44 @@ public class TaskBean implements Serializable {
      */
     public TaskBean setInterChangeLongitude(String interChangeLongitude) {
         this.interChangeLongitude = interChangeLongitude == null ? null : interChangeLongitude.trim();
+        return this;
+    }
+
+    /**
+     * 获取 完成任务（或者部分完成任务）时地址坐标纬度,浮点型
+     *
+     * @return task_complete_latitude - 完成任务（或者部分完成任务）时地址坐标纬度,浮点型
+     */
+    public String getCompleteLatitude() {
+        return completeLatitude;
+    }
+
+    /**
+     * 设置 完成任务（或者部分完成任务）时地址坐标纬度,浮点型
+     *
+     * @param completeLatitude - 完成任务（或者部分完成任务）时地址坐标纬度,浮点型
+     */
+    public TaskBean setCompleteLatitude(String completeLatitude) {
+        this.completeLatitude = completeLatitude == null ? null : completeLatitude.trim();
+        return this;
+    }
+
+    /**
+     * 获取 完成任务（或者部分完成任务）时地址坐标经度,浮点型
+     *
+     * @return task_complete_longitude - 完成任务（或者部分完成任务）时地址坐标经度,浮点型
+     */
+    public String getCompleteLongitude() {
+        return completeLongitude;
+    }
+
+    /**
+     * 设置 完成任务（或者部分完成任务）时地址坐标经度,浮点型
+     *
+     * @param completeLongitude - 完成任务（或者部分完成任务）时地址坐标经度,浮点型
+     */
+    public TaskBean setCompleteLongitude(String completeLongitude) {
+        this.completeLongitude = completeLongitude == null ? null : completeLongitude.trim();
         return this;
     }
 
@@ -2928,6 +3121,25 @@ public class TaskBean implements Serializable {
     }
 
     /**
+     * 获取 司机电话,与t_crew.crew_phone字段关联
+     *
+     * @return task_driver_phone - 司机电话,与t_crew.crew_phone字段关联
+     */
+    public String getDriverPhone() {
+        return driverPhone;
+    }
+
+    /**
+     * 设置 司机电话,与t_crew.crew_phone字段关联
+     *
+     * @param driverPhone - 司机电话,与t_crew.crew_phone字段关联
+     */
+    public TaskBean setDriverPhone(String driverPhone) {
+        this.driverPhone = driverPhone == null ? null : driverPhone.trim();
+        return this;
+    }
+
+    /**
      * 获取 司机shift,与shift_week_start_date,对应【应在生成计划任务,根据人员安排时,设置值也要注意在变更路线时,设置值】
      *
      * @return task_driver_shift - 司机shift,与shift_week_start_date,对应【应在生成计划任务,根据人员安排时,设置值也要注意在变更路线时,设置值】
@@ -3038,6 +3250,25 @@ public class TaskBean implements Serializable {
      */
     public TaskBean setCashierLastName(String cashierLastName) {
         this.cashierLastName = cashierLastName == null ? null : cashierLastName.trim();
+        return this;
+    }
+
+    /**
+     * 获取 收银员电话,与t_crew.crew_phone字段关联
+     *
+     * @return task_cashier_phone - 收银员电话,与t_crew.crew_phone字段关联
+     */
+    public String getCashierPhone() {
+        return cashierPhone;
+    }
+
+    /**
+     * 设置 收银员电话,与t_crew.crew_phone字段关联
+     *
+     * @param cashierPhone - 收银员电话,与t_crew.crew_phone字段关联
+     */
+    public TaskBean setCashierPhone(String cashierPhone) {
+        this.cashierPhone = cashierPhone == null ? null : cashierPhone.trim();
         return this;
     }
 
@@ -3175,6 +3406,25 @@ public class TaskBean implements Serializable {
     }
 
     /**
+     * 获取 保镖1电话,与t_crew.crew_phone字段关联
+     *
+     * @return task_security1_phone - 保镖1电话,与t_crew.crew_phone字段关联
+     */
+    public String getSecurity1Phone() {
+        return security1Phone;
+    }
+
+    /**
+     * 设置 保镖1电话,与t_crew.crew_phone字段关联
+     *
+     * @param security1Phone - 保镖1电话,与t_crew.crew_phone字段关联
+     */
+    public TaskBean setSecurity1Phone(String security1Phone) {
+        this.security1Phone = security1Phone == null ? null : security1Phone.trim();
+        return this;
+    }
+
+    /**
      * 获取 保镖1班次,与shift_week_start_date,对应;【应在生成计划任务,根据人员安排时,设置值也要注意在变更路线时,设置值】
      *
      * @return task_security1_shift - 保镖1班次,与shift_week_start_date,对应;【应在生成计划任务,根据人员安排时,设置值也要注意在变更路线时,设置值】
@@ -3285,6 +3535,25 @@ public class TaskBean implements Serializable {
      */
     public TaskBean setSecurity2LastName(String security2LastName) {
         this.security2LastName = security2LastName == null ? null : security2LastName.trim();
+        return this;
+    }
+
+    /**
+     * 获取 保镖2电话,与t_crew.crew_phone字段关联
+     *
+     * @return task_security2_phone - 保镖2电话,与t_crew.crew_phone字段关联
+     */
+    public String getSecurity2Phone() {
+        return security2Phone;
+    }
+
+    /**
+     * 设置 保镖2电话,与t_crew.crew_phone字段关联
+     *
+     * @param security2Phone - 保镖2电话,与t_crew.crew_phone字段关联
+     */
+    public TaskBean setSecurity2Phone(String security2Phone) {
+        this.security2Phone = security2Phone == null ? null : security2Phone.trim();
         return this;
     }
 
@@ -3403,6 +3672,25 @@ public class TaskBean implements Serializable {
     }
 
     /**
+     * 获取 保镖3电话,与t_crew.crew_phone字段关联
+     *
+     * @return task_security3_phone - 保镖3电话,与t_crew.crew_phone字段关联
+     */
+    public String getSecurity3Phone() {
+        return security3Phone;
+    }
+
+    /**
+     * 设置 保镖3电话,与t_crew.crew_phone字段关联
+     *
+     * @param security3Phone - 保镖3电话,与t_crew.crew_phone字段关联
+     */
+    public TaskBean setSecurity3Phone(String security3Phone) {
+        this.security3Phone = security3Phone == null ? null : security3Phone.trim();
+        return this;
+    }
+
+    /**
      * 获取 保镖3班次,与shift_week_start_date,对应;【应在生成计划任务,根据人员安排时,设置值也要注意在变更路线时,设置值】
      *
      * @return task_security3_shift - 保镖3班次,与shift_week_start_date,对应;【应在生成计划任务,根据人员安排时,设置值也要注意在变更路线时,设置值】
@@ -3513,6 +3801,25 @@ public class TaskBean implements Serializable {
      */
     public TaskBean setSecurity4LastName(String security4LastName) {
         this.security4LastName = security4LastName == null ? null : security4LastName.trim();
+        return this;
+    }
+
+    /**
+     * 获取 保镖4电话,与t_crew.crew_phone字段关联
+     *
+     * @return task_security4_phone - 保镖4电话,与t_crew.crew_phone字段关联
+     */
+    public String getSecurity4Phone() {
+        return security4Phone;
+    }
+
+    /**
+     * 设置 保镖4电话,与t_crew.crew_phone字段关联
+     *
+     * @param security4Phone - 保镖4电话,与t_crew.crew_phone字段关联
+     */
+    public TaskBean setSecurity4Phone(String security4Phone) {
+        this.security4Phone = security4Phone == null ? null : security4Phone.trim();
         return this;
     }
 
@@ -3762,18 +4069,18 @@ public class TaskBean implements Serializable {
     }
 
     /**
-     * 获取 任务来源哪一方生成的任务【SIO[SIO公司导入进来]，COMODIN[comodin手工创建]，EXCEL[excel批量导入]】
+     * 获取 任务来源哪一方生成的任务【SIO公司导入进来分两种：[SIO_0_KIOSKOLIN、SIO_1_COMODIN]，COMODIN[comodin手工创建]，EXCEL[excel批量导入]】
      *
-     * @return task_generate_source_party - 任务来源哪一方生成的任务【SIO[SIO公司导入进来]，COMODIN[comodin手工创建]，EXCEL[excel批量导入]】
+     * @return task_generate_source_party - 任务来源哪一方生成的任务【SIO公司导入进来分两种：[SIO_0_KIOSKOLIN、SIO_1_COMODIN]，COMODIN[comodin手工创建]，EXCEL[excel批量导入]】
      */
     public String getGenerateSourceParty() {
         return generateSourceParty;
     }
 
     /**
-     * 设置 任务来源哪一方生成的任务【SIO[SIO公司导入进来]，COMODIN[comodin手工创建]，EXCEL[excel批量导入]】
+     * 设置 任务来源哪一方生成的任务【SIO公司导入进来分两种：[SIO_0_KIOSKOLIN、SIO_1_COMODIN]，COMODIN[comodin手工创建]，EXCEL[excel批量导入]】
      *
-     * @param generateSourceParty - 任务来源哪一方生成的任务【SIO[SIO公司导入进来]，COMODIN[comodin手工创建]，EXCEL[excel批量导入]】
+     * @param generateSourceParty - 任务来源哪一方生成的任务【SIO公司导入进来分两种：[SIO_0_KIOSKOLIN、SIO_1_COMODIN]，COMODIN[comodin手工创建]，EXCEL[excel批量导入]】
      */
     public TaskBean setGenerateSourceParty(String generateSourceParty) {
         this.generateSourceParty = generateSourceParty == null ? null : generateSourceParty.trim();

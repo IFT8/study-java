@@ -34,6 +34,9 @@
         <module>study_opencv/study_opencv-demo</module>
         <module>study_spring/sp_springboot-jdbc</module>
         <module>study_spring/sp_springboot-web</module>
+
+        <module>study_springCloud/simple-provider-movie</module>
+        <module>study_springCloud/simple-provider-user</module>
     </modules>
 
     <properties>
