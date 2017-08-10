@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 
 @SuppressWarnings("unused")
-public class BaseVo<T extends Serializable> {
+public class BaseVo<T extends Serializable> implements Serializable {
     //通用，
     private Integer draw;
     private Integer start;//通用，从第多少条开始
