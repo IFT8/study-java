@@ -440,7 +440,7 @@ public abstract class AbstractBaseController<T extends Serializable, VO extends 
      *      接口编号：module-012
      *      请求地址：/module/download.php
      *      请求类型：GET
-     *      业务功能：获取，上传功能，JSP页面
+     *      业务功能：获取，文件下载，JSP页面
      * </pre>
      *
      * @param request  //
@@ -449,7 +449,7 @@ public abstract class AbstractBaseController<T extends Serializable, VO extends 
      * @return /module/download.jsp
      */
     @GetMapping(value = "/download" + BaseConstants.INTERCEPTOR_URL_SUFFIX)
-    public String download_GET(HttpServletRequest request, HttpServletResponse response) {
+    public String download_GET(HttpServletRequest request, HttpServletResponse response, String downloadType) {
         return this.getModuleName() + "/download";
     }
 
@@ -459,7 +459,7 @@ public abstract class AbstractBaseController<T extends Serializable, VO extends 
      *      接口编号：module-013
      *      请求地址：/module/download.php
      *      请求类型：POST
-     *      业务功能：上传文件
+     *      业务功能：文件下载
      * </pre>
      *
      * @param request      //
