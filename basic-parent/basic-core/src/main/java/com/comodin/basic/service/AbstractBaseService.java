@@ -179,6 +179,40 @@ public abstract class AbstractBaseService<T extends Serializable, VO extends Bas
 
     /**
      * <pre>
+     *      业务功能：批量删除，根据主键
+     * </pre>
+     *
+     * @param primaryKeys 多主键
+     *
+     * @return 返回删除成功的记录数
+     *
+     * @throws ParameterException     若必需参数不合法，抛出
+     * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
+     */
+    @Override
+    public int batchDeleteByPrimaryKeys(Object... primaryKeys) throws ParameterException, BusinessLogicException {
+        //TODO 需要各子类，自行实现业务逻辑....  // by:supeng date:2017-7-9 10:56:04
+        return 0;
+    }
+
+    /**
+     * <pre>
+     *      业务功能：实现业务逻辑删除功能，此处需在数据库对应的表中
+     * </pre>
+     *
+     * @param primaryKeys 要删除业务逻辑的主键，可以是多个
+     *
+     * @throws ParameterException     若必需参数不合法，抛出
+     * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
+     */
+    @Override
+    public int batchDeleteFlagByPrimaryKeys(Object... primaryKeys) throws ParameterException, BusinessLogicException {
+        //TODO 需要各子类，自行实现业务逻辑....  // by:supeng date:2017-7-9 10:56:04
+        return 0;
+    }
+
+    /**
+     * <pre>
      *     业务功能：根据实体record中的属性进行查询，删除符合的记录
      * </pre>
      *
@@ -211,39 +245,6 @@ public abstract class AbstractBaseService<T extends Serializable, VO extends Bas
         return baseDao.deleteByExample(example);
     }
 
-    /**
-     * <pre>
-     *      业务功能：批量删除，根据主键
-     * </pre>
-     *
-     * @param primaryKeys 多主键
-     *
-     * @return 返回删除成功的记录数
-     *
-     * @throws ParameterException     若必需参数不合法，抛出
-     * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
-     */
-    @Override
-    public int batchDeleteByPrimaryKeys(Object... primaryKeys) throws ParameterException, BusinessLogicException {
-        //TODO 需要各子类，自行实现业务逻辑....  // by:supeng date:2017-7-9 10:56:04
-        return 0;
-    }
-
-    /**
-     * <pre>
-     *      业务功能：实现业务逻辑删除功能，此处需在数据库对应的表中
-     * </pre>
-     *
-     * @param primaryKeys 要删除业务逻辑的主键，可以是多个
-     *
-     * @throws ParameterException     若必需参数不合法，抛出
-     * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
-     */
-    @Override
-    public int batchDeleteFlagByPrimaryKeys(Object... primaryKeys) throws ParameterException, BusinessLogicException {
-        //TODO 需要各子类，自行实现业务逻辑....  // by:supeng date:2017-7-9 10:56:04
-        return 0;
-    }
 
     /**
      * <pre>

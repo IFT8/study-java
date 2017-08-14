@@ -44,15 +44,6 @@ public abstract class BaseExceptionHandler {
         return new ResultEntity(BaseConstants.RESULTS_CODE_ERROR_BUSINESS, message);
     }
 
-    //处理，ExcelPoi异常，以业务逻辑代码返回给客户端
-    @ResponseBody
-    @ExceptionHandler({ExcelPoiException.class})
-    public ResultEntity handleExcelPoiException(ExcelPoiException ex, HttpServletRequest request, HttpServletResponse response) {
-        String message = getIn18NMessage(ex, ex.getStrings(), request, response);
-        log.error(message, ex);
-        return new ResultEntity(BaseConstants.RESULTS_CODE_ERROR_BUSINESS, message);
-    }
-
     @ResponseBody
     @ExceptionHandler({UploadDataErrorException.class})
     public ResultEntity handleUploadDataErrorException(UploadDataErrorException ex, HttpServletRequest request, HttpServletResponse response) {

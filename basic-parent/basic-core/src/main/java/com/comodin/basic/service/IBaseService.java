@@ -19,6 +19,7 @@ import java.util.List;
 @SuppressWarnings({"UnusedReturnValue", "unused"})
 public interface IBaseService<T extends Serializable, VO extends BaseVo<T>> {
 
+
     /**
      * <pre>
      *      业务功能：保存一个实体，null的属性也会保存，不会使用数据库默认值
@@ -134,6 +135,32 @@ public interface IBaseService<T extends Serializable, VO extends BaseVo<T>> {
 
     /**
      * <pre>
+     *      业务功能：批量删除，根据主键
+     * </pre>
+     *
+     * @param primaryKeys 多主键
+     *
+     * @return 返回删除成功的记录数
+     *
+     * @throws ParameterException     若必需参数不合法，抛出
+     * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
+     */
+    int batchDeleteByPrimaryKeys(Object... primaryKeys) throws ParameterException, BusinessLogicException;
+
+    /**
+     * <pre>
+     *      业务功能：实现业务逻辑删除功能，此处需在数据库对应的表中
+     * </pre>
+     *
+     * @param primaryKeys 要删除业务逻辑的主键，可以是多个
+     *
+     * @throws ParameterException     若必需参数不合法，抛出
+     * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
+     */
+    int batchDeleteFlagByPrimaryKeys(Object... primaryKeys) throws ParameterException, BusinessLogicException;
+
+    /**
+     * <pre>
      *     业务功能：根据实体record中的属性进行查询，删除符合的记录
      * </pre>
      *
@@ -160,31 +187,6 @@ public interface IBaseService<T extends Serializable, VO extends BaseVo<T>> {
      */
     int deleteByExample(Object example) throws ParameterException, BusinessLogicException;
 
-    /**
-     * <pre>
-     *      业务功能：批量删除，根据主键
-     * </pre>
-     *
-     * @param primaryKeys 多主键
-     *
-     * @return 返回删除成功的记录数
-     *
-     * @throws ParameterException     若必需参数不合法，抛出
-     * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
-     */
-    int batchDeleteByPrimaryKeys(Object... primaryKeys) throws ParameterException, BusinessLogicException;
-
-    /**
-     * <pre>
-     *      业务功能：实现业务逻辑删除功能，此处需在数据库对应的表中
-     * </pre>
-     *
-     * @param primaryKeys 要删除业务逻辑的主键，可以是多个
-     *
-     * @throws ParameterException     若必需参数不合法，抛出
-     * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
-     */
-    int batchDeleteFlagByPrimaryKeys(Object... primaryKeys) throws ParameterException, BusinessLogicException;
 
     /**
      * <pre>
@@ -450,9 +452,4 @@ public interface IBaseService<T extends Serializable, VO extends BaseVo<T>> {
      * @throws BusinessLogicException 预留【根据各模块自身的业务逻辑需求，自行抛出】
      */
     List<T> getListByVo(VO vo, Example example) throws ParameterException, BusinessLogicException;
-
-
-    //Map<String, T> batchSaveOrUpdateListByPropertyName(Map<String, T> mapInsertBeanList, Map<String, T> mapUpdateBeanList, String propertyName, Class<T> beanEntityClass) throws ParameterException, BusinessLogicException;
-    //
-    //Map<String, T> batchSaveOrUpdateListByPropertyName(Map<String, T> mapInsertBeanList, Map<String, T> mapUpdateBeanList, String propertyName, Example example) throws ParameterException, BusinessLogicException;
 }

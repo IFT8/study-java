@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.comodin.fleet.dao.TaskInterChangeBeanMapper">
-  <resultMap id="BaseResultMap" type="com.comodin.fleet.bean.TaskInterChangeBean">
+<mapper namespace="com.comodin.fleet.core.mapper.TaskInterChangeBeanMapper">
+  <resultMap id="BaseResultMap" type="com.comodin.fleet.core.bean.TaskInterChangeBean">
     <!--
       WARNING - @mbg.generated
     -->
@@ -11,7 +11,10 @@
     <result column="ic_from_branch_internal_id" jdbcType="VARCHAR" property="fromBranchInternalId" />
     <result column="ic_from_service_date" jdbcType="CHAR" property="fromServiceDate" />
     <result column="ic_from_route_id" jdbcType="VARCHAR" property="fromRouteId" />
-    <result column="ic_from_task_ids" jdbcType="VARCHAR" property="fromTaskIds" />
+    <result column="ic_from_driver_id" jdbcType="BIGINT" property="fromDriverId" />
+    <result column="ic_from_driver_internal_id" jdbcType="VARCHAR" property="fromDriverInternalId" />
+    <result column="ic_from_driver_phone" jdbcType="VARCHAR" property="fromDriverPhone" />
+    <result column="ic_from_task_pk_ids" jdbcType="VARCHAR" property="fromTaskPkIds" />
     <result column="ic_from_evidence_picture" jdbcType="VARCHAR" property="fromEvidencePicture" />
     <result column="ic_from_signature_picture" jdbcType="VARCHAR" property="fromSignaturePicture" />
     <result column="ic_from_latitude" jdbcType="VARCHAR" property="fromLatitude" />
@@ -21,7 +24,10 @@
     <result column="ic_to_branch_internal_id" jdbcType="VARCHAR" property="toBranchInternalId" />
     <result column="ic_to_service_date" jdbcType="CHAR" property="toServiceDate" />
     <result column="ic_to_route_id" jdbcType="VARCHAR" property="toRouteId" />
-    <result column="ic_to_task_ids" jdbcType="VARCHAR" property="toTaskIds" />
+    <result column="ic_to_driver_id" jdbcType="BIGINT" property="toDriverId" />
+    <result column="ic_to_driver_internal_id" jdbcType="VARCHAR" property="toDriverInternalId" />
+    <result column="ic_to_driver_phone" jdbcType="VARCHAR" property="toDriverPhone" />
+    <result column="ic_to_task_pk_ids" jdbcType="VARCHAR" property="toTaskPkIds" />
     <result column="ic_to_evidence_picture" jdbcType="VARCHAR" property="toEvidencePicture" />
     <result column="ic_to_signature_picture" jdbcType="VARCHAR" property="toSignaturePicture" />
     <result column="ic_to_latitude" jdbcType="VARCHAR" property="toLatitude" />
