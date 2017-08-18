@@ -302,7 +302,7 @@
             <generatedKey column="script_id" sqlStatement="Mysql" identity="true"/>
             <columnRenamingRule searchString="script_" replaceString=""/>
         </table>
-        <table tableName="t_sio_login_account" domainObjectName="SioLoginAccount">
+        <table tableName="t_sio_login_account" domainObjectName="SioLoginAccountBean">
             <generatedKey column="account_id" sqlStatement="Mysql" identity="true"/>
             <columnRenamingRule searchString="account_" replaceString=""/>
         </table>
