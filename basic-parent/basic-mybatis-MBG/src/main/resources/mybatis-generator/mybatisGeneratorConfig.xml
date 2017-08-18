@@ -297,5 +297,15 @@
             <generatedKey column="ic_id" sqlStatement="Mysql" identity="true"/>
             <columnRenamingRule searchString="ic_" replaceString=""/>
         </table>
+
+        <table tableName="t_db_script_patch" domainObjectName="DbScriptPatchBean">
+            <generatedKey column="script_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="script_" replaceString=""/>
+        </table>
+        <table tableName="t_sio_login_account" domainObjectName="SioLoginAccount">
+            <generatedKey column="account_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="account_" replaceString=""/>
+        </table>
+
     </context>
 </generatorConfiguration>
