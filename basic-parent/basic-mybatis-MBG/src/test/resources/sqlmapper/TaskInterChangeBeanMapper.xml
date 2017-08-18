@@ -15,7 +15,10 @@
     <result column="ic_from_route_id" jdbcType="VARCHAR" property="fromRouteId" />
     <result column="ic_from_task_pk_ids" jdbcType="VARCHAR" property="fromTaskPkIds" />
     <result column="ic_from_driver_id" jdbcType="BIGINT" property="fromDriverId" />
+    <result column="ic_from_driver_username" jdbcType="VARCHAR" property="fromDriverUsername" />
     <result column="ic_from_driver_internal_id" jdbcType="VARCHAR" property="fromDriverInternalId" />
+    <result column="ic_from_driver_first_name" jdbcType="VARCHAR" property="fromDriverFirstName" />
+    <result column="ic_from_driver_last_name" jdbcType="VARCHAR" property="fromDriverLastName" />
     <result column="ic_from_driver_phone" jdbcType="VARCHAR" property="fromDriverPhone" />
     <result column="ic_from_vehicle_id" jdbcType="BIGINT" property="fromVehicleId" />
     <result column="ic_from_vehicle_internal_id" jdbcType="VARCHAR" property="fromVehicleInternalId" />
@@ -32,7 +35,10 @@
     <result column="ic_to_route_id" jdbcType="VARCHAR" property="toRouteId" />
     <result column="ic_to_task_pk_ids" jdbcType="VARCHAR" property="toTaskPkIds" />
     <result column="ic_to_driver_id" jdbcType="BIGINT" property="toDriverId" />
+    <result column="ic_to_driver_username" jdbcType="VARCHAR" property="toDriverUsername" />
     <result column="ic_to_driver_internal_id" jdbcType="VARCHAR" property="toDriverInternalId" />
+    <result column="ic_to_driver_first_name" jdbcType="VARCHAR" property="toDriverFirstName" />
+    <result column="ic_to_driver_last_name" jdbcType="VARCHAR" property="toDriverLastName" />
     <result column="ic_to_driver_phone" jdbcType="VARCHAR" property="toDriverPhone" />
     <result column="ic_to_vehicle_id" jdbcType="BIGINT" property="toVehicleId" />
     <result column="ic_to_vehicle_internal_id" jdbcType="VARCHAR" property="toVehicleInternalId" />

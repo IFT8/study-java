@@ -2,13 +2,16 @@ package com.comodin.fleet.core.bean;
 
 import com.comodin.basic.util.date.DateUtil;
 import com.comodin.basic.validation.IBaseValidGroup;
-import com.comodin.basic.validation.constraints.*;
+import com.comodin.basic.validation.constraints.ValidDateTimeFormat;
+import com.comodin.basic.validation.constraints.ValidLength;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.*;
-import javax.validation.constraints.*;
-import org.hibernate.validator.constraints.*;
-import org.springframework.format.annotation.DateTimeFormat;
 
 @SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue"})
 @Table(name = "t_task_inter_change")
@@ -144,6 +147,18 @@ public class TaskInterChangeBean implements Serializable {
 
     /**
      * <pre>
+     * DB remark: 司机username,与t_crew.crew_username冗余
+     * DB column: ic_from_driver_username	VARCHAR(20)	<--->	fromDriverUsername	java.lang.String
+     * DB is  Nullable: true
+     * DB defaultValue: null
+     * </pre>
+     */
+    @Length(max = 20, message = "{TASK_INTER_CHANGE_BEAN_FROM_DRIVER_USERNAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Column(name = "ic_from_driver_username")
+    private String fromDriverUsername;
+
+    /**
+     * <pre>
      * DB remark: 司机内部编号,与t_crew.crew_internal_id冗余
      * DB column: ic_from_driver_internal_id	VARCHAR(15)	<--->	fromDriverInternalId	java.lang.String
      * DB is  Nullable: true
@@ -153,6 +168,30 @@ public class TaskInterChangeBean implements Serializable {
     @Length(max = 15, message = "{TASK_INTER_CHANGE_BEAN_FROM_DRIVER_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "ic_from_driver_internal_id")
     private String fromDriverInternalId;
+
+    /**
+     * <pre>
+     * DB remark: 司机名字,与t_crew.crew_first_name字段关联
+     * DB column: ic_from_driver_first_name	VARCHAR(50)	<--->	fromDriverFirstName	java.lang.String
+     * DB is  Nullable: true
+     * DB defaultValue: null
+     * </pre>
+     */
+    @Length(max = 50, message = "{TASK_INTER_CHANGE_BEAN_FROM_DRIVER_FIRST_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Column(name = "ic_from_driver_first_name")
+    private String fromDriverFirstName;
+
+    /**
+     * <pre>
+     * DB remark: 司机姓氏,与t_crew.crew_last_name字段关联
+     * DB column: ic_from_driver_last_name	VARCHAR(50)	<--->	fromDriverLastName	java.lang.String
+     * DB is  Nullable: true
+     * DB defaultValue: null
+     * </pre>
+     */
+    @Length(max = 50, message = "{TASK_INTER_CHANGE_BEAN_FROM_DRIVER_LAST_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Column(name = "ic_from_driver_last_name")
+    private String fromDriverLastName;
 
     /**
      * <pre>
@@ -353,6 +392,18 @@ public class TaskInterChangeBean implements Serializable {
 
     /**
      * <pre>
+     * DB remark: 司机username,与t_crew.crew_username冗余
+     * DB column: ic_to_driver_username	VARCHAR(20)	<--->	toDriverUsername	java.lang.String
+     * DB is  Nullable: true
+     * DB defaultValue: null
+     * </pre>
+     */
+    @Length(max = 20, message = "{TASK_INTER_CHANGE_BEAN_TO_DRIVER_USERNAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Column(name = "ic_to_driver_username")
+    private String toDriverUsername;
+
+    /**
+     * <pre>
      * DB remark: 司机内部编号,与t_crew.crew_internal_id冗余
      * DB column: ic_to_driver_internal_id	VARCHAR(15)	<--->	toDriverInternalId	java.lang.String
      * DB is  Nullable: true
@@ -362,6 +413,30 @@ public class TaskInterChangeBean implements Serializable {
     @Length(max = 15, message = "{TASK_INTER_CHANGE_BEAN_TO_DRIVER_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "ic_to_driver_internal_id")
     private String toDriverInternalId;
+
+    /**
+     * <pre>
+     * DB remark: 司机名字,与t_crew.crew_first_name字段关联
+     * DB column: ic_to_driver_first_name	VARCHAR(50)	<--->	toDriverFirstName	java.lang.String
+     * DB is  Nullable: true
+     * DB defaultValue: null
+     * </pre>
+     */
+    @Length(max = 50, message = "{TASK_INTER_CHANGE_BEAN_TO_DRIVER_FIRST_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Column(name = "ic_to_driver_first_name")
+    private String toDriverFirstName;
+
+    /**
+     * <pre>
+     * DB remark: 司机姓氏,与t_crew.crew_last_name字段关联
+     * DB column: ic_to_driver_last_name	VARCHAR(50)	<--->	toDriverLastName	java.lang.String
+     * DB is  Nullable: true
+     * DB defaultValue: null
+     * </pre>
+     */
+    @Length(max = 50, message = "{TASK_INTER_CHANGE_BEAN_TO_DRIVER_LAST_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Column(name = "ic_to_driver_last_name")
+    private String toDriverLastName;
 
     /**
      * <pre>
@@ -705,6 +780,25 @@ public class TaskInterChangeBean implements Serializable {
     }
 
     /**
+     * 获取 司机username,与t_crew.crew_username冗余
+     *
+     * @return ic_from_driver_username - 司机username,与t_crew.crew_username冗余
+     */
+    public String getFromDriverUsername() {
+        return fromDriverUsername;
+    }
+
+    /**
+     * 设置 司机username,与t_crew.crew_username冗余
+     *
+     * @param fromDriverUsername - 司机username,与t_crew.crew_username冗余
+     */
+    public TaskInterChangeBean setFromDriverUsername(String fromDriverUsername) {
+        this.fromDriverUsername = fromDriverUsername == null ? null : fromDriverUsername.trim();
+        return this;
+    }
+
+    /**
      * 获取 司机内部编号,与t_crew.crew_internal_id冗余
      *
      * @return ic_from_driver_internal_id - 司机内部编号,与t_crew.crew_internal_id冗余
@@ -720,6 +814,44 @@ public class TaskInterChangeBean implements Serializable {
      */
     public TaskInterChangeBean setFromDriverInternalId(String fromDriverInternalId) {
         this.fromDriverInternalId = fromDriverInternalId == null ? null : fromDriverInternalId.trim();
+        return this;
+    }
+
+    /**
+     * 获取 司机名字,与t_crew.crew_first_name字段关联
+     *
+     * @return ic_from_driver_first_name - 司机名字,与t_crew.crew_first_name字段关联
+     */
+    public String getFromDriverFirstName() {
+        return fromDriverFirstName;
+    }
+
+    /**
+     * 设置 司机名字,与t_crew.crew_first_name字段关联
+     *
+     * @param fromDriverFirstName - 司机名字,与t_crew.crew_first_name字段关联
+     */
+    public TaskInterChangeBean setFromDriverFirstName(String fromDriverFirstName) {
+        this.fromDriverFirstName = fromDriverFirstName == null ? null : fromDriverFirstName.trim();
+        return this;
+    }
+
+    /**
+     * 获取 司机姓氏,与t_crew.crew_last_name字段关联
+     *
+     * @return ic_from_driver_last_name - 司机姓氏,与t_crew.crew_last_name字段关联
+     */
+    public String getFromDriverLastName() {
+        return fromDriverLastName;
+    }
+
+    /**
+     * 设置 司机姓氏,与t_crew.crew_last_name字段关联
+     *
+     * @param fromDriverLastName - 司机姓氏,与t_crew.crew_last_name字段关联
+     */
+    public TaskInterChangeBean setFromDriverLastName(String fromDriverLastName) {
+        this.fromDriverLastName = fromDriverLastName == null ? null : fromDriverLastName.trim();
         return this;
     }
 
@@ -1028,6 +1160,25 @@ public class TaskInterChangeBean implements Serializable {
     }
 
     /**
+     * 获取 司机username,与t_crew.crew_username冗余
+     *
+     * @return ic_to_driver_username - 司机username,与t_crew.crew_username冗余
+     */
+    public String getToDriverUsername() {
+        return toDriverUsername;
+    }
+
+    /**
+     * 设置 司机username,与t_crew.crew_username冗余
+     *
+     * @param toDriverUsername - 司机username,与t_crew.crew_username冗余
+     */
+    public TaskInterChangeBean setToDriverUsername(String toDriverUsername) {
+        this.toDriverUsername = toDriverUsername == null ? null : toDriverUsername.trim();
+        return this;
+    }
+
+    /**
      * 获取 司机内部编号,与t_crew.crew_internal_id冗余
      *
      * @return ic_to_driver_internal_id - 司机内部编号,与t_crew.crew_internal_id冗余
@@ -1043,6 +1194,44 @@ public class TaskInterChangeBean implements Serializable {
      */
     public TaskInterChangeBean setToDriverInternalId(String toDriverInternalId) {
         this.toDriverInternalId = toDriverInternalId == null ? null : toDriverInternalId.trim();
+        return this;
+    }
+
+    /**
+     * 获取 司机名字,与t_crew.crew_first_name字段关联
+     *
+     * @return ic_to_driver_first_name - 司机名字,与t_crew.crew_first_name字段关联
+     */
+    public String getToDriverFirstName() {
+        return toDriverFirstName;
+    }
+
+    /**
+     * 设置 司机名字,与t_crew.crew_first_name字段关联
+     *
+     * @param toDriverFirstName - 司机名字,与t_crew.crew_first_name字段关联
+     */
+    public TaskInterChangeBean setToDriverFirstName(String toDriverFirstName) {
+        this.toDriverFirstName = toDriverFirstName == null ? null : toDriverFirstName.trim();
+        return this;
+    }
+
+    /**
+     * 获取 司机姓氏,与t_crew.crew_last_name字段关联
+     *
+     * @return ic_to_driver_last_name - 司机姓氏,与t_crew.crew_last_name字段关联
+     */
+    public String getToDriverLastName() {
+        return toDriverLastName;
+    }
+
+    /**
+     * 设置 司机姓氏,与t_crew.crew_last_name字段关联
+     *
+     * @param toDriverLastName - 司机姓氏,与t_crew.crew_last_name字段关联
+     */
+    public TaskInterChangeBean setToDriverLastName(String toDriverLastName) {
+        this.toDriverLastName = toDriverLastName == null ? null : toDriverLastName.trim();
         return this;
     }
 
