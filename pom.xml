@@ -31,11 +31,10 @@
 
         <module>study_opencv/study_opencv-demo</module>
 
-        <module>study_spring/sp_springBoot</module>
-        <module>study_spring/sp_springboot-jdbc</module>
-        <module>study_spring/sp_springboot-web</module>
+        <module>study_springBoot/sp_springBoot01-base</module>
+        <module>study_springBoot/sp_springBoot02-jdbc</module>
+        <module>study_springBoot/sp_springBoot03-web</module>
 
-        <module>study_springBoot/sp_springBoot01-Base</module>
 
         <module>study_springCloud/simple-provider-movie</module>
         <module>study_springCloud/simple-provider-user</module>
