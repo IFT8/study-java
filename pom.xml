@@ -20,8 +20,6 @@
         <module>study_search/sp_search-Nutch</module>
         <module>study_security/sp_security-Shiro</module>
 
-        <module>study_spring/sp_springBoot</module>
-
         <module>study_workflow/sp_workflow-Activiti</module>
 
         <module>study_ws/sp_ws-CXF</module>
@@ -32,8 +30,12 @@
         <module>study_ws/sp_ws-Soap/sp_ws-Soap_server</module>
 
         <module>study_opencv/study_opencv-demo</module>
+
+        <module>study_spring/sp_springBoot</module>
         <module>study_spring/sp_springboot-jdbc</module>
         <module>study_spring/sp_springboot-web</module>
+
+        <module>study_springBoot/sp_springBoot01-Base</module>
 
         <module>study_springCloud/simple-provider-movie</module>
         <module>study_springCloud/simple-provider-user</module>
@@ -950,26 +952,26 @@
                     <groupId>org.eclipse.m2e</groupId>
                     <artifactId>lifecycle-mapping</artifactId>
                     <version>1.0.0</version>
-                    <configuration>
-                        <lifecycleMappingMetadata>
-                            <pluginExecutions>
-                                <pluginExecution>
-                                    <pluginExecutionFilter>
-                                        <groupId>org.zeroturnaround</groupId>
-                                        <artifactId>jrebel-maven-plugin</artifactId>
-                                        <versionRange>1.1.7</versionRange>
-                                        <goals>
-                                            <goal>generate</goal>
-                                        </goals>
-                                    </pluginExecutionFilter>
-                                    <action>
-                                        <!--suppress CheckTagEmptyBody -->
-                                        <ignore></ignore>
-                                    </action>
-                                </pluginExecution>
-                            </pluginExecutions>
-                        </lifecycleMappingMetadata>
-                    </configuration>
+                    <!--<configuration>-->
+                        <!--<lifecycleMappingMetadata>-->
+                            <!--<pluginExecutions>-->
+                                <!--<pluginExecution>-->
+                                    <!--<pluginExecutionFilter>-->
+                                        <!--<groupId>org.zeroturnaround</groupId>-->
+                                        <!--<artifactId>jrebel-maven-plugin</artifactId>-->
+                                        <!--<versionRange>1.1.7</versionRange>-->
+                                        <!--<goals>-->
+                                            <!--<goal>generate</goal>-->
+                                        <!--</goals>-->
+                                    <!--</pluginExecutionFilter>-->
+                                    <!--<action>-->
+                                        <!--&lt;!&ndash;suppress CheckTagEmptyBody &ndash;&gt;-->
+                                        <!--<ignore></ignore>-->
+                                    <!--</action>-->
+                                <!--</pluginExecution>-->
+                            <!--</pluginExecutions>-->
+                        <!--</lifecycleMappingMetadata>-->
+                    <!--</configuration>-->
                 </plugin>
             </plugins>
         </pluginManagement>
