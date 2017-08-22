@@ -1,6 +1,7 @@
-package cn.assupg.study17Web.config;
+package cn.assupg.study.study17Web.config;
 
-import cn.assupg.study17Web.interceptor.LogHandlerInterceptor;
+
+import cn.assupg.study.study17Web.interceptor.LogHandlerInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;

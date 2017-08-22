@@ -1,4 +1,4 @@
-package cn.assupg.study09.s4_EnableLog_ImportBeanDefinitionRegistrar;
+package cn.assupg.study.study09.s4_EnableLog_ImportBeanDefinitionRegistrar;
 
 import org.springframework.context.annotation.Import;
 

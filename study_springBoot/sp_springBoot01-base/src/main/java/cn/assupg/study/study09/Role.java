@@ -1,4 +1,4 @@
-package cn.assupg.study09;
+package cn.assupg.study.study09;
 
 public class Role {
 }

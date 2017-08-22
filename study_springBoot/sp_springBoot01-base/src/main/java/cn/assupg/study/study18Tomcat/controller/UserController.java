@@ -1,4 +1,4 @@
-package cn.assupg.study18Tomcat.controller;
+package cn.assupg.study.study18Tomcat.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

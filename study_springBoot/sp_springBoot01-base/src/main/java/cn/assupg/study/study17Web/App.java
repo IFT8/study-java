@@ -1,4 +1,4 @@
-package cn.assupg.study17Web;
+package cn.assupg.study.study17Web;
 
 
 import org.springframework.boot.SpringApplication;

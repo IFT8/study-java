@@ -1,4 +1,4 @@
-package cn.assupg.study17Web.interceptor;
+package cn.assupg.study.study17Web.interceptor;
 
 
 import org.springframework.web.servlet.HandlerInterceptor;

@@ -1,4 +1,4 @@
-package cn.assupg.study08;
+package cn.assupg.study.study08;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

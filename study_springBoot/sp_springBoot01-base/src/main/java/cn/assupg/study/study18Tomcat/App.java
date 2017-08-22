@@ -1,4 +1,4 @@
-package cn.assupg.study18Tomcat;
+package cn.assupg.study.study18Tomcat;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

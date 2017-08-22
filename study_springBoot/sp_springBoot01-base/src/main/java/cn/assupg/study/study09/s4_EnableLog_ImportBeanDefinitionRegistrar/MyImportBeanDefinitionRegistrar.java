@@ -1,6 +1,6 @@
-package cn.assupg.study09.s4_EnableLog_ImportBeanDefinitionRegistrar;
+package cn.assupg.study.study09.s4_EnableLog_ImportBeanDefinitionRegistrar;
 
-import cn.assupg.study09.User;
+import cn.assupg.study.study09.User;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;

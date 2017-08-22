@@ -1,4 +1,4 @@
-package cn.assupg.study09;
+package cn.assupg.study.study09;
 
 import org.springframework.context.annotation.ImportSelector;
 import org.springframework.core.type.AnnotationMetadata;

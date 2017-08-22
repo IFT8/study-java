@@ -1,6 +1,6 @@
-package cn.assupg.study09.s3_EnableLog_MyImportSelector;
+package cn.assupg.study.study09.s3_EnableLog_MyImportSelector;
 
-import cn.assupg.study09.User;
+import cn.assupg.study.study09.User;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;

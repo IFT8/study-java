@@ -1,4 +1,4 @@
-package cn.assupg.study08;
+package cn.assupg.study.study08;
 
 public class GBKEncodingConvert implements EncodingConvert{
 

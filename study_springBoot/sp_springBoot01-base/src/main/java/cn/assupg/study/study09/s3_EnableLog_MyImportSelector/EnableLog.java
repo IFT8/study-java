@@ -1,4 +1,4 @@
-package cn.assupg.study09.s3_EnableLog_MyImportSelector;
+package cn.assupg.study.study09.s3_EnableLog_MyImportSelector;
 
 import org.springframework.context.annotation.Import;
 

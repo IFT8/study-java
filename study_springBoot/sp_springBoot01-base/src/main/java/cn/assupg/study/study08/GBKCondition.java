@@ -1,4 +1,4 @@
-package cn.assupg.study08;
+package cn.assupg.study.study08;
 
 import org.springframework.context.annotation.Condition;
 import org.springframework.context.annotation.ConditionContext;
