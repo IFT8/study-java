@@ -5,7 +5,7 @@
     <parent>
         <artifactId>fleet-parent</artifactId>
         <groupId>com.comodin.fleet</groupId>
-        <version>1.0.0</version>
+        <version>1.0-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
