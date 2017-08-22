@@ -6,7 +6,8 @@
     <groupId>cn.assupg.study</groupId>
     <artifactId>study-java-parent</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
+
     <modules>
         <module>basic-parent/basic-core</module>
         <module>basic-parent/basic-demo</module>
@@ -551,39 +552,59 @@
         </dependencies>
     </dependencyManagement>
 
+
     <build>
         <finalName>${project.artifactId}</finalName>
 
-        <!--<resources>-->
-            <!--<resource>-->
-                <!--<directory>src/main/resources</directory>-->
-                <!--<excludes>&lt;!&ndash;资源根目录排除各环境的配置，使用单独的资源目录来指定&ndash;&gt;-->
-                    <!--<exclude>*.properties</exclude>-->
-                    <!--<exclude>environment/</exclude>-->
-                <!--</excludes>-->
-            <!--</resource>-->
-            <!--<resource>-->
-                <!--<directory>../fleet-core/src/main/resources/environment/${env}</directory>-->
-            <!--</resource>-->
-            <!--&lt;!&ndash;<resource>&ndash;&gt;-->
-            <!--&lt;!&ndash;<directory>src/main/resources/environment/${env}</directory>&ndash;&gt;-->
-            <!--&lt;!&ndash;</resource>&ndash;&gt;-->
-            <!--<resource>-->
-                <!--<directory>src/main/resources/environment/${env}</directory>-->
-                <!--<includes>-->
-                    <!--<include>baseConfig.properties</include>-->
-                <!--</includes>-->
-            <!--</resource>-->
-        <!--</resources>-->
-        <!--<testResources>-->
-            <!--<testResource>-->
-                <!--<directory>src/test/resources</directory>-->
-            <!--</testResource>-->
-        <!--</testResources>-->
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes><!--资源根目录排除各环境的配置，使用单独的资源目录来指定-->
+                    <exclude>*.properties</exclude>
+                    <exclude>environment/</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <directory>../fleet-core/src/main/resources/environment/${env}</directory>
+            </resource>
+        </resources>
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+            </testResource>
+        </testResources>
 
         <pluginManagement>
             <plugins>
-                <plugin><!--jrebel 热部署插件,用来生成rebel.xml文件-->
+
+                <plugin>
+                    <groupId>org.eclipse.m2e</groupId>
+                    <artifactId>lifecycle-mapping</artifactId>
+                    <version>1.0.0</version>
+                    <!--<configuration>-->
+                    <!--<lifecycleMappingMetadata>-->
+                    <!--<pluginExecutions>-->
+                    <!--<pluginExecution>-->
+                    <!--<pluginExecutionFilter>-->
+                    <!--<groupId>org.zeroturnaround</groupId>-->
+                    <!--<artifactId>jrebel-maven-plugin</artifactId>-->
+                    <!--<versionRange>1.1.7</versionRange>-->
+                    <!--<goals>-->
+                    <!--<goal>generate</goal>-->
+                    <!--</goals>-->
+                    <!--</pluginExecutionFilter>-->
+                    <!--<action>-->
+                    <!--<ignore/>-->
+                    <!--</action>-->
+                    <!--</pluginExecution>-->
+                    <!--</pluginExecutions>-->
+                    <!--</lifecycleMappingMetadata>-->
+                    <!--</configuration>-->
+                </plugin>
+
+                <!--
+                    jrebel 热部署插件,用来生成rebel.xml文件-->
+                <plugin>
                     <groupId>org.zeroturnaround</groupId>
                     <artifactId>jrebel-maven-plugin</artifactId>
                     <version>1.1.7</version>
@@ -603,7 +624,10 @@
                         </execution>
                     </executions>
                 </plugin>
-                <plugin><!--jetty-maven-plugin-->
+
+                <!--
+                    jetty-maven-plugin-->
+                <plugin>
                     <groupId>org.eclipse.jetty</groupId>
                     <artifactId>jetty-maven-plugin</artifactId>
                     <version>9.4.6.v20170531</version>
@@ -649,7 +673,9 @@
                         </dependency>
                     </dependencies>
                 </plugin>
-                <!--tomcat-maven-plugin-->
+
+                <!--
+                    tomcat-maven-plugin 实现热部署-->
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>tomcat-maven-plugin</artifactId>
@@ -658,98 +684,21 @@
                         <url>${tomcat-maven-plugin.manager.url}</url>
                         <username>${tomcat-maven-plugin.manager.username}</username>
                         <password>${tomcat-maven-plugin.manager.password}</password>
-                        <uriEncoding>UTF-8</uriEncoding>        <!--uriEncoding URL按UTF-8进行编码，这样就解决了中文参数乱码。-->
+                        <uriEncoding>UTF-8</uriEncoding><!--uriEncoding URL按UTF-8进行编码，这样就解决了中文参数乱码。-->
+                        <charset>UTF-8</charset>
                     </configuration>
                 </plugin>
-                <!--添加sql-maven-plugin插件
-                     <executions>
-                        <execution>
-                            <id>drop-db-before-test-if-any</id>
-                            <phase>process-test-resources</phase>
-                            <goals>
-                                &lt;!&ndash;suppress MybatisMapperXmlInspection &ndash;&gt;
-                                <goal>execute</goal>
-                            </goals>
-                            <configuration>
-                                <autocommit>true</autocommit>
-                                <sqlCommand>DROP DATABASE IF EXISTS fleet_supeng;</sqlCommand>
-                                &lt;!&ndash;<onError>continue</onError>&ndash;&gt;
-                            </configuration>
-                        </execution>
-                        &lt;!&ndash;创建数据库&ndash;&gt;
-                        <execution>
-                            <id>create-db</id>
-                            <phase>process-test-resources</phase>
-                            <goals>
-                                &lt;!&ndash;suppress MybatisMapperXmlInspection &ndash;&gt;
-                                <goal>execute</goal>
-                            </goals>
-                            <configuration>
-                                <autocommit>true</autocommit>
-                                <sqlCommand>CREATE DATABASE IF NOT EXISTS fleet_supeng DEFAULT CHARSET utf8 COLLATE
-                                    utf8_general_ci;
-                                </sqlCommand>
-                            </configuration>
-                        </execution>
-                        &lt;!&ndash;创建数据表&ndash;&gt;
-                        <execution>
-                            &lt;!&ndash;<id>default-cli</id>&ndash;&gt;
-                            <id>create-schema</id>
-                            <phase>process-test-resources</phase>
-                            <goals>
-                                &lt;!&ndash;suppress MybatisMapperXmlInspection &ndash;&gt;
-                                <goal>execute</goal>
-                            </goals>
-                            <configuration>
-                                <url>jdbc:mysql://192.168.1.10:3306/fleet_supeng?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;allowMultiQueries=true</url>
-                                <autocommit>true</autocommit>
-                                <srcFiles>
-                                    <srcFile>src/main/resources/dbscript/create_all_tables.sql</srcFile>
-                                    <srcFile>src/main/resources/dbscript/patch.sql</srcFile>
-                                </srcFiles>
-                            </configuration>
-                        </execution>
-                        <execution>
-                            <id>insert-data</id>
-                            <phase>process-test-resources</phase>
-                            <goals>
-                                &lt;!&ndash;suppress MybatisMapperXmlInspection &ndash;&gt;
-                                <goal>execute</goal>
-                            </goals>
-                            <configuration>
-                                <url>jdbc:mysql://192.168.1.10:3306/fleet_supeng?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;allowMultiQueries=true</url>
-                                <autocommit>true</autocommit>
-                                <orderFile>ascending</orderFile>
-                                &lt;!&ndash;<srcFiles>&ndash;&gt;
-                                &lt;!&ndash;<srcFile>src/test/resources/init-TestData.sql</srcFile>&ndash;&gt;
-                                &lt;!&ndash;<srcFile>src/test/resources/init-TestData-latlngdata.sql</srcFile>&ndash;&gt;
-                                &lt;!&ndash;</srcFiles>&ndash;&gt;
-                                <fileset>
-                                    <basedir>${basedir}</basedir>
-                                    <includes>
-                                        <include>src/test/resources/init-TestData.sql</include>
-                                    </includes>
-                                </fileset>
-                            </configuration>
-                        </execution>
-                    </executions>
-                -->
+
+
+                <!--
+                    sql-maven-plugin-->
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>sql-maven-plugin</artifactId>
                     <version>1.5</version>
-                    <!-- specify the dependent JDBC driver here
-                        因为该实例中用到的数据库是mysql,故需依赖于mysql连接驱动-->
-                    <dependencies>
-                        <dependency>
-                            <groupId>mysql</groupId>
-                            <artifactId>mysql-connector-java</artifactId>
-                            <version>${mysql_version}</version>
-                        </dependency>
-                    </dependencies>
-                    <!--为该插件配置数据库连接信息-->
                     <configuration>
                         <forceMojoExecution>true</forceMojoExecution>
+                        <!--为该插件配置数据库连接信息-->
                         <driver>com.mysql.jdbc.Driver</driver>
                         <url>${sql-maven-plugin.url}</url>
                         <username>${sql-maven-plugin.username}</username>
@@ -759,62 +708,302 @@
                         <onError>abort</onError>
                         <!--<printResultSet>true</printResultSet>-->
                     </configuration>
+                    <dependencies><!-- specify the dependent JDBC driver here 因为该实例中用到的数据库是mysql,故需依赖于mysql连接驱动-->
+                        <dependency>
+                            <groupId>mysql</groupId>
+                            <artifactId>mysql-connector-java</artifactId>
+                            <version>5.1.42</version>
+                        </dependency>
+                    </dependencies>
                 </plugin>
-                <plugin><!--mybatis-generator-maven-plugin 生成mybatis映射 -->
+
+                <!--
+                    mybatis-generator-maven-plugin 生成mybatis映射 -->
+                <plugin>
                     <groupId>org.mybatis.generator</groupId>
                     <artifactId>mybatis-generator-maven-plugin</artifactId>
                     <version>1.3.2</version>
+                    <configuration>
+                        <verbose>true</verbose>
+                        <overwrite>true</overwrite>
+                        <configurationFile>${project.basedir}/src/main/resources/generatorConfig.xml</configurationFile>
+                    </configuration>
                     <dependencies>
                         <dependency>
                             <groupId>mysql</groupId>
                             <artifactId>mysql-connector-java</artifactId>
-                            <version>${mysql_version}</version>
+                            <version>5.1.42</version>
                         </dependency>
                         <dependency>
                             <groupId>org.mybatis.generator</groupId>
                             <artifactId>mybatis-generator-core</artifactId>
-                            <version>${mybatis_generator_version}</version>
+                            <version>1.3.5</version>
                         </dependency>
                         <dependency>
                             <groupId>tk.mybatis</groupId>
                             <artifactId>mapper</artifactId>
-                            <version>${mybatis_mapper_version}</version>
+                            <version>3.4.0</version>
                         </dependency>
                     </dependencies>
-                    <configuration>
-                        <verbose>true</verbose>
-                        <overwrite>true</overwrite>
-                        <configurationFile>${project.basedir}/src/main/resources/generatorConfig.xml
-                        </configurationFile>
-                    </configuration>
                 </plugin>
 
+
+                <!--maven-assembly-plugin 的用途是制作项目分发包，
+                  |  该分发包可能包含了项目的可执行文件、源代码、readme、平台脚本等等。
+                  |  maven-assembly-plugin支持各种主流的格式如zip、tar.gz、jar和war等，
+                  |  具体打包哪些文件是高度可控的，例如用户可以 按文件级别的粒度、文件集级别的粒度、模块级别的粒度、以及依赖级别的粒度控制打包，
+                  |  此外，包含和排除配置也是支持的。maven-assembly- plugin要求用户使用一个名为assembly.xml的元数据文件来表述打包，
+                  |  它的single目标可以直接在命令行调用，也可以被绑定至生命周期。
+                  |-->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-resources-plugin</artifactId>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>3.0.0</version>
+                    <configuration>
+                        <encoding>UTF-8</encoding>
+                        <descriptors><!--descriptors 描述文件路径-->
+                            <descriptor>src/main/assembly/package.xml</descriptor>
+                        </descriptors>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>single</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <!--
+                    appassembler-maven-plugin-->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>appassembler-maven-plugin</artifactId>
+                    <version>2.0.0</version>
+                    <configuration>
+                        <!--assembleDirectory:整体包目录 默认是：${project.build.directory}/appassembler -->
+                        <assembleDirectory>${project.build.directory}/appassembler/programs/${project.artifactId}-${project.version}</assembleDirectory>
+                        <!--target jsw 输出的目录 默认是：${project.build.directory}/generated-resources/appassembler-->
+                        <target>${project.build.directory}/appassembler</target>
+
+                        <!--repositoryName：打包的jar，以及maven依赖的jar放到这个目录里面，默认repo-->
+                        <repositoryName>lib</repositoryName>
+                        <!--repositoryLayout lib目录中的jar的存放规则，默认是${groupId}/${artifactId}的目录格式，flat表示直接把jar放到lib目录-->
+                        <repositoryLayout>flat</repositoryLayout>
+
+                        <!--binFolder 可执行脚本的目录-->
+                        <binFolder>bin</binFolder>
+                        <!--binFileExtensions：生成脚本的后缀-->
+                        <binFileExtensions>
+                            <unix>.sh</unix>
+                        </binFileExtensions>
+
+                        <!--configurationDirectory：配置文件的目标目录-->
+                        <configurationDirectory>conf</configurationDirectory>
+                        <!--copyConfigurationDirectory 拷贝，配置文件，到上面的目录中-->
+                        <copyConfigurationDirectory>true</copyConfigurationDirectory>
+                        <includeConfigurationDirectoryInClasspath>true</includeConfigurationDirectoryInClasspath>
+                        <!--configurationSourceDirectory：配置文件原路径，默认为src/main/config-->
+                        <configurationSourceDirectory>src/main/resources/environment/${env}</configurationSourceDirectory>
+
+                        <logsDirectory>logs</logsDirectory>
+                        <tempDirectory>tmp</tempDirectory>
+                        <encoding>UTF-8</encoding>
+                        <!--platforms：生成哪几种平台 生成 linux，windows两种平台的执行脚本-->
+                        <platforms>
+                            <platform>all</platform><!--<platform>unix</platform>--><!--<platform>windows</platform>-->
+                        </platforms>
+
+                        <programs>
+                            <program>
+                                <id>app</id>
+                                <!--suppress MavenModelInspection -->
+                                <mainClass>${appassembler.mainClass}</mainClass>
+                                <jvmSettings>
+                                    <initialMemorySize>20m</initialMemorySize>
+                                    <maxMemorySize>256m</maxMemorySize>
+                                    <maxStackSize>128m</maxStackSize>
+                                    <extraArguments>
+                                        <extraArgument>-server</extraArgument>
+                                        <extraArgument>-Xmx1G</extraArgument>
+                                        <extraArgument>-Xms1G</extraArgument>
+                                    </extraArguments>
+                                </jvmSettings>
+                            </program>
+                        </programs>
+
+                        <daemons>
+                            <daemon>
+                                <id>app</id>
+                                <!--suppress MavenModelInspection -->
+                                <mainClass>${appassembler.mainClass}</mainClass>
+                                <commandLineArguments>
+                                    <commandLineArgument>start</commandLineArgument>
+                                </commandLineArguments>
+                                <platforms>
+                                    <platform>jsw</platform>
+                                </platforms>
+                                <generatorConfigurations>
+                                    <generatorConfiguration>
+                                        <generator>jsw</generator>
+                                        <includes>
+                                            <include>linux-x86-32</include>
+                                            <include>linux-x86-64</include>
+                                            <include>linux-ppc-64</include>
+                                            <include>macosx-ppc-32</include>
+                                            <include>macosx-x86-universal-32</include>
+                                            <include>macosx-universal-32</include>
+                                            <include>macosx-universal-64</include>
+                                            <include>windows-x86-32</include>
+                                            <include>windows-x86-64</include>
+                                        </includes>
+                                        <configuration>
+                                            <property>
+                                                <name>configuration.directory.in.classpath.first</name>
+                                                <value>conf</value>
+                                            </property>
+                                            <property>
+                                                <name>set.default.REPO_DIR</name>
+                                                <value>lib</value>
+                                            </property>
+                                            <property>
+                                                <name>wrapper.logfile</name>
+                                                <value>logs/wrapper.log</value>
+                                            </property>
+                                            <property>
+                                                <name>wrapper.ping.timeout</name>
+                                                <value>120</value>
+                                            </property>
+                                            <!--<property>-->
+                                            <!--<name>run.as.user.envvar</name>-->
+                                            <!--<value>johndoe</value>-->
+                                            <!--</property>-->
+                                            <property>
+                                                <name>wrapper.console.loglevel</name>
+                                                <value>DEBUG</value>
+                                            </property>
+                                            <property>
+                                                <name>wrapper.ntservice.name</name>
+                                                <value>${project.artifactId}</value>
+                                            </property>
+                                        </configuration>
+                                    </generatorConfiguration>
+                                </generatorConfigurations>
+                                <jvmSettings>
+                                    <!-- jvm参数 -->
+                                    <initialMemorySize>20m</initialMemorySize>
+                                    <maxMemorySize>256m</maxMemorySize>
+                                    <maxStackSize>128m</maxStackSize>
+                                    <extraArguments>
+                                        <extraArgument>-server</extraArgument>
+                                        <extraArgument>-Xmx1G</extraArgument>
+                                        <extraArgument>-Xms1G</extraArgument>
+                                    </extraArguments>
+                                    <systemProperties>
+                                        <systemProperty>com.sun.management.jmxremote</systemProperty>
+                                        <systemProperty>com.sun.management.jmxremote.port=1984</systemProperty>
+                                        <systemProperty>com.sun.management.jmxremote.authenticate=false</systemProperty>
+                                        <systemProperty>com.sun.management.jmxremote.ssl=false</systemProperty>
+                                    </systemProperties>
+                                </jvmSettings>
+                            </daemon>
+                        </daemons>
+                    </configuration>
+
+
+                    <executions>
+                        <execution>
+                            <id>generate-assemble</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>assemble</goal>
+                            </goals>
+                        </execution>
+                        <!--<execution>-->
+                        <!--<id>generate-jsw-scripts</id>-->
+                        <!--<phase>package</phase>-->
+                        <!--<goals>-->
+                        <!--<goal>generate-daemons</goal>-->
+                        <!--</goals>-->
+                        <!--</execution>-->
+                    </executions>
+                </plugin>
+
+                <!--
+                    exec-maven-plugin-->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <version>1.6.0</version>
+                </plugin>
+
+                <!--
+                    maven-war-plugin-->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>3.0.0</version>
+                </plugin>
+
+                <!--
+                    maven-javadoc-plugin-->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>3.0.0-M1</version>
+                    <configuration>
+                        <show>private</show>
+                        <nohelp>true</nohelp>
+                        <encoding>UTF-8</encoding>
+                        <charset>UTF-8</charset>
+                        <docencoding>UTF-8</docencoding>
+                    </configuration>
+                    <!--<executions>-->
+                    <!--<execution>-->
+                    <!--<phase>package</phase>-->
+                    <!--<goals>-->
+                    <!--<goal>jar</goal>-->
+                    <!--</goals>-->
+                    <!--</execution>-->
+                    <!--</executions>-->
+                </plugin>
+
+                <!--
+                    maven-source-plugin-->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>3.0.1</version>
+                    <!--<executions>-->
+                    <!--<execution>-->
+                    <!--<phase>package</phase>-->
+                    <!--<goals>-->
+                    <!--<goal>jar</goal>-->
+                    <!--<goal>test-jar</goal>-->
+                    <!--</goals>-->
+                    <!--</execution>-->
+                    <!--</executions>-->
+                </plugin>
+
+                <!--
+                    maven-jar-plugin-->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
                     <version>3.0.2</version>
                     <configuration>
-                        <encoding>UTF-8</encoding>
+                        <excludes>
+                            <exclude>**/*.gitignore</exclude>
+                            <exclude>**/*.properties</exclude>
+                            <exclude>**/*.yml</exclude>
+                            <exclude>**/rebel.xml</exclude>
+                        </excludes>
                     </configuration>
                 </plugin>
 
-                <!--maven-compiler-plugin   编译配置
-                 |  1、默认绑定到 compile phase。
-                 |  2、当前版本的maven默认使用jdk1.5，使用更新的java版本必须手动配置。
-                 |  3、指定编码格式，否则在DOS下运行mvn compile命令时会出现莫名的错误，因为系统默认使用GBK编码
-                 -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.6.1</version>
-                    <configuration>
-                        <source>1.8</source>
-                        <target>1.8</target>
-                        <compilerVersion>1.8</compilerVersion>
-                        <encoding>UTF-8</encoding>
-                    </configuration>
-                </plugin>
-                <!--maven-surefire-plugin 单元测试
+                <!--
+                 |  maven-surefire-plugin 单元测试
                  |  surefire 插件用来在maven构建生命周期的test phase执行一个应用的单元测试。它会产生两种不同形式的测试结果报告：
                  |  1）.纯文本
                  |  2）.xml文件格式的
@@ -845,7 +1034,6 @@
                         <includes>
                             <include>**/*Test.java</include>
                         </includes>
-
                         <!--额外的类路径元素
                          |  如果你需要把更多的东西在您的类路径中成功的执行(e。 g一些时髦的资源或一个容器特定的JAR),我们通常建议你将它添加到您的类路径依赖。 考虑部署远程共享jar私人库为您的组织。
                          |  但是,如果你一定要,你可以使用 additionalClasspathElements 元素自定义资源/ jar添加到您的类路径中。
@@ -857,120 +1045,49 @@
                         <!--</additionalClasspathElements>-->
                     </configuration>
                 </plugin>
-                <!--maven-jar-plugin-->
+
+                <!--maven-compiler-plugin   编译配置
+                 |  1、默认绑定到 compile phase。
+                 |  2、当前版本的maven默认使用jdk1.5，使用更新的java版本必须手动配置。
+                 |  3、指定编码格式，否则在DOS下运行mvn compile命令时会出现莫名的错误，因为系统默认使用GBK编码
+                 -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.0.2</version>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.6.1</version>
                     <configuration>
-                        <excludes>
-                            <exclude>**/*.gitignore</exclude>
-                            <exclude>**/*.properties</exclude>
-                            <exclude>**/rebel.xml</exclude>
-                        </excludes>
-                    </configuration>
-                </plugin>
-                <!--maven-source-plugin-->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-source-plugin</artifactId>
-                    <version>3.0.1</version>
-                    <!--<executions><execution><phase>compile</phase><goals><goal>jar</goal><goal>test-jar</goal></goals></execution></executions>-->
-                </plugin>
-                <!--maven-javadoc-plugin-->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>2.10.4</version>
-                    <!--<executions><execution><phase>compile</phase><goals><goal>javadoc</goal><goal>test-javadoc</goal></goals></execution></executions>-->
-                    <configuration>
-                        <show>private</show>
-                        <nohelp>true</nohelp>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                        <compilerVersion>1.8</compilerVersion>
                         <encoding>UTF-8</encoding>
                     </configuration>
                 </plugin>
-                <!--maven-war-plugin-->
+
+                <!--
+                    maven-resources-plugin-->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-war-plugin</artifactId>
-                    <version>3.0.0</version>
-                    <!--<configuration>-->
-                    <!--<webResources>-->
-                    <!--<resource>-->
-                    <!--<directory>src/main/resources/environment/${env}</directory>-->
-                    <!--<targetPath>WEB-INF/classes</targetPath>-->
-                    <!--<filtering>true</filtering>-->
-                    <!--</resource>-->
-                    <!--</webResources>-->
-                    <!--</configuration>-->
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.0.2</version>
+                    <configuration>
+                        <encoding>UTF-8</encoding>
+                    </configuration>
                 </plugin>
 
-                <!--maven-assembly-plugin 的用途是制作项目分发包，
-                 |  该分发包可能包含了项目的可执行文件、源代码、readme、平台脚本等等。
-                 |  maven-assembly-plugin支持各种主流的格式如zip、tar.gz、jar和war等，
-                 |  具体打包哪些文件是高度可控的，例如用户可以 按文件级别的粒度、文件集级别的粒度、模块级别的粒度、以及依赖级别的粒度控制打包，
-                 |  此外，包含和排除配置也是支持的。maven-assembly- plugin要求用户使用一个名为assembly.xml的元数据文件来表述打包，
-                 |  它的single目标可以直接在命令行调用，也可以被绑定至生命周期。
-                 |-->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-assembly-plugin</artifactId>
-                    <version>3.0.0</version>
-                    <configuration>
-                        <descriptors>
-                            <descriptor>src/main/assembly/package.xml</descriptor>
-                        </descriptors>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <id>make-assembly</id>
-                            <phase>package</phase>
-                            <goals>
-                                <goal>single</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>exec-maven-plugin</artifactId>
-                    <version>1.6.0</version>
-                </plugin>
+                <!--
+                    maven-eclipse-plugin-->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-eclipse-plugin</artifactId>
                     <version>2.10</version>
                 </plugin>
+
+                <!--
+                    maven-idea-plugin-->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-idea-plugin</artifactId>
                     <version>2.2.1</version>
-                </plugin>
-                <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
-                <plugin>
-                    <groupId>org.eclipse.m2e</groupId>
-                    <artifactId>lifecycle-mapping</artifactId>
-                    <version>1.0.0</version>
-                    <!--<configuration>-->
-                        <!--<lifecycleMappingMetadata>-->
-                            <!--<pluginExecutions>-->
-                                <!--<pluginExecution>-->
-                                    <!--<pluginExecutionFilter>-->
-                                        <!--<groupId>org.zeroturnaround</groupId>-->
-                                        <!--<artifactId>jrebel-maven-plugin</artifactId>-->
-                                        <!--<versionRange>1.1.7</versionRange>-->
-                                        <!--<goals>-->
-                                            <!--<goal>generate</goal>-->
-                                        <!--</goals>-->
-                                    <!--</pluginExecutionFilter>-->
-                                    <!--<action>-->
-                                        <!--&lt;!&ndash;suppress CheckTagEmptyBody &ndash;&gt;-->
-                                        <!--<ignore></ignore>-->
-                                    <!--</action>-->
-                                <!--</pluginExecution>-->
-                            <!--</pluginExecutions>-->
-                        <!--</lifecycleMappingMetadata>-->
-                    <!--</configuration>-->
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -1018,7 +1135,20 @@
 
     <profiles>
         <profile>
-            <!-- 本地开发环境 -->
+            <!-- 本地开发环境 主要是 mysql连接地址和tomcat映射 localhost 而资源环境是 dev-->
+            <id>local</id>
+            <properties>
+                <env>dev</env>
+                <tomcat-maven-plugin.manager.url>http://localhost:8080/manager/text</tomcat-maven-plugin.manager.url>
+                <tomcat-maven-plugin.manager.username>root</tomcat-maven-plugin.manager.username>
+                <tomcat-maven-plugin.manager.password>root123456</tomcat-maven-plugin.manager.password>
+                <sql-maven-plugin.url>jdbc:mysql://localhost:3306/?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;allowMultiQueries=true</sql-maven-plugin.url>
+                <sql-maven-plugin.username>root</sql-maven-plugin.username>
+                <sql-maven-plugin.password>root123456</sql-maven-plugin.password>
+            </properties>
+        </profile>
+        <profile>
+            <!-- dev开发环境 各开发人员-->
             <id>dev</id>
             <properties>
                 <env>dev</env>
@@ -1033,11 +1163,13 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
         </profile>
+
         <profile>
             <!-- 10测试环境 -->
             <id>10</id>
             <properties>
                 <env>10</env>
+                <db>fleet_10_test</db>
                 <tomcat-maven-plugin.manager.url>http://192.168.1.10:8080/manager/text</tomcat-maven-plugin.manager.url>
                 <tomcat-maven-plugin.manager.username>root</tomcat-maven-plugin.manager.username>
                 <tomcat-maven-plugin.manager.password>root123456</tomcat-maven-plugin.manager.password>
@@ -1047,10 +1179,11 @@
             </properties>
         </profile>
         <profile>
-            <!-- vehicle-forward-10 服务环境 -->
-            <id>vehicle-forward-10</id>
+            <!-- vehicle_forward_10 服务环境 -->
+            <id>vehicle_forward_10</id>
             <properties>
-                <env>vehicle-forward-10</env>
+                <env>vehicle_forward_10</env>
+                <db>vehicle_forward_10</db>
                 <tomcat-maven-plugin.manager.url>http://192.168.1.10:8080/manager/text</tomcat-maven-plugin.manager.url>
                 <tomcat-maven-plugin.manager.username>root</tomcat-maven-plugin.manager.username>
                 <tomcat-maven-plugin.manager.password>root123456</tomcat-maven-plugin.manager.password>
@@ -1059,11 +1192,14 @@
                 <sql-maven-plugin.password>root123456</sql-maven-plugin.password>
             </properties>
         </profile>
+
+
         <profile>
             <!-- test -->
             <id>test</id>
             <properties>
                 <env>test</env>
+                <db>fleet_test</db>
                 <tomcat-maven-plugin.manager.url>http://127.0.0.1:8080/manager/text</tomcat-maven-plugin.manager.url>
                 <tomcat-maven-plugin.manager.username>root</tomcat-maven-plugin.manager.username>
                 <tomcat-maven-plugin.manager.password>root123456</tomcat-maven-plugin.manager.password>
@@ -1072,11 +1208,14 @@
                 <sql-maven-plugin.password>Comodin520</sql-maven-plugin.password>
             </properties>
         </profile>
+
+
         <profile>
-            <!-- vehicle-forward-test2 服务环境 -->
-            <id>vehicle-forward-test2</id>
+            <!-- vehicle_forward_test2 服务环境 -->
+            <id>vehicle_forward_test2</id>
             <properties>
-                <env>vehicle-forward-test2</env>
+                <env>vehicle_forward_test2</env>
+                <db>vehicle_forward_test2</db>
                 <tomcat-maven-plugin.manager.url>http://127.0.0.1:8080/manager/text</tomcat-maven-plugin.manager.url>
                 <tomcat-maven-plugin.manager.username>root</tomcat-maven-plugin.manager.username>
                 <tomcat-maven-plugin.manager.password>root123456</tomcat-maven-plugin.manager.password>
@@ -1090,12 +1229,14 @@
             <id>demo</id>
             <properties>
                 <env>demo</env>
-                <tomcat-maven-plugin.manager.url>http://127.0.0.1:8080/manager/text</tomcat-maven-plugin.manager.url>
-                <tomcat-maven-plugin.manager.username>root</tomcat-maven-plugin.manager.username>
-                <tomcat-maven-plugin.manager.password>root123456</tomcat-maven-plugin.manager.password>
-                <sql-maven-plugin.url>jdbc:mysql://mysql.demo.comodin.cn:3306/?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;allowMultiQueries=true</sql-maven-plugin.url>
-                <sql-maven-plugin.username>fleet</sql-maven-plugin.username>
-                <sql-maven-plugin.password>Comodin520</sql-maven-plugin.password>
+                <db>fleet</db>
+                <!--生产环境，关掉 maven sql 插件 重构数据库连接入口 切记勿打开，生产环境是通过，补丁升级 // by:supeng date:2017-7-21 21:30:15-->
+                <!--<tomcat-maven-plugin.manager.url>http://127.0.0.1:8080/manager/text</tomcat-maven-plugin.manager.url>-->
+                <!--<tomcat-maven-plugin.manager.username>root</tomcat-maven-plugin.manager.username>-->
+                <!--<tomcat-maven-plugin.manager.password>root123456</tomcat-maven-plugin.manager.password>-->
+                <!--<sql-maven-plugin.url>jdbc:mysql://mysql.demo.comodin.cn:3306/?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;allowMultiQueries=true</sql-maven-plugin.url>-->
+                <!--<sql-maven-plugin.username>fleet</sql-maven-plugin.username>-->
+                <!--<sql-maven-plugin.password>Comodin520</sql-maven-plugin.password>-->
             </properties>
         </profile>
         <profile>
@@ -1103,39 +1244,44 @@
             <id>tameme</id>
             <properties>
                 <env>tameme</env>
-                <tomcat-maven-plugin.manager.url>http://127.0.0.1:8080/manager/text</tomcat-maven-plugin.manager.url>
-                <tomcat-maven-plugin.manager.username>root</tomcat-maven-plugin.manager.username>
-                <tomcat-maven-plugin.manager.password>root123456</tomcat-maven-plugin.manager.password>
-                <sql-maven-plugin.url>jdbc:mysql://127.0.0.1:3306/?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;allowMultiQueries=true</sql-maven-plugin.url>
-                <sql-maven-plugin.username>fleet</sql-maven-plugin.username>
-                <sql-maven-plugin.password>Comodin520</sql-maven-plugin.password>
+                <db>fleet</db>
+                <!--生产环境，关掉 maven sql 插件 重构数据库连接入口 切记勿打开，生产环境是通过，补丁升级 // by:supeng date:2017-7-21 21:30:15-->
+                <!--<tomcat-maven-plugin.manager.url>http://127.0.0.1:8080/manager/text</tomcat-maven-plugin.manager.url>-->
+                <!--<tomcat-maven-plugin.manager.username>root</tomcat-maven-plugin.manager.username>-->
+                <!--<tomcat-maven-plugin.manager.password>root123456</tomcat-maven-plugin.manager.password>-->
+                <!--<sql-maven-plugin.url>jdbc:mysql://127.0.0.1:3306/?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;allowMultiQueries=true</sql-maven-plugin.url>-->
+                <!--<sql-maven-plugin.username>fleet</sql-maven-plugin.username>-->
+                <!--<sql-maven-plugin.password>Comodin520</sql-maven-plugin.password>-->
             </properties>
         </profile>
         <profile>
-            <!-- tameme -->
+            <!-- expo -->
             <id>expo</id>
             <properties>
                 <env>expo</env>
-                <tomcat-maven-plugin.manager.url>http://127.0.0.1:8080/manager/text</tomcat-maven-plugin.manager.url>
-                <tomcat-maven-plugin.manager.username>root</tomcat-maven-plugin.manager.username>
-                <tomcat-maven-plugin.manager.password>root123456</tomcat-maven-plugin.manager.password>
-                <sql-maven-plugin.url>jdbc:mysql://127.0.0.1:3306/?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;allowMultiQueries=true</sql-maven-plugin.url>
-                <sql-maven-plugin.username>fleet</sql-maven-plugin.username>
-                <sql-maven-plugin.password>Comodin520</sql-maven-plugin.password>
+                <db>fleet</db>
+                <!--生产环境，关掉 maven sql 插件 重构数据库连接入口 切记勿打开，生产环境是通过，补丁升级 // by:supeng date:2017-7-21 21:30:15-->
+                <!--<tomcat-maven-plugin.manager.url>http://127.0.0.1:8080/manager/text</tomcat-maven-plugin.manager.url>-->
+                <!--<tomcat-maven-plugin.manager.username>root</tomcat-maven-plugin.manager.username>-->
+                <!--<tomcat-maven-plugin.manager.password>root123456</tomcat-maven-plugin.manager.password>-->
+                <!--<sql-maven-plugin.url>jdbc:mysql://127.0.0.1:3306/?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;allowMultiQueries=true</sql-maven-plugin.url>-->
+                <!--<sql-maven-plugin.username>fleet</sql-maven-plugin.username>-->
+                <!--<sql-maven-plugin.password>Comodin520</sql-maven-plugin.password>-->
             </properties>
         </profile>
-
         <profile>
-            <!-- 本地开发环境 -->
-            <id>local</id>
+            <!-- gsi -->
+            <id>gsi</id>
             <properties>
-                <env>dev</env>
-                <tomcat-maven-plugin.manager.url>http://localhost:8080/manager/text</tomcat-maven-plugin.manager.url>
-                <tomcat-maven-plugin.manager.username>root</tomcat-maven-plugin.manager.username>
-                <tomcat-maven-plugin.manager.password>root123456</tomcat-maven-plugin.manager.password>
-                <sql-maven-plugin.url>jdbc:mysql://localhost:3306/?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;allowMultiQueries=true</sql-maven-plugin.url>
-                <sql-maven-plugin.username>root</sql-maven-plugin.username>
-                <sql-maven-plugin.password>root123456</sql-maven-plugin.password>
+                <env>gsi</env>
+                <db>fleet</db>
+                <!--生产环境，关掉 maven sql 插件 重构数据库连接入口 切记勿打开，生产环境是通过，补丁升级 // by:supeng date:2017-7-21 21:30:15-->
+                <!--<tomcat-maven-plugin.manager.url>http://127.0.0.1:8080/manager/text</tomcat-maven-plugin.manager.url>-->
+                <!--<tomcat-maven-plugin.manager.username>root</tomcat-maven-plugin.manager.username>-->
+                <!--<tomcat-maven-plugin.manager.password>root123456</tomcat-maven-plugin.manager.password>-->
+                <!--<sql-maven-plugin.url>jdbc:mysql://127.0.0.1:3306/?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;allowMultiQueries=true</sql-maven-plugin.url>-->
+                <!--<sql-maven-plugin.username>fleet</sql-maven-plugin.username>-->
+                <!--<sql-maven-plugin.password>Comodin520</sql-maven-plugin.password>-->
             </properties>
         </profile>
     </profiles>
