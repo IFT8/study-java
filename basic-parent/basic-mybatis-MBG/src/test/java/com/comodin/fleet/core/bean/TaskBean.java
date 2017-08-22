@@ -11,6 +11,7 @@ import org.hibernate.validator.constraints.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue", "DefaultAnnotationParam"})
+@Entity
 @Table(name = "t_task")
 public class TaskBean implements Serializable {
     /**
@@ -433,7 +434,7 @@ public class TaskBean implements Serializable {
 
     /**
      * <pre>
-     * DB remark: 发件人客户ID,与 t_client.client_id 字段关联【{"max":13}】
+     * DB remark: 发件人客户ID,与t_client.client_id 字段关联【{"max":13}】
      * DB column: task_sender_client_id	BIGINT(20)	<--->	senderClientId	java.lang.Long
      * DB is  Nullable: true
      * DB defaultValue: null
@@ -493,7 +494,7 @@ public class TaskBean implements Serializable {
 
     /**
      * <pre>
-     * DB remark: 发件人网点名称,与 t_client_branch.branch_name 字段冗余
+     * DB remark: 发件人网点名称,与t_client_branch.branch_name 字段冗余
      * DB column: task_sender_branch_name	VARCHAR(100)	<--->	senderBranchName	java.lang.String
      * DB is  Nullable: false
      * DB defaultValue: null
@@ -592,7 +593,7 @@ public class TaskBean implements Serializable {
 
     /**
      * <pre>
-     * DB remark: 收件人客户ID,与 t_client.client_id 字段关联【{"max":13}】
+     * DB remark: 收件人客户ID,与t_client.client_id 字段关联【{"max":13}】
      * DB column: task_receiver_client_id	BIGINT(20)	<--->	receiverClientId	java.lang.Long
      * DB is  Nullable: true
      * DB defaultValue: null
@@ -652,7 +653,7 @@ public class TaskBean implements Serializable {
 
     /**
      * <pre>
-     * DB remark: 收件人网点名称,与 t_client_branch.branch_name 字段冗余
+     * DB remark: 收件人网点名称,与t_client_branch.branch_name 字段冗余
      * DB column: task_receiver_branch_name	VARCHAR(100)	<--->	receiverBranchName	java.lang.String
      * DB is  Nullable: false
      * DB defaultValue: null
@@ -2342,18 +2343,18 @@ public class TaskBean implements Serializable {
     }
 
     /**
-     * 获取 发件人客户ID,与 t_client.client_id 字段关联【{"max":13}】
+     * 获取 发件人客户ID,与t_client.client_id 字段关联【{"max":13}】
      *
-     * @return task_sender_client_id - 发件人客户ID,与 t_client.client_id 字段关联【{"max":13}】
+     * @return task_sender_client_id - 发件人客户ID,与t_client.client_id 字段关联【{"max":13}】
      */
     public Long getSenderClientId() {
         return senderClientId;
     }
 
     /**
-     * 设置 发件人客户ID,与 t_client.client_id 字段关联【{"max":13}】
+     * 设置 发件人客户ID,与t_client.client_id 字段关联【{"max":13}】
      *
-     * @param senderClientId - 发件人客户ID,与 t_client.client_id 字段关联【{"max":13}】
+     * @param senderClientId - 发件人客户ID,与t_client.client_id 字段关联【{"max":13}】
      */
     public TaskBean setSenderClientId(Long senderClientId) {
         this.senderClientId = senderClientId;
@@ -2437,18 +2438,18 @@ public class TaskBean implements Serializable {
     }
 
     /**
-     * 获取 发件人网点名称,与 t_client_branch.branch_name 字段冗余
+     * 获取 发件人网点名称,与t_client_branch.branch_name 字段冗余
      *
-     * @return task_sender_branch_name - 发件人网点名称,与 t_client_branch.branch_name 字段冗余
+     * @return task_sender_branch_name - 发件人网点名称,与t_client_branch.branch_name 字段冗余
      */
     public String getSenderBranchName() {
         return senderBranchName;
     }
 
     /**
-     * 设置 发件人网点名称,与 t_client_branch.branch_name 字段冗余
+     * 设置 发件人网点名称,与t_client_branch.branch_name 字段冗余
      *
-     * @param senderBranchName - 发件人网点名称,与 t_client_branch.branch_name 字段冗余
+     * @param senderBranchName - 发件人网点名称,与t_client_branch.branch_name 字段冗余
      */
     public TaskBean setSenderBranchName(String senderBranchName) {
         this.senderBranchName = senderBranchName == null ? null : senderBranchName.trim();
@@ -2589,18 +2590,18 @@ public class TaskBean implements Serializable {
     }
 
     /**
-     * 获取 收件人客户ID,与 t_client.client_id 字段关联【{"max":13}】
+     * 获取 收件人客户ID,与t_client.client_id 字段关联【{"max":13}】
      *
-     * @return task_receiver_client_id - 收件人客户ID,与 t_client.client_id 字段关联【{"max":13}】
+     * @return task_receiver_client_id - 收件人客户ID,与t_client.client_id 字段关联【{"max":13}】
      */
     public Long getReceiverClientId() {
         return receiverClientId;
     }
 
     /**
-     * 设置 收件人客户ID,与 t_client.client_id 字段关联【{"max":13}】
+     * 设置 收件人客户ID,与t_client.client_id 字段关联【{"max":13}】
      *
-     * @param receiverClientId - 收件人客户ID,与 t_client.client_id 字段关联【{"max":13}】
+     * @param receiverClientId - 收件人客户ID,与t_client.client_id 字段关联【{"max":13}】
      */
     public TaskBean setReceiverClientId(Long receiverClientId) {
         this.receiverClientId = receiverClientId;
@@ -2684,18 +2685,18 @@ public class TaskBean implements Serializable {
     }
 
     /**
-     * 获取 收件人网点名称,与 t_client_branch.branch_name 字段冗余
+     * 获取 收件人网点名称,与t_client_branch.branch_name 字段冗余
      *
-     * @return task_receiver_branch_name - 收件人网点名称,与 t_client_branch.branch_name 字段冗余
+     * @return task_receiver_branch_name - 收件人网点名称,与t_client_branch.branch_name 字段冗余
      */
     public String getReceiverBranchName() {
         return receiverBranchName;
     }
 
     /**
-     * 设置 收件人网点名称,与 t_client_branch.branch_name 字段冗余
+     * 设置 收件人网点名称,与t_client_branch.branch_name 字段冗余
      *
-     * @param receiverBranchName - 收件人网点名称,与 t_client_branch.branch_name 字段冗余
+     * @param receiverBranchName - 收件人网点名称,与t_client_branch.branch_name 字段冗余
      */
     public TaskBean setReceiverBranchName(String receiverBranchName) {
         this.receiverBranchName = receiverBranchName == null ? null : receiverBranchName.trim();

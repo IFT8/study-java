@@ -11,6 +11,7 @@ import org.hibernate.validator.constraints.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue", "DefaultAnnotationParam"})
+@Entity
 @Table(name = "t_task_transaction")
 public class TaskTransactionBean implements Serializable {
     /**

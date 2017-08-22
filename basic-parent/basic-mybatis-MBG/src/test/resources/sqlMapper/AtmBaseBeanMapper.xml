@@ -5,20 +5,35 @@
     <!--
       WARNING - @mbg.generated
     -->
-    <id column="base_id" jdbcType="BIGINT" property="id" />
-    <result column="base_internal_id" jdbcType="VARCHAR" property="internalId" />
-    <result column="base_status" jdbcType="CHAR" property="status" />
-    <result column="base_branch_id" jdbcType="BIGINT" property="branchId" />
-    <result column="base_branch_internal_id" jdbcType="VARCHAR" property="branchInternalId" />
-    <result column="base_principal" jdbcType="VARCHAR" property="principal" />
-    <result column="base_max_capacity" jdbcType="INTEGER" property="maxCapacity" />
-    <result column="base_current_capacity" jdbcType="INTEGER" property="currentCapacity" />
-    <result column="base_total_amount" jdbcType="DECIMAL" property="totalAmount" />
-    <result column="base_amount_currency" jdbcType="VARCHAR" property="amountCurrency" />
-    <result column="base_create_by" jdbcType="VARCHAR" property="createBy" />
-    <result column="base_device_model" jdbcType="VARCHAR" property="deviceModel" />
-    <result column="base_create_timestamp" jdbcType="TIMESTAMP" property="createTimestamp" />
-    <result column="base_update_timestamp" jdbcType="TIMESTAMP" property="updateTimestamp" />
-    <result column="base_delete_flag" jdbcType="CHAR" property="deleteFlag" />
+    <id column="atm_id" jdbcType="BIGINT" property="id" />
+    <result column="atm_device_type" jdbcType="VARCHAR" property="deviceType" />
+    <result column="atm_cit_id" jdbcType="BIGINT" property="citId" />
+    <result column="atm_cit_internal_id" jdbcType="VARCHAR" property="citInternalId" />
+    <result column="atm_cit_name" jdbcType="VARCHAR" property="citName" />
+    <result column="atm_cit_branch_id" jdbcType="VARCHAR" property="citBranchId" />
+    <result column="atm_cit_branch_internal_id" jdbcType="VARCHAR" property="citBranchInternalId" />
+    <result column="atm_cit_branch_name" jdbcType="VARCHAR" property="citBranchName" />
+    <result column="atm_cit_owner_id" jdbcType="BIGINT" property="citOwnerId" />
+    <result column="atm_cit_owner_name" jdbcType="VARCHAR" property="citOwnerName" />
+    <result column="atm_client_name" jdbcType="VARCHAR" property="clientName" />
+    <result column="atm_client_branch_name" jdbcType="VARCHAR" property="clientBranchName" />
+    <result column="atm_client_branch_phone" jdbcType="VARCHAR" property="clientBranchPhone" />
+    <result column="atm_client_branch_address" jdbcType="VARCHAR" property="clientBranchAddress" />
+    <result column="atm_client_branch_latitude" jdbcType="VARCHAR" property="clientBranchLatitude" />
+    <result column="atm_client_branch_longitude" jdbcType="VARCHAR" property="clientBranchLongitude" />
+    <result column="atm_client_owner_id" jdbcType="BIGINT" property="clientOwnerId" />
+    <result column="atm_client_owner_name" jdbcType="VARCHAR" property="clientOwnerName" />
+    <result column="atm_status" jdbcType="CHAR" property="status" />
+    <result column="atm_currency_total_amount" jdbcType="DECIMAL" property="currencyTotalAmount" />
+    <result column="atm_current_capacity" jdbcType="INTEGER" property="currentCapacity" />
+    <result column="atm_currency_max_capacity" jdbcType="INTEGER" property="currencyMaxCapacity" />
+    <result column="atm_currency_type" jdbcType="VARCHAR" property="currencyType" />
+    <result column="atm_envelopes_total_amount" jdbcType="INTEGER" property="envelopesTotalAmount" />
+    <result column="atm_envelopes_capacity" jdbcType="INTEGER" property="envelopesCapacity" />
+    <result column="atm_envelopes_max_capacity" jdbcType="INTEGER" property="envelopesMaxCapacity" />
+    <result column="atm_create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="atm_create_timestamp" jdbcType="TIMESTAMP" property="createTimestamp" />
+    <result column="atm_update_timestamp" jdbcType="TIMESTAMP" property="updateTimestamp" />
+    <result column="atm_delete_flag" jdbcType="CHAR" property="deleteFlag" />
   </resultMap>
 </mapper>

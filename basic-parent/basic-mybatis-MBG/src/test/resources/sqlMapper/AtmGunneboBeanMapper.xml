@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.comodin.fleet.core.mapper.AtmGunneboBeanMapper">
+  <resultMap id="BaseResultMap" type="com.comodin.fleet.core.bean.AtmGunneboBean">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="atm_id" jdbcType="BIGINT" property="id" />
+    <result column="atm_device_type" jdbcType="VARCHAR" property="deviceType" />
+    <result column="atm_cit_id" jdbcType="BIGINT" property="citId" />
+    <result column="atm_cit_internal_id" jdbcType="VARCHAR" property="citInternalId" />
+    <result column="atm_cit_name" jdbcType="VARCHAR" property="citName" />
+    <result column="atm_cit_branch_id" jdbcType="VARCHAR" property="citBranchId" />
+    <result column="atm_cit_branch_internal_id" jdbcType="VARCHAR" property="citBranchInternalId" />
+    <result column="atm_cit_branch_name" jdbcType="VARCHAR" property="citBranchName" />
+    <result column="atm_cit_owner_id" jdbcType="BIGINT" property="citOwnerId" />
+    <result column="atm_cit_owner_name" jdbcType="VARCHAR" property="citOwnerName" />
+    <result column="atm_client_name" jdbcType="VARCHAR" property="clientName" />
+    <result column="atm_client_branch_name" jdbcType="VARCHAR" property="clientBranchName" />
+    <result column="atm_client_branch_phone" jdbcType="VARCHAR" property="clientBranchPhone" />
+    <result column="atm_client_branch_address" jdbcType="VARCHAR" property="clientBranchAddress" />
+    <result column="atm_client_branch_latitude" jdbcType="VARCHAR" property="clientBranchLatitude" />
+    <result column="atm_client_branch_longitude" jdbcType="VARCHAR" property="clientBranchLongitude" />
+    <result column="atm_client_owner_id" jdbcType="BIGINT" property="clientOwnerId" />
+    <result column="atm_client_owner_name" jdbcType="VARCHAR" property="clientOwnerName" />
+    <result column="atm_status" jdbcType="CHAR" property="status" />
+    <result column="atm_currency_total_amount" jdbcType="DECIMAL" property="currencyTotalAmount" />
+    <result column="atm_current_capacity" jdbcType="INTEGER" property="currentCapacity" />
+    <result column="atm_currency_max_capacity" jdbcType="INTEGER" property="currencyMaxCapacity" />
+    <result column="atm_currency_type" jdbcType="VARCHAR" property="currencyType" />
+    <result column="atm_envelopes_total_amount" jdbcType="INTEGER" property="envelopesTotalAmount" />
+    <result column="atm_envelopes_capacity" jdbcType="INTEGER" property="envelopesCapacity" />
+    <result column="atm_envelopes_max_capacity" jdbcType="INTEGER" property="envelopesMaxCapacity" />
+    <result column="atm_create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="atm_create_timestamp" jdbcType="TIMESTAMP" property="createTimestamp" />
+    <result column="atm_update_timestamp" jdbcType="TIMESTAMP" property="updateTimestamp" />
+    <result column="atm_delete_flag" jdbcType="CHAR" property="deleteFlag" />
+  </resultMap>
+</mapper>

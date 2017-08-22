@@ -11,6 +11,7 @@ import org.hibernate.validator.constraints.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue", "DefaultAnnotationParam"})
+@Entity
 @Table(name = "t_db_script_patch")
 public class DbScriptPatchBean implements Serializable {
     /**

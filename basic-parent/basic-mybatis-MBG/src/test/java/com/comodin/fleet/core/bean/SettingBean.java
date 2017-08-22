@@ -10,6 +10,7 @@ import org.hibernate.validator.constraints.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue", "DefaultAnnotationParam"})
+@Entity
 @Table(name = "t_setting")
 public class SettingBean implements Serializable {
     /**

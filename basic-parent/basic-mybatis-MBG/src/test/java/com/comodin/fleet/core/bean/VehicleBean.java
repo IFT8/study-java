@@ -11,6 +11,7 @@ import org.hibernate.validator.constraints.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue", "DefaultAnnotationParam"})
+@Entity
 @Table(name = "t_vehicle")
 public class VehicleBean implements Serializable {
     /**
@@ -54,7 +55,7 @@ public class VehicleBean implements Serializable {
 
     /**
      * <pre>
-     * DB remark: 车辆所属的网点ID,与 t_client_branch.branch_id 字段关联
+     * DB remark: 车辆所属的网点ID,与t_client_branch.branch_id 字段关联
      * DB column: vehicle_branch_id	BIGINT(20)	<--->	branchId	java.lang.Long
      * DB is  Nullable: false
      * DB defaultValue: null
@@ -336,18 +337,18 @@ public class VehicleBean implements Serializable {
     }
 
     /**
-     * 获取 车辆所属的网点ID,与 t_client_branch.branch_id 字段关联
+     * 获取 车辆所属的网点ID,与t_client_branch.branch_id 字段关联
      *
-     * @return vehicle_branch_id - 车辆所属的网点ID,与 t_client_branch.branch_id 字段关联
+     * @return vehicle_branch_id - 车辆所属的网点ID,与t_client_branch.branch_id 字段关联
      */
     public Long getBranchId() {
         return branchId;
     }
 
     /**
-     * 设置 车辆所属的网点ID,与 t_client_branch.branch_id 字段关联
+     * 设置 车辆所属的网点ID,与t_client_branch.branch_id 字段关联
      *
-     * @param branchId - 车辆所属的网点ID,与 t_client_branch.branch_id 字段关联
+     * @param branchId - 车辆所属的网点ID,与t_client_branch.branch_id 字段关联
      */
     public VehicleBean setBranchId(Long branchId) {
         this.branchId = branchId;

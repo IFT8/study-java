@@ -10,6 +10,7 @@ import org.hibernate.validator.constraints.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue", "DefaultAnnotationParam"})
+@Entity
 @Table(name = "t_bank_atm_code")
 public class BankAtmCodeBean implements Serializable {
     /**
@@ -29,7 +30,7 @@ public class BankAtmCodeBean implements Serializable {
 
     /**
      * <pre>
-     * DB remark: 状态码所属客户ID,与 t_client.client_id 字段关联
+     * DB remark: 状态码所属客户ID,与t_client.client_id 字段关联
      * DB column: code_client_id	BIGINT(20)	<--->	clientId	java.lang.Long
      * DB is  Nullable: true
      * DB defaultValue: null
@@ -98,18 +99,18 @@ public class BankAtmCodeBean implements Serializable {
     }
 
     /**
-     * 获取 状态码所属客户ID,与 t_client.client_id 字段关联
+     * 获取 状态码所属客户ID,与t_client.client_id 字段关联
      *
-     * @return code_client_id - 状态码所属客户ID,与 t_client.client_id 字段关联
+     * @return code_client_id - 状态码所属客户ID,与t_client.client_id 字段关联
      */
     public Long getClientId() {
         return clientId;
     }
 
     /**
-     * 设置 状态码所属客户ID,与 t_client.client_id 字段关联
+     * 设置 状态码所属客户ID,与t_client.client_id 字段关联
      *
-     * @param clientId - 状态码所属客户ID,与 t_client.client_id 字段关联
+     * @param clientId - 状态码所属客户ID,与t_client.client_id 字段关联
      */
     public BankAtmCodeBean setClientId(Long clientId) {
         this.clientId = clientId;

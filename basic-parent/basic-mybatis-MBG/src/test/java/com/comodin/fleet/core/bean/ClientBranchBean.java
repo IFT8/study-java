@@ -11,6 +11,7 @@ import org.hibernate.validator.constraints.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue", "DefaultAnnotationParam"})
+@Entity
 @Table(name = "t_client_branch")
 public class ClientBranchBean implements Serializable {
     /**
@@ -81,7 +82,7 @@ public class ClientBranchBean implements Serializable {
 
     /**
      * <pre>
-     * DB remark: 网点所属的客户ID,与 t_client.client_id 字段关联
+     * DB remark: 网点所属的客户ID,与t_client.client_id 字段关联
      * DB column: branch_client_id	BIGINT(20)	<--->	clientId	java.lang.Long
      * DB is  Nullable: false
      * DB defaultValue: null
@@ -94,7 +95,7 @@ public class ClientBranchBean implements Serializable {
 
     /**
      * <pre>
-     * DB remark: 网点所属的客户内部ID,与 t_client.client_internal_id 字段冗余
+     * DB remark: 网点所属的客户内部ID,与t_client.client_internal_id 字段冗余
      * DB column: branch_client_internal_id	VARCHAR(15)	<--->	clientInternalId	java.lang.String
      * DB is  Nullable: false
      * DB defaultValue: null
@@ -107,7 +108,7 @@ public class ClientBranchBean implements Serializable {
 
     /**
      * <pre>
-     * DB remark: 客户的名称,与 t_client.client_name冗余
+     * DB remark: 客户的名称,与t_client.client_name冗余
      * DB column: branch_client_name	VARCHAR(100)	<--->	clientName	java.lang.String
      * DB is  Nullable: false
      * DB defaultValue: null
@@ -565,18 +566,18 @@ public class ClientBranchBean implements Serializable {
     }
 
     /**
-     * 获取 网点所属的客户ID,与 t_client.client_id 字段关联
+     * 获取 网点所属的客户ID,与t_client.client_id 字段关联
      *
-     * @return branch_client_id - 网点所属的客户ID,与 t_client.client_id 字段关联
+     * @return branch_client_id - 网点所属的客户ID,与t_client.client_id 字段关联
      */
     public Long getClientId() {
         return clientId;
     }
 
     /**
-     * 设置 网点所属的客户ID,与 t_client.client_id 字段关联
+     * 设置 网点所属的客户ID,与t_client.client_id 字段关联
      *
-     * @param clientId - 网点所属的客户ID,与 t_client.client_id 字段关联
+     * @param clientId - 网点所属的客户ID,与t_client.client_id 字段关联
      */
     public ClientBranchBean setClientId(Long clientId) {
         this.clientId = clientId;
@@ -584,18 +585,18 @@ public class ClientBranchBean implements Serializable {
     }
 
     /**
-     * 获取 网点所属的客户内部ID,与 t_client.client_internal_id 字段冗余
+     * 获取 网点所属的客户内部ID,与t_client.client_internal_id 字段冗余
      *
-     * @return branch_client_internal_id - 网点所属的客户内部ID,与 t_client.client_internal_id 字段冗余
+     * @return branch_client_internal_id - 网点所属的客户内部ID,与t_client.client_internal_id 字段冗余
      */
     public String getClientInternalId() {
         return clientInternalId;
     }
 
     /**
-     * 设置 网点所属的客户内部ID,与 t_client.client_internal_id 字段冗余
+     * 设置 网点所属的客户内部ID,与t_client.client_internal_id 字段冗余
      *
-     * @param clientInternalId - 网点所属的客户内部ID,与 t_client.client_internal_id 字段冗余
+     * @param clientInternalId - 网点所属的客户内部ID,与t_client.client_internal_id 字段冗余
      */
     public ClientBranchBean setClientInternalId(String clientInternalId) {
         this.clientInternalId = clientInternalId == null ? null : clientInternalId.trim();
@@ -603,18 +604,18 @@ public class ClientBranchBean implements Serializable {
     }
 
     /**
-     * 获取 客户的名称,与 t_client.client_name冗余
+     * 获取 客户的名称,与t_client.client_name冗余
      *
-     * @return branch_client_name - 客户的名称,与 t_client.client_name冗余
+     * @return branch_client_name - 客户的名称,与t_client.client_name冗余
      */
     public String getClientName() {
         return clientName;
     }
 
     /**
-     * 设置 客户的名称,与 t_client.client_name冗余
+     * 设置 客户的名称,与t_client.client_name冗余
      *
-     * @param clientName - 客户的名称,与 t_client.client_name冗余
+     * @param clientName - 客户的名称,与t_client.client_name冗余
      */
     public ClientBranchBean setClientName(String clientName) {
         this.clientName = clientName == null ? null : clientName.trim();

@@ -11,6 +11,7 @@ import org.hibernate.validator.constraints.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue", "DefaultAnnotationParam"})
+@Entity
 @Table(name = "t_currency")
 public class CurrencyBean implements Serializable {
     /**
@@ -30,7 +31,7 @@ public class CurrencyBean implements Serializable {
 
     /**
      * <pre>
-     * DB remark: 货币所属的分公司,与 t_client.client_id 字段关联
+     * DB remark: 货币所属的分公司,与t_client.client_id 字段关联
      * DB column: currency_client_id	BIGINT(20)	<--->	clientId	java.lang.Long
      * DB is  Nullable: false
      * DB defaultValue: null
@@ -155,18 +156,18 @@ public class CurrencyBean implements Serializable {
     }
 
     /**
-     * 获取 货币所属的分公司,与 t_client.client_id 字段关联
+     * 获取 货币所属的分公司,与t_client.client_id 字段关联
      *
-     * @return currency_client_id - 货币所属的分公司,与 t_client.client_id 字段关联
+     * @return currency_client_id - 货币所属的分公司,与t_client.client_id 字段关联
      */
     public Long getClientId() {
         return clientId;
     }
 
     /**
-     * 设置 货币所属的分公司,与 t_client.client_id 字段关联
+     * 设置 货币所属的分公司,与t_client.client_id 字段关联
      *
-     * @param clientId - 货币所属的分公司,与 t_client.client_id 字段关联
+     * @param clientId - 货币所属的分公司,与t_client.client_id 字段关联
      */
     public CurrencyBean setClientId(Long clientId) {
         this.clientId = clientId;

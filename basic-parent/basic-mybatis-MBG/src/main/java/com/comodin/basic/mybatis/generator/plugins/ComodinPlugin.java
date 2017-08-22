@@ -165,6 +165,7 @@ public class ComodinPlugin extends PluginAdapter {
                     + tableName
                     + context.getEndingDelimiter();
         }
+        topLevelClass.addAnnotation("@Entity");
         //是否忽略大小写，对于区分大小写的数据库，会有用
         if (caseSensitive && !topLevelClass.getType().getShortName().equals(tableName)) {
             topLevelClass.addAnnotation("@Table(name = \"" + getDelimiterName(tableName) + "\")");
@@ -175,6 +176,7 @@ public class ComodinPlugin extends PluginAdapter {
                 || StringUtility.stringHasValue(endingDelimiter)) {
             topLevelClass.addAnnotation("@Table(name = \"" + getDelimiterName(tableName) + "\")");
         }
+
 
         GenerateConstantFile.generateApplicationConstantFile(topLevelClass, introspectedTable);
         GenerateI18nFile.generateApplicationI18nFile(topLevelClass, introspectedTable);

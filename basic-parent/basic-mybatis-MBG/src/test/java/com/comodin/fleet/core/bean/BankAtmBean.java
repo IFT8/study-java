@@ -12,6 +12,7 @@ import org.hibernate.validator.constraints.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue", "DefaultAnnotationParam"})
+@Entity
 @Table(name = "t_bank_atm")
 public class BankAtmBean implements Serializable {
     /**
@@ -31,7 +32,7 @@ public class BankAtmBean implements Serializable {
 
     /**
      * <pre>
-     * DB remark: ATM对应,客户ID,与 t_client.client_id 字段关联
+     * DB remark: ATM对应,客户ID,与t_client.client_id 字段关联
      * DB column: atm_client_id	BIGINT(20)	<--->	clientId	java.lang.Long
      * DB is  Nullable: false
      * DB defaultValue: null
@@ -44,7 +45,7 @@ public class BankAtmBean implements Serializable {
 
     /**
      * <pre>
-     * DB remark: ATM对应,客户名称,与 t_client.client_name 字段冗余
+     * DB remark: ATM对应,客户名称,与t_client.client_name 字段冗余
      * DB column: atm_client_name	VARCHAR(100)	<--->	clientName	java.lang.String
      * DB is  Nullable: false
      * DB defaultValue: null
@@ -57,7 +58,7 @@ public class BankAtmBean implements Serializable {
 
     /**
      * <pre>
-     * DB remark: ATM对应,网点ID,与 t_client_branch.branch_id 字段关联
+     * DB remark: ATM对应,网点ID,与t_client_branch.branch_id 字段关联
      * DB column: atm_branch_id	BIGINT(20)	<--->	branchId	java.lang.Long
      * DB is  Nullable: false
      * DB defaultValue: null
@@ -70,7 +71,7 @@ public class BankAtmBean implements Serializable {
 
     /**
      * <pre>
-     * DB remark: ATM对应,网点名称,与 t_client_branch.branch_name 字段冗余
+     * DB remark: ATM对应,网点名称,与t_client_branch.branch_name 字段冗余
      * DB column: atm_branch_name	VARCHAR(100)	<--->	branchName	java.lang.String
      * DB is  Nullable: false
      * DB defaultValue: null
@@ -1223,18 +1224,18 @@ public class BankAtmBean implements Serializable {
     }
 
     /**
-     * 获取 ATM对应,客户ID,与 t_client.client_id 字段关联
+     * 获取 ATM对应,客户ID,与t_client.client_id 字段关联
      *
-     * @return atm_client_id - ATM对应,客户ID,与 t_client.client_id 字段关联
+     * @return atm_client_id - ATM对应,客户ID,与t_client.client_id 字段关联
      */
     public Long getClientId() {
         return clientId;
     }
 
     /**
-     * 设置 ATM对应,客户ID,与 t_client.client_id 字段关联
+     * 设置 ATM对应,客户ID,与t_client.client_id 字段关联
      *
-     * @param clientId - ATM对应,客户ID,与 t_client.client_id 字段关联
+     * @param clientId - ATM对应,客户ID,与t_client.client_id 字段关联
      */
     public BankAtmBean setClientId(Long clientId) {
         this.clientId = clientId;
@@ -1242,18 +1243,18 @@ public class BankAtmBean implements Serializable {
     }
 
     /**
-     * 获取 ATM对应,客户名称,与 t_client.client_name 字段冗余
+     * 获取 ATM对应,客户名称,与t_client.client_name 字段冗余
      *
-     * @return atm_client_name - ATM对应,客户名称,与 t_client.client_name 字段冗余
+     * @return atm_client_name - ATM对应,客户名称,与t_client.client_name 字段冗余
      */
     public String getClientName() {
         return clientName;
     }
 
     /**
-     * 设置 ATM对应,客户名称,与 t_client.client_name 字段冗余
+     * 设置 ATM对应,客户名称,与t_client.client_name 字段冗余
      *
-     * @param clientName - ATM对应,客户名称,与 t_client.client_name 字段冗余
+     * @param clientName - ATM对应,客户名称,与t_client.client_name 字段冗余
      */
     public BankAtmBean setClientName(String clientName) {
         this.clientName = clientName == null ? null : clientName.trim();
@@ -1261,18 +1262,18 @@ public class BankAtmBean implements Serializable {
     }
 
     /**
-     * 获取 ATM对应,网点ID,与 t_client_branch.branch_id 字段关联
+     * 获取 ATM对应,网点ID,与t_client_branch.branch_id 字段关联
      *
-     * @return atm_branch_id - ATM对应,网点ID,与 t_client_branch.branch_id 字段关联
+     * @return atm_branch_id - ATM对应,网点ID,与t_client_branch.branch_id 字段关联
      */
     public Long getBranchId() {
         return branchId;
     }
 
     /**
-     * 设置 ATM对应,网点ID,与 t_client_branch.branch_id 字段关联
+     * 设置 ATM对应,网点ID,与t_client_branch.branch_id 字段关联
      *
-     * @param branchId - ATM对应,网点ID,与 t_client_branch.branch_id 字段关联
+     * @param branchId - ATM对应,网点ID,与t_client_branch.branch_id 字段关联
      */
     public BankAtmBean setBranchId(Long branchId) {
         this.branchId = branchId;
@@ -1280,18 +1281,18 @@ public class BankAtmBean implements Serializable {
     }
 
     /**
-     * 获取 ATM对应,网点名称,与 t_client_branch.branch_name 字段冗余
+     * 获取 ATM对应,网点名称,与t_client_branch.branch_name 字段冗余
      *
-     * @return atm_branch_name - ATM对应,网点名称,与 t_client_branch.branch_name 字段冗余
+     * @return atm_branch_name - ATM对应,网点名称,与t_client_branch.branch_name 字段冗余
      */
     public String getBranchName() {
         return branchName;
     }
 
     /**
-     * 设置 ATM对应,网点名称,与 t_client_branch.branch_name 字段冗余
+     * 设置 ATM对应,网点名称,与t_client_branch.branch_name 字段冗余
      *
-     * @param branchName - ATM对应,网点名称,与 t_client_branch.branch_name 字段冗余
+     * @param branchName - ATM对应,网点名称,与t_client_branch.branch_name 字段冗余
      */
     public BankAtmBean setBranchName(String branchName) {
         this.branchName = branchName == null ? null : branchName.trim();
