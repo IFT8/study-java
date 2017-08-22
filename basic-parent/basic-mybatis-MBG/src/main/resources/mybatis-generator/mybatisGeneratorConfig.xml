@@ -264,24 +264,122 @@
                 javaType                对应的Java数据类型的完全限定名 在必要的时候可以覆盖由JavaTypeResolver计算得到的java数据类型
                 jdbcType                该列的JDBC数据类型(INTEGER,DECIMAL,NUMERIC,VARCHAR,etc.) 该列可以覆盖由JavaTypeResolver计算得到的Jdbc类型，对某些数据库而言，对于处理特定的JDBC驱动癖好很有必要
                 typeHandler-->
-        <!--<table tableName="t_task" domainObjectName="TaskBean"-->
-        <!--enableInsert="true"-->
-        <!--enableDeleteByPrimaryKey="true" enableDeleteByExample="true"-->
-        <!--enableUpdateByPrimaryKey="true" enableUpdateByExample="true"-->
-        <!--enableSelectByPrimaryKey="true" enableSelectByExample="true" selectByExampleQueryId="true"-->
-        <!--enableCountByExample="true">-->
-        <!--<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="MySql" type="pre"/>-->
-        <!--&lt;!&ndash;<generatedKey column="epa_id" sqlStatement="Mysql" identity="true"/>&ndash;&gt;-->
-        <!--</table>-->
 
-        <!--<table tableName="t_crew" domainObjectName="CrewBean">-->
-        <!--<generatedKey column="crew_id" sqlStatement="Mysql" identity="true"/>-->
-        <!--<columnRenamingRule searchString="crew_" replaceString=""/>-->
-        <!--</table>-->
-        <!--<table tableName="t_client" domainObjectName="ClientBean">-->
-        <!--<generatedKey column="client_id" sqlStatement="Mysql" identity="true"/>-->
-        <!--<columnRenamingRule searchString="client_" replaceString=""/>-->
-        <!--</table>-->
+
+        <table tableName="t_atm_base" domainObjectName="AtmBaseBean">
+            <generatedKey column="base_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="base_" replaceString=""/>
+        </table>
+        <table tableName="t_bank_atm" domainObjectName="BankAtmBean">
+            <generatedKey column="atm_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="atm_" replaceString=""/>
+        </table>
+        <table tableName="t_bank_atm_code" domainObjectName="BankAtmCodeBean">
+            <generatedKey column="code_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="code_" replaceString=""/>
+        </table>
+        <table tableName="t_bank_atm_log" domainObjectName="BankAtmLogBean">
+            <generatedKey column="atm_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="atm_" replaceString=""/>
+        </table>
+
+
+        <table tableName="t_client" domainObjectName="ClientBean">
+            <generatedKey column="client_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="client_" replaceString=""/>
+        </table>
+        <table tableName="t_client_branch" domainObjectName="ClientBranchBean">
+            <generatedKey column="branch_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="branch_" replaceString=""/>
+        </table>
+
+
+        <table tableName="t_comprobantes" domainObjectName="ComprobantesBean">
+            <generatedKey column="comprobantes_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="comprobantes_" replaceString=""/>
+        </table>
+        <table tableName="t_comprobantes_bag_number" domainObjectName="ComprobantesBagNumberBean">
+            <generatedKey column="bag_number_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="bag_number_" replaceString=""/>
+        </table>
+        <table tableName="t_comprobantes_banknote" domainObjectName="ComprobantesBankNoteBean">
+            <generatedKey column="banknote_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="banknote_" replaceString=""/>
+        </table>
+
+
+        <table tableName="t_crew" domainObjectName="CrewBean">
+            <generatedKey column="crew_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="crew_" replaceString=""/>
+        </table>
+
+
+        <table tableName="t_currency" domainObjectName="CurrencyBean">
+            <generatedKey column="currency_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="currency_" replaceString=""/>
+        </table>
+
+
+        <table tableName="t_db_script_patch" domainObjectName="DbScriptPatchBean">
+            <generatedKey column="script_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="script_" replaceString=""/>
+        </table>
+
+
+        <table tableName="t_department" domainObjectName="DepartmentBean">
+            <generatedKey column="department_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="department_" replaceString=""/>
+        </table>
+        <table tableName="t_department_role_relation" domainObjectName="DepartmentRoleRelationBean">
+            <generatedKey column="relation_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="relation_" replaceString=""/>
+        </table>
+
+
+        <table tableName="t_log" domainObjectName="LogBean">
+            <generatedKey column="log_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="log_" replaceString=""/>
+        </table>
+
+
+        <table tableName="t_privilege" domainObjectName="PrivilegeBean">
+            <generatedKey column="privilege_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="privilege_" replaceString=""/>
+        </table>
+        <table tableName="t_role" domainObjectName="RoleBean">
+            <generatedKey column="role_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="role_" replaceString=""/>
+        </table>
+
+
+        <table tableName="t_setting" domainObjectName="SettingBean">
+            <generatedKey column="setting_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="setting_" replaceString=""/>
+        </table>
+
+
+        <table tableName="t_sio_login_account" domainObjectName="SioLoginAccountBean">
+            <generatedKey column="account_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="account_" replaceString=""/>
+        </table>
+        <table tableName="t_sio_task" domainObjectName="SioTaskBean">
+            <generatedKey column="task_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="task_" replaceString=""/>
+            <columnOverride column="task_task_id" property="taskId"/>
+            <columnOverride column="task_task_original_complex_id" property="taskOriginalComplexId"/>
+            <columnOverride column="task_inter_change_task_id" property="interChangeTaskId"/>
+        </table>
+        <table tableName="t_sio_task_comprobantes" domainObjectName="SioTaskComprobantesBean">
+            <generatedKey column="comprobantes_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="comprobantes_" replaceString=""/>
+        </table>
+
+
+        <table tableName="t_system_status" domainObjectName="SystemStatusBean">
+            <generatedKey column="system_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="system_" replaceString=""/>
+        </table>
+
 
         <table tableName="t_task" domainObjectName="TaskBean">
             <generatedKey column="task_pk_id" sqlStatement="Mysql" identity="true"/>
@@ -292,19 +390,42 @@
             <columnOverride column="task_source_task_complex_id" property="sourceTaskOriginalComplexId"/>
             <columnOverride column="task_last_generate_xml_task_status" property="lastGenerateXmlTaskStatus"/>
         </table>
-
+        <!--<table tableName="t_task_contract" domainObjectName="TaskContractBean">-->
+        <!--<generatedKey column="contract_id" sqlStatement="Mysql" identity="true"/>-->
+        <!--<columnRenamingRule searchString="contract_" replaceString=""/>-->
+        <!--</table>-->
+        <!--<table tableName="t_task_plan" domainObjectName="TaskPlanBean">-->
+        <!--<generatedKey column="task_pk_id" sqlStatement="Mysql" identity="true"/>-->
+        <!--<columnRenamingRule searchString="task_" replaceString=""/>-->
+        <!--<columnOverride column="task_pk_id" property="pkId"/>-->
+        <!--<columnOverride column="task_id" property="taskId"/>-->
+        <!--<columnOverride column="task_source_task_id" property="sourceTaskId"/>-->
+        <!--<columnOverride column="task_source_task_complex_id" property="sourceTaskComplexId"/>-->
+        <!--<columnOverride column="task_last_generate_xml_task_status" property="lastGenerateXmlTaskStatus"/>-->
+        <!--</table>-->
         <table tableName="t_task_inter_change" domainObjectName="TaskInterChangeBean">
             <generatedKey column="ic_id" sqlStatement="Mysql" identity="true"/>
             <columnRenamingRule searchString="ic_" replaceString=""/>
         </table>
-
-        <table tableName="t_db_script_patch" domainObjectName="DbScriptPatchBean">
-            <generatedKey column="script_id" sqlStatement="Mysql" identity="true"/>
-            <columnRenamingRule searchString="script_" replaceString=""/>
+        <table tableName="t_task_transaction" domainObjectName="TaskTransactionBean">
+            <generatedKey column="transaction_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="transaction_" replaceString=""/>
         </table>
-        <table tableName="t_sio_login_account" domainObjectName="SioLoginAccountBean">
-            <generatedKey column="account_id" sqlStatement="Mysql" identity="true"/>
-            <columnRenamingRule searchString="account_" replaceString=""/>
+
+
+        <table tableName="t_upgrade" domainObjectName="UpgradeBean">
+            <generatedKey column="upgrade_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="upgrade_" replaceString=""/>
+        </table>
+
+        <table tableName="t_user" domainObjectName="UserBean">
+            <generatedKey column="user_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="user_" replaceString=""/>
+        </table>
+
+        <table tableName="t_vehicle" domainObjectName="VehicleBean">
+            <generatedKey column="vehicle_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="vehicle_" replaceString=""/>
         </table>
 
     </context>
