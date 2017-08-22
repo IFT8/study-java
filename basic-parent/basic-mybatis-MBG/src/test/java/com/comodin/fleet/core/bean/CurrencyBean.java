@@ -10,7 +10,7 @@ import javax.validation.constraints.*;
 import org.hibernate.validator.constraints.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
-@SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue"})
+@SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue", "DefaultAnnotationParam"})
 @Table(name = "t_currency")
 public class CurrencyBean implements Serializable {
     /**
@@ -24,7 +24,7 @@ public class CurrencyBean implements Serializable {
     @NotNull(message = "{CURRENCY_BEAN_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @ValidLength(max = 20, message = "{CURRENCY_BEAN_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Id
-    @Column(name = "currency_id")
+    @Column(name = "currency_id", length = 20, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -38,7 +38,7 @@ public class CurrencyBean implements Serializable {
      */
     @NotNull(message = "{CURRENCY_BEAN_CLIENT_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @ValidLength(max = 20, message = "{CURRENCY_BEAN_CLIENT_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "currency_client_id")
+    @Column(name = "currency_client_id", length = 20, nullable = false)
     private Long clientId;
 
     /**
@@ -50,7 +50,7 @@ public class CurrencyBean implements Serializable {
      * </pre>
      */
     @Length(max = 15, message = "{CURRENCY_BEAN_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "currency_internal_id")
+    @Column(name = "currency_internal_id", length = 15, nullable = true)
     private String internalId;
 
     /**
@@ -63,7 +63,7 @@ public class CurrencyBean implements Serializable {
      */
     @NotBlank(message = "{CURRENCY_BEAN_ISO_CODE_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 5, message = "{CURRENCY_BEAN_ISO_CODE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "currency_iso_code")
+    @Column(name = "currency_iso_code", length = 5, nullable = false)
     private String isoCode;
 
     /**
@@ -76,7 +76,7 @@ public class CurrencyBean implements Serializable {
      */
     @NotBlank(message = "{CURRENCY_BEAN_AVAILABILITY_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 7, message = "{CURRENCY_BEAN_AVAILABILITY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "currency_availability")
+    @Column(name = "currency_availability", length = 7, nullable = false)
     private String availability;
 
     /**
@@ -89,7 +89,7 @@ public class CurrencyBean implements Serializable {
      */
     @NotBlank(message = "{CURRENCY_BEAN_CREATE_BY_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 20, message = "{CURRENCY_BEAN_CREATE_BY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "currency_create_by")
+    @Column(name = "currency_create_by", length = 20, nullable = false)
     private String createBy;
 
     /**
@@ -103,7 +103,7 @@ public class CurrencyBean implements Serializable {
     @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{CURRENCY_BEAN_CREATE_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
     @NotNull(message = "{CURRENCY_BEAN_CREATE_TIMESTAMP_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "currency_create_timestamp")
+    @Column(name = "currency_create_timestamp", length = 19, nullable = false)
     private Date createTimestamp;
 
     /**
@@ -117,7 +117,7 @@ public class CurrencyBean implements Serializable {
     @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{CURRENCY_BEAN_UPDATE_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
     @NotNull(message = "{CURRENCY_BEAN_UPDATE_TIMESTAMP_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "currency_update_timestamp")
+    @Column(name = "currency_update_timestamp", length = 19, nullable = false)
     private Date updateTimestamp;
 
     /**
@@ -130,7 +130,7 @@ public class CurrencyBean implements Serializable {
      */
     @NotBlank(message = "{CURRENCY_BEAN_DELETE_FLAG_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 1, message = "{CURRENCY_BEAN_DELETE_FLAG_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "currency_delete_flag")
+    @Column(name = "currency_delete_flag", length = 1, nullable = false)
     private String deleteFlag;
 
     private static final long serialVersionUID = 1L;

@@ -10,7 +10,7 @@ import javax.validation.constraints.*;
 import org.hibernate.validator.constraints.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
-@SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue"})
+@SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue", "DefaultAnnotationParam"})
 @Table(name = "t_task_inter_change")
 public class TaskInterChangeBean implements Serializable {
     /**
@@ -24,7 +24,7 @@ public class TaskInterChangeBean implements Serializable {
     @NotNull(message = "{TASK_INTER_CHANGE_BEAN_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @ValidLength(max = 13, message = "{TASK_INTER_CHANGE_BEAN_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Id
-    @Column(name = "ic_id")
+    @Column(name = "ic_id", length = 19, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -38,7 +38,7 @@ public class TaskInterChangeBean implements Serializable {
      */
     @NotNull(message = "{TASK_INTER_CHANGE_BEAN_BATCH_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @ValidLength(max = 19, message = "{TASK_INTER_CHANGE_BEAN_BATCH_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "ic_batch_id")
+    @Column(name = "ic_batch_id", length = 19, nullable = false)
     private Long batchId;
 
     /**
@@ -51,7 +51,7 @@ public class TaskInterChangeBean implements Serializable {
      */
     @NotBlank(message = "{TASK_INTER_CHANGE_BEAN_FROM_COMPANY_INTERNAL_ID_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 15, message = "{TASK_INTER_CHANGE_BEAN_FROM_COMPANY_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "ic_from_company_internal_id")
+    @Column(name = "ic_from_company_internal_id", length = 15, nullable = false)
     private String fromCompanyInternalId;
 
     /**
@@ -63,7 +63,7 @@ public class TaskInterChangeBean implements Serializable {
      * </pre>
      */
     @Length(max = 100, message = "{TASK_INTER_CHANGE_BEAN_FROM_COMPANY_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "ic_from_company_name")
+    @Column(name = "ic_from_company_name", length = 100, nullable = true)
     private String fromCompanyName;
 
     /**
@@ -76,7 +76,7 @@ public class TaskInterChangeBean implements Serializable {
      */
     @NotBlank(message = "{TASK_INTER_CHANGE_BEAN_FROM_BRANCH_INTERNAL_ID_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 15, message = "{TASK_INTER_CHANGE_BEAN_FROM_BRANCH_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "ic_from_branch_internal_id")
+    @Column(name = "ic_from_branch_internal_id", length = 15, nullable = false)
     private String fromBranchInternalId;
 
     /**
@@ -88,7 +88,7 @@ public class TaskInterChangeBean implements Serializable {
      * </pre>
      */
     @Length(max = 100, message = "{TASK_INTER_CHANGE_BEAN_FROM_BRANCH_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "ic_from_branch_name")
+    @Column(name = "ic_from_branch_name", length = 100, nullable = true)
     private String fromBranchName;
 
     /**
@@ -101,7 +101,7 @@ public class TaskInterChangeBean implements Serializable {
      */
     @NotBlank(message = "{TASK_INTER_CHANGE_BEAN_FROM_SERVICE_DATE_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 10, message = "{TASK_INTER_CHANGE_BEAN_FROM_SERVICE_DATE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "ic_from_service_date")
+    @Column(name = "ic_from_service_date", length = 10, nullable = false)
     private String fromServiceDate;
 
     /**
@@ -114,7 +114,7 @@ public class TaskInterChangeBean implements Serializable {
      */
     @NotBlank(message = "{TASK_INTER_CHANGE_BEAN_FROM_ROUTE_ID_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 10, message = "{TASK_INTER_CHANGE_BEAN_FROM_ROUTE_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "ic_from_route_id")
+    @Column(name = "ic_from_route_id", length = 10, nullable = false)
     private String fromRouteId;
 
     /**
@@ -127,7 +127,7 @@ public class TaskInterChangeBean implements Serializable {
      */
     @NotBlank(message = "{TASK_INTER_CHANGE_BEAN_FROM_TASK_PK_IDS_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 2048, message = "{TASK_INTER_CHANGE_BEAN_FROM_TASK_PK_IDS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "ic_from_task_pk_ids")
+    @Column(name = "ic_from_task_pk_ids", length = 2048, nullable = false)
     private String fromTaskPkIds;
 
     /**
@@ -139,7 +139,7 @@ public class TaskInterChangeBean implements Serializable {
      * </pre>
      */
     @ValidLength(max = 13, message = "{TASK_INTER_CHANGE_BEAN_FROM_DRIVER_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "ic_from_driver_id")
+    @Column(name = "ic_from_driver_id", length = 20, nullable = true)
     private Long fromDriverId;
 
     /**
@@ -151,7 +151,7 @@ public class TaskInterChangeBean implements Serializable {
      * </pre>
      */
     @Length(max = 20, message = "{TASK_INTER_CHANGE_BEAN_FROM_DRIVER_USERNAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "ic_from_driver_username")
+    @Column(name = "ic_from_driver_username", length = 20, nullable = true)
     private String fromDriverUsername;
 
     /**
@@ -163,7 +163,7 @@ public class TaskInterChangeBean implements Serializable {
      * </pre>
      */
     @Length(max = 15, message = "{TASK_INTER_CHANGE_BEAN_FROM_DRIVER_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "ic_from_driver_internal_id")
+    @Column(name = "ic_from_driver_internal_id", length = 15, nullable = true)
     private String fromDriverInternalId;
 
     /**
@@ -175,7 +175,7 @@ public class TaskInterChangeBean implements Serializable {
      * </pre>
      */
     @Length(max = 50, message = "{TASK_INTER_CHANGE_BEAN_FROM_DRIVER_FIRST_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "ic_from_driver_first_name")
+    @Column(name = "ic_from_driver_first_name", length = 50, nullable = true)
     private String fromDriverFirstName;
 
     /**
@@ -187,7 +187,7 @@ public class TaskInterChangeBean implements Serializable {
      * </pre>
      */
     @Length(max = 50, message = "{TASK_INTER_CHANGE_BEAN_FROM_DRIVER_LAST_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "ic_from_driver_last_name")
+    @Column(name = "ic_from_driver_last_name", length = 50, nullable = true)
     private String fromDriverLastName;
 
     /**
@@ -199,7 +199,7 @@ public class TaskInterChangeBean implements Serializable {
      * </pre>
      */
     @Length(max = 15, message = "{TASK_INTER_CHANGE_BEAN_FROM_DRIVER_PHONE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "ic_from_driver_phone")
+    @Column(name = "ic_from_driver_phone", length = 15, nullable = true)
     private String fromDriverPhone;
 
     /**
@@ -211,7 +211,7 @@ public class TaskInterChangeBean implements Serializable {
      * </pre>
      */
     @ValidLength(max = 13, message = "{TASK_INTER_CHANGE_BEAN_FROM_VEHICLE_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "ic_from_vehicle_id")
+    @Column(name = "ic_from_vehicle_id", length = 20, nullable = true)
     private Long fromVehicleId;
 
     /**
@@ -223,7 +223,7 @@ public class TaskInterChangeBean implements Serializable {
      * </pre>
      */
     @Length(max = 15, message = "{TASK_INTER_CHANGE_BEAN_FROM_VEHICLE_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "ic_from_vehicle_internal_id")
+    @Column(name = "ic_from_vehicle_internal_id", length = 15, nullable = true)
     private String fromVehicleInternalId;
 
     /**
@@ -235,7 +235,7 @@ public class TaskInterChangeBean implements Serializable {
      * </pre>
      */
     @Length(max = 100, message = "{TASK_INTER_CHANGE_BEAN_FROM_EVIDENCE_PICTURE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "ic_from_evidence_picture")
+    @Column(name = "ic_from_evidence_picture", length = 100, nullable = true)
     private String fromEvidencePicture;
 
     /**
@@ -247,7 +247,7 @@ public class TaskInterChangeBean implements Serializable {
      * </pre>
      */
     @Length(max = 100, message = "{TASK_INTER_CHANGE_BEAN_FROM_SIGNATURE_PICTURE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "ic_from_signature_picture")
+    @Column(name = "ic_from_signature_picture", length = 100, nullable = true)
     private String fromSignaturePicture;
 
     /**
@@ -259,7 +259,7 @@ public class TaskInterChangeBean implements Serializable {
      * </pre>
      */
     @Length(max = 15, message = "{TASK_INTER_CHANGE_BEAN_FROM_LATITUDE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "ic_from_latitude")
+    @Column(name = "ic_from_latitude", length = 15, nullable = true)
     private String fromLatitude;
 
     /**
@@ -271,7 +271,7 @@ public class TaskInterChangeBean implements Serializable {
      * </pre>
      */
     @Length(max = 15, message = "{TASK_INTER_CHANGE_BEAN_FROM_LONGITUDE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "ic_from_longitude")
+    @Column(name = "ic_from_longitude", length = 15, nullable = true)
     private String fromLongitude;
 
     /**
@@ -283,7 +283,7 @@ public class TaskInterChangeBean implements Serializable {
      * </pre>
      */
     @Length(max = 1, message = "{TASK_INTER_CHANGE_BEAN_FROM_CONFIRM_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "ic_from_confirm")
+    @Column(name = "ic_from_confirm", length = 1, nullable = true)
     private String fromConfirm;
 
     /**
@@ -296,7 +296,7 @@ public class TaskInterChangeBean implements Serializable {
      */
     @NotBlank(message = "{TASK_INTER_CHANGE_BEAN_TO_COMPANY_INTERNAL_ID_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 15, message = "{TASK_INTER_CHANGE_BEAN_TO_COMPANY_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "ic_to_company_internal_id")
+    @Column(name = "ic_to_company_internal_id", length = 15, nullable = false)
     private String toCompanyInternalId;
 
     /**
@@ -308,7 +308,7 @@ public class TaskInterChangeBean implements Serializable {
      * </pre>
      */
     @Length(max = 100, message = "{TASK_INTER_CHANGE_BEAN_TO_COMPANY_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "ic_to_company_name")
+    @Column(name = "ic_to_company_name", length = 100, nullable = true)
     private String toCompanyName;
 
     /**
@@ -321,7 +321,7 @@ public class TaskInterChangeBean implements Serializable {
      */
     @NotBlank(message = "{TASK_INTER_CHANGE_BEAN_TO_BRANCH_INTERNAL_ID_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 15, message = "{TASK_INTER_CHANGE_BEAN_TO_BRANCH_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "ic_to_branch_internal_id")
+    @Column(name = "ic_to_branch_internal_id", length = 15, nullable = false)
     private String toBranchInternalId;
 
     /**
@@ -333,7 +333,7 @@ public class TaskInterChangeBean implements Serializable {
      * </pre>
      */
     @Length(max = 100, message = "{TASK_INTER_CHANGE_BEAN_TO_BRANCH_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "ic_to_branch_name")
+    @Column(name = "ic_to_branch_name", length = 100, nullable = true)
     private String toBranchName;
 
     /**
@@ -346,7 +346,7 @@ public class TaskInterChangeBean implements Serializable {
      */
     @NotBlank(message = "{TASK_INTER_CHANGE_BEAN_TO_SERVICE_DATE_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 10, message = "{TASK_INTER_CHANGE_BEAN_TO_SERVICE_DATE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "ic_to_service_date")
+    @Column(name = "ic_to_service_date", length = 10, nullable = false)
     private String toServiceDate;
 
     /**
@@ -359,7 +359,7 @@ public class TaskInterChangeBean implements Serializable {
      */
     @NotBlank(message = "{TASK_INTER_CHANGE_BEAN_TO_ROUTE_ID_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 10, message = "{TASK_INTER_CHANGE_BEAN_TO_ROUTE_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "ic_to_route_id")
+    @Column(name = "ic_to_route_id", length = 10, nullable = false)
     private String toRouteId;
 
     /**
@@ -372,7 +372,7 @@ public class TaskInterChangeBean implements Serializable {
      */
     @NotBlank(message = "{TASK_INTER_CHANGE_BEAN_TO_TASK_PK_IDS_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 2048, message = "{TASK_INTER_CHANGE_BEAN_TO_TASK_PK_IDS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "ic_to_task_pk_ids")
+    @Column(name = "ic_to_task_pk_ids", length = 2048, nullable = false)
     private String toTaskPkIds;
 
     /**
@@ -384,7 +384,7 @@ public class TaskInterChangeBean implements Serializable {
      * </pre>
      */
     @ValidLength(max = 13, message = "{TASK_INTER_CHANGE_BEAN_TO_DRIVER_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "ic_to_driver_id")
+    @Column(name = "ic_to_driver_id", length = 20, nullable = true)
     private Long toDriverId;
 
     /**
@@ -396,7 +396,7 @@ public class TaskInterChangeBean implements Serializable {
      * </pre>
      */
     @Length(max = 20, message = "{TASK_INTER_CHANGE_BEAN_TO_DRIVER_USERNAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "ic_to_driver_username")
+    @Column(name = "ic_to_driver_username", length = 20, nullable = true)
     private String toDriverUsername;
 
     /**
@@ -408,7 +408,7 @@ public class TaskInterChangeBean implements Serializable {
      * </pre>
      */
     @Length(max = 15, message = "{TASK_INTER_CHANGE_BEAN_TO_DRIVER_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "ic_to_driver_internal_id")
+    @Column(name = "ic_to_driver_internal_id", length = 15, nullable = true)
     private String toDriverInternalId;
 
     /**
@@ -420,7 +420,7 @@ public class TaskInterChangeBean implements Serializable {
      * </pre>
      */
     @Length(max = 50, message = "{TASK_INTER_CHANGE_BEAN_TO_DRIVER_FIRST_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "ic_to_driver_first_name")
+    @Column(name = "ic_to_driver_first_name", length = 50, nullable = true)
     private String toDriverFirstName;
 
     /**
@@ -432,7 +432,7 @@ public class TaskInterChangeBean implements Serializable {
      * </pre>
      */
     @Length(max = 50, message = "{TASK_INTER_CHANGE_BEAN_TO_DRIVER_LAST_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "ic_to_driver_last_name")
+    @Column(name = "ic_to_driver_last_name", length = 50, nullable = true)
     private String toDriverLastName;
 
     /**
@@ -444,7 +444,7 @@ public class TaskInterChangeBean implements Serializable {
      * </pre>
      */
     @Length(max = 15, message = "{TASK_INTER_CHANGE_BEAN_TO_DRIVER_PHONE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "ic_to_driver_phone")
+    @Column(name = "ic_to_driver_phone", length = 15, nullable = true)
     private String toDriverPhone;
 
     /**
@@ -456,7 +456,7 @@ public class TaskInterChangeBean implements Serializable {
      * </pre>
      */
     @ValidLength(max = 13, message = "{TASK_INTER_CHANGE_BEAN_TO_VEHICLE_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "ic_to_vehicle_id")
+    @Column(name = "ic_to_vehicle_id", length = 20, nullable = true)
     private Long toVehicleId;
 
     /**
@@ -468,7 +468,7 @@ public class TaskInterChangeBean implements Serializable {
      * </pre>
      */
     @Length(max = 15, message = "{TASK_INTER_CHANGE_BEAN_TO_VEHICLE_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "ic_to_vehicle_internal_id")
+    @Column(name = "ic_to_vehicle_internal_id", length = 15, nullable = true)
     private String toVehicleInternalId;
 
     /**
@@ -480,7 +480,7 @@ public class TaskInterChangeBean implements Serializable {
      * </pre>
      */
     @Length(max = 100, message = "{TASK_INTER_CHANGE_BEAN_TO_EVIDENCE_PICTURE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "ic_to_evidence_picture")
+    @Column(name = "ic_to_evidence_picture", length = 100, nullable = true)
     private String toEvidencePicture;
 
     /**
@@ -492,7 +492,7 @@ public class TaskInterChangeBean implements Serializable {
      * </pre>
      */
     @Length(max = 100, message = "{TASK_INTER_CHANGE_BEAN_TO_SIGNATURE_PICTURE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "ic_to_signature_picture")
+    @Column(name = "ic_to_signature_picture", length = 100, nullable = true)
     private String toSignaturePicture;
 
     /**
@@ -504,7 +504,7 @@ public class TaskInterChangeBean implements Serializable {
      * </pre>
      */
     @Length(max = 15, message = "{TASK_INTER_CHANGE_BEAN_TO_LATITUDE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "ic_to_latitude")
+    @Column(name = "ic_to_latitude", length = 15, nullable = true)
     private String toLatitude;
 
     /**
@@ -516,7 +516,7 @@ public class TaskInterChangeBean implements Serializable {
      * </pre>
      */
     @Length(max = 15, message = "{TASK_INTER_CHANGE_BEAN_TO_LONGITUDE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "ic_to_longitude")
+    @Column(name = "ic_to_longitude", length = 15, nullable = true)
     private String toLongitude;
 
     /**
@@ -528,7 +528,7 @@ public class TaskInterChangeBean implements Serializable {
      * </pre>
      */
     @Length(max = 1, message = "{TASK_INTER_CHANGE_BEAN_TO_CONFIRM_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "ic_to_confirm")
+    @Column(name = "ic_to_confirm", length = 1, nullable = true)
     private String toConfirm;
 
     /**
@@ -541,7 +541,7 @@ public class TaskInterChangeBean implements Serializable {
      */
     @NotBlank(message = "{TASK_INTER_CHANGE_BEAN_STATUS_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 30, message = "{TASK_INTER_CHANGE_BEAN_STATUS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "ic_status")
+    @Column(name = "ic_status", length = 30, nullable = false)
     private String status;
 
     /**
@@ -555,7 +555,7 @@ public class TaskInterChangeBean implements Serializable {
     @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{TASK_INTER_CHANGE_BEAN_CREATE_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
     @NotNull(message = "{TASK_INTER_CHANGE_BEAN_CREATE_TIMESTAMP_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "ic_create_timestamp")
+    @Column(name = "ic_create_timestamp", length = 19, nullable = false)
     private Date createTimestamp;
 
     /**
@@ -568,7 +568,7 @@ public class TaskInterChangeBean implements Serializable {
      */
     @NotBlank(message = "{TASK_INTER_CHANGE_BEAN_CREATE_BY_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 20, message = "{TASK_INTER_CHANGE_BEAN_CREATE_BY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "ic_create_by")
+    @Column(name = "ic_create_by", length = 20, nullable = false)
     private String createBy;
 
     /**
@@ -581,7 +581,7 @@ public class TaskInterChangeBean implements Serializable {
      */
     @NotBlank(message = "{TASK_INTER_CHANGE_BEAN_DELETE_FLAG_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 1, message = "{TASK_INTER_CHANGE_BEAN_DELETE_FLAG_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "ic_delete_flag")
+    @Column(name = "ic_delete_flag", length = 1, nullable = false)
     private String deleteFlag;
 
     private static final long serialVersionUID = 1L;

@@ -8,6 +8,7 @@ import com.comodin.fleet.core.bean.SioLoginAccountBean;
 
 @Controller
 @RequestMapping("/sioLoginAccount")
+@SuppressWarnings({"unused", "SpringAutowiredFieldsWarningInspection", "StatementWithEmptyBody"})
 public class SioLoginAccountBeanController extends AbstractBaseController<SioLoginAccountBean, BaseVo<SioLoginAccountBean>> {
 
     @Override protected String getModuleName() {return "sioLoginAccount";}

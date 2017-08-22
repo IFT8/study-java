@@ -7,6 +7,7 @@ import com.comodin.fleet.core.bean.VehicleBean;
 import com.comodin.fleet.service.IVehicleBeanService;
 
 @Service
+@SuppressWarnings({"unused", "SpringAutowiredFieldsWarningInspection", "StatementWithEmptyBody"})
 public class VehicleBeanService extends AbstractBaseService<VehicleBean, BaseVo<VehicleBean>> implements IVehicleBeanService {
 
 }

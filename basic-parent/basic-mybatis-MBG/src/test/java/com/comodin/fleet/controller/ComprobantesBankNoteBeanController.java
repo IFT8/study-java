@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 @RequestMapping("/comprobantesBankNote")
+@SuppressWarnings({"unused", "SpringAutowiredFieldsWarningInspection", "StatementWithEmptyBody"})
 public class ComprobantesBankNoteBeanController extends AbstractBaseController<ComprobantesBankNoteBean, BaseVo<ComprobantesBankNoteBean>> {
 
     @Override protected String getModuleName() {return "comprobantesBankNote";}

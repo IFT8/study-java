@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 @RequestMapping("/taskInterChange")
+@SuppressWarnings({"unused", "SpringAutowiredFieldsWarningInspection", "StatementWithEmptyBody"})
 public class TaskInterChangeBeanController extends AbstractBaseController<TaskInterChangeBean, BaseVo<TaskInterChangeBean>> {
 
     @Override protected String getModuleName() {return "taskInterChange";}

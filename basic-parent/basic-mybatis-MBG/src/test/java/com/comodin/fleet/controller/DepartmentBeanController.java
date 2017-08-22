@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 @RequestMapping("/department")
+@SuppressWarnings({"unused", "SpringAutowiredFieldsWarningInspection", "StatementWithEmptyBody"})
 public class DepartmentBeanController extends AbstractBaseController<DepartmentBean, BaseVo<DepartmentBean>> {
 
     @Override protected String getModuleName() {return "department";}

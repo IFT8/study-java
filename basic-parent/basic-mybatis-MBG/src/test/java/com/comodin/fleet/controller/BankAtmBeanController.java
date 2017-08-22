@@ -8,6 +8,7 @@ import com.comodin.fleet.core.bean.BankAtmBean;
 
 @Controller
 @RequestMapping("/bankAtm")
+@SuppressWarnings({"unused", "SpringAutowiredFieldsWarningInspection", "StatementWithEmptyBody"})
 public class BankAtmBeanController extends AbstractBaseController<BankAtmBean, BaseVo<BankAtmBean>> {
 
     @Override protected String getModuleName() {return "bankAtm";}

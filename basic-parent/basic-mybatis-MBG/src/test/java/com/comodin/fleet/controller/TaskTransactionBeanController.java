@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 @RequestMapping("/taskTransaction")
+@SuppressWarnings({"unused", "SpringAutowiredFieldsWarningInspection", "StatementWithEmptyBody"})
 public class TaskTransactionBeanController extends AbstractBaseController<TaskTransactionBean, BaseVo<TaskTransactionBean>> {
 
     @Override protected String getModuleName() {return "taskTransaction";}

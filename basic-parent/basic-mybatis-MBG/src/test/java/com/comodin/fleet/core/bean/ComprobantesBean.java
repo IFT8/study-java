@@ -11,7 +11,7 @@ import javax.validation.constraints.*;
 import org.hibernate.validator.constraints.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
-@SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue"})
+@SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue", "DefaultAnnotationParam"})
 @Table(name = "t_comprobantes")
 public class ComprobantesBean implements Serializable {
     /**
@@ -25,7 +25,7 @@ public class ComprobantesBean implements Serializable {
     @NotNull(message = "{COMPROBANTES_BEAN_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @ValidLength(max = 20, message = "{COMPROBANTES_BEAN_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Id
-    @Column(name = "comprobantes_id")
+    @Column(name = "comprobantes_id", length = 20, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -39,7 +39,7 @@ public class ComprobantesBean implements Serializable {
      */
     @NotNull(message = "{COMPROBANTES_BEAN_TASK_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @ValidLength(max = 20, message = "{COMPROBANTES_BEAN_TASK_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "comprobantes_task_id")
+    @Column(name = "comprobantes_task_id", length = 20, nullable = false)
     private Long taskId;
 
     /**
@@ -52,7 +52,7 @@ public class ComprobantesBean implements Serializable {
      */
     @NotNull(message = "{COMPROBANTES_BEAN_TASK_PK_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @ValidLength(max = 20, message = "{COMPROBANTES_BEAN_TASK_PK_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "comprobantes_task_pk_id")
+    @Column(name = "comprobantes_task_pk_id", length = 20, nullable = false)
     private Long taskPkId;
 
     /**
@@ -65,7 +65,7 @@ public class ComprobantesBean implements Serializable {
      */
     @NotBlank(message = "{COMPROBANTES_BEAN_CODE_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 15, message = "{COMPROBANTES_BEAN_CODE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "comprobantes_code")
+    @Column(name = "comprobantes_code", length = 15, nullable = false)
     private String code;
 
     /**
@@ -78,7 +78,7 @@ public class ComprobantesBean implements Serializable {
      */
     @NotBlank(message = "{COMPROBANTES_BEAN_TYPE_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 20, message = "{COMPROBANTES_BEAN_TYPE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "comprobantes_type")
+    @Column(name = "comprobantes_type", length = 20, nullable = false)
     private String type;
 
     /**
@@ -91,7 +91,7 @@ public class ComprobantesBean implements Serializable {
      */
     @NotBlank(message = "{COMPROBANTES_BEAN_AVAILABILITY_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 7, message = "{COMPROBANTES_BEAN_AVAILABILITY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "comprobantes_availability")
+    @Column(name = "comprobantes_availability", length = 7, nullable = false)
     private String availability;
 
     /**
@@ -104,7 +104,7 @@ public class ComprobantesBean implements Serializable {
      */
     @NotBlank(message = "{COMPROBANTES_BEAN_STATUS_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 30, message = "{COMPROBANTES_BEAN_STATUS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "comprobantes_status")
+    @Column(name = "comprobantes_status", length = 30, nullable = false)
     private String status;
 
     /**
@@ -116,7 +116,7 @@ public class ComprobantesBean implements Serializable {
      * </pre>
      */
     @Length(max = 15, message = "{COMPROBANTES_BEAN_CURRENCY_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "comprobantes_currency_internal_id")
+    @Column(name = "comprobantes_currency_internal_id", length = 15, nullable = true)
     private String currencyInternalId;
 
     /**
@@ -129,7 +129,7 @@ public class ComprobantesBean implements Serializable {
      */
     @NotBlank(message = "{COMPROBANTES_BEAN_CURRENCY_ISO_CODE_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 5, message = "{COMPROBANTES_BEAN_CURRENCY_ISO_CODE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "comprobantes_currency_iso_code")
+    @Column(name = "comprobantes_currency_iso_code", length = 5, nullable = false)
     private String currencyIsoCode;
 
     /**
@@ -142,7 +142,7 @@ public class ComprobantesBean implements Serializable {
      */
     @NotNull(message = "{COMPROBANTES_BEAN_PACKAGE_NUMBER_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @ValidLength(max = 10, message = "{COMPROBANTES_BEAN_PACKAGE_NUMBER_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "comprobantes_package_number")
+    @Column(name = "comprobantes_package_number", length = 10, nullable = false)
     private Integer packageNumber;
 
     /**
@@ -154,7 +154,7 @@ public class ComprobantesBean implements Serializable {
      * </pre>
      */
     @Length(max = 800, message = "{COMPROBANTES_BEAN_BAG_SERIAL_NUMBERS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "comprobantes_bag_serial_numbers")
+    @Column(name = "comprobantes_bag_serial_numbers", length = 800, nullable = true)
     private String bagSerialNumbers;
 
     /**
@@ -165,7 +165,7 @@ public class ComprobantesBean implements Serializable {
      * DB defaultValue: 0.0000
      * </pre>
      */
-    @Column(name = "comprobantes_amount")
+    @Column(name = "comprobantes_amount", length = 15, nullable = false)
     private BigDecimal amount;
 
     /**
@@ -177,7 +177,7 @@ public class ComprobantesBean implements Serializable {
      * </pre>
      */
     @Length(max = 100, message = "{COMPROBANTES_BEAN_EVIDENCE_PICTURE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "comprobantes_evidence_picture")
+    @Column(name = "comprobantes_evidence_picture", length = 100, nullable = true)
     private String evidencePicture;
 
     /**
@@ -189,7 +189,7 @@ public class ComprobantesBean implements Serializable {
      * </pre>
      */
     @Length(max = 100, message = "{COMPROBANTES_BEAN_SIGNATURE_PICTURE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "comprobantes_signature_picture")
+    @Column(name = "comprobantes_signature_picture", length = 100, nullable = true)
     private String signaturePicture;
 
     /**
@@ -201,7 +201,7 @@ public class ComprobantesBean implements Serializable {
      * </pre>
      */
     @Length(max = 100, message = "{COMPROBANTES_BEAN_PART_EVIDENCE_PICTURE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "comprobantes_part_evidence_picture")
+    @Column(name = "comprobantes_part_evidence_picture", length = 100, nullable = true)
     private String partEvidencePicture;
 
     /**
@@ -213,7 +213,7 @@ public class ComprobantesBean implements Serializable {
      * </pre>
      */
     @Length(max = 100, message = "{COMPROBANTES_BEAN_PART_SIGNATURE_PICTURE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "comprobantes_part_signature_picture")
+    @Column(name = "comprobantes_part_signature_picture", length = 100, nullable = true)
     private String partSignaturePicture;
 
     /**
@@ -225,7 +225,7 @@ public class ComprobantesBean implements Serializable {
      * </pre>
      */
     @Length(max = 10, message = "{COMPROBANTES_BEAN_CANCEL_RESPONSIBLE_PARTY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "comprobantes_cancel_responsible_party")
+    @Column(name = "comprobantes_cancel_responsible_party", length = 10, nullable = true)
     private String cancelResponsibleParty;
 
     /**
@@ -237,7 +237,7 @@ public class ComprobantesBean implements Serializable {
      * </pre>
      */
     @Length(max = 20, message = "{COMPROBANTES_BEAN_CANCEL_SINGLE_RECEIPT_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "comprobantes_cancel_single_receipt")
+    @Column(name = "comprobantes_cancel_single_receipt", length = 20, nullable = true)
     private String cancelSingleReceipt;
 
     /**
@@ -249,7 +249,7 @@ public class ComprobantesBean implements Serializable {
      * </pre>
      */
     @Length(max = 40, message = "{COMPROBANTES_BEAN_CANCEL_REASON_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "comprobantes_cancel_reason")
+    @Column(name = "comprobantes_cancel_reason", length = 40, nullable = true)
     private String cancelReason;
 
     /**
@@ -261,7 +261,7 @@ public class ComprobantesBean implements Serializable {
      * </pre>
      */
     @Length(max = 30, message = "{COMPROBANTES_BEAN_CANCEL_MONEY_BACK_PARTY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "comprobantes_cancel_money_back_party")
+    @Column(name = "comprobantes_cancel_money_back_party", length = 30, nullable = true)
     private String cancelMoneyBackParty;
 
     /**
@@ -273,7 +273,7 @@ public class ComprobantesBean implements Serializable {
      * </pre>
      */
     @Length(max = 100, message = "{COMPROBANTES_BEAN_CANCEL_COMMENT_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "comprobantes_cancel_comment")
+    @Column(name = "comprobantes_cancel_comment", length = 100, nullable = true)
     private String cancelComment;
 
     /**
@@ -285,7 +285,7 @@ public class ComprobantesBean implements Serializable {
      * </pre>
      */
     @Length(max = 50, message = "{COMPROBANTES_BEAN_BRANCH_CODE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "comprobantes_branch_code")
+    @Column(name = "comprobantes_branch_code", length = 50, nullable = true)
     private String branchCode;
 
     /**
@@ -299,13 +299,13 @@ public class ComprobantesBean implements Serializable {
     @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{COMPROBANTES_BEAN_CREATE_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
     @NotNull(message = "{COMPROBANTES_BEAN_CREATE_TIMESTAMP_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "comprobantes_create_timestamp")
+    @Column(name = "comprobantes_create_timestamp", length = 19, nullable = false)
     private Date createTimestamp;
 
     @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{COMPROBANTES_BEAN_UPDATE_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
     @NotNull(message = "{COMPROBANTES_BEAN_UPDATE_TIMESTAMP_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "comprobantes_update_timestamp")
+    @Column(name = "comprobantes_update_timestamp", length = 19, nullable = false)
     private Date updateTimestamp;
 
     /**
@@ -318,7 +318,7 @@ public class ComprobantesBean implements Serializable {
      */
     @NotBlank(message = "{COMPROBANTES_BEAN_CREATE_BY_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 20, message = "{COMPROBANTES_BEAN_CREATE_BY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "comprobantes_create_by")
+    @Column(name = "comprobantes_create_by", length = 20, nullable = false)
     private String createBy;
 
     /**
@@ -331,7 +331,7 @@ public class ComprobantesBean implements Serializable {
      */
     @NotBlank(message = "{COMPROBANTES_BEAN_DELETE_FLAG_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 1, message = "{COMPROBANTES_BEAN_DELETE_FLAG_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "comprobantes_delete_flag")
+    @Column(name = "comprobantes_delete_flag", length = 1, nullable = false)
     private String deleteFlag;
 
     /**
@@ -344,7 +344,7 @@ public class ComprobantesBean implements Serializable {
      */
     @NotBlank(message = "{COMPROBANTES_BEAN_GENERATE_SOURCE_PARTY_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 20, message = "{COMPROBANTES_BEAN_GENERATE_SOURCE_PARTY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "comprobantes_generate_source_party")
+    @Column(name = "comprobantes_generate_source_party", length = 20, nullable = false)
     private String generateSourceParty;
 
     /**
@@ -356,7 +356,7 @@ public class ComprobantesBean implements Serializable {
      * </pre>
      */
     @Length(max = 100, message = "{COMPROBANTES_BEAN_SOURCE_BILL_ORIGINAL_CODE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "comprobantes_source_bill_original_code")
+    @Column(name = "comprobantes_source_bill_original_code", length = 100, nullable = true)
     private String sourceBillOriginalCode;
 
     private static final long serialVersionUID = 1L;

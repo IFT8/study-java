@@ -7,6 +7,7 @@ import com.comodin.basic.service.AbstractBaseService;
 import com.comodin.fleet.core.bean.ComprobantesBean;
 
 @Service
+@SuppressWarnings({"unused", "SpringAutowiredFieldsWarningInspection", "StatementWithEmptyBody"})
 public class ComprobantesBeanService extends AbstractBaseService<ComprobantesBean, BaseVo<ComprobantesBean>> implements IComprobantesBeanService {
 
 }

@@ -7,6 +7,7 @@ import com.comodin.fleet.service.IBankAtmCodeBeanService;
 import com.comodin.fleet.core.bean.BankAtmCodeBean;
 
 @Service
+@SuppressWarnings({"unused", "SpringAutowiredFieldsWarningInspection", "StatementWithEmptyBody"})
 public class BankAtmCodeBeanService extends AbstractBaseService<BankAtmCodeBean, BaseVo<BankAtmCodeBean>> implements IBankAtmCodeBeanService {
 
 }

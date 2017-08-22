@@ -10,7 +10,7 @@ import javax.validation.constraints.*;
 import org.hibernate.validator.constraints.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
-@SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue"})
+@SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue", "DefaultAnnotationParam"})
 @Table(name = "t_role")
 public class RoleBean implements Serializable {
     /**
@@ -24,7 +24,7 @@ public class RoleBean implements Serializable {
     @NotNull(message = "{ROLE_BEAN_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @ValidLength(max = 20, message = "{ROLE_BEAN_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Id
-    @Column(name = "role_id")
+    @Column(name = "role_id", length = 20, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -37,7 +37,7 @@ public class RoleBean implements Serializable {
      * </pre>
      */
     @Length(max = 20, message = "{ROLE_BEAN_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "role_name")
+    @Column(name = "role_name", length = 20, nullable = true)
     private String name;
 
     /**
@@ -49,7 +49,7 @@ public class RoleBean implements Serializable {
      * </pre>
      */
     @ValidLength(max = 10, message = "{ROLE_BEAN_AMOUNT_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "role_amount")
+    @Column(name = "role_amount", length = 10, nullable = true)
     private Integer amount;
 
     /**
@@ -61,7 +61,7 @@ public class RoleBean implements Serializable {
      * </pre>
      */
     @Length(max = 5000, message = "{ROLE_BEAN_PRIVILEGE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "role_privilege")
+    @Column(name = "role_privilege", length = 5000, nullable = true)
     private String privilege;
 
     /**
@@ -74,7 +74,7 @@ public class RoleBean implements Serializable {
      */
     @NotBlank(message = "{ROLE_BEAN_STATUS_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 7, message = "{ROLE_BEAN_STATUS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "role_status")
+    @Column(name = "role_status", length = 7, nullable = false)
     private String status;
 
     /**
@@ -86,7 +86,7 @@ public class RoleBean implements Serializable {
      * </pre>
      */
     @Length(max = 255, message = "{ROLE_BEAN_DESCRIPTION_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "role_description")
+    @Column(name = "role_description", length = 255, nullable = true)
     private String description;
 
     /**
@@ -99,7 +99,7 @@ public class RoleBean implements Serializable {
      */
     @NotBlank(message = "{ROLE_BEAN_CREATE_BY_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 20, message = "{ROLE_BEAN_CREATE_BY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "role_create_by")
+    @Column(name = "role_create_by", length = 20, nullable = false)
     private String createBy;
 
     /**
@@ -113,7 +113,7 @@ public class RoleBean implements Serializable {
     @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{ROLE_BEAN_CREATE_DATE_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
     @NotNull(message = "{ROLE_BEAN_CREATE_DATE_TIMESTAMP_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "role_create_date_timestamp")
+    @Column(name = "role_create_date_timestamp", length = 19, nullable = false)
     private Date createDateTimestamp;
 
     /**
@@ -126,7 +126,7 @@ public class RoleBean implements Serializable {
      */
     @NotBlank(message = "{ROLE_BEAN_DELETE_FLAG_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 1, message = "{ROLE_BEAN_DELETE_FLAG_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "role_delete_flag")
+    @Column(name = "role_delete_flag", length = 1, nullable = false)
     private String deleteFlag;
 
     private static final long serialVersionUID = 1L;

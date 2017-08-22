@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 @RequestMapping("/sioTask")
+@SuppressWarnings({"unused", "SpringAutowiredFieldsWarningInspection", "StatementWithEmptyBody"})
 public class SioTaskBeanController extends AbstractBaseController<SioTaskBean, BaseVo<SioTaskBean>> {
 
     @Override protected String getModuleName() {return "sioTask";}

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 @RequestMapping("/upgrade")
+@SuppressWarnings({"unused", "SpringAutowiredFieldsWarningInspection", "StatementWithEmptyBody"})
 public class UpgradeBeanController extends AbstractBaseController<UpgradeBean, BaseVo<UpgradeBean>> {
 
     @Override protected String getModuleName() {return "upgrade";}

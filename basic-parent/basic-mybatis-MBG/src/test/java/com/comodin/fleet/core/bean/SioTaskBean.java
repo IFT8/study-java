@@ -10,7 +10,7 @@ import javax.validation.constraints.*;
 import org.hibernate.validator.constraints.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
-@SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue"})
+@SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue", "DefaultAnnotationParam"})
 @Table(name = "t_sio_task")
 public class SioTaskBean implements Serializable {
     /**
@@ -24,7 +24,7 @@ public class SioTaskBean implements Serializable {
     @NotNull(message = "{SIO_TASK_BEAN_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @ValidLength(max = 19, message = "{SIO_TASK_BEAN_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Id
-    @Column(name = "task_id")
+    @Column(name = "task_id", length = 19, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -37,7 +37,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 100, message = "{SIO_TASK_BEAN_TASK_ORIGINAL_COMPLEX_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_task_original_complex_id")
+    @Column(name = "task_task_original_complex_id", length = 100, nullable = true)
     private String taskOriginalComplexId;
 
     /**
@@ -49,7 +49,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 15, message = "{SIO_TASK_BEAN_ROUTE_COMPANY_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_route_company_internal_id")
+    @Column(name = "task_route_company_internal_id", length = 15, nullable = true)
     private String routeCompanyInternalId;
 
     /**
@@ -61,7 +61,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 15, message = "{SIO_TASK_BEAN_ROUTE_BRANCH_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_route_branch_internal_id")
+    @Column(name = "task_route_branch_internal_id", length = 15, nullable = true)
     private String routeBranchInternalId;
 
     /**
@@ -73,7 +73,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 10, message = "{SIO_TASK_BEAN_ROUTE_SERVICE_DATE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_route_service_date")
+    @Column(name = "task_route_service_date", length = 10, nullable = true)
     private String routeServiceDate;
 
     /**
@@ -85,7 +85,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 10, message = "{SIO_TASK_BEAN_ROUTE_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_route_id")
+    @Column(name = "task_route_id", length = 10, nullable = true)
     private String routeId;
 
     /**
@@ -97,15 +97,15 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 25, message = "{SIO_TASK_BEAN_ROUTE_STATUS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_route_status")
+    @Column(name = "task_route_status", length = 25, nullable = true)
     private String routeStatus;
 
     @Length(max = 25, message = "{SIO_TASK_BEAN_ROUTE_USERNAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_route_username")
+    @Column(name = "task_route_username", length = 25, nullable = true)
     private String routeUsername;
 
     @Length(max = 25, message = "{SIO_TASK_BEAN_ROUTE_PASSWORD_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_route_password")
+    @Column(name = "task_route_password", length = 25, nullable = true)
     private String routePassword;
 
     /**
@@ -117,7 +117,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 15, message = "{SIO_TASK_BEAN_TASK_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_task_id")
+    @Column(name = "task_task_id", length = 15, nullable = true)
     private String taskId;
 
     /**
@@ -129,7 +129,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @ValidLength(max = 10, message = "{SIO_TASK_BEAN_ROUTE_ORDER_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_route_order")
+    @Column(name = "task_route_order", length = 10, nullable = true)
     private Integer routeOrder;
 
     /**
@@ -141,7 +141,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 20, message = "{SIO_TASK_BEAN_GENERATED_TYPE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_generated_type")
+    @Column(name = "task_generated_type", length = 20, nullable = true)
     private String generatedType;
 
     /**
@@ -153,7 +153,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 20, message = "{SIO_TASK_BEAN_SERVICE_TYPE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_service_type")
+    @Column(name = "task_service_type", length = 20, nullable = true)
     private String serviceType;
 
     /**
@@ -165,7 +165,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 20, message = "{SIO_TASK_BEAN_SERVICE_CODE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_service_code")
+    @Column(name = "task_service_code", length = 20, nullable = true)
     private String serviceCode;
 
     /**
@@ -177,7 +177,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 255, message = "{SIO_TASK_BEAN_DESCRIPTION_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_description")
+    @Column(name = "task_description", length = 255, nullable = true)
     private String description;
 
     /**
@@ -189,7 +189,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 20, message = "{SIO_TASK_BEAN_SAFE_KEY_NUMBER_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_safe_key_number")
+    @Column(name = "task_safe_key_number", length = 20, nullable = true)
     private String safeKeyNumber;
 
     /**
@@ -201,7 +201,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 20, message = "{SIO_TASK_BEAN_MONEY_BAGS_TOTAL_NUMBER_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_money_bags_total_number")
+    @Column(name = "task_money_bags_total_number", length = 20, nullable = true)
     private String moneyBagsTotalNumber;
 
     /**
@@ -213,7 +213,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 20, message = "{SIO_TASK_BEAN_COMPROBANTES_TOTAL_NUMBER_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_comprobantes_total_number")
+    @Column(name = "task_comprobantes_total_number", length = 20, nullable = true)
     private String comprobantesTotalNumber;
 
     /**
@@ -225,7 +225,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 25, message = "{SIO_TASK_BEAN_STATUS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_status")
+    @Column(name = "task_status", length = 25, nullable = true)
     private String status;
 
     /**
@@ -237,7 +237,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 100, message = "{SIO_TASK_BEAN_NOTES_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_notes")
+    @Column(name = "task_notes", length = 100, nullable = true)
     private String notes;
 
     /**
@@ -249,7 +249,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 15, message = "{SIO_TASK_BEAN_XML_SENDER_BRANCH_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_xml_sender_branch_internal_id")
+    @Column(name = "task_xml_sender_branch_internal_id", length = 15, nullable = true)
     private String xmlSenderBranchInternalId;
 
     /**
@@ -261,7 +261,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 8, message = "{SIO_TASK_BEAN_XML_SENDER_WINDOW_SERVICE_TIME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_xml_sender_window_service_time")
+    @Column(name = "task_xml_sender_window_service_time", length = 8, nullable = true)
     private String xmlSenderWindowServiceTime;
 
     /**
@@ -273,7 +273,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 5, message = "{SIO_TASK_BEAN_XML_SENDER_WINDOW_SERVICE_DURATION_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_xml_sender_window_service_duration")
+    @Column(name = "task_xml_sender_window_service_duration", length = 5, nullable = true)
     private String xmlSenderWindowServiceDuration;
 
     /**
@@ -285,7 +285,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 15, message = "{SIO_TASK_BEAN_XML_RECEIVER_BRANCH_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_xml_receiver_branch_internal_id")
+    @Column(name = "task_xml_receiver_branch_internal_id", length = 15, nullable = true)
     private String xmlReceiverBranchInternalId;
 
     /**
@@ -297,7 +297,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 8, message = "{SIO_TASK_BEAN_XML_RECEIVER_WINDOW_SERVICE_TIME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_xml_receiver_window_service_time")
+    @Column(name = "task_xml_receiver_window_service_time", length = 8, nullable = true)
     private String xmlReceiverWindowServiceTime;
 
     /**
@@ -309,7 +309,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 5, message = "{SIO_TASK_BEAN_XML_RECEIVER_WINDOW_SERVICE_DURATION_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_xml_receiver_window_service_duration")
+    @Column(name = "task_xml_receiver_window_service_duration", length = 5, nullable = true)
     private String xmlReceiverWindowServiceDuration;
 
     /**
@@ -321,7 +321,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 20, message = "{SIO_TASK_BEAN_CONFIG_WHETHER_ELECTRONIC_BILL_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_config_whether_electronic_bill")
+    @Column(name = "task_config_whether_electronic_bill", length = 20, nullable = true)
     private String configWhetherElectronicBill;
 
     /**
@@ -333,7 +333,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 20, message = "{SIO_TASK_BEAN_CONFIG_CANCEL_MONEY_BACK_PARTY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_config_cancel_money_back_party")
+    @Column(name = "task_config_cancel_money_back_party", length = 20, nullable = true)
     private String configCancelMoneyBackParty;
 
     /**
@@ -345,7 +345,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 20, message = "{SIO_TASK_BEAN_CONFIG_WHETHER_SITE_COUNTING_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_config_whether_site_counting")
+    @Column(name = "task_config_whether_site_counting", length = 20, nullable = true)
     private String configWhetherSiteCounting;
 
     /**
@@ -357,7 +357,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 20, message = "{SIO_TASK_BEAN_CONFIG_ATM_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_config_atm_id")
+    @Column(name = "task_config_atm_id", length = 20, nullable = true)
     private String configAtmId;
 
     /**
@@ -369,7 +369,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 20, message = "{SIO_TASK_BEAN_CONFIG_WHETHER_SITE_WAGES_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_config_whether_site_wages")
+    @Column(name = "task_config_whether_site_wages", length = 20, nullable = true)
     private String configWhetherSiteWages;
 
     /**
@@ -381,7 +381,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 20, message = "{SIO_TASK_BEAN_CONFIG_XML_SOURCE_SIDE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_config_xml_source_side")
+    @Column(name = "task_config_xml_source_side", length = 20, nullable = true)
     private String configXmlSourceSide;
 
     /**
@@ -393,7 +393,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 20, message = "{SIO_TASK_BEAN_INTER_CHANGE_TYPE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_inter_change_type")
+    @Column(name = "task_inter_change_type", length = 20, nullable = true)
     private String interChangeType;
 
     /**
@@ -405,7 +405,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 20, message = "{SIO_TASK_BEAN_INTER_CHANGE_COMPANY_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_inter_change_company_internal_id")
+    @Column(name = "task_inter_change_company_internal_id", length = 20, nullable = true)
     private String interChangeCompanyInternalId;
 
     /**
@@ -417,7 +417,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 20, message = "{SIO_TASK_BEAN_INTER_CHANGE_BRANCH_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_inter_change_branch_internal_id")
+    @Column(name = "task_inter_change_branch_internal_id", length = 20, nullable = true)
     private String interChangeBranchInternalId;
 
     /**
@@ -429,7 +429,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 20, message = "{SIO_TASK_BEAN_INTER_CHANGE_ROUTE_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_inter_change_route_id")
+    @Column(name = "task_inter_change_route_id", length = 20, nullable = true)
     private String interChangeRouteId;
 
     /**
@@ -441,7 +441,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 20, message = "{SIO_TASK_BEAN_INTER_CHANGE_SERVICE_DATE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_inter_change_service_date")
+    @Column(name = "task_inter_change_service_date", length = 20, nullable = true)
     private String interChangeServiceDate;
 
     /**
@@ -453,7 +453,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 20, message = "{SIO_TASK_BEAN_INTER_CHANGE_TASK_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_inter_change_task_id")
+    @Column(name = "task_inter_change_task_id", length = 20, nullable = true)
     private String interChangeTaskId;
 
     /**
@@ -465,7 +465,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 15, message = "{SIO_TASK_BEAN_SENDER_BRANCH_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_sender_branch_internal_id")
+    @Column(name = "task_sender_branch_internal_id", length = 15, nullable = true)
     private String senderBranchInternalId;
 
     /**
@@ -477,15 +477,15 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 8, message = "{SIO_TASK_BEAN_SENDER_WINDOW_SERVICE_TIME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_sender_window_service_time")
+    @Column(name = "task_sender_window_service_time", length = 8, nullable = true)
     private String senderWindowServiceTime;
 
     @Length(max = 50, message = "{SIO_TASK_BEAN_SENDER_CHECK_INN_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_sender_check_inn")
+    @Column(name = "task_sender_check_inn", length = 50, nullable = true)
     private String senderCheckInn;
 
     @Length(max = 50, message = "{SIO_TASK_BEAN_SENDER_CHECK_OUT_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_sender_check_out")
+    @Column(name = "task_sender_check_out", length = 50, nullable = true)
     private String senderCheckOut;
 
     /**
@@ -497,7 +497,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 100, message = "{SIO_TASK_BEAN_SENDER_BRANCH_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_sender_branch_name")
+    @Column(name = "task_sender_branch_name", length = 100, nullable = true)
     private String senderBranchName;
 
     /**
@@ -509,7 +509,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 100, message = "{SIO_TASK_BEAN_SENDER_BRANCH_ADDRESS_STREET_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_sender_branch_address_street")
+    @Column(name = "task_sender_branch_address_street", length = 100, nullable = true)
     private String senderBranchAddressStreet;
 
     /**
@@ -521,7 +521,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 50, message = "{SIO_TASK_BEAN_SENDER_BRANCH_ADDRESS_NUMBER_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_sender_branch_address_number")
+    @Column(name = "task_sender_branch_address_number", length = 50, nullable = true)
     private String senderBranchAddressNumber;
 
     /**
@@ -533,7 +533,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 15, message = "{SIO_TASK_BEAN_SENDER_BRANCH_LATITUDE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_sender_branch_latitude")
+    @Column(name = "task_sender_branch_latitude", length = 15, nullable = true)
     private String senderBranchLatitude;
 
     /**
@@ -545,7 +545,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 15, message = "{SIO_TASK_BEAN_SENDER_BRANCH_LONGITUDE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_sender_branch_longitude")
+    @Column(name = "task_sender_branch_longitude", length = 15, nullable = true)
     private String senderBranchLongitude;
 
     /**
@@ -557,7 +557,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 15, message = "{SIO_TASK_BEAN_RECEIVER_BRANCH_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_receiver_branch_internal_id")
+    @Column(name = "task_receiver_branch_internal_id", length = 15, nullable = true)
     private String receiverBranchInternalId;
 
     /**
@@ -569,15 +569,15 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 8, message = "{SIO_TASK_BEAN_RECEIVER_WINDOW_SERVICE_TIME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_receiver_window_service_time")
+    @Column(name = "task_receiver_window_service_time", length = 8, nullable = true)
     private String receiverWindowServiceTime;
 
     @Length(max = 50, message = "{SIO_TASK_BEAN_RECEIVER_CHECK_INN_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_receiver_check_inn")
+    @Column(name = "task_receiver_check_inn", length = 50, nullable = true)
     private String receiverCheckInn;
 
     @Length(max = 50, message = "{SIO_TASK_BEAN_RECEIVER_CHECK_OUT_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_receiver_check_out")
+    @Column(name = "task_receiver_check_out", length = 50, nullable = true)
     private String receiverCheckOut;
 
     /**
@@ -589,7 +589,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 100, message = "{SIO_TASK_BEAN_RECEIVER_BRANCH_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_receiver_branch_name")
+    @Column(name = "task_receiver_branch_name", length = 100, nullable = true)
     private String receiverBranchName;
 
     /**
@@ -601,7 +601,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 100, message = "{SIO_TASK_BEAN_RECEIVER_BRANCH_ADDRESS_STREET_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_receiver_branch_address_street")
+    @Column(name = "task_receiver_branch_address_street", length = 100, nullable = true)
     private String receiverBranchAddressStreet;
 
     /**
@@ -613,7 +613,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 50, message = "{SIO_TASK_BEAN_RECEIVER_BRANCH_ADDRESS_NUMBER_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_receiver_branch_address_number")
+    @Column(name = "task_receiver_branch_address_number", length = 50, nullable = true)
     private String receiverBranchAddressNumber;
 
     /**
@@ -625,7 +625,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 15, message = "{SIO_TASK_BEAN_RECEIVER_BRANCH_LATITUDE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_receiver_branch_latitude")
+    @Column(name = "task_receiver_branch_latitude", length = 15, nullable = true)
     private String receiverBranchLatitude;
 
     /**
@@ -637,7 +637,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 15, message = "{SIO_TASK_BEAN_RECEIVER_BRANCH_LONGITUDE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_receiver_branch_longitude")
+    @Column(name = "task_receiver_branch_longitude", length = 15, nullable = true)
     private String receiverBranchLongitude;
 
     /**
@@ -649,7 +649,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 15, message = "{SIO_TASK_BEAN_VEHICLE_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_vehicle_internal_id")
+    @Column(name = "task_vehicle_internal_id", length = 15, nullable = true)
     private String vehicleInternalId;
 
     /**
@@ -661,7 +661,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 20, message = "{SIO_TASK_BEAN_VEHICLE_LICENSE_PLATE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_vehicle_license_plate")
+    @Column(name = "task_vehicle_license_plate", length = 20, nullable = true)
     private String vehicleLicensePlate;
 
     /**
@@ -673,7 +673,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 80, message = "{SIO_TASK_BEAN_VEHICLE_DESCRIPTION_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_vehicle_description")
+    @Column(name = "task_vehicle_description", length = 80, nullable = true)
     private String vehicleDescription;
 
     /**
@@ -685,7 +685,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 15, message = "{SIO_TASK_BEAN_VEHICLE_CURRENCY_CAPACITY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_vehicle_currency_capacity")
+    @Column(name = "task_vehicle_currency_capacity", length = 15, nullable = true)
     private String vehicleCurrencyCapacity;
 
     /**
@@ -697,7 +697,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 15, message = "{SIO_TASK_BEAN_DRIVER_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_driver_internal_id")
+    @Column(name = "task_driver_internal_id", length = 15, nullable = true)
     private String driverInternalId;
 
     /**
@@ -709,7 +709,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 50, message = "{SIO_TASK_BEAN_DRIVER_FULL_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_driver_full_name")
+    @Column(name = "task_driver_full_name", length = 50, nullable = true)
     private String driverFullName;
 
     /**
@@ -721,7 +721,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 50, message = "{SIO_TASK_BEAN_DRIVER_FATHER_LAST_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_driver_father_last_name")
+    @Column(name = "task_driver_father_last_name", length = 50, nullable = true)
     private String driverFatherLastName;
 
     /**
@@ -733,7 +733,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 50, message = "{SIO_TASK_BEAN_DRIVER_MOTHER_LAST_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_driver_mother_last_name")
+    @Column(name = "task_driver_mother_last_name", length = 50, nullable = true)
     private String driverMotherLastName;
 
     /**
@@ -745,7 +745,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 13, message = "{SIO_TASK_BEAN_DRIVER_SIO_DEPARTMENT_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_driver_sio_department_id")
+    @Column(name = "task_driver_sio_department_id", length = 13, nullable = true)
     private String driverSioDepartmentId;
 
     /**
@@ -757,7 +757,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 100, message = "{SIO_TASK_BEAN_DRIVER_SIO_DEPARTMENT_DESCRIPTION_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_driver_sio_department_description")
+    @Column(name = "task_driver_sio_department_description", length = 100, nullable = true)
     private String driverSioDepartmentDescription;
 
     /**
@@ -769,7 +769,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 13, message = "{SIO_TASK_BEAN_DRIVER_SIO_ROLE_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_driver_sio_role_id")
+    @Column(name = "task_driver_sio_role_id", length = 13, nullable = true)
     private String driverSioRoleId;
 
     /**
@@ -781,7 +781,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 100, message = "{SIO_TASK_BEAN_DRIVER_SIO_ROLE_DESCRIPTION_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_driver_sio_role_description")
+    @Column(name = "task_driver_sio_role_description", length = 100, nullable = true)
     private String driverSioRoleDescription;
 
     /**
@@ -793,7 +793,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 8, message = "{SIO_TASK_BEAN_DRIVER_CREW_TYPE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_driver_crew_type")
+    @Column(name = "task_driver_crew_type", length = 8, nullable = true)
     private String driverCrewType;
 
     /**
@@ -805,7 +805,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 15, message = "{SIO_TASK_BEAN_CASHIER_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_cashier_internal_id")
+    @Column(name = "task_cashier_internal_id", length = 15, nullable = true)
     private String cashierInternalId;
 
     /**
@@ -817,7 +817,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 50, message = "{SIO_TASK_BEAN_CASHIER_FULL_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_cashier_full_name")
+    @Column(name = "task_cashier_full_name", length = 50, nullable = true)
     private String cashierFullName;
 
     /**
@@ -829,7 +829,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 50, message = "{SIO_TASK_BEAN_CASHIER_FATHER_LAST_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_cashier_father_last_name")
+    @Column(name = "task_cashier_father_last_name", length = 50, nullable = true)
     private String cashierFatherLastName;
 
     /**
@@ -841,7 +841,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 50, message = "{SIO_TASK_BEAN_CASHIER_MOTHER_LAST_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_cashier_mother_last_name")
+    @Column(name = "task_cashier_mother_last_name", length = 50, nullable = true)
     private String cashierMotherLastName;
 
     /**
@@ -853,7 +853,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 13, message = "{SIO_TASK_BEAN_CASHIER_SIO_DEPARTMENT_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_cashier_sio_department_id")
+    @Column(name = "task_cashier_sio_department_id", length = 13, nullable = true)
     private String cashierSioDepartmentId;
 
     /**
@@ -865,7 +865,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 100, message = "{SIO_TASK_BEAN_CASHIER_SIO_DEPARTMENT_DESCRIPTION_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_cashier_sio_department_description")
+    @Column(name = "task_cashier_sio_department_description", length = 100, nullable = true)
     private String cashierSioDepartmentDescription;
 
     /**
@@ -877,7 +877,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 13, message = "{SIO_TASK_BEAN_CASHIER_SIO_ROLE_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_cashier_sio_role_id")
+    @Column(name = "task_cashier_sio_role_id", length = 13, nullable = true)
     private String cashierSioRoleId;
 
     /**
@@ -889,7 +889,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 100, message = "{SIO_TASK_BEAN_CASHIER_SIO_ROLE_DESCRIPTION_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_cashier_sio_role_description")
+    @Column(name = "task_cashier_sio_role_description", length = 100, nullable = true)
     private String cashierSioRoleDescription;
 
     /**
@@ -901,7 +901,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 8, message = "{SIO_TASK_BEAN_CASHIER_CREW_TYPE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_cashier_crew_type")
+    @Column(name = "task_cashier_crew_type", length = 8, nullable = true)
     private String cashierCrewType;
 
     /**
@@ -913,7 +913,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 15, message = "{SIO_TASK_BEAN_SECURITY1_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_security1_internal_id")
+    @Column(name = "task_security1_internal_id", length = 15, nullable = true)
     private String security1InternalId;
 
     /**
@@ -925,7 +925,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 50, message = "{SIO_TASK_BEAN_SECURITY1_FULL_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_security1_full_name")
+    @Column(name = "task_security1_full_name", length = 50, nullable = true)
     private String security1FullName;
 
     /**
@@ -937,7 +937,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 50, message = "{SIO_TASK_BEAN_SECURITY1_FATHER_LAST_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_security1_father_last_name")
+    @Column(name = "task_security1_father_last_name", length = 50, nullable = true)
     private String security1FatherLastName;
 
     /**
@@ -949,7 +949,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 50, message = "{SIO_TASK_BEAN_SECURITY1_MOTHER_LAST_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_security1_mother_last_name")
+    @Column(name = "task_security1_mother_last_name", length = 50, nullable = true)
     private String security1MotherLastName;
 
     /**
@@ -961,7 +961,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 13, message = "{SIO_TASK_BEAN_SECURITY1_SIO_DEPARTMENT_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_security1_sio_department_id")
+    @Column(name = "task_security1_sio_department_id", length = 13, nullable = true)
     private String security1SioDepartmentId;
 
     /**
@@ -973,7 +973,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 100, message = "{SIO_TASK_BEAN_SECURITY1_SIO_DEPARTMENT_DESCRIPTION_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_security1_sio_department_description")
+    @Column(name = "task_security1_sio_department_description", length = 100, nullable = true)
     private String security1SioDepartmentDescription;
 
     /**
@@ -985,7 +985,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 13, message = "{SIO_TASK_BEAN_SECURITY1_SIO_ROLE_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_security1_sio_role_id")
+    @Column(name = "task_security1_sio_role_id", length = 13, nullable = true)
     private String security1SioRoleId;
 
     /**
@@ -997,7 +997,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 100, message = "{SIO_TASK_BEAN_SECURITY1_SIO_ROLE_DESCRIPTION_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_security1_sio_role_description")
+    @Column(name = "task_security1_sio_role_description", length = 100, nullable = true)
     private String security1SioRoleDescription;
 
     /**
@@ -1009,7 +1009,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 8, message = "{SIO_TASK_BEAN_SECURITY1_CREW_TYPE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_security1_crew_type")
+    @Column(name = "task_security1_crew_type", length = 8, nullable = true)
     private String security1CrewType;
 
     /**
@@ -1021,7 +1021,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 15, message = "{SIO_TASK_BEAN_SECURITY2_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_security2_internal_id")
+    @Column(name = "task_security2_internal_id", length = 15, nullable = true)
     private String security2InternalId;
 
     /**
@@ -1033,7 +1033,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 50, message = "{SIO_TASK_BEAN_SECURITY2_FULL_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_security2_full_name")
+    @Column(name = "task_security2_full_name", length = 50, nullable = true)
     private String security2FullName;
 
     /**
@@ -1045,7 +1045,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 50, message = "{SIO_TASK_BEAN_SECURITY2_FATHER_LAST_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_security2_father_last_name")
+    @Column(name = "task_security2_father_last_name", length = 50, nullable = true)
     private String security2FatherLastName;
 
     /**
@@ -1057,7 +1057,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 50, message = "{SIO_TASK_BEAN_SECURITY2_MOTHER_LAST_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_security2_mother_last_name")
+    @Column(name = "task_security2_mother_last_name", length = 50, nullable = true)
     private String security2MotherLastName;
 
     /**
@@ -1069,7 +1069,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 13, message = "{SIO_TASK_BEAN_SECURITY2_SIO_DEPARTMENT_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_security2_sio_department_id")
+    @Column(name = "task_security2_sio_department_id", length = 13, nullable = true)
     private String security2SioDepartmentId;
 
     /**
@@ -1081,7 +1081,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 100, message = "{SIO_TASK_BEAN_SECURITY2_SIO_DEPARTMENT_DESCRIPTION_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_security2_sio_department_description")
+    @Column(name = "task_security2_sio_department_description", length = 100, nullable = true)
     private String security2SioDepartmentDescription;
 
     /**
@@ -1093,7 +1093,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 13, message = "{SIO_TASK_BEAN_SECURITY2_SIO_ROLE_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_security2_sio_role_id")
+    @Column(name = "task_security2_sio_role_id", length = 13, nullable = true)
     private String security2SioRoleId;
 
     /**
@@ -1105,7 +1105,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 100, message = "{SIO_TASK_BEAN_SECURITY2_SIO_ROLE_DESCRIPTION_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_security2_sio_role_description")
+    @Column(name = "task_security2_sio_role_description", length = 100, nullable = true)
     private String security2SioRoleDescription;
 
     /**
@@ -1117,7 +1117,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 8, message = "{SIO_TASK_BEAN_SECURITY2_CREW_TYPE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_security2_crew_type")
+    @Column(name = "task_security2_crew_type", length = 8, nullable = true)
     private String security2CrewType;
 
     /**
@@ -1129,7 +1129,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 15, message = "{SIO_TASK_BEAN_SECURITY3_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_security3_internal_id")
+    @Column(name = "task_security3_internal_id", length = 15, nullable = true)
     private String security3InternalId;
 
     /**
@@ -1141,7 +1141,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 50, message = "{SIO_TASK_BEAN_SECURITY3_FULL_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_security3_full_name")
+    @Column(name = "task_security3_full_name", length = 50, nullable = true)
     private String security3FullName;
 
     /**
@@ -1153,7 +1153,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 50, message = "{SIO_TASK_BEAN_SECURITY3_FATHER_LAST_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_security3_father_last_name")
+    @Column(name = "task_security3_father_last_name", length = 50, nullable = true)
     private String security3FatherLastName;
 
     /**
@@ -1165,7 +1165,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 50, message = "{SIO_TASK_BEAN_SECURITY3_MOTHER_LAST_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_security3_mother_last_name")
+    @Column(name = "task_security3_mother_last_name", length = 50, nullable = true)
     private String security3MotherLastName;
 
     /**
@@ -1177,7 +1177,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 13, message = "{SIO_TASK_BEAN_SECURITY3_SIO_DEPARTMENT_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_security3_sio_department_id")
+    @Column(name = "task_security3_sio_department_id", length = 13, nullable = true)
     private String security3SioDepartmentId;
 
     /**
@@ -1189,7 +1189,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 100, message = "{SIO_TASK_BEAN_SECURITY3_SIO_DEPARTMENT_DESCRIPTION_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_security3_sio_department_description")
+    @Column(name = "task_security3_sio_department_description", length = 100, nullable = true)
     private String security3SioDepartmentDescription;
 
     /**
@@ -1201,7 +1201,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 13, message = "{SIO_TASK_BEAN_SECURITY3_SIO_ROLE_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_security3_sio_role_id")
+    @Column(name = "task_security3_sio_role_id", length = 13, nullable = true)
     private String security3SioRoleId;
 
     /**
@@ -1213,7 +1213,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 100, message = "{SIO_TASK_BEAN_SECURITY3_SIO_ROLE_DESCRIPTION_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_security3_sio_role_description")
+    @Column(name = "task_security3_sio_role_description", length = 100, nullable = true)
     private String security3SioRoleDescription;
 
     /**
@@ -1225,7 +1225,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 8, message = "{SIO_TASK_BEAN_SECURITY3_CREW_TYPE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_security3_crew_type")
+    @Column(name = "task_security3_crew_type", length = 8, nullable = true)
     private String security3CrewType;
 
     /**
@@ -1237,7 +1237,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 15, message = "{SIO_TASK_BEAN_SECURITY4_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_security4_internal_id")
+    @Column(name = "task_security4_internal_id", length = 15, nullable = true)
     private String security4InternalId;
 
     /**
@@ -1249,7 +1249,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 50, message = "{SIO_TASK_BEAN_SECURITY4_FULL_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_security4_full_name")
+    @Column(name = "task_security4_full_name", length = 50, nullable = true)
     private String security4FullName;
 
     /**
@@ -1261,7 +1261,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 50, message = "{SIO_TASK_BEAN_SECURITY4_FATHER_LAST_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_security4_father_last_name")
+    @Column(name = "task_security4_father_last_name", length = 50, nullable = true)
     private String security4FatherLastName;
 
     /**
@@ -1273,7 +1273,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 50, message = "{SIO_TASK_BEAN_SECURITY4_MOTHER_LAST_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_security4_mother_last_name")
+    @Column(name = "task_security4_mother_last_name", length = 50, nullable = true)
     private String security4MotherLastName;
 
     /**
@@ -1285,7 +1285,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 13, message = "{SIO_TASK_BEAN_SECURITY4_SIO_DEPARTMENT_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_security4_sio_department_id")
+    @Column(name = "task_security4_sio_department_id", length = 13, nullable = true)
     private String security4SioDepartmentId;
 
     /**
@@ -1297,7 +1297,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 100, message = "{SIO_TASK_BEAN_SECURITY4_SIO_DEPARTMENT_DESCRIPTION_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_security4_sio_department_description")
+    @Column(name = "task_security4_sio_department_description", length = 100, nullable = true)
     private String security4SioDepartmentDescription;
 
     /**
@@ -1309,7 +1309,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 13, message = "{SIO_TASK_BEAN_SECURITY4_SIO_ROLE_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_security4_sio_role_id")
+    @Column(name = "task_security4_sio_role_id", length = 13, nullable = true)
     private String security4SioRoleId;
 
     /**
@@ -1321,7 +1321,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 100, message = "{SIO_TASK_BEAN_SECURITY4_SIO_ROLE_DESCRIPTION_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_security4_sio_role_description")
+    @Column(name = "task_security4_sio_role_description", length = 100, nullable = true)
     private String security4SioRoleDescription;
 
     /**
@@ -1333,7 +1333,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 8, message = "{SIO_TASK_BEAN_SECURITY4_CREW_TYPE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_security4_crew_type")
+    @Column(name = "task_security4_crew_type", length = 8, nullable = true)
     private String security4CrewType;
 
     /**
@@ -1345,7 +1345,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 15, message = "{SIO_TASK_BEAN_COUNTER_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_counter_internal_id")
+    @Column(name = "task_counter_internal_id", length = 15, nullable = true)
     private String counterInternalId;
 
     /**
@@ -1357,7 +1357,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 50, message = "{SIO_TASK_BEAN_COUNTER_FULL_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_counter_full_name")
+    @Column(name = "task_counter_full_name", length = 50, nullable = true)
     private String counterFullName;
 
     /**
@@ -1369,7 +1369,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 50, message = "{SIO_TASK_BEAN_COUNTER_FATHER_LAST_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_counter_father_last_name")
+    @Column(name = "task_counter_father_last_name", length = 50, nullable = true)
     private String counterFatherLastName;
 
     /**
@@ -1381,7 +1381,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 50, message = "{SIO_TASK_BEAN_COUNTER_MOTHER_LAST_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_counter_mother_last_name")
+    @Column(name = "task_counter_mother_last_name", length = 50, nullable = true)
     private String counterMotherLastName;
 
     /**
@@ -1393,7 +1393,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 13, message = "{SIO_TASK_BEAN_COUNTER_SIO_DEPARTMENT_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_counter_sio_department_id")
+    @Column(name = "task_counter_sio_department_id", length = 13, nullable = true)
     private String counterSioDepartmentId;
 
     /**
@@ -1405,7 +1405,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 100, message = "{SIO_TASK_BEAN_COUNTER_SIO_DEPARTMENT_DESCRIPTION_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_counter_sio_department_description")
+    @Column(name = "task_counter_sio_department_description", length = 100, nullable = true)
     private String counterSioDepartmentDescription;
 
     /**
@@ -1417,7 +1417,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 13, message = "{SIO_TASK_BEAN_COUNTER_SIO_ROLE_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_counter_sio_role_id")
+    @Column(name = "task_counter_sio_role_id", length = 13, nullable = true)
     private String counterSioRoleId;
 
     /**
@@ -1429,7 +1429,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 100, message = "{SIO_TASK_BEAN_COUNTER_SIO_ROLE_DESCRIPTION_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_counter_sio_role_description")
+    @Column(name = "task_counter_sio_role_description", length = 100, nullable = true)
     private String counterSioRoleDescription;
 
     /**
@@ -1441,7 +1441,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 8, message = "{SIO_TASK_BEAN_COUNTER_CREW_TYPE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_counter_crew_type")
+    @Column(name = "task_counter_crew_type", length = 8, nullable = true)
     private String counterCrewType;
 
     /**
@@ -1453,7 +1453,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 15, message = "{SIO_TASK_BEAN_DRAWEE_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_drawee_internal_id")
+    @Column(name = "task_drawee_internal_id", length = 15, nullable = true)
     private String draweeInternalId;
 
     /**
@@ -1465,7 +1465,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 50, message = "{SIO_TASK_BEAN_DRAWEE_FULL_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_drawee_full_name")
+    @Column(name = "task_drawee_full_name", length = 50, nullable = true)
     private String draweeFullName;
 
     /**
@@ -1477,7 +1477,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 50, message = "{SIO_TASK_BEAN_DRAWEE_FATHER_LAST_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_drawee_father_last_name")
+    @Column(name = "task_drawee_father_last_name", length = 50, nullable = true)
     private String draweeFatherLastName;
 
     /**
@@ -1489,7 +1489,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 50, message = "{SIO_TASK_BEAN_DRAWEE_MOTHER_LAST_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_drawee_mother_last_name")
+    @Column(name = "task_drawee_mother_last_name", length = 50, nullable = true)
     private String draweeMotherLastName;
 
     /**
@@ -1501,7 +1501,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 13, message = "{SIO_TASK_BEAN_DRAWEE_SIO_DEPARTMENT_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_drawee_sio_department_id")
+    @Column(name = "task_drawee_sio_department_id", length = 13, nullable = true)
     private String draweeSioDepartmentId;
 
     /**
@@ -1513,7 +1513,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 100, message = "{SIO_TASK_BEAN_DRAWEE_SIO_DEPARTMENT_DESCRIPTION_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_drawee_sio_department_description")
+    @Column(name = "task_drawee_sio_department_description", length = 100, nullable = true)
     private String draweeSioDepartmentDescription;
 
     /**
@@ -1525,7 +1525,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 13, message = "{SIO_TASK_BEAN_DRAWEE_SIO_ROLE_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_drawee_sio_role_id")
+    @Column(name = "task_drawee_sio_role_id", length = 13, nullable = true)
     private String draweeSioRoleId;
 
     /**
@@ -1537,7 +1537,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 100, message = "{SIO_TASK_BEAN_DRAWEE_SIO_ROLE_DESCRIPTION_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_drawee_sio_role_description")
+    @Column(name = "task_drawee_sio_role_description", length = 100, nullable = true)
     private String draweeSioRoleDescription;
 
     /**
@@ -1549,7 +1549,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 8, message = "{SIO_TASK_BEAN_DRAWEE_CREW_TYPE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_drawee_crew_type")
+    @Column(name = "task_drawee_crew_type", length = 8, nullable = true)
     private String draweeCrewType;
 
     /**
@@ -1561,7 +1561,7 @@ public class SioTaskBean implements Serializable {
      * </pre>
      */
     @Length(max = 1024, message = "{SIO_TASK_BEAN_CREW_CREW_JSON_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_crew_crew_json")
+    @Column(name = "task_crew_crew_json", length = 1024, nullable = true)
     private String crewCrewJson;
 
     /**
@@ -1575,7 +1575,7 @@ public class SioTaskBean implements Serializable {
     @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{SIO_TASK_BEAN_CREATE_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
     @NotNull(message = "{SIO_TASK_BEAN_CREATE_TIMESTAMP_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_create_timestamp")
+    @Column(name = "task_create_timestamp", length = 19, nullable = false)
     private Date createTimestamp;
 
     /**
@@ -1588,7 +1588,7 @@ public class SioTaskBean implements Serializable {
      */
     @NotBlank(message = "{SIO_TASK_BEAN_CREATE_BY_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 20, message = "{SIO_TASK_BEAN_CREATE_BY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_create_by")
+    @Column(name = "task_create_by", length = 20, nullable = false)
     private String createBy;
 
     /**
@@ -1601,7 +1601,7 @@ public class SioTaskBean implements Serializable {
      */
     @NotBlank(message = "{SIO_TASK_BEAN_DELETE_FLAG_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 1, message = "{SIO_TASK_BEAN_DELETE_FLAG_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "task_delete_flag")
+    @Column(name = "task_delete_flag", length = 1, nullable = false)
     private String deleteFlag;
 
     private static final long serialVersionUID = 1L;

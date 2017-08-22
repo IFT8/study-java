@@ -7,6 +7,7 @@ import com.comodin.basic.vo.BaseVo;
 import com.comodin.basic.service.AbstractBaseService;
 
 @Service
+@SuppressWarnings({"unused", "SpringAutowiredFieldsWarningInspection", "StatementWithEmptyBody"})
 public class TaskInterChangeBeanService extends AbstractBaseService<TaskInterChangeBean, BaseVo<TaskInterChangeBean>> implements ITaskInterChangeBeanService {
 
 }

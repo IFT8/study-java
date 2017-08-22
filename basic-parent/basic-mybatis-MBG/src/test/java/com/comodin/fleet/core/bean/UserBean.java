@@ -10,7 +10,7 @@ import javax.validation.constraints.*;
 import org.hibernate.validator.constraints.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
-@SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue"})
+@SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue", "DefaultAnnotationParam"})
 @Table(name = "t_user")
 public class UserBean implements Serializable {
     /**
@@ -24,7 +24,7 @@ public class UserBean implements Serializable {
     @NotNull(message = "{USER_BEAN_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @ValidLength(max = 20, message = "{USER_BEAN_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Id
-    @Column(name = "user_id")
+    @Column(name = "user_id", length = 20, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -38,7 +38,7 @@ public class UserBean implements Serializable {
      */
     @NotBlank(message = "{USER_BEAN_USERNAME_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 20, message = "{USER_BEAN_USERNAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "user_username")
+    @Column(name = "user_username", length = 20, nullable = false)
     private String username;
 
     /**
@@ -51,7 +51,7 @@ public class UserBean implements Serializable {
      */
     @NotBlank(message = "{USER_BEAN_PASSWORD_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 64, message = "{USER_BEAN_PASSWORD_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "user_password")
+    @Column(name = "user_password", length = 64, nullable = false)
     private String password;
 
     /**
@@ -64,7 +64,7 @@ public class UserBean implements Serializable {
      */
     @NotBlank(message = "{USER_BEAN_PASSWORD_SALT_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 8, message = "{USER_BEAN_PASSWORD_SALT_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "user_password_salt")
+    @Column(name = "user_password_salt", length = 8, nullable = false)
     private String passwordSalt;
 
     /**
@@ -77,7 +77,7 @@ public class UserBean implements Serializable {
      */
     @NotNull(message = "{USER_BEAN_BRANCH_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @ValidLength(max = 20, message = "{USER_BEAN_BRANCH_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "user_branch_id")
+    @Column(name = "user_branch_id", length = 20, nullable = false)
     private Long branchId;
 
     /**
@@ -90,7 +90,7 @@ public class UserBean implements Serializable {
      */
     @NotNull(message = "{USER_BEAN_CIT_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @ValidLength(max = 20, message = "{USER_BEAN_CIT_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "user_cit_id")
+    @Column(name = "user_cit_id", length = 20, nullable = false)
     private Long citId;
 
     /**
@@ -102,7 +102,7 @@ public class UserBean implements Serializable {
      * </pre>
      */
     @Length(max = 50, message = "{USER_BEAN_FIRST_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "user_first_name")
+    @Column(name = "user_first_name", length = 50, nullable = true)
     private String firstName;
 
     /**
@@ -114,7 +114,7 @@ public class UserBean implements Serializable {
      * </pre>
      */
     @Length(max = 50, message = "{USER_BEAN_LAST_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "user_last_name")
+    @Column(name = "user_last_name", length = 50, nullable = true)
     private String lastName;
 
     /**
@@ -126,7 +126,7 @@ public class UserBean implements Serializable {
      * </pre>
      */
     @Length(max = 15, message = "{USER_BEAN_PHONE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "user_phone")
+    @Column(name = "user_phone", length = 15, nullable = true)
     private String phone;
 
     /**
@@ -138,7 +138,7 @@ public class UserBean implements Serializable {
      * </pre>
      */
     @Length(max = 20, message = "{USER_BEAN_EMAIL_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "user_email")
+    @Column(name = "user_email", length = 20, nullable = true)
     private String email;
 
     /**
@@ -150,7 +150,7 @@ public class UserBean implements Serializable {
      * </pre>
      */
     @Length(max = 6, message = "{USER_BEAN_GENDER_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "user_gender")
+    @Column(name = "user_gender", length = 6, nullable = true)
     private String gender;
 
     /**
@@ -163,7 +163,7 @@ public class UserBean implements Serializable {
      */
     @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD , message = "{USER_BEAN_BIRTHDAY_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
-    @Column(name = "user_birthday")
+    @Column(name = "user_birthday", length = 10, nullable = true)
     private Date birthday;
 
     /**
@@ -175,7 +175,7 @@ public class UserBean implements Serializable {
      * </pre>
      */
     @Length(max = 20, message = "{USER_BEAN_CURP_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "user_curp_id")
+    @Column(name = "user_curp_id", length = 20, nullable = true)
     private String curpId;
 
     /**
@@ -187,7 +187,7 @@ public class UserBean implements Serializable {
      * </pre>
      */
     @Length(max = 100, message = "{USER_BEAN_ADDRESS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "user_address")
+    @Column(name = "user_address", length = 100, nullable = true)
     private String address;
 
     /**
@@ -199,7 +199,7 @@ public class UserBean implements Serializable {
      * </pre>
      */
     @Length(max = 100, message = "{USER_BEAN_PHOTO_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "user_photo")
+    @Column(name = "user_photo", length = 100, nullable = true)
     private String photo;
 
     /**
@@ -211,7 +211,7 @@ public class UserBean implements Serializable {
      * </pre>
      */
     @Length(max = 300, message = "{USER_BEAN_DESCRIPTION_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "user_description")
+    @Column(name = "user_description", length = 300, nullable = true)
     private String description;
 
     /**
@@ -224,7 +224,7 @@ public class UserBean implements Serializable {
      */
     @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{USER_BEAN_LAST_LOGIN_TIME_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
-    @Column(name = "user_last_login_time")
+    @Column(name = "user_last_login_time", length = 19, nullable = true)
     private Date lastLoginTime;
 
     /**
@@ -236,7 +236,7 @@ public class UserBean implements Serializable {
      * </pre>
      */
     @Length(max = 20, message = "{USER_BEAN_LAST_LOGIN_IP_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "user_last_login_ip")
+    @Column(name = "user_last_login_ip", length = 20, nullable = true)
     private String lastLoginIp;
 
     /**
@@ -248,7 +248,7 @@ public class UserBean implements Serializable {
      * </pre>
      */
     @Length(max = 50, message = "{USER_BEAN_ROLES_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "user_roles")
+    @Column(name = "user_roles", length = 50, nullable = true)
     private String roles;
 
     /**
@@ -260,7 +260,7 @@ public class UserBean implements Serializable {
      * </pre>
      */
     @Length(max = 1, message = "{USER_BEAN_PASS_CODE_ENABLE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "user_pass_code_enable")
+    @Column(name = "user_pass_code_enable", length = 1, nullable = true)
     private String passCodeEnable;
 
     /**
@@ -272,7 +272,7 @@ public class UserBean implements Serializable {
      * </pre>
      */
     @Length(max = 32, message = "{USER_BEAN_PASS_CODE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "user_pass_code")
+    @Column(name = "user_pass_code", length = 32, nullable = true)
     private String passCode;
 
     /**
@@ -285,7 +285,7 @@ public class UserBean implements Serializable {
      */
     @NotBlank(message = "{USER_BEAN_STATUS_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 7, message = "{USER_BEAN_STATUS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "user_status")
+    @Column(name = "user_status", length = 7, nullable = false)
     private String status;
 
     /**
@@ -299,7 +299,7 @@ public class UserBean implements Serializable {
     @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{USER_BEAN_CREATE_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
     @NotNull(message = "{USER_BEAN_CREATE_TIMESTAMP_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "user_create_timestamp")
+    @Column(name = "user_create_timestamp", length = 19, nullable = false)
     private Date createTimestamp;
 
     /**
@@ -312,7 +312,7 @@ public class UserBean implements Serializable {
      */
     @NotBlank(message = "{USER_BEAN_CREATE_BY_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 20, message = "{USER_BEAN_CREATE_BY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "user_create_by")
+    @Column(name = "user_create_by", length = 20, nullable = false)
     private String createBy;
 
     /**
@@ -325,7 +325,7 @@ public class UserBean implements Serializable {
      */
     @NotBlank(message = "{USER_BEAN_DELETE_FLAG_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 1, message = "{USER_BEAN_DELETE_FLAG_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "user_delete_flag")
+    @Column(name = "user_delete_flag", length = 1, nullable = false)
     private String deleteFlag;
 
     private static final long serialVersionUID = 1L;

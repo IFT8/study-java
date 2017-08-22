@@ -10,7 +10,7 @@ import javax.validation.constraints.*;
 import org.hibernate.validator.constraints.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
-@SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue"})
+@SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue", "DefaultAnnotationParam"})
 @Table(name = "t_crew")
 public class CrewBean implements Serializable {
     /**
@@ -24,7 +24,7 @@ public class CrewBean implements Serializable {
     @NotNull(message = "{CREW_BEAN_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @ValidLength(max = 20, message = "{CREW_BEAN_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Id
-    @Column(name = "crew_id")
+    @Column(name = "crew_id", length = 20, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -37,7 +37,7 @@ public class CrewBean implements Serializable {
      * </pre>
      */
     @Length(max = 15, message = "{CREW_BEAN_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "crew_internal_id")
+    @Column(name = "crew_internal_id", length = 15, nullable = true)
     private String internalId;
 
     /**
@@ -50,7 +50,7 @@ public class CrewBean implements Serializable {
      */
     @NotBlank(message = "{CREW_BEAN_USERNAME_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 20, message = "{CREW_BEAN_USERNAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "crew_username")
+    @Column(name = "crew_username", length = 20, nullable = false)
     private String username;
 
     /**
@@ -63,7 +63,7 @@ public class CrewBean implements Serializable {
      */
     @NotBlank(message = "{CREW_BEAN_PASSWORD_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 64, message = "{CREW_BEAN_PASSWORD_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "crew_password")
+    @Column(name = "crew_password", length = 64, nullable = false)
     private String password;
 
     /**
@@ -76,7 +76,7 @@ public class CrewBean implements Serializable {
      */
     @NotBlank(message = "{CREW_BEAN_PASSWORD_SALT_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 8, message = "{CREW_BEAN_PASSWORD_SALT_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "crew_password_salt")
+    @Column(name = "crew_password_salt", length = 8, nullable = false)
     private String passwordSalt;
 
     /**
@@ -89,7 +89,7 @@ public class CrewBean implements Serializable {
      */
     @NotBlank(message = "{CREW_BEAN_PASSWORD_PLAINTEXT_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 20, message = "{CREW_BEAN_PASSWORD_PLAINTEXT_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "crew_password_plaintext")
+    @Column(name = "crew_password_plaintext", length = 20, nullable = false)
     private String passwordPlaintext;
 
     /**
@@ -102,7 +102,7 @@ public class CrewBean implements Serializable {
      */
     @NotNull(message = "{CREW_BEAN_BRANCH_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @ValidLength(max = 20, message = "{CREW_BEAN_BRANCH_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "crew_branch_id")
+    @Column(name = "crew_branch_id", length = 20, nullable = false)
     private Long branchId;
 
     /**
@@ -115,7 +115,7 @@ public class CrewBean implements Serializable {
      */
     @NotBlank(message = "{CREW_BEAN_DEPARTMENT_ID_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 40, message = "{CREW_BEAN_DEPARTMENT_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "crew_department_id")
+    @Column(name = "crew_department_id", length = 40, nullable = false)
     private String departmentId;
 
     /**
@@ -127,7 +127,7 @@ public class CrewBean implements Serializable {
      * </pre>
      */
     @Length(max = 50, message = "{CREW_BEAN_ROLES_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "crew_roles")
+    @Column(name = "crew_roles", length = 50, nullable = true)
     private String roles;
 
     /**
@@ -140,7 +140,7 @@ public class CrewBean implements Serializable {
      */
     @NotBlank(message = "{CREW_BEAN_FIRST_NAME_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 50, message = "{CREW_BEAN_FIRST_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "crew_first_name")
+    @Column(name = "crew_first_name", length = 50, nullable = false)
     private String firstName;
 
     /**
@@ -153,7 +153,7 @@ public class CrewBean implements Serializable {
      */
     @NotBlank(message = "{CREW_BEAN_LAST_NAME_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 50, message = "{CREW_BEAN_LAST_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "crew_last_name")
+    @Column(name = "crew_last_name", length = 50, nullable = false)
     private String lastName;
 
     /**
@@ -165,7 +165,7 @@ public class CrewBean implements Serializable {
      * </pre>
      */
     @Length(max = 15, message = "{CREW_BEAN_PHONE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "crew_phone")
+    @Column(name = "crew_phone", length = 15, nullable = true)
     private String phone;
 
     /**
@@ -177,7 +177,7 @@ public class CrewBean implements Serializable {
      * </pre>
      */
     @Length(max = 20, message = "{CREW_BEAN_TELE_PHONE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "crew_tele_phone")
+    @Column(name = "crew_tele_phone", length = 20, nullable = true)
     private String telePhone;
 
     /**
@@ -189,7 +189,7 @@ public class CrewBean implements Serializable {
      * </pre>
      */
     @Length(max = 45, message = "{CREW_BEAN_EMAIL_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "crew_email")
+    @Column(name = "crew_email", length = 45, nullable = true)
     private String email;
 
     /**
@@ -201,7 +201,7 @@ public class CrewBean implements Serializable {
      * </pre>
      */
     @Length(max = 6, message = "{CREW_BEAN_GENDER_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "crew_gender")
+    @Column(name = "crew_gender", length = 6, nullable = true)
     private String gender;
 
     /**
@@ -214,7 +214,7 @@ public class CrewBean implements Serializable {
      */
     @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD , message = "{CREW_BEAN_BIRTHDAY_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
-    @Column(name = "crew_birthday")
+    @Column(name = "crew_birthday", length = 10, nullable = true)
     private Date birthday;
 
     /**
@@ -226,7 +226,7 @@ public class CrewBean implements Serializable {
      * </pre>
      */
     @Length(max = 20, message = "{CREW_BEAN_CURP_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "crew_curp_id")
+    @Column(name = "crew_curp_id", length = 20, nullable = true)
     private String curpId;
 
     /**
@@ -238,7 +238,7 @@ public class CrewBean implements Serializable {
      * </pre>
      */
     @Length(max = 100, message = "{CREW_BEAN_PHOTO_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "crew_photo")
+    @Column(name = "crew_photo", length = 100, nullable = true)
     private String photo;
 
     /**
@@ -250,7 +250,7 @@ public class CrewBean implements Serializable {
      * </pre>
      */
     @Length(max = 100, message = "{CREW_BEAN_ADDRESS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "crew_address")
+    @Column(name = "crew_address", length = 100, nullable = true)
     private String address;
 
     /**
@@ -262,7 +262,7 @@ public class CrewBean implements Serializable {
      * </pre>
      */
     @Length(max = 300, message = "{CREW_BEAN_DESCRIPTION_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "crew_description")
+    @Column(name = "crew_description", length = 300, nullable = true)
     private String description;
 
     /**
@@ -274,7 +274,7 @@ public class CrewBean implements Serializable {
      * </pre>
      */
     @Length(max = 50, message = "{CREW_BEAN_SKILLS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "crew_skills")
+    @Column(name = "crew_skills", length = 50, nullable = true)
     private String skills;
 
     /**
@@ -286,7 +286,7 @@ public class CrewBean implements Serializable {
      * </pre>
      */
     @Length(max = 50, message = "{CREW_BEAN_WEAPONS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "crew_weapons")
+    @Column(name = "crew_weapons", length = 50, nullable = true)
     private String weapons;
 
     /**
@@ -299,7 +299,7 @@ public class CrewBean implements Serializable {
      */
     @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{CREW_BEAN_LAST_LOGIN_TIME_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
-    @Column(name = "crew_last_login_time")
+    @Column(name = "crew_last_login_time", length = 19, nullable = true)
     private Date lastLoginTime;
 
     /**
@@ -311,7 +311,7 @@ public class CrewBean implements Serializable {
      * </pre>
      */
     @Length(max = 20, message = "{CREW_BEAN_LAST_LOGIN_IP_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "crew_last_login_ip")
+    @Column(name = "crew_last_login_ip", length = 20, nullable = true)
     private String lastLoginIp;
 
     /**
@@ -323,7 +323,7 @@ public class CrewBean implements Serializable {
      * </pre>
      */
     @ValidLength(max = 10, message = "{CREW_BEAN_ORGANIZATION_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "crew_organization_id")
+    @Column(name = "crew_organization_id", length = 10, nullable = true)
     private Integer organizationId;
 
     /**
@@ -336,7 +336,7 @@ public class CrewBean implements Serializable {
      */
     @NotBlank(message = "{CREW_BEAN_STATUS_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 7, message = "{CREW_BEAN_STATUS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "crew_status")
+    @Column(name = "crew_status", length = 7, nullable = false)
     private String status;
 
     /**
@@ -349,7 +349,7 @@ public class CrewBean implements Serializable {
      */
     @NotBlank(message = "{CREW_BEAN_CREATE_BY_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 20, message = "{CREW_BEAN_CREATE_BY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "crew_create_by")
+    @Column(name = "crew_create_by", length = 20, nullable = false)
     private String createBy;
 
     /**
@@ -363,7 +363,7 @@ public class CrewBean implements Serializable {
     @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{CREW_BEAN_CREATE_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
     @NotNull(message = "{CREW_BEAN_CREATE_TIMESTAMP_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "crew_create_timestamp")
+    @Column(name = "crew_create_timestamp", length = 19, nullable = false)
     private Date createTimestamp;
 
     /**
@@ -376,7 +376,7 @@ public class CrewBean implements Serializable {
      */
     @NotBlank(message = "{CREW_BEAN_DELETE_FLAG_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 1, message = "{CREW_BEAN_DELETE_FLAG_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "crew_delete_flag")
+    @Column(name = "crew_delete_flag", length = 1, nullable = false)
     private String deleteFlag;
 
     private static final long serialVersionUID = 1L;

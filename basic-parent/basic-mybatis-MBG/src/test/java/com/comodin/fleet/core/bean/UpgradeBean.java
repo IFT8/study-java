@@ -10,7 +10,7 @@ import javax.validation.constraints.*;
 import org.hibernate.validator.constraints.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
-@SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue"})
+@SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue", "DefaultAnnotationParam"})
 @Table(name = "t_upgrade")
 public class UpgradeBean implements Serializable {
     /**
@@ -24,7 +24,7 @@ public class UpgradeBean implements Serializable {
     @NotNull(message = "{UPGRADE_BEAN_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @ValidLength(max = 20, message = "{UPGRADE_BEAN_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Id
-    @Column(name = "upgrade_id")
+    @Column(name = "upgrade_id", length = 20, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -38,7 +38,7 @@ public class UpgradeBean implements Serializable {
      */
     @NotNull(message = "{UPGRADE_BEAN_VERSION_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @ValidLength(max = 20, message = "{UPGRADE_BEAN_VERSION_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "upgrade_version")
+    @Column(name = "upgrade_version", length = 20, nullable = false)
     private Long version;
 
     /**
@@ -51,7 +51,7 @@ public class UpgradeBean implements Serializable {
      */
     @NotBlank(message = "{UPGRADE_BEAN_VERSION_TEXT_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 20, message = "{UPGRADE_BEAN_VERSION_TEXT_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "upgrade_version_text")
+    @Column(name = "upgrade_version_text", length = 20, nullable = false)
     private String versionText;
 
     /**
@@ -64,7 +64,7 @@ public class UpgradeBean implements Serializable {
      */
     @NotBlank(message = "{UPGRADE_BEAN_DESC_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 250, message = "{UPGRADE_BEAN_DESC_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "upgrade_desc")
+    @Column(name = "upgrade_desc", length = 250, nullable = false)
     private String desc;
 
     /**
@@ -77,7 +77,7 @@ public class UpgradeBean implements Serializable {
      */
     @NotBlank(message = "{UPGRADE_BEAN_FORCE_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 1, message = "{UPGRADE_BEAN_FORCE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "upgrade_force")
+    @Column(name = "upgrade_force", length = 1, nullable = false)
     private String force;
 
     /**
@@ -90,7 +90,7 @@ public class UpgradeBean implements Serializable {
      */
     @NotBlank(message = "{UPGRADE_BEAN_MD5_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 32, message = "{UPGRADE_BEAN_MD5_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "upgrade_md5")
+    @Column(name = "upgrade_md5", length = 32, nullable = false)
     private String md5;
 
     /**
@@ -103,7 +103,7 @@ public class UpgradeBean implements Serializable {
      */
     @NotBlank(message = "{UPGRADE_BEAN_SIZE_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 30, message = "{UPGRADE_BEAN_SIZE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "upgrade_size")
+    @Column(name = "upgrade_size", length = 30, nullable = false)
     private String size;
 
     /**
@@ -116,7 +116,7 @@ public class UpgradeBean implements Serializable {
      */
     @NotBlank(message = "{UPGRADE_BEAN_URL_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 150, message = "{UPGRADE_BEAN_URL_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "upgrade_url")
+    @Column(name = "upgrade_url", length = 150, nullable = false)
     private String url;
 
     /**
@@ -129,7 +129,7 @@ public class UpgradeBean implements Serializable {
      */
     @NotBlank(message = "{UPGRADE_BEAN_CREATE_BY_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 50, message = "{UPGRADE_BEAN_CREATE_BY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "upgrade_create_by")
+    @Column(name = "upgrade_create_by", length = 50, nullable = false)
     private String createBy;
 
     /**
@@ -143,7 +143,7 @@ public class UpgradeBean implements Serializable {
     @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{UPGRADE_BEAN_CREATE_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
     @NotNull(message = "{UPGRADE_BEAN_CREATE_TIMESTAMP_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "upgrade_create_timestamp")
+    @Column(name = "upgrade_create_timestamp", length = 19, nullable = false)
     private Date createTimestamp;
 
     /**
@@ -156,7 +156,7 @@ public class UpgradeBean implements Serializable {
      */
     @NotBlank(message = "{UPGRADE_BEAN_DELETE_FLAG_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 1, message = "{UPGRADE_BEAN_DELETE_FLAG_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "upgrade_delete_flag")
+    @Column(name = "upgrade_delete_flag", length = 1, nullable = false)
     private String deleteFlag;
 
     private static final long serialVersionUID = 1L;

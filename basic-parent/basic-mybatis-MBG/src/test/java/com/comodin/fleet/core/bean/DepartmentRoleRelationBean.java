@@ -10,7 +10,7 @@ import javax.validation.constraints.*;
 import org.hibernate.validator.constraints.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
-@SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue"})
+@SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue", "DefaultAnnotationParam"})
 @Table(name = "t_department_role_relation")
 public class DepartmentRoleRelationBean implements Serializable {
     /**
@@ -24,7 +24,7 @@ public class DepartmentRoleRelationBean implements Serializable {
     @NotNull(message = "{DEPARTMENT_ROLE_RELATION_BEAN_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @ValidLength(max = 20, message = "{DEPARTMENT_ROLE_RELATION_BEAN_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Id
-    @Column(name = "relation_id")
+    @Column(name = "relation_id", length = 20, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -38,7 +38,7 @@ public class DepartmentRoleRelationBean implements Serializable {
      */
     @NotNull(message = "{DEPARTMENT_ROLE_RELATION_BEAN_DEPARTMENT_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @ValidLength(max = 19, message = "{DEPARTMENT_ROLE_RELATION_BEAN_DEPARTMENT_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "relation_department_id")
+    @Column(name = "relation_department_id", length = 19, nullable = false)
     private Long departmentId;
 
     /**
@@ -51,7 +51,7 @@ public class DepartmentRoleRelationBean implements Serializable {
      */
     @NotNull(message = "{DEPARTMENT_ROLE_RELATION_BEAN_ROLE_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @ValidLength(max = 19, message = "{DEPARTMENT_ROLE_RELATION_BEAN_ROLE_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "relation_role_id")
+    @Column(name = "relation_role_id", length = 19, nullable = false)
     private Long roleId;
 
     /**
@@ -65,7 +65,7 @@ public class DepartmentRoleRelationBean implements Serializable {
     @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{DEPARTMENT_ROLE_RELATION_BEAN_CREATE_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
     @NotNull(message = "{DEPARTMENT_ROLE_RELATION_BEAN_CREATE_TIMESTAMP_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "relation_create_timestamp")
+    @Column(name = "relation_create_timestamp", length = 19, nullable = false)
     private Date createTimestamp;
 
     /**
@@ -78,7 +78,7 @@ public class DepartmentRoleRelationBean implements Serializable {
      */
     @NotBlank(message = "{DEPARTMENT_ROLE_RELATION_BEAN_CREATE_BY_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 20, message = "{DEPARTMENT_ROLE_RELATION_BEAN_CREATE_BY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "relation_create_by")
+    @Column(name = "relation_create_by", length = 20, nullable = false)
     private String createBy;
 
     /**
@@ -91,7 +91,7 @@ public class DepartmentRoleRelationBean implements Serializable {
      */
     @NotBlank(message = "{DEPARTMENT_ROLE_RELATION_BEAN_DELETE_FLAG_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 1, message = "{DEPARTMENT_ROLE_RELATION_BEAN_DELETE_FLAG_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "relation_delete_flag")
+    @Column(name = "relation_delete_flag", length = 1, nullable = false)
     private String deleteFlag;
 
     private static final long serialVersionUID = 1L;

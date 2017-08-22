@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 @RequestMapping("/log")
+@SuppressWarnings({"unused", "SpringAutowiredFieldsWarningInspection", "StatementWithEmptyBody"})
 public class LogBeanController extends AbstractBaseController<LogBean, BaseVo<LogBean>> {
 
     @Override protected String getModuleName() {return "log";}

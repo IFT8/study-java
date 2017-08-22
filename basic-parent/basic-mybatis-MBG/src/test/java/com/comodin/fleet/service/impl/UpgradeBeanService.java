@@ -7,6 +7,7 @@ import com.comodin.basic.service.AbstractBaseService;
 import com.comodin.fleet.service.IUpgradeBeanService;
 
 @Service
+@SuppressWarnings({"unused", "SpringAutowiredFieldsWarningInspection", "StatementWithEmptyBody"})
 public class UpgradeBeanService extends AbstractBaseService<UpgradeBean, BaseVo<UpgradeBean>> implements IUpgradeBeanService {
 
 }

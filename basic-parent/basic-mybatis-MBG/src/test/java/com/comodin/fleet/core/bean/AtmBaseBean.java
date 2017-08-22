@@ -2,16 +2,19 @@ package com.comodin.fleet.core.bean;
 
 import com.comodin.basic.util.date.DateUtil;
 import com.comodin.basic.validation.IBaseValidGroup;
-import com.comodin.basic.validation.constraints.*;
+import com.comodin.basic.validation.constraints.ValidDateTimeFormat;
+import com.comodin.basic.validation.constraints.ValidLength;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-import javax.persistence.*;
-import javax.validation.constraints.*;
-import org.hibernate.validator.constraints.*;
-import org.springframework.format.annotation.DateTimeFormat;
 
-@SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue"})
+@SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue", "DefaultAnnotationParam"})
 @Table(name = "t_atm_base")
 public class AtmBaseBean implements Serializable {
     /**
@@ -25,7 +28,7 @@ public class AtmBaseBean implements Serializable {
     @NotNull(message = "{ATM_BASE_BEAN_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @ValidLength(max = 20, message = "{ATM_BASE_BEAN_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Id
-    @Column(name = "base_id")
+    @Column(name = "base_id", length = 20, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -39,7 +42,7 @@ public class AtmBaseBean implements Serializable {
      */
     @NotBlank(message = "{ATM_BASE_BEAN_INTERNAL_ID_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 15, message = "{ATM_BASE_BEAN_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "base_internal_id")
+    @Column(name = "base_internal_id", length = 15, nullable = false)
     private String internalId;
 
     /**
@@ -51,7 +54,7 @@ public class AtmBaseBean implements Serializable {
      * </pre>
      */
     @Length(max = 32, message = "{ATM_BASE_BEAN_STATUS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "base_status")
+    @Column(name = "base_status", length = 32, nullable = true)
     private String status;
 
     /**
@@ -64,7 +67,7 @@ public class AtmBaseBean implements Serializable {
      */
     @NotNull(message = "{ATM_BASE_BEAN_BRANCH_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @ValidLength(max = 19, message = "{ATM_BASE_BEAN_BRANCH_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "base_branch_id")
+    @Column(name = "base_branch_id", length = 19, nullable = false)
     private Long branchId;
 
     /**
@@ -76,7 +79,7 @@ public class AtmBaseBean implements Serializable {
      * </pre>
      */
     @Length(max = 15, message = "{ATM_BASE_BEAN_BRANCH_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "base_branch_internal_id")
+    @Column(name = "base_branch_internal_id", length = 15, nullable = true)
     private String branchInternalId;
 
     /**
@@ -88,7 +91,7 @@ public class AtmBaseBean implements Serializable {
      * </pre>
      */
     @Length(max = 20, message = "{ATM_BASE_BEAN_PRINCIPAL_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "base_principal")
+    @Column(name = "base_principal", length = 20, nullable = true)
     private String principal;
 
     /**
@@ -101,7 +104,7 @@ public class AtmBaseBean implements Serializable {
      */
     @NotNull(message = "{ATM_BASE_BEAN_MAX_CAPACITY_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @ValidLength(max = 10, message = "{ATM_BASE_BEAN_MAX_CAPACITY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "base_max_capacity")
+    @Column(name = "base_max_capacity", length = 10, nullable = false)
     private Integer maxCapacity;
 
     /**
@@ -114,7 +117,7 @@ public class AtmBaseBean implements Serializable {
      */
     @NotNull(message = "{ATM_BASE_BEAN_CURRENT_CAPACITY_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @ValidLength(max = 10, message = "{ATM_BASE_BEAN_CURRENT_CAPACITY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "base_current_capacity")
+    @Column(name = "base_current_capacity", length = 10, nullable = false)
     private Integer currentCapacity;
 
     /**
@@ -125,7 +128,7 @@ public class AtmBaseBean implements Serializable {
      * DB defaultValue: 0.0000
      * </pre>
      */
-    @Column(name = "base_total_amount")
+    @Column(name = "base_total_amount", length = 14, nullable = true)
     private BigDecimal totalAmount;
 
     /**
@@ -137,7 +140,7 @@ public class AtmBaseBean implements Serializable {
      * </pre>
      */
     @Length(max = 5, message = "{ATM_BASE_BEAN_AMOUNT_CURRENCY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "base_amount_currency")
+    @Column(name = "base_amount_currency", length = 5, nullable = true)
     private String amountCurrency;
 
     /**
@@ -150,7 +153,7 @@ public class AtmBaseBean implements Serializable {
      */
     @NotBlank(message = "{ATM_BASE_BEAN_CREATE_BY_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 20, message = "{ATM_BASE_BEAN_CREATE_BY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "base_create_by")
+    @Column(name = "base_create_by", length = 20, nullable = false)
     private String createBy;
 
     /**
@@ -163,7 +166,7 @@ public class AtmBaseBean implements Serializable {
      */
     @NotBlank(message = "{ATM_BASE_BEAN_DEVICE_MODEL_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 20, message = "{ATM_BASE_BEAN_DEVICE_MODEL_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "base_device_model")
+    @Column(name = "base_device_model", length = 20, nullable = false)
     private String deviceModel;
 
     /**
@@ -174,10 +177,10 @@ public class AtmBaseBean implements Serializable {
      * DB defaultValue: CURRENT_TIMESTAMP
      * </pre>
      */
-    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{ATM_BASE_BEAN_CREATE_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS, message = "{ATM_BASE_BEAN_CREATE_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
     @NotNull(message = "{ATM_BASE_BEAN_CREATE_TIMESTAMP_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "base_create_timestamp")
+    @Column(name = "base_create_timestamp", length = 19, nullable = false)
     private Date createTimestamp;
 
     /**
@@ -188,10 +191,10 @@ public class AtmBaseBean implements Serializable {
      * DB defaultValue: CURRENT_TIMESTAMP
      * </pre>
      */
-    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{ATM_BASE_BEAN_UPDATE_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS, message = "{ATM_BASE_BEAN_UPDATE_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
     @NotNull(message = "{ATM_BASE_BEAN_UPDATE_TIMESTAMP_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "base_update_timestamp")
+    @Column(name = "base_update_timestamp", length = 19, nullable = false)
     private Date updateTimestamp;
 
     /**
@@ -204,7 +207,7 @@ public class AtmBaseBean implements Serializable {
      */
     @NotBlank(message = "{ATM_BASE_BEAN_DELETE_FLAG_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 1, message = "{ATM_BASE_BEAN_DELETE_FLAG_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "base_delete_flag")
+    @Column(name = "base_delete_flag", length = 1, nullable = false)
     private String deleteFlag;
 
     private static final long serialVersionUID = 1L;

@@ -16,8 +16,10 @@ ${classAnnotation}
 
 </#if>
 <#if dataModel.classType == "Class">
+@SuppressWarnings({"unused", "SpringAutowiredFieldsWarningInspection", "StatementWithEmptyBody"})
 public class ${dataModel.className} <#if dataModel.superClass?has_content>extends ${dataModel.superClass}</#if> <#if dataModel.implementsInterfaceClassSet?has_content>implements <#list dataModel.implementsInterfaceClassSet as implementsInterfaceClass>${implementsInterfaceClass}<#if implementsInterfaceClass_has_next>,</#if></#list> </#if>{
 <#else>
+@SuppressWarnings({"unused", "SpringAutowiredFieldsWarningInspection", "StatementWithEmptyBody"})
 public interface ${dataModel.className} <#if dataModel.interfaceSuperClassSet?has_content>extends <#list dataModel.interfaceSuperClassSet as interfaceSuperClass>${interfaceSuperClass}<#if interfaceSuperClass_has_next>,</#if></#list> </#if>{
 </#if>
 <#--********** class attribute ***********-->

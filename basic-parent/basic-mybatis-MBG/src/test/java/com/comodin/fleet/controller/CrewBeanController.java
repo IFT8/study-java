@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 
 @RequestMapping("/crew")
 @Controller
+@SuppressWarnings({"unused", "SpringAutowiredFieldsWarningInspection", "StatementWithEmptyBody"})
 public class CrewBeanController extends AbstractBaseController<CrewBean, BaseVo<CrewBean>> {
 
     @Override protected String getModuleName() {return "crew";}

@@ -8,6 +8,7 @@ import com.comodin.fleet.core.bean.RoleBean;
 
 @Controller
 @RequestMapping("/role")
+@SuppressWarnings({"unused", "SpringAutowiredFieldsWarningInspection", "StatementWithEmptyBody"})
 public class RoleBeanController extends AbstractBaseController<RoleBean, BaseVo<RoleBean>> {
 
     @Override protected String getModuleName() {return "role";}

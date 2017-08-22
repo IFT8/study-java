@@ -7,6 +7,7 @@ import com.comodin.basic.service.AbstractBaseService;
 import com.comodin.fleet.core.bean.DbScriptPatchBean;
 
 @Service
+@SuppressWarnings({"unused", "SpringAutowiredFieldsWarningInspection", "StatementWithEmptyBody"})
 public class DbScriptPatchBeanService extends AbstractBaseService<DbScriptPatchBean, BaseVo<DbScriptPatchBean>> implements IDbScriptPatchBeanService {
 
 }

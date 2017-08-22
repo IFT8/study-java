@@ -7,6 +7,7 @@ import com.comodin.basic.service.AbstractBaseService;
 import com.comodin.fleet.service.IDepartmentBeanService;
 
 @Service
+@SuppressWarnings({"unused", "SpringAutowiredFieldsWarningInspection", "StatementWithEmptyBody"})
 public class DepartmentBeanService extends AbstractBaseService<DepartmentBean, BaseVo<DepartmentBean>> implements IDepartmentBeanService {
 
 }

@@ -8,6 +8,7 @@ import com.comodin.fleet.core.bean.ComprobantesBean;
 
 @Controller
 @RequestMapping("/comprobantes")
+@SuppressWarnings({"unused", "SpringAutowiredFieldsWarningInspection", "StatementWithEmptyBody"})
 public class ComprobantesBeanController extends AbstractBaseController<ComprobantesBean, BaseVo<ComprobantesBean>> {
 
     @Override protected String getModuleName() {return "comprobantes";}

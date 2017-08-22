@@ -7,6 +7,7 @@ import com.comodin.basic.service.AbstractBaseService;
 import com.comodin.fleet.service.IDepartmentRoleRelationBeanService;
 
 @Service
+@SuppressWarnings({"unused", "SpringAutowiredFieldsWarningInspection", "StatementWithEmptyBody"})
 public class DepartmentRoleRelationBeanService extends AbstractBaseService<DepartmentRoleRelationBean, BaseVo<DepartmentRoleRelationBean>> implements IDepartmentRoleRelationBeanService {
 
 }

@@ -152,9 +152,9 @@ public class ComodinCommentGenerator implements CommentGenerator {
         }
         if (!column.equals(introspectedColumn.getJavaProperty())) {
             //@Column
-            field.addAnnotation("@Column(name = \"" + getDelimiterName(column) + "\")");
+            field.addAnnotation("@Column(name = \"" + getDelimiterName(column) + "\", length = " + introspectedColumn.getLength() + ", nullable = " + introspectedColumn.isNullable() + ")");
         } else if (StringUtility.stringHasValue(beginningDelimiter) || StringUtility.stringHasValue(endingDelimiter)) {
-            field.addAnnotation("@Column(name = \"" + getDelimiterName(column) + "\")");
+            field.addAnnotation("@Column(name = \"" + getDelimiterName(column) + "\", length = " + introspectedColumn.getLength() + ", nullable = " + introspectedColumn.isNullable() + ")");
         }
         if (introspectedColumn.isIdentity()) {
             if (introspectedTable.getTableConfiguration().getGeneratedKey().getRuntimeSqlStatement().equals("JDBC")) {

@@ -428,5 +428,98 @@
             <columnRenamingRule searchString="vehicle_" replaceString=""/>
         </table>
 
+
+        <table tableName="Transacciones" domainObjectName="TransactionsBean">
+            <generatedKey column="idtransaccion" sqlStatement="SqlServer" identity="true"/>
+
+            <columnOverride column="idtransaccion" property="id"/>                          <!--//private Integer idtransaccion;//流水ID-->
+
+            <columnOverride column="cliente" property="clientInternalId"/>                  <!--//private Integer cliente;//客户ID-->
+            <columnOverride column="sucursal" property="branchInternalId"/>                 <!--//private Integer sucursal;//网点ID-->
+
+            <columnOverride column="operacion" property="operationType"/>                   <!--//private Integer operacion;//操作类型-->
+
+
+            <columnOverride column="dispositivo" property="depositId"/>                     <!--//private String dispositivo;//存款号ID-->
+            <columnOverride column="usuario" property="depositUserAccount"/>                <!--//private String usuario;//存款用户账号-->
+            <columnOverride column="fechaHoraDispositivo" property="depositDateTime"/>      <!--//private Date fechaHoraDispositivo;//存款时间-->
+
+            <columnOverride column="codigoRetiro" property="withdrawalsId"/>                    <!--//private Integer codigoRetiro;//取款ID-->
+
+            <columnOverride column="Estatus" property="status"/>                            <!--//private String estatus;//状态-->
+            <columnOverride column="estatusMaquina" property="deviceStatus"/>               <!--//private String estatusmaquina;//设备状态-->
+            <columnOverride column="estatusTransaccion" property="transactionStatus"/>      <!--//private Integer estatusTransaccion;//交易状态-->
+
+            <columnOverride column="descripcion" property="description"/>                   <!--//private String descripcion;//描述-->
+            <columnOverride column="codHex" property="codError"/>                           <!--//private String codHex;////错误代码-->
+
+            <columnOverride column="divisa" property="currencyType"/>                       <!--//private String divisa;//货币类型-->
+            <columnOverride column="cuentaBanco" property="currencyCurrentNumber"/>         <!--//private String cuentaBanco;//当前货币张数-->
+            <columnOverride column="totalValidado" property="currencyTotalAmount"/>         <!--//private Integer totalValidado;//总金额-->
+
+            <columnOverride column="billetesValidados" property="chequeTotalAmount"/>       <!--//private Integer cantidadBilletesValidados;//支票金额-->
+            <columnOverride column="billetesManual" property="chequeNumber"/>               <!--//private Integer cantidadBilletesManual;//支票数量-->
+
+            <columnOverride column="totalManual" property="manualTotalAmount"/>             <!--//private Double totalManual;//手工输入的金额-->
+
+            <columnOverride column="transaccionEnvase" property="envelopesNumber"/>         <!--//private Integer transaccionEnvase;//信封数量-->
+            <columnOverride column="codigoEnvase" property="envelopesCode"/>                <!--//private String codigoenvase;//信封代码-->
+
+
+            <columnOverride column="fechaHoraServicio" property="depositSendServerDateTime"/>   <!--//private Date fechaHoraServicio;//存款机发送到服务端的时间-->
+
+
+            <!--
+            /**
+            * 硬币
+            * PAPER[纸币],HARD[硬币]
+            */-->
+            <columnOverride column="denominacion1" property="hardDenomination1"/>           <!--//硬币20的面额-->
+            <columnOverride column="denominacion2" property="hardDenomination2"/>           <!--//50的面额-->
+            <columnOverride column="denominacion3" property="hardDenomination3"/>
+            <columnOverride column="denominacion4" property="hardDenomination4"/>
+            <columnOverride column="denominacion5" property="hardDenomination5"/>
+            <columnOverride column="denominacion6" property="hardDenomination6"/>
+            <columnOverride column="denominacion7" property="hardDenomination7"/>
+            <columnOverride column="denominacion8" property="hardDenomination8"/>
+
+            <!--
+            /**
+            * 纸币
+            * PAPER[纸币],HARD[硬币]
+            */-->
+            <columnOverride column="denominacionM1" property="paperDenomination1"/>
+            <columnOverride column="denominacionM2" property="paperDenomination2"/>
+            <columnOverride column="denominacionM3" property="paperDenomination3"/>
+            <columnOverride column="denominacionM4" property="paperDenomination4"/>
+            <columnOverride column="denominacionM5" property="paperDenomination5"/>
+            <columnOverride column="denominacionM6" property="paperDenomination6"/>
+            <columnOverride column="denominacionM7" property="paperDenomination7"/>
+
+            <!--
+            /**
+            * （存信封时）手工输入的面额
+            */-->
+            <columnOverride column="denominacion1Manual" property="manualDenomination11"/>
+            <columnOverride column="denominacion2Manual" property="manualDenomination12"/>
+            <columnOverride column="denominacion3Manual" property="manualDenomination13"/>
+            <columnOverride column="denominacion4Manual" property="manualDenomination14"/>
+            <columnOverride column="denominacion5Manual" property="manualDenomination15"/>
+            <columnOverride column="denominacion6Manual" property="manualDenomination16"/>
+            <columnOverride column="denominacion7Manual" property="manualDenomination17"/>
+            <columnOverride column="denominacion8Manual" property="manualDenomination18"/>
+
+
+            <columnOverride column="referencia" property="reference"/>                          <!--//private String referencia;//（客户输入的内容有关）-->
+            <columnOverride column="totalDocumentosExternos" property="totalDocumentos"/>       <!--//文件数量、（其他机器使用，忽略）-->
+            <columnOverride column="claveSobre" property="claveSobre"/>                         <!--//（其他机器使用，忽略）-->
+            <columnOverride column="totalSobre" property="totalSobre"/>                         <!--//（其他机器使用，忽略）-->
+
+            <columnOverride column="impreso" property="impreso"/>
+            <columnOverride column="Balanza" property="balanza"/>
+            <columnOverride column="fecha_cont" property="fechaCont"/>
+
+        </table>
+
     </context>
 </generatorConfiguration>

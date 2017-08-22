@@ -7,6 +7,7 @@ import com.comodin.basic.vo.BaseVo;
 import com.comodin.basic.service.AbstractBaseService;
 
 @Service
+@SuppressWarnings({"unused", "SpringAutowiredFieldsWarningInspection", "StatementWithEmptyBody"})
 public class CrewBeanService extends AbstractBaseService<CrewBean, BaseVo<CrewBean>> implements ICrewBeanService {
 
 }

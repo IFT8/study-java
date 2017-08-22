@@ -9,7 +9,7 @@ import javax.validation.constraints.*;
 import org.hibernate.validator.constraints.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
-@SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue"})
+@SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue", "DefaultAnnotationParam"})
 @Table(name = "t_bank_atm_code")
 public class BankAtmCodeBean implements Serializable {
     /**
@@ -23,7 +23,7 @@ public class BankAtmCodeBean implements Serializable {
     @NotNull(message = "{BANK_ATM_CODE_BEAN_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @ValidLength(max = 20, message = "{BANK_ATM_CODE_BEAN_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Id
-    @Column(name = "code_id")
+    @Column(name = "code_id", length = 20, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -36,7 +36,7 @@ public class BankAtmCodeBean implements Serializable {
      * </pre>
      */
     @ValidLength(max = 20, message = "{BANK_ATM_CODE_BEAN_CLIENT_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "code_client_id")
+    @Column(name = "code_client_id", length = 20, nullable = true)
     private Long clientId;
 
     /**
@@ -48,7 +48,7 @@ public class BankAtmCodeBean implements Serializable {
      * </pre>
      */
     @Length(max = 200, message = "{BANK_ATM_CODE_BEAN_SUGGESTION_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "code_suggestion")
+    @Column(name = "code_suggestion", length = 200, nullable = true)
     private String suggestion;
 
     /**
@@ -61,7 +61,7 @@ public class BankAtmCodeBean implements Serializable {
      */
     @NotBlank(message = "{BANK_ATM_CODE_BEAN_NUM_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 10, message = "{BANK_ATM_CODE_BEAN_NUM_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "code_num")
+    @Column(name = "code_num", length = 10, nullable = false)
     private String num;
 
     /**
@@ -73,7 +73,7 @@ public class BankAtmCodeBean implements Serializable {
      * </pre>
      */
     @Length(max = 200, message = "{BANK_ATM_CODE_BEAN_DESCRIPTION_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "code_description")
+    @Column(name = "code_description", length = 200, nullable = true)
     private String description;
 
     private static final long serialVersionUID = 1L;

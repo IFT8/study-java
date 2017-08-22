@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 @RequestMapping("/privilege")
+@SuppressWarnings({"unused", "SpringAutowiredFieldsWarningInspection", "StatementWithEmptyBody"})
 public class PrivilegeBeanController extends AbstractBaseController<PrivilegeBean, BaseVo<PrivilegeBean>> {
 
     @Override protected String getModuleName() {return "privilege";}

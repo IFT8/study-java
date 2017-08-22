@@ -9,7 +9,7 @@ import javax.validation.constraints.*;
 import org.hibernate.validator.constraints.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
-@SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue"})
+@SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue", "DefaultAnnotationParam"})
 @Table(name = "t_setting")
 public class SettingBean implements Serializable {
     /**
@@ -23,7 +23,7 @@ public class SettingBean implements Serializable {
     @NotNull(message = "{SETTING_BEAN_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @ValidLength(max = 20, message = "{SETTING_BEAN_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Id
-    @Column(name = "setting_id")
+    @Column(name = "setting_id", length = 20, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -37,7 +37,7 @@ public class SettingBean implements Serializable {
      */
     @NotBlank(message = "{SETTING_BEAN_MODULE_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 40, message = "{SETTING_BEAN_MODULE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "setting_module")
+    @Column(name = "setting_module", length = 40, nullable = false)
     private String module;
 
     /**
@@ -50,7 +50,7 @@ public class SettingBean implements Serializable {
      */
     @NotBlank(message = "{SETTING_BEAN_KEY_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 40, message = "{SETTING_BEAN_KEY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "setting_key")
+    @Column(name = "setting_key", length = 40, nullable = false)
     private String key;
 
     /**
@@ -63,7 +63,7 @@ public class SettingBean implements Serializable {
      */
     @NotBlank(message = "{SETTING_BEAN_VALUE_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 50, message = "{SETTING_BEAN_VALUE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "setting_value")
+    @Column(name = "setting_value", length = 50, nullable = false)
     private String value;
 
     /**
@@ -76,7 +76,7 @@ public class SettingBean implements Serializable {
      */
     @NotBlank(message = "{SETTING_BEAN_LANGUAGE_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 10, message = "{SETTING_BEAN_LANGUAGE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "setting_language")
+    @Column(name = "setting_language", length = 10, nullable = false)
     private String language;
 
     /**
@@ -88,7 +88,7 @@ public class SettingBean implements Serializable {
      * </pre>
      */
     @Length(max = 50, message = "{SETTING_BEAN_COMMENT_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "setting_comment")
+    @Column(name = "setting_comment", length = 50, nullable = true)
     private String comment;
 
     private static final long serialVersionUID = 1L;

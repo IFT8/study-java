@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 @RequestMapping("/currency")
+@SuppressWarnings({"unused", "SpringAutowiredFieldsWarningInspection", "StatementWithEmptyBody"})
 public class CurrencyBeanController extends AbstractBaseController<CurrencyBean, BaseVo<CurrencyBean>> {
 
     @Override protected String getModuleName() {return "currency";}

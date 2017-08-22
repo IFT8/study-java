@@ -7,6 +7,7 @@ import com.comodin.fleet.service.ISioLoginAccountBeanService;
 import com.comodin.fleet.core.bean.SioLoginAccountBean;
 
 @Service
+@SuppressWarnings({"unused", "SpringAutowiredFieldsWarningInspection", "StatementWithEmptyBody"})
 public class SioLoginAccountBeanService extends AbstractBaseService<SioLoginAccountBean, BaseVo<SioLoginAccountBean>> implements ISioLoginAccountBeanService {
 
 }

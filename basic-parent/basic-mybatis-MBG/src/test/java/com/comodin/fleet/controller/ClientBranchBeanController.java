@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 @RequestMapping("/clientBranch")
+@SuppressWarnings({"unused", "SpringAutowiredFieldsWarningInspection", "StatementWithEmptyBody"})
 public class ClientBranchBeanController extends AbstractBaseController<ClientBranchBean, BaseVo<ClientBranchBean>> {
 
     @Override protected String getModuleName() {return "clientBranch";}

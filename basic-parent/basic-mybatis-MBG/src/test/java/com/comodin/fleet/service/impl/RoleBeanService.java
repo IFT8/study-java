@@ -7,6 +7,7 @@ import com.comodin.basic.service.AbstractBaseService;
 import com.comodin.fleet.core.bean.RoleBean;
 
 @Service
+@SuppressWarnings({"unused", "SpringAutowiredFieldsWarningInspection", "StatementWithEmptyBody"})
 public class RoleBeanService extends AbstractBaseService<RoleBean, BaseVo<RoleBean>> implements IRoleBeanService {
 
 }

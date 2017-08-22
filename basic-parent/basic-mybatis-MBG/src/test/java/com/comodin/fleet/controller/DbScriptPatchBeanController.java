@@ -8,6 +8,7 @@ import com.comodin.fleet.core.bean.DbScriptPatchBean;
 
 @Controller
 @RequestMapping("/dbScriptPatch")
+@SuppressWarnings({"unused", "SpringAutowiredFieldsWarningInspection", "StatementWithEmptyBody"})
 public class DbScriptPatchBeanController extends AbstractBaseController<DbScriptPatchBean, BaseVo<DbScriptPatchBean>> {
 
     @Override protected String getModuleName() {return "dbScriptPatch";}

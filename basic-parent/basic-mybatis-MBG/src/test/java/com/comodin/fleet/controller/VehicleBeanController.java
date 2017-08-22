@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 
 @RequestMapping("/vehicle")
 @Controller
+@SuppressWarnings({"unused", "SpringAutowiredFieldsWarningInspection", "StatementWithEmptyBody"})
 public class VehicleBeanController extends AbstractBaseController<VehicleBean, BaseVo<VehicleBean>> {
 
     @Override protected String getModuleName() {return "vehicle";}

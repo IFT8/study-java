@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 @RequestMapping("/setting")
+@SuppressWarnings({"unused", "SpringAutowiredFieldsWarningInspection", "StatementWithEmptyBody"})
 public class SettingBeanController extends AbstractBaseController<SettingBean, BaseVo<SettingBean>> {
 
     @Override protected String getModuleName() {return "setting";}

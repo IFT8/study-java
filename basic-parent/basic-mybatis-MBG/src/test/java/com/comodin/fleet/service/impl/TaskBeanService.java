@@ -7,6 +7,7 @@ import com.comodin.basic.service.AbstractBaseService;
 import com.comodin.fleet.core.bean.TaskBean;
 
 @Service
+@SuppressWarnings({"unused", "SpringAutowiredFieldsWarningInspection", "StatementWithEmptyBody"})
 public class TaskBeanService extends AbstractBaseService<TaskBean, BaseVo<TaskBean>> implements ITaskBeanService {
 
 }

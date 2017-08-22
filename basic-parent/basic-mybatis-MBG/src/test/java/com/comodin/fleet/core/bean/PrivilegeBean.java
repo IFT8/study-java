@@ -9,7 +9,7 @@ import javax.validation.constraints.*;
 import org.hibernate.validator.constraints.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
-@SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue"})
+@SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue", "DefaultAnnotationParam"})
 @Table(name = "t_privilege")
 public class PrivilegeBean implements Serializable {
     /**
@@ -23,7 +23,7 @@ public class PrivilegeBean implements Serializable {
     @NotNull(message = "{PRIVILEGE_BEAN_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @ValidLength(max = 20, message = "{PRIVILEGE_BEAN_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Id
-    @Column(name = "privilege_id")
+    @Column(name = "privilege_id", length = 20, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -36,7 +36,7 @@ public class PrivilegeBean implements Serializable {
      * </pre>
      */
     @Length(max = 30, message = "{PRIVILEGE_BEAN_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "privilege_name")
+    @Column(name = "privilege_name", length = 30, nullable = true)
     private String name;
 
     /**
@@ -48,7 +48,7 @@ public class PrivilegeBean implements Serializable {
      * </pre>
      */
     @Length(max = 20, message = "{PRIVILEGE_BEAN_MODULE_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "privilege_module_name")
+    @Column(name = "privilege_module_name", length = 20, nullable = true)
     private String moduleName;
 
     /**
@@ -61,7 +61,7 @@ public class PrivilegeBean implements Serializable {
      */
     @NotBlank(message = "{PRIVILEGE_BEAN_STATUS_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 7, message = "{PRIVILEGE_BEAN_STATUS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "privilege_status")
+    @Column(name = "privilege_status", length = 7, nullable = false)
     private String status;
 
     /**
@@ -73,7 +73,7 @@ public class PrivilegeBean implements Serializable {
      * </pre>
      */
     @Length(max = 2000, message = "{PRIVILEGE_BEAN_URLS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "privilege_urls")
+    @Column(name = "privilege_urls", length = 2000, nullable = true)
     private String urls;
 
     /**
@@ -86,7 +86,7 @@ public class PrivilegeBean implements Serializable {
      */
     @NotBlank(message = "{PRIVILEGE_BEAN_DELETE_FLAG_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 1, message = "{PRIVILEGE_BEAN_DELETE_FLAG_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "privilege_delete_flag")
+    @Column(name = "privilege_delete_flag", length = 1, nullable = false)
     private String deleteFlag;
 
     private static final long serialVersionUID = 1L;

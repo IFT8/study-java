@@ -4,6 +4,7 @@ import com.comodin.basic.service.IBaseService;
 import com.comodin.fleet.core.bean.PrivilegeBean;
 import com.comodin.basic.vo.BaseVo;
 
+@SuppressWarnings({"unused", "SpringAutowiredFieldsWarningInspection", "StatementWithEmptyBody"})
 public interface IPrivilegeBeanService extends IBaseService<PrivilegeBean, BaseVo<PrivilegeBean>> {
 
 }

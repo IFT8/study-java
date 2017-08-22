@@ -8,6 +8,7 @@ import com.comodin.fleet.core.bean.TaskBean;
 
 @Controller
 @RequestMapping("/task")
+@SuppressWarnings({"unused", "SpringAutowiredFieldsWarningInspection", "StatementWithEmptyBody"})
 public class TaskBeanController extends AbstractBaseController<TaskBean, BaseVo<TaskBean>> {
 
     @Override protected String getModuleName() {return "task";}

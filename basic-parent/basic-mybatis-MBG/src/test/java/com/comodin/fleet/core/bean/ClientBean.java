@@ -10,7 +10,7 @@ import javax.validation.constraints.*;
 import org.hibernate.validator.constraints.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
-@SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue"})
+@SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue", "DefaultAnnotationParam"})
 @Table(name = "t_client")
 public class ClientBean implements Serializable {
     /**
@@ -24,7 +24,7 @@ public class ClientBean implements Serializable {
     @NotNull(message = "{CLIENT_BEAN_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @ValidLength(max = 20, message = "{CLIENT_BEAN_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Id
-    @Column(name = "client_id")
+    @Column(name = "client_id", length = 20, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -38,7 +38,7 @@ public class ClientBean implements Serializable {
      */
     @NotBlank(message = "{CLIENT_BEAN_INTERNAL_ID_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 15, message = "{CLIENT_BEAN_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "client_internal_id")
+    @Column(name = "client_internal_id", length = 15, nullable = false)
     private String internalId;
 
     /**
@@ -51,7 +51,7 @@ public class ClientBean implements Serializable {
      */
     @NotBlank(message = "{CLIENT_BEAN_NAME_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 100, message = "{CLIENT_BEAN_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "client_name")
+    @Column(name = "client_name", length = 100, nullable = false)
     private String name;
 
     /**
@@ -64,7 +64,7 @@ public class ClientBean implements Serializable {
      */
     @NotBlank(message = "{CLIENT_BEAN_TYPE_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 6, message = "{CLIENT_BEAN_TYPE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "client_type")
+    @Column(name = "client_type", length = 6, nullable = false)
     private String type;
 
     /**
@@ -77,7 +77,7 @@ public class ClientBean implements Serializable {
      */
     @NotNull(message = "{CLIENT_BEAN_CIT_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @ValidLength(max = 20, message = "{CLIENT_BEAN_CIT_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "client_cit_id")
+    @Column(name = "client_cit_id", length = 20, nullable = false)
     private Long citId;
 
     /**
@@ -89,7 +89,7 @@ public class ClientBean implements Serializable {
      * </pre>
      */
     @Length(max = 30, message = "{CLIENT_BEAN_SECTOR_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "client_sector")
+    @Column(name = "client_sector", length = 30, nullable = true)
     private String sector;
 
     /**
@@ -101,7 +101,7 @@ public class ClientBean implements Serializable {
      * </pre>
      */
     @Length(max = 15, message = "{CLIENT_BEAN_TELE_PHONE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "client_tele_phone")
+    @Column(name = "client_tele_phone", length = 15, nullable = true)
     private String telePhone;
 
     /**
@@ -113,7 +113,7 @@ public class ClientBean implements Serializable {
      * </pre>
      */
     @Length(max = 150, message = "{CLIENT_BEAN_ADDRESS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "client_address")
+    @Column(name = "client_address", length = 150, nullable = true)
     private String address;
 
     /**
@@ -125,7 +125,7 @@ public class ClientBean implements Serializable {
      * </pre>
      */
     @Length(max = 20, message = "{CLIENT_BEAN_PHONE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "client_phone")
+    @Column(name = "client_phone", length = 20, nullable = true)
     private String phone;
 
     /**
@@ -137,7 +137,7 @@ public class ClientBean implements Serializable {
      * </pre>
      */
     @Length(max = 15, message = "{CLIENT_BEAN_LONGITUDE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "client_longitude")
+    @Column(name = "client_longitude", length = 15, nullable = true)
     private String longitude;
 
     /**
@@ -149,7 +149,7 @@ public class ClientBean implements Serializable {
      * </pre>
      */
     @Length(max = 15, message = "{CLIENT_BEAN_LATITUDE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "client_latitude")
+    @Column(name = "client_latitude", length = 15, nullable = true)
     private String latitude;
 
     /**
@@ -163,7 +163,7 @@ public class ClientBean implements Serializable {
     @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{CLIENT_BEAN_CREATE_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
     @NotNull(message = "{CLIENT_BEAN_CREATE_TIMESTAMP_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "client_create_timestamp")
+    @Column(name = "client_create_timestamp", length = 19, nullable = false)
     private Date createTimestamp;
 
     /**
@@ -176,7 +176,7 @@ public class ClientBean implements Serializable {
      */
     @NotBlank(message = "{CLIENT_BEAN_CREATE_BY_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 20, message = "{CLIENT_BEAN_CREATE_BY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "client_create_by")
+    @Column(name = "client_create_by", length = 20, nullable = false)
     private String createBy;
 
     /**
@@ -189,7 +189,7 @@ public class ClientBean implements Serializable {
      */
     @NotBlank(message = "{CLIENT_BEAN_DELETE_FLAG_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 1, message = "{CLIENT_BEAN_DELETE_FLAG_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "client_delete_flag")
+    @Column(name = "client_delete_flag", length = 1, nullable = false)
     private String deleteFlag;
 
     private static final long serialVersionUID = 1L;

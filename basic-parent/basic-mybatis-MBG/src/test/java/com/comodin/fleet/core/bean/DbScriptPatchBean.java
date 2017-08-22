@@ -10,7 +10,7 @@ import javax.validation.constraints.*;
 import org.hibernate.validator.constraints.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
-@SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue"})
+@SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue", "DefaultAnnotationParam"})
 @Table(name = "t_db_script_patch")
 public class DbScriptPatchBean implements Serializable {
     /**
@@ -24,7 +24,7 @@ public class DbScriptPatchBean implements Serializable {
     @NotNull(message = "{DB_SCRIPT_PATCH_BEAN_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @ValidLength(max = 20, message = "{DB_SCRIPT_PATCH_BEAN_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Id
-    @Column(name = "script_id")
+    @Column(name = "script_id", length = 20, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -38,7 +38,7 @@ public class DbScriptPatchBean implements Serializable {
      */
     @NotBlank(message = "{DB_SCRIPT_PATCH_BEAN_PATCH_FILE_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 100, message = "{DB_SCRIPT_PATCH_BEAN_PATCH_FILE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "script_patch_file")
+    @Column(name = "script_patch_file", length = 100, nullable = false)
     private String patchFile;
 
     /**
@@ -51,7 +51,7 @@ public class DbScriptPatchBean implements Serializable {
      */
     @NotBlank(message = "{DB_SCRIPT_PATCH_BEAN_DESCRIPTION_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 255, message = "{DB_SCRIPT_PATCH_BEAN_DESCRIPTION_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "script_description")
+    @Column(name = "script_description", length = 255, nullable = false)
     private String description;
 
     /**
@@ -65,7 +65,7 @@ public class DbScriptPatchBean implements Serializable {
     @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{DB_SCRIPT_PATCH_BEAN_SYSTEM_CREATE_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
     @NotNull(message = "{DB_SCRIPT_PATCH_BEAN_SYSTEM_CREATE_TIMESTAMP_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "system_create_timestamp")
+    @Column(name = "system_create_timestamp", length = 19, nullable = false)
     private Date systemCreateTimestamp;
 
     /**
@@ -78,7 +78,7 @@ public class DbScriptPatchBean implements Serializable {
      */
     @NotBlank(message = "{DB_SCRIPT_PATCH_BEAN_SYSTEM_CREATE_BY_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 20, message = "{DB_SCRIPT_PATCH_BEAN_SYSTEM_CREATE_BY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "system_create_by")
+    @Column(name = "system_create_by", length = 20, nullable = false)
     private String systemCreateBy;
 
     /**
@@ -91,7 +91,7 @@ public class DbScriptPatchBean implements Serializable {
      */
     @NotBlank(message = "{DB_SCRIPT_PATCH_BEAN_SYSTEM_DELETE_FLAG_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 1, message = "{DB_SCRIPT_PATCH_BEAN_SYSTEM_DELETE_FLAG_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "system_delete_flag")
+    @Column(name = "system_delete_flag", length = 1, nullable = false)
     private String systemDeleteFlag;
 
     private static final long serialVersionUID = 1L;
