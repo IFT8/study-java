@@ -9,8 +9,10 @@
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
+
     <artifactId>study_opencv-demo</artifactId>
     <packaging>war</packaging>
+
 
     <dependencies>
 
@@ -45,8 +47,8 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
         </dependency>
-
     </dependencies>
+
 
     <build>
         <plugins>

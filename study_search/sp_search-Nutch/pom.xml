@@ -9,8 +9,10 @@
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
+
     <artifactId>sp_search-Nutch</artifactId>
     <packaging>jar</packaging>
+
 
     <dependencies>
 
@@ -77,6 +79,5 @@
             <artifactId>nutch</artifactId>
             <version>2.3.1</version>
         </dependency>
-        
     </dependencies>
 </project>

@@ -9,10 +9,10 @@
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
+
     <artifactId>basic-demo</artifactId>
     <packaging>war</packaging>
-    <name>basic-demo Maven Webapp</name>
-    <url>http://maven.apache.org</url>
+
 
     <dependencies>
         <dependency>
@@ -21,5 +21,4 @@
             <version>${project.version}</version>
         </dependency>
     </dependencies>
-
 </project>
