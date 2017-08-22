@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.comodin.fleet.core.mapper.ComprobantesBeanMapper">
+  <resultMap id="BaseResultMap" type="com.comodin.fleet.core.bean.ComprobantesBean">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="comprobantes_id" jdbcType="BIGINT" property="id" />
+    <result column="comprobantes_task_id" jdbcType="BIGINT" property="taskId" />
+    <result column="comprobantes_task_pk_id" jdbcType="BIGINT" property="taskPkId" />
+    <result column="comprobantes_code" jdbcType="VARCHAR" property="code" />
+    <result column="comprobantes_type" jdbcType="CHAR" property="type" />
+    <result column="comprobantes_availability" jdbcType="CHAR" property="availability" />
+    <result column="comprobantes_status" jdbcType="VARCHAR" property="status" />
+    <result column="comprobantes_currency_internal_id" jdbcType="CHAR" property="currencyInternalId" />
+    <result column="comprobantes_currency_iso_code" jdbcType="CHAR" property="currencyIsoCode" />
+    <result column="comprobantes_package_number" jdbcType="INTEGER" property="packageNumber" />
+    <result column="comprobantes_bag_serial_numbers" jdbcType="VARCHAR" property="bagSerialNumbers" />
+    <result column="comprobantes_amount" jdbcType="DECIMAL" property="amount" />
+    <result column="comprobantes_evidence_picture" jdbcType="VARCHAR" property="evidencePicture" />
+    <result column="comprobantes_signature_picture" jdbcType="VARCHAR" property="signaturePicture" />
+    <result column="comprobantes_part_evidence_picture" jdbcType="VARCHAR" property="partEvidencePicture" />
+    <result column="comprobantes_part_signature_picture" jdbcType="VARCHAR" property="partSignaturePicture" />
+    <result column="comprobantes_cancel_responsible_party" jdbcType="VARCHAR" property="cancelResponsibleParty" />
+    <result column="comprobantes_cancel_single_receipt" jdbcType="VARCHAR" property="cancelSingleReceipt" />
+    <result column="comprobantes_cancel_reason" jdbcType="VARCHAR" property="cancelReason" />
+    <result column="comprobantes_cancel_money_back_party" jdbcType="VARCHAR" property="cancelMoneyBackParty" />
+    <result column="comprobantes_cancel_comment" jdbcType="VARCHAR" property="cancelComment" />
+    <result column="comprobantes_branch_code" jdbcType="VARCHAR" property="branchCode" />
+    <result column="comprobantes_create_timestamp" jdbcType="TIMESTAMP" property="createTimestamp" />
+    <result column="comprobantes_update_timestamp" jdbcType="TIMESTAMP" property="updateTimestamp" />
+    <result column="comprobantes_create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="comprobantes_delete_flag" jdbcType="CHAR" property="deleteFlag" />
+    <result column="comprobantes_generate_source_party" jdbcType="VARCHAR" property="generateSourceParty" />
+    <result column="comprobantes_source_bill_original_code" jdbcType="VARCHAR" property="sourceBillOriginalCode" />
+  </resultMap>
+</mapper>

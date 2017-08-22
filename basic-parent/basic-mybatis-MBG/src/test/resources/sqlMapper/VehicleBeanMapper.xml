@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.comodin.fleet.core.mapper.VehicleBeanMapper">
+  <resultMap id="BaseResultMap" type="com.comodin.fleet.core.bean.VehicleBean">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="vehicle_id" jdbcType="BIGINT" property="id" />
+    <result column="vehicle_internal_id" jdbcType="VARCHAR" property="internalId" />
+    <result column="vehicle_tomtom_id" jdbcType="VARCHAR" property="tomtomId" />
+    <result column="vehicle_branch_id" jdbcType="BIGINT" property="branchId" />
+    <result column="vehicle_license_plate" jdbcType="VARCHAR" property="licensePlate" />
+    <result column="vehicle_VIN" jdbcType="VARCHAR" property="vin" />
+    <result column="vehicle_nuclear_load_people_number" jdbcType="INTEGER" property="nuclearLoadPeopleNumber" />
+    <result column="vehicle_year" jdbcType="CHAR" property="year" />
+    <result column="vehicle_currency_capacity" jdbcType="VARCHAR" property="currencyCapacity" />
+    <result column="vehicle_description" jdbcType="VARCHAR" property="description" />
+    <result column="vehicle_model" jdbcType="VARCHAR" property="model" />
+    <result column="vehicle_service_type" jdbcType="VARCHAR" property="serviceType" />
+    <result column="vehicle_armored_level" jdbcType="VARCHAR" property="armoredLevel" />
+    <result column="vehicle_status" jdbcType="VARCHAR" property="status" />
+    <result column="vehicle_mileage" jdbcType="VARCHAR" property="mileage" />
+    <result column="vehicle_last_maintenance_time" jdbcType="TIMESTAMP" property="lastMaintenanceTime" />
+    <result column="vehicle_principal_by" jdbcType="VARCHAR" property="principalBy" />
+    <result column="vehicle_operator_by" jdbcType="VARCHAR" property="operatorBy" />
+    <result column="vehicle_create_timestamp" jdbcType="TIMESTAMP" property="createTimestamp" />
+    <result column="vehicle_create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="vehicle_delete_flag" jdbcType="CHAR" property="deleteFlag" />
+  </resultMap>
+</mapper>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.comodin.fleet.core.mapper.SioTaskComprobantesBeanMapper">
+  <resultMap id="BaseResultMap" type="com.comodin.fleet.core.bean.SioTaskComprobantesBean">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="comprobantes_id" jdbcType="BIGINT" property="id" />
+    <result column="comprobantes_task_original_complex_id" jdbcType="VARCHAR" property="taskOriginalComplexId" />
+    <result column="comprobantes_code" jdbcType="VARCHAR" property="code" />
+    <result column="comprobantes_package_number" jdbcType="INTEGER" property="packageNumber" />
+    <result column="comprobantes_amount" jdbcType="DECIMAL" property="amount" />
+    <result column="comprobantes_status" jdbcType="CHAR" property="status" />
+    <result column="comprobantes_record_date" jdbcType="CHAR" property="recordDate" />
+    <result column="comprobantes_record_time" jdbcType="CHAR" property="recordTime" />
+    <result column="comprobantes_type" jdbcType="CHAR" property="type" />
+    <result column="comprobantes_currency_internal_id" jdbcType="CHAR" property="currencyInternalId" />
+    <result column="comprobantes_original_code" jdbcType="VARCHAR" property="originalCode" />
+    <result column="comprobantes_operate_device_json" jdbcType="VARCHAR" property="operateDeviceJson" />
+    <result column="comprobantes_create_timestamp" jdbcType="TIMESTAMP" property="createTimestamp" />
+    <result column="comprobantes_create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="comprobantes_delete_flag" jdbcType="CHAR" property="deleteFlag" />
+  </resultMap>
+</mapper>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.comodin.fleet.core.mapper.AtmBaseBeanMapper">
+  <resultMap id="BaseResultMap" type="com.comodin.fleet.core.bean.AtmBaseBean">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="base_id" jdbcType="BIGINT" property="id" />
+    <result column="base_internal_id" jdbcType="VARCHAR" property="internalId" />
+    <result column="base_status" jdbcType="CHAR" property="status" />
+    <result column="base_branch_id" jdbcType="BIGINT" property="branchId" />
+    <result column="base_branch_internal_id" jdbcType="VARCHAR" property="branchInternalId" />
+    <result column="base_principal" jdbcType="VARCHAR" property="principal" />
+    <result column="base_max_capacity" jdbcType="INTEGER" property="maxCapacity" />
+    <result column="base_current_capacity" jdbcType="INTEGER" property="currentCapacity" />
+    <result column="base_total_amount" jdbcType="DECIMAL" property="totalAmount" />
+    <result column="base_amount_currency" jdbcType="VARCHAR" property="amountCurrency" />
+    <result column="base_create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="base_device_model" jdbcType="VARCHAR" property="deviceModel" />
+    <result column="base_create_timestamp" jdbcType="TIMESTAMP" property="createTimestamp" />
+    <result column="base_update_timestamp" jdbcType="TIMESTAMP" property="updateTimestamp" />
+    <result column="base_delete_flag" jdbcType="CHAR" property="deleteFlag" />
+  </resultMap>
+</mapper>
