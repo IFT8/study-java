@@ -38,6 +38,8 @@
 
         <module>study_springCloud/sp-movie</module>
         <module>study_springCloud/sp-user</module>
+        <module>study_springCloud/sp-eureka-movie</module>
+        <module>study_springCloud/sp-eureka-user</module>
     </modules>
 
     <properties>
