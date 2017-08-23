@@ -1,6 +1,8 @@
 server:
   port: 7900
 spring:
+  application:
+    name: sp-eureka-user    #建议，名称写为小写
   jpa:
     generate-ddl: false
     show-sql: true
@@ -18,3 +20,14 @@ logging:
     org.hibernate.type.descriptor.sql.BasicBinder: trace
     org.hibernate.type.descriptor.sql.BasicExtractor: trace
     cn.assupg.study: debug
+eureka:
+  client:
+    serviceUrl:
+      #registered-replicas	http://localhost:8761/eureka/
+      #unavailable-replicas	http://localhost:8761/eureka/,
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+    # Changing the Eureka Instance ID
+    # default ${spring.cloud.client.hostname}:${spring.application.name}:${spring.application.instance_id:${server.port}}}.
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${server.port}}}.
