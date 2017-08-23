@@ -36,8 +36,8 @@
         <module>study_springBoot/sp_springBoot03-web</module>
 
 
-        <module>study_springCloud/simple-provider-movie</module>
-        <module>study_springCloud/simple-provider-user</module>
+        <module>study_springCloud/sp-movie</module>
+        <module>study_springCloud/sp-user</module>
     </modules>
 
     <properties>
