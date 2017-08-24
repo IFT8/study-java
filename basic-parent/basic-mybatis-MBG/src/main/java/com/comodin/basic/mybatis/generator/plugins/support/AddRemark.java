@@ -1,4 +1,4 @@
-package com.comodin.basic.mybatis.generator.plugins;
+package com.comodin.basic.mybatis.generator.plugins.support;
 
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
@@ -14,7 +14,7 @@ public class AddRemark {
             field.addJavaDocLine("/**");
             field.addJavaDocLine(" * <pre>");
             field.addJavaDocLine(" * DB remark: " + introspectedColumn.getRemarks());
-            field.addJavaDocLine(String.format(" * DB column: %s\t%s(%d)\t<--->\t%s\t%s", introspectedColumn.getActualColumnName(), introspectedColumn.getJdbcTypeName(), introspectedColumn.getLength(), introspectedColumn.getJavaProperty(), introspectedColumn.getFullyQualifiedJavaType().getFullyQualifiedName()));
+            field.addJavaDocLine(" * DB column: " + String.format("%s\t%s(%d)\t<--->\t%s\t%s", introspectedColumn.getActualColumnName(), introspectedColumn.getJdbcTypeName(), introspectedColumn.getLength(), introspectedColumn.getJavaProperty(), introspectedColumn.getFullyQualifiedJavaType().getFullyQualifiedName()));
             field.addJavaDocLine(" * DB is  Nullable: " + introspectedColumn.isNullable());
             field.addJavaDocLine(" * DB defaultValue: " + introspectedColumn.getDefaultValue());
             field.addJavaDocLine(" * </pre>");

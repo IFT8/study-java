@@ -1,4 +1,4 @@
-package com.comodin.basic.mybatis.generator.plugins;
+package com.comodin.basic.mybatis.generator.util;
 
 import com.alibaba.fastjson.JSON;
 import com.comodin.basic.mybatis.generator.json.RemarksJSON;

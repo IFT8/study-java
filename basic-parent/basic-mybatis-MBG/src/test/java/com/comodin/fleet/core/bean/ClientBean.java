@@ -24,9 +24,9 @@ public class ClientBean implements Serializable {
      */
     @NotNull(message = "{CLIENT_BEAN_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @ValidLength(max = 20, message = "{CLIENT_BEAN_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Id
     @Column(name = "client_id", length = 20, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     private Long id;
 
     /**

@@ -24,6 +24,8 @@
 
 package com.comodin.basic.mybatis.generator.plugins;
 
+import com.comodin.basic.mybatis.generator.plugins.support.*;
+import com.comodin.basic.mybatis.generator.util.PluginsUtils;
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.PluginAdapter;
@@ -165,7 +167,7 @@ public class ComodinPlugin extends PluginAdapter {
                     + tableName
                     + context.getEndingDelimiter();
         }
-        topLevelClass.addAnnotation("@Entity");
+        topLevelClass.addAnnotation("@Entity"); //为支持jpa
         //是否忽略大小写，对于区分大小写的数据库，会有用
         if (caseSensitive && !topLevelClass.getType().getShortName().equals(tableName)) {
             topLevelClass.addAnnotation("@Table(name = \"" + getDelimiterName(tableName) + "\")");
@@ -176,7 +178,6 @@ public class ComodinPlugin extends PluginAdapter {
                 || StringUtility.stringHasValue(endingDelimiter)) {
             topLevelClass.addAnnotation("@Table(name = \"" + getDelimiterName(tableName) + "\")");
         }
-
 
         GenerateConstantFile.generateApplicationConstantFile(topLevelClass, introspectedTable);
         GenerateI18nFile.generateApplicationI18nFile(topLevelClass, introspectedTable);

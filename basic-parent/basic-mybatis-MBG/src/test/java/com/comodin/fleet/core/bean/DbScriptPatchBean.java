@@ -24,9 +24,9 @@ public class DbScriptPatchBean implements Serializable {
      */
     @NotNull(message = "{DB_SCRIPT_PATCH_BEAN_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @ValidLength(max = 20, message = "{DB_SCRIPT_PATCH_BEAN_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Id
     @Column(name = "script_id", length = 20, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     private Long id;
 
     /**

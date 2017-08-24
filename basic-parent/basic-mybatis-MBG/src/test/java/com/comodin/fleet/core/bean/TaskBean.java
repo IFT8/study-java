@@ -24,9 +24,9 @@ public class TaskBean implements Serializable {
      */
     @NotNull(message = "{TASK_BEAN_PK_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @ValidLength(max = 13, message = "{TASK_BEAN_PK_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Id
     @Column(name = "task_pk_id", length = 19, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     private Long pkId;
 
     /**

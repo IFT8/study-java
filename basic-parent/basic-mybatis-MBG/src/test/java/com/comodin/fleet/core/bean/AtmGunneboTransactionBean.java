@@ -24,9 +24,9 @@ public class AtmGunneboTransactionBean implements Serializable {
      */
     @NotNull(message = "{ATM_GUNNEBO_TRANSACTION_BEAN_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @ValidLength(max = 20, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Id
     @Column(name = "transaction_id", length = 20, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     private Long id;
 
     /**

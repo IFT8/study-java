@@ -1,6 +1,7 @@
-package com.comodin.basic.mybatis.generator.plugins;
+package com.comodin.basic.mybatis.generator.plugins.support;
 
 import com.comodin.basic.mybatis.generator.json.RemarksJSON;
+import com.comodin.basic.mybatis.generator.util.PluginsUtils;
 import com.comodin.basic.util.MyStringUtils;
 import com.comodin.basic.util.freemarker.EntityProperty;
 import com.comodin.basic.util.freemarker.EntityPropertyType;

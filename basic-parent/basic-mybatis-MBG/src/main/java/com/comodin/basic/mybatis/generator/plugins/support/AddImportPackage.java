@@ -1,5 +1,6 @@
-package com.comodin.basic.mybatis.generator.plugins;
+package com.comodin.basic.mybatis.generator.plugins.support;
 
+import com.comodin.basic.mybatis.generator.util.PluginsUtils;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
 import org.mybatis.generator.api.dom.java.TopLevelClass;

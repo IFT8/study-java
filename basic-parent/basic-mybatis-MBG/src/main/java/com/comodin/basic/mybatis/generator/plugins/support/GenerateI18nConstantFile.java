@@ -1,6 +1,7 @@
-package com.comodin.basic.mybatis.generator.plugins;
+package com.comodin.basic.mybatis.generator.plugins.support;
 
 
+import com.comodin.basic.mybatis.generator.util.PluginsUtils;
 import com.comodin.basic.util.freemarker.EntityProperty;
 import com.comodin.basic.util.freemarker.FreeMarkerUtils;
 import org.mybatis.generator.api.IntrospectedTable;
@@ -12,7 +13,7 @@ import java.util.Map;
 import java.util.Set;
 
 @SuppressWarnings({"WeakerAccess", "unused"})
-public class GenerateI18nFile {
+public class GenerateI18nConstantFile {
 
     public static void generateApplicationI18nFile(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
         if (PluginsUtils.getEntityI18nToMapByEntityBeanName().isEmpty() || PluginsUtils.getI18nLanguageSet().isEmpty()) {

@@ -1,5 +1,6 @@
-package com.comodin.basic.mybatis.generator.plugins;
+package com.comodin.basic.mybatis.generator.plugins.support;
 
+import com.comodin.basic.mybatis.generator.util.PluginsUtils;
 import com.comodin.basic.util.freemarker.Entity;
 import com.comodin.basic.util.freemarker.EntityProperty;
 import com.comodin.basic.util.freemarker.EntityType;

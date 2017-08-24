@@ -24,9 +24,9 @@ public class ComprobantesBagNumberBean implements Serializable {
      */
     @NotNull(message = "{COMPROBANTES_BAG_NUMBER_BEAN_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @ValidLength(max = 20, message = "{COMPROBANTES_BAG_NUMBER_BEAN_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Id
     @Column(name = "bag_number_id", length = 20, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     private Long id;
 
     /**

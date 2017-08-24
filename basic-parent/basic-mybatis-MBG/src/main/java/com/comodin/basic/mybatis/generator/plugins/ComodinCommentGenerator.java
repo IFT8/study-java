@@ -24,6 +24,8 @@
 
 package com.comodin.basic.mybatis.generator.plugins;
 
+import com.comodin.basic.mybatis.generator.plugins.support.AddRemark;
+import com.comodin.basic.mybatis.generator.plugins.support.AddValidator;
 import org.mybatis.generator.api.CommentGenerator;
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
@@ -129,8 +131,10 @@ public class ComodinCommentGenerator implements CommentGenerator {
         //    field.addJavaDocLine(sb.toString());
         //    field.addJavaDocLine(" */");
         //}
+        //为bean 字段增加 备注
         AddRemark.fieldAddRemark(field, introspectedTable, introspectedColumn);
 
+        //为bean 字段增加 hibernate注解
         AddValidator.fieldAddHibernateValidatorAnnotation(field, introspectedTable, introspectedColumn);
 
         //添加注解
@@ -138,12 +142,7 @@ public class ComodinCommentGenerator implements CommentGenerator {
             //@Column
             field.addAnnotation("@Transient");
         }
-        for (IntrospectedColumn column : introspectedTable.getPrimaryKeyColumns()) {
-            if (introspectedColumn == column) {
-                field.addAnnotation("@Id");
-                break;
-            }
-        }
+
         String column = introspectedColumn.getActualColumnName();
         if (StringUtility.stringContainsSpace(column) || introspectedTable.getTableConfiguration().isAllColumnDelimitingEnabled()) {
             column = introspectedColumn.getContext().getBeginningDelimiter()
@@ -156,17 +155,25 @@ public class ComodinCommentGenerator implements CommentGenerator {
         } else if (StringUtility.stringHasValue(beginningDelimiter) || StringUtility.stringHasValue(endingDelimiter)) {
             field.addAnnotation("@Column(name = \"" + getDelimiterName(column) + "\", length = " + introspectedColumn.getLength() + ", nullable = " + introspectedColumn.isNullable() + ")");
         }
-        if (introspectedColumn.isIdentity()) {
-            if (introspectedTable.getTableConfiguration().getGeneratedKey().getRuntimeSqlStatement().equals("JDBC")) {
-                field.addAnnotation("@GeneratedValue(generator = \"JDBC\")");
-            } else {
-                field.addAnnotation("@GeneratedValue(strategy = GenerationType.IDENTITY)");
+
+        //循环出，主键字段，为其增加 @Id 以及 主键生成方式
+        for (IntrospectedColumn introspectedColumn1 : introspectedTable.getPrimaryKeyColumns()) {
+            if (introspectedColumn == introspectedColumn1) {
+                if (introspectedColumn.isIdentity()) {
+                    if (introspectedTable.getTableConfiguration().getGeneratedKey().getRuntimeSqlStatement().equals("JDBC")) {
+                        field.addAnnotation("@GeneratedValue(generator = \"JDBC\")");
+                    } else {
+                        field.addAnnotation("@GeneratedValue(strategy = GenerationType.IDENTITY)");
+                    }
+                } else if (introspectedColumn.isSequenceColumn()) {
+                    //在 Oracle 中，如果需要是 SEQ_TABLE_NAME，那么可以配置为 select SEQ_{1} from dual
+                    String tableName = introspectedTable.getFullyQualifiedTableNameAtRuntime();
+                    String sql = MessageFormat.format(introspectedTable.getTableConfiguration().getGeneratedKey().getRuntimeSqlStatement(), tableName, tableName.toUpperCase());
+                    field.addAnnotation("@GeneratedValue(strategy = GenerationType.IDENTITY, generator = \"" + sql + "\")");
+                }
+                field.addAnnotation("@Id");
+                break;
             }
-        } else if (introspectedColumn.isSequenceColumn()) {
-            //在 Oracle 中，如果需要是 SEQ_TABLE_NAME，那么可以配置为 select SEQ_{1} from dual
-            String tableName = introspectedTable.getFullyQualifiedTableNameAtRuntime();
-            String sql = MessageFormat.format(introspectedTable.getTableConfiguration().getGeneratedKey().getRuntimeSqlStatement(), tableName, tableName.toUpperCase());
-            field.addAnnotation("@GeneratedValue(strategy = GenerationType.IDENTITY, generator = \"" + sql + "\")");
         }
     }
 
