@@ -1,7 +1,7 @@
 package com.comodin.basic.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.comodin.basic.bean.ResultEntity;
+import com.comodin.basic.json.ResultEntity;
 import com.comodin.basic.constant.BaseConstants;
 import com.comodin.basic.exception.BusinessLogicException;
 import com.comodin.basic.exception.ParameterException;

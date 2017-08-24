@@ -1,10 +1,17 @@
-package com.comodin.basic.bean;
+package com.comodin.basic.json;
 
 @SuppressWarnings("unused")
 public class ResultEntity {
     private String resultCode;
     private String resultMsg;
     private Object resultData;
+
+    private Long timestamp;
+    private String status;
+    private String error;
+    private String exception;
+    private String message;
+    private String path;
 
     public ResultEntity() {
     }

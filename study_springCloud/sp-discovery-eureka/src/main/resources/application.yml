@@ -5,4 +5,13 @@ eureka:
     register-with-eureka: false #只把它当成一个server，而不是client
     fetch-registry: false
     service-url:
-      defaultZone: http://localhost:8761/eureka #把eureka server 注册到哪一个url
+#      defaultZone: http://localhost:8761/eureka #把eureka server 注册到哪一个url
+      defaultZone: http://root:root123456@localhost:8761/eureka #把eureka server 注册到哪一个url + 安全认证
+    healthcheck:
+        enabled: true
+security:
+  basic:
+    enabled: true
+  user:
+    name: root
+    password: root123456

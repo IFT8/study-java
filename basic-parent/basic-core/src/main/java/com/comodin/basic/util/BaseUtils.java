@@ -3,7 +3,7 @@ package com.comodin.basic.util;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.comodin.basic.bean.ResultEntity;
+import com.comodin.basic.json.ResultEntity;
 import com.comodin.basic.constant.BaseConstants;
 import com.comodin.basic.exception.ParameterException;
 import com.github.pagehelper.PageInfo;

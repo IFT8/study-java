@@ -1,7 +1,7 @@
 package com.comodin.basic.exception;
 
 
-import com.comodin.basic.bean.ResultEntity;
+import com.comodin.basic.json.ResultEntity;
 import com.comodin.basic.constant.BaseConstants;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
