@@ -1,0 +1,38 @@
+server:
+  port: 7900
+spring:
+  application:
+    name: sp-user-eureka    #建议，名称写为小写
+  jpa:
+    generate-ddl: false
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  datasource:
+    platform: h2
+    #可以不配置，默认会读取 classpath 路径下，名字为 schema.sql data.sql
+    schema: classpath:schema.sql
+    data: classpath:data.sql
+logging:
+  level:
+    root: info
+    org.hibernate: info
+    org.hibernate.type.descriptor.sql.BasicBinder: trace
+    org.hibernate.type.descriptor.sql.BasicExtractor: trace
+    cn.assupg.study: debug
+eureka:
+  client:
+    #实现健康检查开关，需要依赖：spring-boot-actuator
+    healthcheck:
+        enabled: true
+    serviceUrl:
+      #registered-replicas	http://localhost:8761/eureka/
+      #unavailable-replicas	http://localhost:8761/eureka/,
+      #defaultZone: http://localhost:8761/eureka/                  #将当前应用，注册到指定eureka 服务器中
+      defaultZone: http://root:root123456@localhost:8761/eureka   #将当前应用，注册到指定eureka 服务器中【安全认证方式】
+  instance:
+    # 默认是使用，主机名进行访问，若以IP访问，需要将  prefer-ip-address: true
+    prefer-ip-address: true
+    # Eureka Instance ID
+    # 默认：${spring.cloud.client.hostname}:${spring.application.name}:${spring.application.instance_id:${server.port}}}.
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${server.port}}}.

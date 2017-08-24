@@ -36,12 +36,15 @@
         <module>study_springBoot/sp_springBoot03-web</module>
 
 
-        <module>study_springCloud/sp-movie</module>
         <module>study_springCloud/sp-user</module>
+        <module>study_springCloud/sp-movie</module>
 
         <module>study_springCloud/sp-discovery-eureka</module>
-        <module>study_springCloud/sp-eureka-movie</module>
-        <module>study_springCloud/sp-eureka-user</module>
+        <module>study_springCloud/sp-user-eureka</module>
+        <module>study_springCloud/sp-movie-eureka</module>
+		
+		<module>study_springCloud/sp-user-ribbon</module>
+        <module>study_springCloud/sp-movie-ribbon</module>
     </modules>
 
     <properties>
