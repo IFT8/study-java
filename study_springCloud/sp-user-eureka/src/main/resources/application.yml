@@ -2,7 +2,7 @@ server:
   port: 7900
 spring:
   application:
-    name: sp-user-eureka    #建议，名称写为小写
+    name: sp-user    #建议，名称写为小写
   jpa:
     generate-ddl: false
     show-sql: true
@@ -29,7 +29,7 @@ eureka:
       #registered-replicas	http://localhost:8761/eureka/
       #unavailable-replicas	http://localhost:8761/eureka/,
       #defaultZone: http://localhost:8761/eureka/                  #将当前应用，注册到指定eureka 服务器中
-      defaultZone: http://root:root123456@localhost:8761/eureka   #将当前应用，注册到指定eureka 服务器中【安全认证方式】
+      defaultZone: http://root:root123456@localhost:8761/eureka/   #将当前应用，注册到指定eureka 服务器中【安全认证方式】
   instance:
     # 默认是使用，主机名进行访问，若以IP访问，需要将  prefer-ip-address: true
     prefer-ip-address: true

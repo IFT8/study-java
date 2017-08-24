@@ -1,10 +1,11 @@
 spring:
   application:
-    name: sp-movie-eureka
+    name: sp-movie
 server:
-  port: 8900
-user:
-  userServicePath: http://localhost:7900/user/
+  port: 8901
+# 使用Ribbon 实现负载均衡，即不需要配置 服务者的URL，通过 eureka注册中心获取
+#user:
+#  userServicePath: http://localhost:7900/user/
 eureka:
   client:
     #实现健康检查开关，需要依赖：spring-boot-actuator
@@ -14,7 +15,7 @@ eureka:
       #registered-replicas	http://localhost:8761/eureka/
       #unavailable-replicas	http://localhost:8761/eureka/,
       #defaultZone: http://localhost:8761/eureka/                  #将当前应用，注册到指定eureka 服务器中
-      defaultZone: http://root:root123456@localhost:8761/eureka   #将当前应用，注册到指定eureka 服务器中【安全认证方式】
+      defaultZone: http://root:root123456@localhost:8761/eureka/   #将当前应用，注册到指定eureka 服务器中【安全认证方式】
   instance:
     # 默认是使用，主机名进行访问，若以IP访问，需要将  prefer-ip-address: true
     prefer-ip-address: true

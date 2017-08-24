@@ -18,6 +18,7 @@ public class MovieController {
     @Autowired
     private RestTemplate restTemplate;
 
+    @SuppressWarnings("SpringJavaAutowiringInspection")
     @Autowired
     private EurekaClient eurekaClient;
     @Autowired
@@ -40,7 +41,7 @@ public class MovieController {
      */
     @GetMapping("/eureka-instance")
     public String serviceUrl() {
-        InstanceInfo instance = eurekaClient.getNextServerFromEureka("SP-MOVIE-EUREKA", false);
+        InstanceInfo instance = eurekaClient.getNextServerFromEureka("SP-MOVIE", false);
         return instance.getHomePageUrl();
     }
 
