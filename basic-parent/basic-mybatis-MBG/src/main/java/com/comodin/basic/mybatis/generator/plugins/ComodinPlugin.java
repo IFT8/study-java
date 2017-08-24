@@ -179,11 +179,12 @@ public class ComodinPlugin extends PluginAdapter {
             topLevelClass.addAnnotation("@Table(name = \"" + getDelimiterName(tableName) + "\")");
         }
 
-        GenerateConstantFile.generateApplicationConstantFile(topLevelClass, introspectedTable);
-        GenerateI18nFile.generateApplicationI18nFile(topLevelClass, introspectedTable);
-        GenerateServiceInterfaceFile.generateApplicationServiceInterfaceFile(topLevelClass, introspectedTable);
-        GenerateServiceImplementsFile.generateApplicationServiceImplementsFile(topLevelClass, introspectedTable);
-        GenerateControllerFile.generateApplicationControllerFile(topLevelClass, introspectedTable);
+        GenerateConstantFile.generateConstantFile(topLevelClass, introspectedTable);
+        GenerateI18nConstantFile.generateI18nConstantFile(topLevelClass, introspectedTable);
+        GenerateI18nFile.generateI18nFile(topLevelClass, introspectedTable);
+        GenerateServiceInterfaceFile.generateServiceInterfaceFile(topLevelClass, introspectedTable);
+        GenerateServiceImplementsFile.generateServiceImplementsFile(topLevelClass, introspectedTable);
+        GenerateControllerFile.generateControllerFile(topLevelClass, introspectedTable);
     }
 
     /**

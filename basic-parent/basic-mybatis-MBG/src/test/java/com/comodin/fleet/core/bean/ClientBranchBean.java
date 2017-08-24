@@ -3,6 +3,7 @@ package com.comodin.fleet.core.bean;
 import com.comodin.basic.util.date.DateUtil;
 import com.comodin.basic.validation.IBaseValidGroup;
 import com.comodin.basic.validation.constraints.*;
+import com.comodin.fleet.constant.i18n.ClientBranchBeanI18nConstant;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
@@ -22,8 +23,8 @@ public class ClientBranchBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotNull(message = "{CLIENT_BRANCH_BEAN_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @ValidLength(max = 20, message = "{CLIENT_BRANCH_BEAN_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotNull(message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_ID_NOT_NULL + "}", groups = {IBaseValidGroup.Update.class})
+    @ValidLength(max = 20, message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_ID_LENGTH + "}", groups = {IBaseValidGroup.Update.class})
     @Column(name = "branch_id", length = 20, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -37,7 +38,7 @@ public class ClientBranchBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{CLIENT_BRANCH_BEAN_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_INTERNAL_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "branch_internal_id", length = 15, nullable = true)
     private String internalId;
 
@@ -49,8 +50,8 @@ public class ClientBranchBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{CLIENT_BRANCH_BEAN_NAME_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 100, message = "{CLIENT_BRANCH_BEAN_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_NAME_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 100, message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_NAME_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "branch_name", length = 100, nullable = false)
     private String name;
 
@@ -62,8 +63,8 @@ public class ClientBranchBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotNull(message = "{CLIENT_BRANCH_BEAN_CIT_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @ValidLength(max = 20, message = "{CLIENT_BRANCH_BEAN_CIT_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotNull(message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_CIT_ID_NOT_NULL + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidLength(max = 20, message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_CIT_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "branch_cit_id", length = 20, nullable = false)
     private Long citId;
 
@@ -75,8 +76,8 @@ public class ClientBranchBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{CLIENT_BRANCH_BEAN_TYPE_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 15, message = "{CLIENT_BRANCH_BEAN_TYPE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_TYPE_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_TYPE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "branch_type", length = 15, nullable = false)
     private String type;
 
@@ -88,8 +89,8 @@ public class ClientBranchBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotNull(message = "{CLIENT_BRANCH_BEAN_CLIENT_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @ValidLength(max = 20, message = "{CLIENT_BRANCH_BEAN_CLIENT_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotNull(message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_CLIENT_ID_NOT_NULL + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidLength(max = 20, message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_CLIENT_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "branch_client_id", length = 20, nullable = false)
     private Long clientId;
 
@@ -101,8 +102,8 @@ public class ClientBranchBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{CLIENT_BRANCH_BEAN_CLIENT_INTERNAL_ID_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 15, message = "{CLIENT_BRANCH_BEAN_CLIENT_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_CLIENT_INTERNAL_ID_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_CLIENT_INTERNAL_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "branch_client_internal_id", length = 15, nullable = false)
     private String clientInternalId;
 
@@ -114,8 +115,8 @@ public class ClientBranchBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{CLIENT_BRANCH_BEAN_CLIENT_NAME_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 100, message = "{CLIENT_BRANCH_BEAN_CLIENT_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_CLIENT_NAME_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 100, message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_CLIENT_NAME_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "branch_client_name", length = 100, nullable = false)
     private String clientName;
 
@@ -127,8 +128,8 @@ public class ClientBranchBean implements Serializable {
      * DB defaultValue: 
      * </pre>
      */
-    @NotBlank(message = "{CLIENT_BRANCH_BEAN_TIME_ZONE_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 20, message = "{CLIENT_BRANCH_BEAN_TIME_ZONE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_TIME_ZONE_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 20, message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_TIME_ZONE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "branch_time_zone", length = 20, nullable = false)
     private String timeZone;
 
@@ -140,7 +141,7 @@ public class ClientBranchBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{CLIENT_BRANCH_BEAN_PHONE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_PHONE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "branch_phone", length = 15, nullable = true)
     private String phone;
 
@@ -152,7 +153,7 @@ public class ClientBranchBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 150, message = "{CLIENT_BRANCH_BEAN_ADDRESS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 150, message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_ADDRESS_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "branch_address", length = 150, nullable = true)
     private String address;
 
@@ -164,8 +165,8 @@ public class ClientBranchBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{CLIENT_BRANCH_BEAN_LATITUDE_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 15, message = "{CLIENT_BRANCH_BEAN_LATITUDE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_LATITUDE_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_LATITUDE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "branch_latitude", length = 15, nullable = false)
     private String latitude;
 
@@ -177,8 +178,8 @@ public class ClientBranchBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{CLIENT_BRANCH_BEAN_LONGITUDE_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 15, message = "{CLIENT_BRANCH_BEAN_LONGITUDE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_LONGITUDE_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_LONGITUDE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "branch_longitude", length = 15, nullable = false)
     private String longitude;
 
@@ -190,7 +191,7 @@ public class ClientBranchBean implements Serializable {
      * DB defaultValue: 
      * </pre>
      */
-    @Length(max = 20, message = "{CLIENT_BRANCH_BEAN_SAFE_KEY_NUMBER_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 20, message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_SAFE_KEY_NUMBER_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "branch_safe_key_number", length = 20, nullable = true)
     private String safeKeyNumber;
 
@@ -202,8 +203,8 @@ public class ClientBranchBean implements Serializable {
      * DB defaultValue: 900
      * </pre>
      */
-    @NotNull(message = "{CLIENT_BRANCH_BEAN_SYNCHRONOUS_INTERVAL_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @ValidLength(max = 20, message = "{CLIENT_BRANCH_BEAN_SYNCHRONOUS_INTERVAL_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotNull(message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_SYNCHRONOUS_INTERVAL_NOT_NULL + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidLength(max = 20, message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_SYNCHRONOUS_INTERVAL_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "branch_synchronous_interval", length = 20, nullable = false)
     private Long synchronousInterval;
 
@@ -215,8 +216,8 @@ public class ClientBranchBean implements Serializable {
      * DB defaultValue: Y
      * </pre>
      */
-    @NotBlank(message = "{CLIENT_BRANCH_BEAN_ASSIGN_VEHICLE_FLAG_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 1, message = "{CLIENT_BRANCH_BEAN_ASSIGN_VEHICLE_FLAG_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_ASSIGN_VEHICLE_FLAG_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 1, message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_ASSIGN_VEHICLE_FLAG_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "branch_assign_vehicle_flag", length = 1, nullable = false)
     private String assignVehicleFlag;
 
@@ -228,8 +229,8 @@ public class ClientBranchBean implements Serializable {
      * DB defaultValue: Y
      * </pre>
      */
-    @NotBlank(message = "{CLIENT_BRANCH_BEAN_ASSIGN_ROUTE_FLAG_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 1, message = "{CLIENT_BRANCH_BEAN_ASSIGN_ROUTE_FLAG_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_ASSIGN_ROUTE_FLAG_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 1, message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_ASSIGN_ROUTE_FLAG_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "branch_assign_route_flag", length = 1, nullable = false)
     private String assignRouteFlag;
 
@@ -241,8 +242,8 @@ public class ClientBranchBean implements Serializable {
      * DB defaultValue: Y
      * </pre>
      */
-    @NotBlank(message = "{CLIENT_BRANCH_BEAN_ASSIGN_AUXILIARY_FLAG_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 1, message = "{CLIENT_BRANCH_BEAN_ASSIGN_AUXILIARY_FLAG_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_ASSIGN_AUXILIARY_FLAG_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 1, message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_ASSIGN_AUXILIARY_FLAG_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "branch_assign_auxiliary_flag", length = 1, nullable = false)
     private String assignAuxiliaryFlag;
 
@@ -254,8 +255,8 @@ public class ClientBranchBean implements Serializable {
      * DB defaultValue: Y
      * </pre>
      */
-    @NotBlank(message = "{CLIENT_BRANCH_BEAN_ASSIGN_GUARD_FLAG_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 1, message = "{CLIENT_BRANCH_BEAN_ASSIGN_GUARD_FLAG_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_ASSIGN_GUARD_FLAG_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 1, message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_ASSIGN_GUARD_FLAG_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "branch_assign_guard_flag", length = 1, nullable = false)
     private String assignGuardFlag;
 
@@ -267,8 +268,8 @@ public class ClientBranchBean implements Serializable {
      * DB defaultValue: Y
      * </pre>
      */
-    @NotBlank(message = "{CLIENT_BRANCH_BEAN_NEED_VALIDATE_FLAG_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 1, message = "{CLIENT_BRANCH_BEAN_NEED_VALIDATE_FLAG_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_NEED_VALIDATE_FLAG_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 1, message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_NEED_VALIDATE_FLAG_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "branch_need_validate_flag", length = 1, nullable = false)
     private String needValidateFlag;
 
@@ -280,8 +281,8 @@ public class ClientBranchBean implements Serializable {
      * DB defaultValue: Y
      * </pre>
      */
-    @NotBlank(message = "{CLIENT_BRANCH_BEAN_NEED_ARRIVE_FLAG_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 1, message = "{CLIENT_BRANCH_BEAN_NEED_ARRIVE_FLAG_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_NEED_ARRIVE_FLAG_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 1, message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_NEED_ARRIVE_FLAG_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "branch_need_arrive_flag", length = 1, nullable = false)
     private String needArriveFlag;
 
@@ -293,8 +294,8 @@ public class ClientBranchBean implements Serializable {
      * DB defaultValue: Y
      * </pre>
      */
-    @NotBlank(message = "{CLIENT_BRANCH_BEAN_NEED_ORDER_FLAG_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 1, message = "{CLIENT_BRANCH_BEAN_NEED_ORDER_FLAG_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_NEED_ORDER_FLAG_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 1, message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_NEED_ORDER_FLAG_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "branch_need_order_flag", length = 1, nullable = false)
     private String needOrderFlag;
 
@@ -306,8 +307,8 @@ public class ClientBranchBean implements Serializable {
      * DB defaultValue: Y
      * </pre>
      */
-    @NotBlank(message = "{CLIENT_BRANCH_BEAN_NEED_PRINT_FLAG_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 1, message = "{CLIENT_BRANCH_BEAN_NEED_PRINT_FLAG_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_NEED_PRINT_FLAG_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 1, message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_NEED_PRINT_FLAG_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "branch_need_print_flag", length = 1, nullable = false)
     private String needPrintFlag;
 
@@ -319,8 +320,8 @@ public class ClientBranchBean implements Serializable {
      * DB defaultValue: Y
      * </pre>
      */
-    @NotBlank(message = "{CLIENT_BRANCH_BEAN_NEED_PIN_FLAG_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 1, message = "{CLIENT_BRANCH_BEAN_NEED_PIN_FLAG_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_NEED_PIN_FLAG_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 1, message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_NEED_PIN_FLAG_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "branch_need_pin_flag", length = 1, nullable = false)
     private String needPinFlag;
 
@@ -332,8 +333,8 @@ public class ClientBranchBean implements Serializable {
      * DB defaultValue: Y
      * </pre>
      */
-    @NotBlank(message = "{CLIENT_BRANCH_BEAN_NEED_PHOTOGRAPH_FLAG_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 1, message = "{CLIENT_BRANCH_BEAN_NEED_PHOTOGRAPH_FLAG_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_NEED_PHOTOGRAPH_FLAG_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 1, message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_NEED_PHOTOGRAPH_FLAG_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "branch_need_photograph_flag", length = 1, nullable = false)
     private String needPhotographFlag;
 
@@ -345,8 +346,8 @@ public class ClientBranchBean implements Serializable {
      * DB defaultValue: Y
      * </pre>
      */
-    @NotBlank(message = "{CLIENT_BRANCH_BEAN_NEED_SIGNATURE_FLAG_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 1, message = "{CLIENT_BRANCH_BEAN_NEED_SIGNATURE_FLAG_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_NEED_SIGNATURE_FLAG_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 1, message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_NEED_SIGNATURE_FLAG_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "branch_need_signature_flag", length = 1, nullable = false)
     private String needSignatureFlag;
 
@@ -358,8 +359,8 @@ public class ClientBranchBean implements Serializable {
      * DB defaultValue: Y
      * </pre>
      */
-    @NotBlank(message = "{CLIENT_BRANCH_BEAN_SWITCH_CANCEL_TASK_VISIT_BILL_BY_PICKUP_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 1, message = "{CLIENT_BRANCH_BEAN_SWITCH_CANCEL_TASK_VISIT_BILL_BY_PICKUP_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_SWITCH_CANCEL_TASK_VISIT_BILL_BY_PICKUP_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 1, message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_SWITCH_CANCEL_TASK_VISIT_BILL_BY_PICKUP_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "branch_switch_cancel_task_visit_bill_by_pickup", length = 1, nullable = false)
     private String switchCancelTaskVisitBillByPickup;
 
@@ -371,8 +372,8 @@ public class ClientBranchBean implements Serializable {
      * DB defaultValue: Y
      * </pre>
      */
-    @NotBlank(message = "{CLIENT_BRANCH_BEAN_SWITCH_CANCEL_TASK_VISIT_BILL_BY_DELIVERY_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 1, message = "{CLIENT_BRANCH_BEAN_SWITCH_CANCEL_TASK_VISIT_BILL_BY_DELIVERY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_SWITCH_CANCEL_TASK_VISIT_BILL_BY_DELIVERY_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 1, message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_SWITCH_CANCEL_TASK_VISIT_BILL_BY_DELIVERY_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "branch_switch_cancel_task_visit_bill_by_delivery", length = 1, nullable = false)
     private String switchCancelTaskVisitBillByDelivery;
 
@@ -384,8 +385,8 @@ public class ClientBranchBean implements Serializable {
      * DB defaultValue: Y
      * </pre>
      */
-    @NotBlank(message = "{CLIENT_BRANCH_BEAN_SWITCH_CANCEL_TASK_VISIT_BILL_BY_DIRECTLY_TO_PICKUP_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 1, message = "{CLIENT_BRANCH_BEAN_SWITCH_CANCEL_TASK_VISIT_BILL_BY_DIRECTLY_TO_PICKUP_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_SWITCH_CANCEL_TASK_VISIT_BILL_BY_DIRECTLY_TO_PICKUP_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 1, message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_SWITCH_CANCEL_TASK_VISIT_BILL_BY_DIRECTLY_TO_PICKUP_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "branch_switch_cancel_task_visit_bill_by_directly_to_pickup", length = 1, nullable = false)
     private String switchCancelTaskVisitBillByDirectlyToPickup;
 
@@ -397,8 +398,8 @@ public class ClientBranchBean implements Serializable {
      * DB defaultValue: Y
      * </pre>
      */
-    @NotBlank(message = "{CLIENT_BRANCH_BEAN_SWITCH_CANCEL_TASK_VISIT_BILL_BY_DIRECTLY_TO_DELIVERY_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 1, message = "{CLIENT_BRANCH_BEAN_SWITCH_CANCEL_TASK_VISIT_BILL_BY_DIRECTLY_TO_DELIVERY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_SWITCH_CANCEL_TASK_VISIT_BILL_BY_DIRECTLY_TO_DELIVERY_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 1, message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_SWITCH_CANCEL_TASK_VISIT_BILL_BY_DIRECTLY_TO_DELIVERY_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "branch_switch_cancel_task_visit_bill_by_directly_to_delivery", length = 1, nullable = false)
     private String switchCancelTaskVisitBillByDirectlyToDelivery;
 
@@ -410,8 +411,8 @@ public class ClientBranchBean implements Serializable {
      * DB defaultValue: Y
      * </pre>
      */
-    @NotBlank(message = "{CLIENT_BRANCH_BEAN_SWITCH_SEND_TASK_NEED_ADD_COMPROBANTES_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 1, message = "{CLIENT_BRANCH_BEAN_SWITCH_SEND_TASK_NEED_ADD_COMPROBANTES_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_SWITCH_SEND_TASK_NEED_ADD_COMPROBANTES_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 1, message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_SWITCH_SEND_TASK_NEED_ADD_COMPROBANTES_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "branch_switch_send_task_need_add_comprobantes", length = 1, nullable = false)
     private String switchSendTaskNeedAddComprobantes;
 
@@ -423,8 +424,8 @@ public class ClientBranchBean implements Serializable {
      * DB defaultValue: Y
      * </pre>
      */
-    @NotBlank(message = "{CLIENT_BRANCH_BEAN_SWITCH_IP_CHANGE_TOKEN_EFFECTIVE_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 1, message = "{CLIENT_BRANCH_BEAN_SWITCH_IP_CHANGE_TOKEN_EFFECTIVE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_SWITCH_IP_CHANGE_TOKEN_EFFECTIVE_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 1, message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_SWITCH_IP_CHANGE_TOKEN_EFFECTIVE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "branch_switch_ip_change_token_effective", length = 1, nullable = false)
     private String switchIpChangeTokenEffective;
 
@@ -436,9 +437,9 @@ public class ClientBranchBean implements Serializable {
      * DB defaultValue: CURRENT_TIMESTAMP
      * </pre>
      */
-    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{CLIENT_BRANCH_BEAN_CREATE_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS, message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_CREATE_TIMESTAMP_DATE_TIME_FORMAT + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
-    @NotNull(message = "{CLIENT_BRANCH_BEAN_CREATE_TIMESTAMP_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotNull(message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_CREATE_TIMESTAMP_NOT_NULL + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "branch_create_timestamp", length = 19, nullable = false)
     private Date createTimestamp;
 
@@ -450,8 +451,8 @@ public class ClientBranchBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{CLIENT_BRANCH_BEAN_CREATE_BY_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 20, message = "{CLIENT_BRANCH_BEAN_CREATE_BY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_CREATE_BY_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 20, message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_CREATE_BY_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "branch_create_by", length = 20, nullable = false)
     private String createBy;
 
@@ -463,8 +464,8 @@ public class ClientBranchBean implements Serializable {
      * DB defaultValue: N
      * </pre>
      */
-    @NotBlank(message = "{CLIENT_BRANCH_BEAN_DELETE_FLAG_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 1, message = "{CLIENT_BRANCH_BEAN_DELETE_FLAG_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_DELETE_FLAG_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 1, message = "{" + ClientBranchBeanI18nConstant.CLIENT_BRANCH_BEAN_DELETE_FLAG_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "branch_delete_flag", length = 1, nullable = false)
     private String deleteFlag;
 

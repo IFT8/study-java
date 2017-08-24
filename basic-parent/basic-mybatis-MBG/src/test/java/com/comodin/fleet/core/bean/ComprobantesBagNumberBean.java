@@ -3,6 +3,7 @@ package com.comodin.fleet.core.bean;
 import com.comodin.basic.util.date.DateUtil;
 import com.comodin.basic.validation.IBaseValidGroup;
 import com.comodin.basic.validation.constraints.*;
+import com.comodin.fleet.constant.i18n.ComprobantesBagNumberBeanI18nConstant;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
@@ -22,8 +23,8 @@ public class ComprobantesBagNumberBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotNull(message = "{COMPROBANTES_BAG_NUMBER_BEAN_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @ValidLength(max = 20, message = "{COMPROBANTES_BAG_NUMBER_BEAN_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotNull(message = "{" + ComprobantesBagNumberBeanI18nConstant.COMPROBANTES_BAG_NUMBER_BEAN_ID_NOT_NULL + "}", groups = {IBaseValidGroup.Update.class})
+    @ValidLength(max = 20, message = "{" + ComprobantesBagNumberBeanI18nConstant.COMPROBANTES_BAG_NUMBER_BEAN_ID_LENGTH + "}", groups = {IBaseValidGroup.Update.class})
     @Column(name = "bag_number_id", length = 20, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -37,8 +38,8 @@ public class ComprobantesBagNumberBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotNull(message = "{COMPROBANTES_BAG_NUMBER_BEAN_COMPROBANTES_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @ValidLength(max = 20, message = "{COMPROBANTES_BAG_NUMBER_BEAN_COMPROBANTES_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotNull(message = "{" + ComprobantesBagNumberBeanI18nConstant.COMPROBANTES_BAG_NUMBER_BEAN_COMPROBANTES_ID_NOT_NULL + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidLength(max = 20, message = "{" + ComprobantesBagNumberBeanI18nConstant.COMPROBANTES_BAG_NUMBER_BEAN_COMPROBANTES_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "bag_number_comprobantes_id", length = 20, nullable = false)
     private Long comprobantesId;
 
@@ -50,8 +51,8 @@ public class ComprobantesBagNumberBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{COMPROBANTES_BAG_NUMBER_BEAN_SERIAL_CODE_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 12, message = "{COMPROBANTES_BAG_NUMBER_BEAN_SERIAL_CODE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + ComprobantesBagNumberBeanI18nConstant.COMPROBANTES_BAG_NUMBER_BEAN_SERIAL_CODE_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 12, message = "{" + ComprobantesBagNumberBeanI18nConstant.COMPROBANTES_BAG_NUMBER_BEAN_SERIAL_CODE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "bag_number_serial_code", length = 12, nullable = false)
     private String serialCode;
 
@@ -63,9 +64,9 @@ public class ComprobantesBagNumberBean implements Serializable {
      * DB defaultValue: CURRENT_TIMESTAMP
      * </pre>
      */
-    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{COMPROBANTES_BAG_NUMBER_BEAN_CREATE_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS, message = "{" + ComprobantesBagNumberBeanI18nConstant.COMPROBANTES_BAG_NUMBER_BEAN_CREATE_TIMESTAMP_DATE_TIME_FORMAT + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
-    @NotNull(message = "{COMPROBANTES_BAG_NUMBER_BEAN_CREATE_TIMESTAMP_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotNull(message = "{" + ComprobantesBagNumberBeanI18nConstant.COMPROBANTES_BAG_NUMBER_BEAN_CREATE_TIMESTAMP_NOT_NULL + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "bag_number_create_timestamp", length = 19, nullable = false)
     private Date createTimestamp;
 
@@ -77,8 +78,8 @@ public class ComprobantesBagNumberBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{COMPROBANTES_BAG_NUMBER_BEAN_CREATE_BY_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 20, message = "{COMPROBANTES_BAG_NUMBER_BEAN_CREATE_BY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + ComprobantesBagNumberBeanI18nConstant.COMPROBANTES_BAG_NUMBER_BEAN_CREATE_BY_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 20, message = "{" + ComprobantesBagNumberBeanI18nConstant.COMPROBANTES_BAG_NUMBER_BEAN_CREATE_BY_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "bag_number_create_by", length = 20, nullable = false)
     private String createBy;
 
@@ -90,8 +91,8 @@ public class ComprobantesBagNumberBean implements Serializable {
      * DB defaultValue: N
      * </pre>
      */
-    @NotBlank(message = "{COMPROBANTES_BAG_NUMBER_BEAN_DELETE_FLAG_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 1, message = "{COMPROBANTES_BAG_NUMBER_BEAN_DELETE_FLAG_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + ComprobantesBagNumberBeanI18nConstant.COMPROBANTES_BAG_NUMBER_BEAN_DELETE_FLAG_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 1, message = "{" + ComprobantesBagNumberBeanI18nConstant.COMPROBANTES_BAG_NUMBER_BEAN_DELETE_FLAG_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "bag_number_delete_flag", length = 1, nullable = false)
     private String deleteFlag;
 

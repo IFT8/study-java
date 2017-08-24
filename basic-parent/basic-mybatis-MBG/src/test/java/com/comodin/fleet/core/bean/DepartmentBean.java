@@ -3,6 +3,7 @@ package com.comodin.fleet.core.bean;
 import com.comodin.basic.util.date.DateUtil;
 import com.comodin.basic.validation.IBaseValidGroup;
 import com.comodin.basic.validation.constraints.*;
+import com.comodin.fleet.constant.i18n.DepartmentBeanI18nConstant;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
@@ -22,8 +23,8 @@ public class DepartmentBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotNull(message = "{DEPARTMENT_BEAN_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @ValidLength(max = 20, message = "{DEPARTMENT_BEAN_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotNull(message = "{" + DepartmentBeanI18nConstant.DEPARTMENT_BEAN_ID_NOT_NULL + "}", groups = {IBaseValidGroup.Update.class})
+    @ValidLength(max = 20, message = "{" + DepartmentBeanI18nConstant.DEPARTMENT_BEAN_ID_LENGTH + "}", groups = {IBaseValidGroup.Update.class})
     @Column(name = "department_id", length = 20, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -37,8 +38,8 @@ public class DepartmentBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{DEPARTMENT_BEAN_NAME_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 20, message = "{DEPARTMENT_BEAN_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + DepartmentBeanI18nConstant.DEPARTMENT_BEAN_NAME_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 20, message = "{" + DepartmentBeanI18nConstant.DEPARTMENT_BEAN_NAME_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "department_name", length = 20, nullable = false)
     private String name;
 
@@ -50,8 +51,8 @@ public class DepartmentBean implements Serializable {
      * DB defaultValue: ENABLE
      * </pre>
      */
-    @NotBlank(message = "{DEPARTMENT_BEAN_STATUS_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 7, message = "{DEPARTMENT_BEAN_STATUS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + DepartmentBeanI18nConstant.DEPARTMENT_BEAN_STATUS_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 7, message = "{" + DepartmentBeanI18nConstant.DEPARTMENT_BEAN_STATUS_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "department_status", length = 7, nullable = false)
     private String status;
 
@@ -63,7 +64,7 @@ public class DepartmentBean implements Serializable {
      * DB defaultValue: 
      * </pre>
      */
-    @Length(max = 255, message = "{DEPARTMENT_BEAN_DESCRIPTION_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 255, message = "{" + DepartmentBeanI18nConstant.DEPARTMENT_BEAN_DESCRIPTION_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "department_description", length = 255, nullable = true)
     private String description;
 
@@ -75,9 +76,9 @@ public class DepartmentBean implements Serializable {
      * DB defaultValue: CURRENT_TIMESTAMP
      * </pre>
      */
-    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{DEPARTMENT_BEAN_CREATE_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS, message = "{" + DepartmentBeanI18nConstant.DEPARTMENT_BEAN_CREATE_TIMESTAMP_DATE_TIME_FORMAT + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
-    @NotNull(message = "{DEPARTMENT_BEAN_CREATE_TIMESTAMP_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotNull(message = "{" + DepartmentBeanI18nConstant.DEPARTMENT_BEAN_CREATE_TIMESTAMP_NOT_NULL + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "department_create_timestamp", length = 19, nullable = false)
     private Date createTimestamp;
 
@@ -89,8 +90,8 @@ public class DepartmentBean implements Serializable {
      * DB defaultValue: N
      * </pre>
      */
-    @NotBlank(message = "{DEPARTMENT_BEAN_DELETE_FLAG_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 1, message = "{DEPARTMENT_BEAN_DELETE_FLAG_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + DepartmentBeanI18nConstant.DEPARTMENT_BEAN_DELETE_FLAG_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 1, message = "{" + DepartmentBeanI18nConstant.DEPARTMENT_BEAN_DELETE_FLAG_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "department_delete_flag", length = 1, nullable = false)
     private String deleteFlag;
 

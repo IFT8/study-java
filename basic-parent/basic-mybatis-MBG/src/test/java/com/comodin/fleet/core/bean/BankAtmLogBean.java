@@ -3,6 +3,7 @@ package com.comodin.fleet.core.bean;
 import com.comodin.basic.util.date.DateUtil;
 import com.comodin.basic.validation.IBaseValidGroup;
 import com.comodin.basic.validation.constraints.*;
+import com.comodin.fleet.constant.i18n.BankAtmLogBeanI18nConstant;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
@@ -22,8 +23,8 @@ public class BankAtmLogBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotNull(message = "{BANK_ATM_LOG_BEAN_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @ValidLength(max = 20, message = "{BANK_ATM_LOG_BEAN_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotNull(message = "{" + BankAtmLogBeanI18nConstant.BANK_ATM_LOG_BEAN_ID_NOT_NULL + "}", groups = {IBaseValidGroup.Update.class})
+    @ValidLength(max = 20, message = "{" + BankAtmLogBeanI18nConstant.BANK_ATM_LOG_BEAN_ID_LENGTH + "}", groups = {IBaseValidGroup.Update.class})
     @Column(name = "atm_id", length = 20, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -37,8 +38,8 @@ public class BankAtmLogBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{BANK_ATM_LOG_BEAN_EXTERNAL_ID_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 15, message = "{BANK_ATM_LOG_BEAN_EXTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + BankAtmLogBeanI18nConstant.BANK_ATM_LOG_BEAN_EXTERNAL_ID_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + BankAtmLogBeanI18nConstant.BANK_ATM_LOG_BEAN_EXTERNAL_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_external_id", length = 15, nullable = false)
     private String externalId;
 
@@ -50,8 +51,8 @@ public class BankAtmLogBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{BANK_ATM_LOG_BEAN_DISPOSITIVO_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 20, message = "{BANK_ATM_LOG_BEAN_DISPOSITIVO_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + BankAtmLogBeanI18nConstant.BANK_ATM_LOG_BEAN_DISPOSITIVO_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 20, message = "{" + BankAtmLogBeanI18nConstant.BANK_ATM_LOG_BEAN_DISPOSITIVO_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_dispositivo", length = 20, nullable = false)
     private String dispositivo;
 
@@ -63,8 +64,8 @@ public class BankAtmLogBean implements Serializable {
      * DB defaultValue: 0
      * </pre>
      */
-    @NotNull(message = "{BANK_ATM_LOG_BEAN_CONSECUTIVO_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @ValidLength(max = 19, message = "{BANK_ATM_LOG_BEAN_CONSECUTIVO_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotNull(message = "{" + BankAtmLogBeanI18nConstant.BANK_ATM_LOG_BEAN_CONSECUTIVO_NOT_NULL + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidLength(max = 19, message = "{" + BankAtmLogBeanI18nConstant.BANK_ATM_LOG_BEAN_CONSECUTIVO_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_consecutivo", length = 19, nullable = false)
     private Long consecutivo;
 
@@ -76,8 +77,8 @@ public class BankAtmLogBean implements Serializable {
      * DB defaultValue: 
      * </pre>
      */
-    @NotBlank(message = "{BANK_ATM_LOG_BEAN_INTERNAL_ID_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 15, message = "{BANK_ATM_LOG_BEAN_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + BankAtmLogBeanI18nConstant.BANK_ATM_LOG_BEAN_INTERNAL_ID_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + BankAtmLogBeanI18nConstant.BANK_ATM_LOG_BEAN_INTERNAL_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_internal_id", length = 15, nullable = false)
     private String internalId;
 
@@ -89,8 +90,8 @@ public class BankAtmLogBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{BANK_ATM_LOG_BEAN_ERROR_CODE_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 10, message = "{BANK_ATM_LOG_BEAN_ERROR_CODE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + BankAtmLogBeanI18nConstant.BANK_ATM_LOG_BEAN_ERROR_CODE_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 10, message = "{" + BankAtmLogBeanI18nConstant.BANK_ATM_LOG_BEAN_ERROR_CODE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_error_code", length = 10, nullable = false)
     private String errorCode;
 
@@ -102,7 +103,7 @@ public class BankAtmLogBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 100, message = "{BANK_ATM_LOG_BEAN_DESCRIPTION_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 100, message = "{" + BankAtmLogBeanI18nConstant.BANK_ATM_LOG_BEAN_DESCRIPTION_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_description", length = 100, nullable = true)
     private String description;
 
@@ -114,9 +115,9 @@ public class BankAtmLogBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{BANK_ATM_LOG_BEAN_UPLOAD_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS, message = "{" + BankAtmLogBeanI18nConstant.BANK_ATM_LOG_BEAN_UPLOAD_TIMESTAMP_DATE_TIME_FORMAT + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
-    @NotNull(message = "{BANK_ATM_LOG_BEAN_UPLOAD_TIMESTAMP_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotNull(message = "{" + BankAtmLogBeanI18nConstant.BANK_ATM_LOG_BEAN_UPLOAD_TIMESTAMP_NOT_NULL + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_upload_timestamp", length = 19, nullable = false)
     private Date uploadTimestamp;
 
@@ -128,8 +129,8 @@ public class BankAtmLogBean implements Serializable {
      * DB defaultValue: ENABLE
      * </pre>
      */
-    @NotBlank(message = "{BANK_ATM_LOG_BEAN_UNIT_STATUS_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 7, message = "{BANK_ATM_LOG_BEAN_UNIT_STATUS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + BankAtmLogBeanI18nConstant.BANK_ATM_LOG_BEAN_UNIT_STATUS_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 7, message = "{" + BankAtmLogBeanI18nConstant.BANK_ATM_LOG_BEAN_UNIT_STATUS_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_unit_status", length = 7, nullable = false)
     private String unitStatus;
 
@@ -141,9 +142,9 @@ public class BankAtmLogBean implements Serializable {
      * DB defaultValue: CURRENT_TIMESTAMP
      * </pre>
      */
-    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{BANK_ATM_LOG_BEAN_CREATE_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS, message = "{" + BankAtmLogBeanI18nConstant.BANK_ATM_LOG_BEAN_CREATE_TIMESTAMP_DATE_TIME_FORMAT + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
-    @NotNull(message = "{BANK_ATM_LOG_BEAN_CREATE_TIMESTAMP_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotNull(message = "{" + BankAtmLogBeanI18nConstant.BANK_ATM_LOG_BEAN_CREATE_TIMESTAMP_NOT_NULL + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_create_timestamp", length = 19, nullable = false)
     private Date createTimestamp;
 

@@ -3,6 +3,7 @@ package com.comodin.fleet.core.bean;
 import com.comodin.basic.util.date.DateUtil;
 import com.comodin.basic.validation.IBaseValidGroup;
 import com.comodin.basic.validation.constraints.*;
+import com.comodin.fleet.constant.i18n.AtmGunneboBeanI18nConstant;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -23,8 +24,8 @@ public class AtmGunneboBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotNull(message = "{ATM_GUNNEBO_BEAN_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @ValidLength(max = 20, message = "{ATM_GUNNEBO_BEAN_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotNull(message = "{" + AtmGunneboBeanI18nConstant.ATM_GUNNEBO_BEAN_ID_NOT_NULL + "}", groups = {IBaseValidGroup.Update.class})
+    @ValidLength(max = 20, message = "{" + AtmGunneboBeanI18nConstant.ATM_GUNNEBO_BEAN_ID_LENGTH + "}", groups = {IBaseValidGroup.Update.class})
     @Column(name = "atm_id", length = 20, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -38,8 +39,8 @@ public class AtmGunneboBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{ATM_GUNNEBO_BEAN_DEVICE_TYPE_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 20, message = "{ATM_GUNNEBO_BEAN_DEVICE_TYPE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + AtmGunneboBeanI18nConstant.ATM_GUNNEBO_BEAN_DEVICE_TYPE_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 20, message = "{" + AtmGunneboBeanI18nConstant.ATM_GUNNEBO_BEAN_DEVICE_TYPE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_device_type", length = 20, nullable = false)
     private String deviceType;
 
@@ -51,7 +52,7 @@ public class AtmGunneboBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @ValidLength(max = 13, message = "{ATM_GUNNEBO_BEAN_CIT_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidLength(max = 13, message = "{" + AtmGunneboBeanI18nConstant.ATM_GUNNEBO_BEAN_CIT_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_cit_id", length = 20, nullable = true)
     private Long citId;
 
@@ -63,8 +64,8 @@ public class AtmGunneboBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{ATM_GUNNEBO_BEAN_CIT_INTERNAL_ID_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 15, message = "{ATM_GUNNEBO_BEAN_CIT_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + AtmGunneboBeanI18nConstant.ATM_GUNNEBO_BEAN_CIT_INTERNAL_ID_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboBeanI18nConstant.ATM_GUNNEBO_BEAN_CIT_INTERNAL_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_cit_internal_id", length = 15, nullable = false)
     private String citInternalId;
 
@@ -76,7 +77,7 @@ public class AtmGunneboBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 100, message = "{ATM_GUNNEBO_BEAN_CIT_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 100, message = "{" + AtmGunneboBeanI18nConstant.ATM_GUNNEBO_BEAN_CIT_NAME_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_cit_name", length = 100, nullable = true)
     private String citName;
 
@@ -88,8 +89,8 @@ public class AtmGunneboBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{ATM_GUNNEBO_BEAN_CIT_BRANCH_ID_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 13, message = "{ATM_GUNNEBO_BEAN_CIT_BRANCH_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + AtmGunneboBeanI18nConstant.ATM_GUNNEBO_BEAN_CIT_BRANCH_ID_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 13, message = "{" + AtmGunneboBeanI18nConstant.ATM_GUNNEBO_BEAN_CIT_BRANCH_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_cit_branch_id", length = 15, nullable = false)
     private String citBranchId;
 
@@ -101,8 +102,8 @@ public class AtmGunneboBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{ATM_GUNNEBO_BEAN_CIT_BRANCH_INTERNAL_ID_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 15, message = "{ATM_GUNNEBO_BEAN_CIT_BRANCH_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + AtmGunneboBeanI18nConstant.ATM_GUNNEBO_BEAN_CIT_BRANCH_INTERNAL_ID_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboBeanI18nConstant.ATM_GUNNEBO_BEAN_CIT_BRANCH_INTERNAL_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_cit_branch_internal_id", length = 15, nullable = false)
     private String citBranchInternalId;
 
@@ -114,7 +115,7 @@ public class AtmGunneboBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 100, message = "{ATM_GUNNEBO_BEAN_CIT_BRANCH_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 100, message = "{" + AtmGunneboBeanI18nConstant.ATM_GUNNEBO_BEAN_CIT_BRANCH_NAME_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_cit_branch_name", length = 100, nullable = true)
     private String citBranchName;
 
@@ -126,7 +127,7 @@ public class AtmGunneboBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @ValidLength(max = 13, message = "{ATM_GUNNEBO_BEAN_CIT_OWNER_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidLength(max = 13, message = "{" + AtmGunneboBeanI18nConstant.ATM_GUNNEBO_BEAN_CIT_OWNER_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_cit_owner_id", length = 20, nullable = true)
     private Long citOwnerId;
 
@@ -138,7 +139,7 @@ public class AtmGunneboBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 13, message = "{ATM_GUNNEBO_BEAN_CIT_OWNER_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 13, message = "{" + AtmGunneboBeanI18nConstant.ATM_GUNNEBO_BEAN_CIT_OWNER_NAME_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_cit_owner_name", length = 50, nullable = true)
     private String citOwnerName;
 
@@ -150,7 +151,7 @@ public class AtmGunneboBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 100, message = "{ATM_GUNNEBO_BEAN_CLIENT_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 100, message = "{" + AtmGunneboBeanI18nConstant.ATM_GUNNEBO_BEAN_CLIENT_NAME_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_client_name", length = 100, nullable = true)
     private String clientName;
 
@@ -162,7 +163,7 @@ public class AtmGunneboBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 100, message = "{ATM_GUNNEBO_BEAN_CLIENT_BRANCH_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 100, message = "{" + AtmGunneboBeanI18nConstant.ATM_GUNNEBO_BEAN_CLIENT_BRANCH_NAME_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_client_branch_name", length = 100, nullable = true)
     private String clientBranchName;
 
@@ -174,7 +175,7 @@ public class AtmGunneboBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_BEAN_CLIENT_BRANCH_PHONE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboBeanI18nConstant.ATM_GUNNEBO_BEAN_CLIENT_BRANCH_PHONE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_client_branch_phone", length = 15, nullable = true)
     private String clientBranchPhone;
 
@@ -186,7 +187,7 @@ public class AtmGunneboBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 150, message = "{ATM_GUNNEBO_BEAN_CLIENT_BRANCH_ADDRESS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 150, message = "{" + AtmGunneboBeanI18nConstant.ATM_GUNNEBO_BEAN_CLIENT_BRANCH_ADDRESS_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_client_branch_address", length = 150, nullable = true)
     private String clientBranchAddress;
 
@@ -198,7 +199,7 @@ public class AtmGunneboBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_BEAN_CLIENT_BRANCH_LATITUDE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboBeanI18nConstant.ATM_GUNNEBO_BEAN_CLIENT_BRANCH_LATITUDE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_client_branch_latitude", length = 15, nullable = true)
     private String clientBranchLatitude;
 
@@ -210,7 +211,7 @@ public class AtmGunneboBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_BEAN_CLIENT_BRANCH_LONGITUDE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboBeanI18nConstant.ATM_GUNNEBO_BEAN_CLIENT_BRANCH_LONGITUDE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_client_branch_longitude", length = 15, nullable = true)
     private String clientBranchLongitude;
 
@@ -222,7 +223,7 @@ public class AtmGunneboBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @ValidLength(max = 13, message = "{ATM_GUNNEBO_BEAN_CLIENT_OWNER_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidLength(max = 13, message = "{" + AtmGunneboBeanI18nConstant.ATM_GUNNEBO_BEAN_CLIENT_OWNER_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_client_owner_id", length = 20, nullable = true)
     private Long clientOwnerId;
 
@@ -234,7 +235,7 @@ public class AtmGunneboBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 13, message = "{ATM_GUNNEBO_BEAN_CLIENT_OWNER_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 13, message = "{" + AtmGunneboBeanI18nConstant.ATM_GUNNEBO_BEAN_CLIENT_OWNER_NAME_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_client_owner_name", length = 50, nullable = true)
     private String clientOwnerName;
 
@@ -246,7 +247,7 @@ public class AtmGunneboBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 32, message = "{ATM_GUNNEBO_BEAN_STATUS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 32, message = "{" + AtmGunneboBeanI18nConstant.ATM_GUNNEBO_BEAN_STATUS_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_status", length = 32, nullable = true)
     private String status;
 
@@ -269,7 +270,7 @@ public class AtmGunneboBean implements Serializable {
      * DB defaultValue: 0
      * </pre>
      */
-    @ValidLength(max = 10, message = "{ATM_GUNNEBO_BEAN_CURRENT_CAPACITY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidLength(max = 10, message = "{" + AtmGunneboBeanI18nConstant.ATM_GUNNEBO_BEAN_CURRENT_CAPACITY_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_current_capacity", length = 10, nullable = true)
     private Integer currentCapacity;
 
@@ -281,7 +282,7 @@ public class AtmGunneboBean implements Serializable {
      * DB defaultValue: 0
      * </pre>
      */
-    @ValidLength(max = 10, message = "{ATM_GUNNEBO_BEAN_CURRENCY_MAX_CAPACITY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidLength(max = 10, message = "{" + AtmGunneboBeanI18nConstant.ATM_GUNNEBO_BEAN_CURRENCY_MAX_CAPACITY_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_currency_max_capacity", length = 10, nullable = true)
     private Integer currencyMaxCapacity;
 
@@ -293,7 +294,7 @@ public class AtmGunneboBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 5, message = "{ATM_GUNNEBO_BEAN_CURRENCY_TYPE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 5, message = "{" + AtmGunneboBeanI18nConstant.ATM_GUNNEBO_BEAN_CURRENCY_TYPE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_currency_type", length = 5, nullable = true)
     private String currencyType;
 
@@ -305,7 +306,7 @@ public class AtmGunneboBean implements Serializable {
      * DB defaultValue: 0
      * </pre>
      */
-    @ValidLength(max = 10, message = "{ATM_GUNNEBO_BEAN_ENVELOPES_TOTAL_AMOUNT_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidLength(max = 10, message = "{" + AtmGunneboBeanI18nConstant.ATM_GUNNEBO_BEAN_ENVELOPES_TOTAL_AMOUNT_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_envelopes_total_amount", length = 10, nullable = true)
     private Integer envelopesTotalAmount;
 
@@ -317,7 +318,7 @@ public class AtmGunneboBean implements Serializable {
      * DB defaultValue: 0
      * </pre>
      */
-    @ValidLength(max = 10, message = "{ATM_GUNNEBO_BEAN_ENVELOPES_CAPACITY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidLength(max = 10, message = "{" + AtmGunneboBeanI18nConstant.ATM_GUNNEBO_BEAN_ENVELOPES_CAPACITY_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_envelopes_capacity", length = 10, nullable = true)
     private Integer envelopesCapacity;
 
@@ -329,7 +330,7 @@ public class AtmGunneboBean implements Serializable {
      * DB defaultValue: 0
      * </pre>
      */
-    @ValidLength(max = 10, message = "{ATM_GUNNEBO_BEAN_ENVELOPES_MAX_CAPACITY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidLength(max = 10, message = "{" + AtmGunneboBeanI18nConstant.ATM_GUNNEBO_BEAN_ENVELOPES_MAX_CAPACITY_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_envelopes_max_capacity", length = 10, nullable = true)
     private Integer envelopesMaxCapacity;
 
@@ -341,8 +342,8 @@ public class AtmGunneboBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{ATM_GUNNEBO_BEAN_CREATE_BY_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 20, message = "{ATM_GUNNEBO_BEAN_CREATE_BY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + AtmGunneboBeanI18nConstant.ATM_GUNNEBO_BEAN_CREATE_BY_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 20, message = "{" + AtmGunneboBeanI18nConstant.ATM_GUNNEBO_BEAN_CREATE_BY_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_create_by", length = 20, nullable = false)
     private String createBy;
 
@@ -354,9 +355,9 @@ public class AtmGunneboBean implements Serializable {
      * DB defaultValue: CURRENT_TIMESTAMP
      * </pre>
      */
-    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{ATM_GUNNEBO_BEAN_CREATE_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS, message = "{" + AtmGunneboBeanI18nConstant.ATM_GUNNEBO_BEAN_CREATE_TIMESTAMP_DATE_TIME_FORMAT + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
-    @NotNull(message = "{ATM_GUNNEBO_BEAN_CREATE_TIMESTAMP_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotNull(message = "{" + AtmGunneboBeanI18nConstant.ATM_GUNNEBO_BEAN_CREATE_TIMESTAMP_NOT_NULL + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_create_timestamp", length = 19, nullable = false)
     private Date createTimestamp;
 
@@ -368,9 +369,9 @@ public class AtmGunneboBean implements Serializable {
      * DB defaultValue: CURRENT_TIMESTAMP
      * </pre>
      */
-    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{ATM_GUNNEBO_BEAN_UPDATE_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS, message = "{" + AtmGunneboBeanI18nConstant.ATM_GUNNEBO_BEAN_UPDATE_TIMESTAMP_DATE_TIME_FORMAT + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
-    @NotNull(message = "{ATM_GUNNEBO_BEAN_UPDATE_TIMESTAMP_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotNull(message = "{" + AtmGunneboBeanI18nConstant.ATM_GUNNEBO_BEAN_UPDATE_TIMESTAMP_NOT_NULL + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_update_timestamp", length = 19, nullable = false)
     private Date updateTimestamp;
 
@@ -382,8 +383,8 @@ public class AtmGunneboBean implements Serializable {
      * DB defaultValue: N
      * </pre>
      */
-    @NotBlank(message = "{ATM_GUNNEBO_BEAN_DELETE_FLAG_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 1, message = "{ATM_GUNNEBO_BEAN_DELETE_FLAG_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + AtmGunneboBeanI18nConstant.ATM_GUNNEBO_BEAN_DELETE_FLAG_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 1, message = "{" + AtmGunneboBeanI18nConstant.ATM_GUNNEBO_BEAN_DELETE_FLAG_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_delete_flag", length = 1, nullable = false)
     private String deleteFlag;
 

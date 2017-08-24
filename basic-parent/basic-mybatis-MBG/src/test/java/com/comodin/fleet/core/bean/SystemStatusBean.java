@@ -3,6 +3,7 @@ package com.comodin.fleet.core.bean;
 import com.comodin.basic.util.date.DateUtil;
 import com.comodin.basic.validation.IBaseValidGroup;
 import com.comodin.basic.validation.constraints.*;
+import com.comodin.fleet.constant.i18n.SystemStatusBeanI18nConstant;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
@@ -22,8 +23,8 @@ public class SystemStatusBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotNull(message = "{SYSTEM_STATUS_BEAN_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @ValidLength(max = 20, message = "{SYSTEM_STATUS_BEAN_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotNull(message = "{" + SystemStatusBeanI18nConstant.SYSTEM_STATUS_BEAN_ID_NOT_NULL + "}", groups = {IBaseValidGroup.Update.class})
+    @ValidLength(max = 20, message = "{" + SystemStatusBeanI18nConstant.SYSTEM_STATUS_BEAN_ID_LENGTH + "}", groups = {IBaseValidGroup.Update.class})
     @Column(name = "system_id", length = 20, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -37,8 +38,8 @@ public class SystemStatusBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{SYSTEM_STATUS_BEAN_ATTRIBUTE_KEY_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 40, message = "{SYSTEM_STATUS_BEAN_ATTRIBUTE_KEY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + SystemStatusBeanI18nConstant.SYSTEM_STATUS_BEAN_ATTRIBUTE_KEY_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 40, message = "{" + SystemStatusBeanI18nConstant.SYSTEM_STATUS_BEAN_ATTRIBUTE_KEY_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "system_attribute_key", length = 40, nullable = false)
     private String attributeKey;
 
@@ -50,7 +51,7 @@ public class SystemStatusBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 40, message = "{SYSTEM_STATUS_BEAN_ATTRIBUTE_VALUE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 40, message = "{" + SystemStatusBeanI18nConstant.SYSTEM_STATUS_BEAN_ATTRIBUTE_VALUE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "system_attribute_value", length = 40, nullable = true)
     private String attributeValue;
 
@@ -62,7 +63,7 @@ public class SystemStatusBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 50, message = "{SYSTEM_STATUS_BEAN_COMMENT_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 50, message = "{" + SystemStatusBeanI18nConstant.SYSTEM_STATUS_BEAN_COMMENT_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "system_comment", length = 50, nullable = true)
     private String comment;
 
@@ -74,9 +75,9 @@ public class SystemStatusBean implements Serializable {
      * DB defaultValue: CURRENT_TIMESTAMP
      * </pre>
      */
-    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{SYSTEM_STATUS_BEAN_CREATE_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS, message = "{" + SystemStatusBeanI18nConstant.SYSTEM_STATUS_BEAN_CREATE_TIMESTAMP_DATE_TIME_FORMAT + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
-    @NotNull(message = "{SYSTEM_STATUS_BEAN_CREATE_TIMESTAMP_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotNull(message = "{" + SystemStatusBeanI18nConstant.SYSTEM_STATUS_BEAN_CREATE_TIMESTAMP_NOT_NULL + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "system_create_timestamp", length = 19, nullable = false)
     private Date createTimestamp;
 
@@ -88,8 +89,8 @@ public class SystemStatusBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{SYSTEM_STATUS_BEAN_CREATE_BY_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 20, message = "{SYSTEM_STATUS_BEAN_CREATE_BY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + SystemStatusBeanI18nConstant.SYSTEM_STATUS_BEAN_CREATE_BY_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 20, message = "{" + SystemStatusBeanI18nConstant.SYSTEM_STATUS_BEAN_CREATE_BY_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "system_create_by", length = 20, nullable = false)
     private String createBy;
 
@@ -101,8 +102,8 @@ public class SystemStatusBean implements Serializable {
      * DB defaultValue: N
      * </pre>
      */
-    @NotBlank(message = "{SYSTEM_STATUS_BEAN_DELETE_FLAG_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 1, message = "{SYSTEM_STATUS_BEAN_DELETE_FLAG_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + SystemStatusBeanI18nConstant.SYSTEM_STATUS_BEAN_DELETE_FLAG_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 1, message = "{" + SystemStatusBeanI18nConstant.SYSTEM_STATUS_BEAN_DELETE_FLAG_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "system_delete_flag", length = 1, nullable = false)
     private String deleteFlag;
 

@@ -35,9 +35,14 @@ public class AddImportPackage {
         String javaBeanName = introspectedTable.getFullyQualifiedTable().getDomainObjectName();
         if (PluginsUtils.getEntityConstantToMapByEntityBeanName().containsKey(javaBeanName)) {
             if (!topLevelClass.getImportedTypes().contains(new FullyQualifiedJavaType(PluginsUtils.getConstantPackage()))) {
-                String constantBeanName = PluginsUtils.getConstantBeanClassName(introspectedTable.getFullyQualifiedTable().getDomainObjectName());
+                String constantBeanName = PluginsUtils.getConstantBeanClassName(javaBeanName);
                 topLevelClass.addImportedType(PluginsUtils.getConstantPackage() + "." + constantBeanName);
             }
+        }
+
+        if (!topLevelClass.getImportedTypes().contains(new FullyQualifiedJavaType(PluginsUtils.getI18nConstantPackage()))) {
+            String i18nConstantBeanName = PluginsUtils.getI18nConstantBeanClassName(javaBeanName);
+            topLevelClass.addImportedType(PluginsUtils.getI18nConstantPackage() + "." + i18nConstantBeanName);
         }
     }
 }

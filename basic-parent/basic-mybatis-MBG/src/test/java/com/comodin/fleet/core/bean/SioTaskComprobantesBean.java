@@ -3,6 +3,7 @@ package com.comodin.fleet.core.bean;
 import com.comodin.basic.util.date.DateUtil;
 import com.comodin.basic.validation.IBaseValidGroup;
 import com.comodin.basic.validation.constraints.*;
+import com.comodin.fleet.constant.i18n.SioTaskComprobantesBeanI18nConstant;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -23,8 +24,8 @@ public class SioTaskComprobantesBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotNull(message = "{SIO_TASK_COMPROBANTES_BEAN_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @ValidLength(max = 20, message = "{SIO_TASK_COMPROBANTES_BEAN_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotNull(message = "{" + SioTaskComprobantesBeanI18nConstant.SIO_TASK_COMPROBANTES_BEAN_ID_NOT_NULL + "}", groups = {IBaseValidGroup.Update.class})
+    @ValidLength(max = 20, message = "{" + SioTaskComprobantesBeanI18nConstant.SIO_TASK_COMPROBANTES_BEAN_ID_LENGTH + "}", groups = {IBaseValidGroup.Update.class})
     @Column(name = "comprobantes_id", length = 20, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -38,7 +39,7 @@ public class SioTaskComprobantesBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 100, message = "{SIO_TASK_COMPROBANTES_BEAN_TASK_ORIGINAL_COMPLEX_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 100, message = "{" + SioTaskComprobantesBeanI18nConstant.SIO_TASK_COMPROBANTES_BEAN_TASK_ORIGINAL_COMPLEX_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "comprobantes_task_original_complex_id", length = 100, nullable = true)
     private String taskOriginalComplexId;
 
@@ -50,8 +51,8 @@ public class SioTaskComprobantesBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{SIO_TASK_COMPROBANTES_BEAN_CODE_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 15, message = "{SIO_TASK_COMPROBANTES_BEAN_CODE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + SioTaskComprobantesBeanI18nConstant.SIO_TASK_COMPROBANTES_BEAN_CODE_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + SioTaskComprobantesBeanI18nConstant.SIO_TASK_COMPROBANTES_BEAN_CODE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "comprobantes_code", length = 15, nullable = false)
     private String code;
 
@@ -63,8 +64,8 @@ public class SioTaskComprobantesBean implements Serializable {
      * DB defaultValue: 0
      * </pre>
      */
-    @NotNull(message = "{SIO_TASK_COMPROBANTES_BEAN_PACKAGE_NUMBER_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @ValidLength(max = 10, message = "{SIO_TASK_COMPROBANTES_BEAN_PACKAGE_NUMBER_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotNull(message = "{" + SioTaskComprobantesBeanI18nConstant.SIO_TASK_COMPROBANTES_BEAN_PACKAGE_NUMBER_NOT_NULL + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidLength(max = 10, message = "{" + SioTaskComprobantesBeanI18nConstant.SIO_TASK_COMPROBANTES_BEAN_PACKAGE_NUMBER_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "comprobantes_package_number", length = 10, nullable = false)
     private Integer packageNumber;
 
@@ -87,8 +88,8 @@ public class SioTaskComprobantesBean implements Serializable {
      * DB defaultValue: ENABLE
      * </pre>
      */
-    @NotBlank(message = "{SIO_TASK_COMPROBANTES_BEAN_STATUS_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 7, message = "{SIO_TASK_COMPROBANTES_BEAN_STATUS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + SioTaskComprobantesBeanI18nConstant.SIO_TASK_COMPROBANTES_BEAN_STATUS_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 7, message = "{" + SioTaskComprobantesBeanI18nConstant.SIO_TASK_COMPROBANTES_BEAN_STATUS_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "comprobantes_status", length = 7, nullable = false)
     private String status;
 
@@ -100,7 +101,7 @@ public class SioTaskComprobantesBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 10, message = "{SIO_TASK_COMPROBANTES_BEAN_RECORD_DATE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 10, message = "{" + SioTaskComprobantesBeanI18nConstant.SIO_TASK_COMPROBANTES_BEAN_RECORD_DATE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "comprobantes_record_date", length = 10, nullable = true)
     private String recordDate;
 
@@ -112,7 +113,7 @@ public class SioTaskComprobantesBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 8, message = "{SIO_TASK_COMPROBANTES_BEAN_RECORD_TIME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 8, message = "{" + SioTaskComprobantesBeanI18nConstant.SIO_TASK_COMPROBANTES_BEAN_RECORD_TIME_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "comprobantes_record_time", length = 8, nullable = true)
     private String recordTime;
 
@@ -124,7 +125,7 @@ public class SioTaskComprobantesBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 16, message = "{SIO_TASK_COMPROBANTES_BEAN_TYPE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 16, message = "{" + SioTaskComprobantesBeanI18nConstant.SIO_TASK_COMPROBANTES_BEAN_TYPE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "comprobantes_type", length = 16, nullable = true)
     private String type;
 
@@ -136,7 +137,7 @@ public class SioTaskComprobantesBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 16, message = "{SIO_TASK_COMPROBANTES_BEAN_CURRENCY_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 16, message = "{" + SioTaskComprobantesBeanI18nConstant.SIO_TASK_COMPROBANTES_BEAN_CURRENCY_INTERNAL_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "comprobantes_currency_internal_id", length = 16, nullable = true)
     private String currencyInternalId;
 
@@ -148,7 +149,7 @@ public class SioTaskComprobantesBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 100, message = "{SIO_TASK_COMPROBANTES_BEAN_ORIGINAL_CODE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 100, message = "{" + SioTaskComprobantesBeanI18nConstant.SIO_TASK_COMPROBANTES_BEAN_ORIGINAL_CODE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "comprobantes_original_code", length = 100, nullable = true)
     private String originalCode;
 
@@ -160,7 +161,7 @@ public class SioTaskComprobantesBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 1024, message = "{SIO_TASK_COMPROBANTES_BEAN_OPERATE_DEVICE_JSON_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 1024, message = "{" + SioTaskComprobantesBeanI18nConstant.SIO_TASK_COMPROBANTES_BEAN_OPERATE_DEVICE_JSON_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "comprobantes_operate_device_json", length = 1024, nullable = true)
     private String operateDeviceJson;
 
@@ -172,9 +173,9 @@ public class SioTaskComprobantesBean implements Serializable {
      * DB defaultValue: CURRENT_TIMESTAMP
      * </pre>
      */
-    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{SIO_TASK_COMPROBANTES_BEAN_CREATE_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS, message = "{" + SioTaskComprobantesBeanI18nConstant.SIO_TASK_COMPROBANTES_BEAN_CREATE_TIMESTAMP_DATE_TIME_FORMAT + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
-    @NotNull(message = "{SIO_TASK_COMPROBANTES_BEAN_CREATE_TIMESTAMP_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotNull(message = "{" + SioTaskComprobantesBeanI18nConstant.SIO_TASK_COMPROBANTES_BEAN_CREATE_TIMESTAMP_NOT_NULL + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "comprobantes_create_timestamp", length = 19, nullable = false)
     private Date createTimestamp;
 
@@ -186,8 +187,8 @@ public class SioTaskComprobantesBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{SIO_TASK_COMPROBANTES_BEAN_CREATE_BY_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 20, message = "{SIO_TASK_COMPROBANTES_BEAN_CREATE_BY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + SioTaskComprobantesBeanI18nConstant.SIO_TASK_COMPROBANTES_BEAN_CREATE_BY_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 20, message = "{" + SioTaskComprobantesBeanI18nConstant.SIO_TASK_COMPROBANTES_BEAN_CREATE_BY_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "comprobantes_create_by", length = 20, nullable = false)
     private String createBy;
 
@@ -199,8 +200,8 @@ public class SioTaskComprobantesBean implements Serializable {
      * DB defaultValue: N
      * </pre>
      */
-    @NotBlank(message = "{SIO_TASK_COMPROBANTES_BEAN_DELETE_FLAG_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 1, message = "{SIO_TASK_COMPROBANTES_BEAN_DELETE_FLAG_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + SioTaskComprobantesBeanI18nConstant.SIO_TASK_COMPROBANTES_BEAN_DELETE_FLAG_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 1, message = "{" + SioTaskComprobantesBeanI18nConstant.SIO_TASK_COMPROBANTES_BEAN_DELETE_FLAG_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "comprobantes_delete_flag", length = 1, nullable = false)
     private String deleteFlag;
 

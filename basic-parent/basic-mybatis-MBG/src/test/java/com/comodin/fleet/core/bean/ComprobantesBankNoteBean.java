@@ -3,6 +3,7 @@ package com.comodin.fleet.core.bean;
 import com.comodin.basic.util.date.DateUtil;
 import com.comodin.basic.validation.IBaseValidGroup;
 import com.comodin.basic.validation.constraints.*;
+import com.comodin.fleet.constant.i18n.ComprobantesBankNoteBeanI18nConstant;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -23,8 +24,8 @@ public class ComprobantesBankNoteBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotNull(message = "{COMPROBANTES_BANK_NOTE_BEAN_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @ValidLength(max = 20, message = "{COMPROBANTES_BANK_NOTE_BEAN_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotNull(message = "{" + ComprobantesBankNoteBeanI18nConstant.COMPROBANTES_BANK_NOTE_BEAN_ID_NOT_NULL + "}", groups = {IBaseValidGroup.Update.class})
+    @ValidLength(max = 20, message = "{" + ComprobantesBankNoteBeanI18nConstant.COMPROBANTES_BANK_NOTE_BEAN_ID_LENGTH + "}", groups = {IBaseValidGroup.Update.class})
     @Column(name = "banknote_id", length = 20, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -38,8 +39,8 @@ public class ComprobantesBankNoteBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{COMPROBANTES_BANK_NOTE_BEAN_COMPROBANTES_CODE_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 15, message = "{COMPROBANTES_BANK_NOTE_BEAN_COMPROBANTES_CODE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + ComprobantesBankNoteBeanI18nConstant.COMPROBANTES_BANK_NOTE_BEAN_COMPROBANTES_CODE_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + ComprobantesBankNoteBeanI18nConstant.COMPROBANTES_BANK_NOTE_BEAN_COMPROBANTES_CODE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "banknote_comprobantes_code", length = 15, nullable = false)
     private String comprobantesCode;
 
@@ -51,8 +52,8 @@ public class ComprobantesBankNoteBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{COMPROBANTES_BANK_NOTE_BEAN_BANK_NOTE_TYPE_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 5, message = "{COMPROBANTES_BANK_NOTE_BEAN_BANK_NOTE_TYPE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + ComprobantesBankNoteBeanI18nConstant.COMPROBANTES_BANK_NOTE_BEAN_BANK_NOTE_TYPE_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 5, message = "{" + ComprobantesBankNoteBeanI18nConstant.COMPROBANTES_BANK_NOTE_BEAN_BANK_NOTE_TYPE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "banknote_bank_note_type", length = 5, nullable = false)
     private String bankNoteType;
 
@@ -75,8 +76,8 @@ public class ComprobantesBankNoteBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotNull(message = "{COMPROBANTES_BANK_NOTE_BEAN_NUMBER_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @ValidLength(max = 10, message = "{COMPROBANTES_BANK_NOTE_BEAN_NUMBER_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotNull(message = "{" + ComprobantesBankNoteBeanI18nConstant.COMPROBANTES_BANK_NOTE_BEAN_NUMBER_NOT_NULL + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidLength(max = 10, message = "{" + ComprobantesBankNoteBeanI18nConstant.COMPROBANTES_BANK_NOTE_BEAN_NUMBER_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "banknote_number", length = 10, nullable = false)
     private Integer number;
 
@@ -88,8 +89,8 @@ public class ComprobantesBankNoteBean implements Serializable {
      * DB defaultValue: ENABLE
      * </pre>
      */
-    @NotBlank(message = "{COMPROBANTES_BANK_NOTE_BEAN_STATUS_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 7, message = "{COMPROBANTES_BANK_NOTE_BEAN_STATUS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + ComprobantesBankNoteBeanI18nConstant.COMPROBANTES_BANK_NOTE_BEAN_STATUS_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 7, message = "{" + ComprobantesBankNoteBeanI18nConstant.COMPROBANTES_BANK_NOTE_BEAN_STATUS_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "banknote_status", length = 7, nullable = false)
     private String status;
 
@@ -101,9 +102,9 @@ public class ComprobantesBankNoteBean implements Serializable {
      * DB defaultValue: CURRENT_TIMESTAMP
      * </pre>
      */
-    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{COMPROBANTES_BANK_NOTE_BEAN_CREATE_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS, message = "{" + ComprobantesBankNoteBeanI18nConstant.COMPROBANTES_BANK_NOTE_BEAN_CREATE_TIMESTAMP_DATE_TIME_FORMAT + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
-    @NotNull(message = "{COMPROBANTES_BANK_NOTE_BEAN_CREATE_TIMESTAMP_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotNull(message = "{" + ComprobantesBankNoteBeanI18nConstant.COMPROBANTES_BANK_NOTE_BEAN_CREATE_TIMESTAMP_NOT_NULL + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "banknote_create_timestamp", length = 19, nullable = false)
     private Date createTimestamp;
 
@@ -115,8 +116,8 @@ public class ComprobantesBankNoteBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{COMPROBANTES_BANK_NOTE_BEAN_CREATE_BY_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 20, message = "{COMPROBANTES_BANK_NOTE_BEAN_CREATE_BY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + ComprobantesBankNoteBeanI18nConstant.COMPROBANTES_BANK_NOTE_BEAN_CREATE_BY_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 20, message = "{" + ComprobantesBankNoteBeanI18nConstant.COMPROBANTES_BANK_NOTE_BEAN_CREATE_BY_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "banknote_create_by", length = 20, nullable = false)
     private String createBy;
 
@@ -128,8 +129,8 @@ public class ComprobantesBankNoteBean implements Serializable {
      * DB defaultValue: N
      * </pre>
      */
-    @NotBlank(message = "{COMPROBANTES_BANK_NOTE_BEAN_DELETE_FLAG_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 1, message = "{COMPROBANTES_BANK_NOTE_BEAN_DELETE_FLAG_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + ComprobantesBankNoteBeanI18nConstant.COMPROBANTES_BANK_NOTE_BEAN_DELETE_FLAG_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 1, message = "{" + ComprobantesBankNoteBeanI18nConstant.COMPROBANTES_BANK_NOTE_BEAN_DELETE_FLAG_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "banknote_delete_flag", length = 1, nullable = false)
     private String deleteFlag;
 

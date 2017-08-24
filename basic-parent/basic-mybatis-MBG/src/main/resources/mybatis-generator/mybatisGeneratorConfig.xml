@@ -59,6 +59,9 @@
             <property name="constantFileNamePrefix" value="${constantFileNamePrefix}"/>
             <property name="constantFileNameSuffix" value="${constantFileNameSuffix}"/>
 
+            <property name="i18nConstantPackage" value="${i18nConstantPackage}"/>
+            <property name="i18nConstantFileNamePrefix" value="${i18nConstantFileNamePrefix}"/>
+            <property name="i18nConstantFileNameSuffix" value="${i18nConstantFileNameSuffix}"/>
 
             <property name="serviceInterfacePackage" value="${serviceInterfacePackage}"/>
             <property name="serviceInterfaceFileNamePrefix" value="${serviceInterfaceFileNamePrefix}"/>

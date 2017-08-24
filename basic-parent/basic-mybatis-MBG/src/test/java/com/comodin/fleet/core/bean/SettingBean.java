@@ -3,6 +3,7 @@ package com.comodin.fleet.core.bean;
 import com.comodin.basic.util.date.DateUtil;
 import com.comodin.basic.validation.IBaseValidGroup;
 import com.comodin.basic.validation.constraints.*;
+import com.comodin.fleet.constant.i18n.SettingBeanI18nConstant;
 import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -21,8 +22,8 @@ public class SettingBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotNull(message = "{SETTING_BEAN_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @ValidLength(max = 20, message = "{SETTING_BEAN_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotNull(message = "{" + SettingBeanI18nConstant.SETTING_BEAN_ID_NOT_NULL + "}", groups = {IBaseValidGroup.Update.class})
+    @ValidLength(max = 20, message = "{" + SettingBeanI18nConstant.SETTING_BEAN_ID_LENGTH + "}", groups = {IBaseValidGroup.Update.class})
     @Column(name = "setting_id", length = 20, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -36,8 +37,8 @@ public class SettingBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{SETTING_BEAN_MODULE_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 40, message = "{SETTING_BEAN_MODULE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + SettingBeanI18nConstant.SETTING_BEAN_MODULE_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 40, message = "{" + SettingBeanI18nConstant.SETTING_BEAN_MODULE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "setting_module", length = 40, nullable = false)
     private String module;
 
@@ -49,8 +50,8 @@ public class SettingBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{SETTING_BEAN_KEY_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 40, message = "{SETTING_BEAN_KEY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + SettingBeanI18nConstant.SETTING_BEAN_KEY_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 40, message = "{" + SettingBeanI18nConstant.SETTING_BEAN_KEY_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "setting_key", length = 40, nullable = false)
     private String key;
 
@@ -62,8 +63,8 @@ public class SettingBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{SETTING_BEAN_VALUE_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 50, message = "{SETTING_BEAN_VALUE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + SettingBeanI18nConstant.SETTING_BEAN_VALUE_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 50, message = "{" + SettingBeanI18nConstant.SETTING_BEAN_VALUE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "setting_value", length = 50, nullable = false)
     private String value;
 
@@ -75,8 +76,8 @@ public class SettingBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{SETTING_BEAN_LANGUAGE_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 10, message = "{SETTING_BEAN_LANGUAGE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + SettingBeanI18nConstant.SETTING_BEAN_LANGUAGE_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 10, message = "{" + SettingBeanI18nConstant.SETTING_BEAN_LANGUAGE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "setting_language", length = 10, nullable = false)
     private String language;
 
@@ -88,7 +89,7 @@ public class SettingBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 50, message = "{SETTING_BEAN_COMMENT_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 50, message = "{" + SettingBeanI18nConstant.SETTING_BEAN_COMMENT_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "setting_comment", length = 50, nullable = true)
     private String comment;
 

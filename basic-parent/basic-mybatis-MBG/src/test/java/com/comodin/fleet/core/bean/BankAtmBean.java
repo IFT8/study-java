@@ -3,6 +3,7 @@ package com.comodin.fleet.core.bean;
 import com.comodin.basic.util.date.DateUtil;
 import com.comodin.basic.validation.IBaseValidGroup;
 import com.comodin.basic.validation.constraints.*;
+import com.comodin.fleet.constant.i18n.BankAtmBeanI18nConstant;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -23,8 +24,8 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotNull(message = "{BANK_ATM_BEAN_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @ValidLength(max = 20, message = "{BANK_ATM_BEAN_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotNull(message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_ID_NOT_NULL + "}", groups = {IBaseValidGroup.Update.class})
+    @ValidLength(max = 20, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_ID_LENGTH + "}", groups = {IBaseValidGroup.Update.class})
     @Column(name = "atm_id", length = 20, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -38,8 +39,8 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotNull(message = "{BANK_ATM_BEAN_CLIENT_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @ValidLength(max = 20, message = "{BANK_ATM_BEAN_CLIENT_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotNull(message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_CLIENT_ID_NOT_NULL + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidLength(max = 20, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_CLIENT_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_client_id", length = 20, nullable = false)
     private Long clientId;
 
@@ -51,8 +52,8 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{BANK_ATM_BEAN_CLIENT_NAME_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 100, message = "{BANK_ATM_BEAN_CLIENT_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_CLIENT_NAME_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 100, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_CLIENT_NAME_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_client_name", length = 100, nullable = false)
     private String clientName;
 
@@ -64,8 +65,8 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotNull(message = "{BANK_ATM_BEAN_BRANCH_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @ValidLength(max = 20, message = "{BANK_ATM_BEAN_BRANCH_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotNull(message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_BRANCH_ID_NOT_NULL + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidLength(max = 20, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_BRANCH_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_branch_id", length = 20, nullable = false)
     private Long branchId;
 
@@ -77,8 +78,8 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{BANK_ATM_BEAN_BRANCH_NAME_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 100, message = "{BANK_ATM_BEAN_BRANCH_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_BRANCH_NAME_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 100, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_BRANCH_NAME_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_branch_name", length = 100, nullable = false)
     private String branchName;
 
@@ -90,7 +91,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 50, message = "{BANK_ATM_BEAN_IP_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 50, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_IP_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_ip", length = 50, nullable = true)
     private String ip;
 
@@ -102,7 +103,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 20, message = "{BANK_ATM_BEAN_MODEL_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 20, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_MODEL_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_model", length = 20, nullable = true)
     private String model;
 
@@ -114,7 +115,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 20, message = "{BANK_ATM_BEAN_VENDOR_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 20, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_VENDOR_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_vendor", length = 20, nullable = true)
     private String vendor;
 
@@ -126,7 +127,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 150, message = "{BANK_ATM_BEAN_ADDRESS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 150, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_ADDRESS_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_address", length = 150, nullable = true)
     private String address;
 
@@ -138,7 +139,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @ValidLength(max = 20, message = "{BANK_ATM_BEAN_TASK_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidLength(max = 20, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_TASK_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_task_id", length = 20, nullable = true)
     private Long taskId;
 
@@ -150,7 +151,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{BANK_ATM_BEAN_TYPE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_TYPE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_type", length = 15, nullable = true)
     private String type;
 
@@ -162,8 +163,8 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{BANK_ATM_BEAN_LATITUDE_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 15, message = "{BANK_ATM_BEAN_LATITUDE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_LATITUDE_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_LATITUDE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_latitude", length = 15, nullable = false)
     private String latitude;
 
@@ -175,8 +176,8 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{BANK_ATM_BEAN_LONGITUDE_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 15, message = "{BANK_ATM_BEAN_LONGITUDE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_LONGITUDE_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_LONGITUDE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_longitude", length = 15, nullable = false)
     private String longitude;
 
@@ -188,7 +189,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{BANK_ATM_BEAN_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_INTERNAL_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_internal_id", length = 15, nullable = true)
     private String internalId;
 
@@ -200,8 +201,8 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{BANK_ATM_BEAN_EXTERNAL_ID_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 15, message = "{BANK_ATM_BEAN_EXTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_EXTERNAL_ID_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_EXTERNAL_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_external_id", length = 15, nullable = false)
     private String externalId;
 
@@ -213,7 +214,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: DISABLE
      * </pre>
      */
-    @Length(max = 30, message = "{BANK_ATM_BEAN_RAM_STATUS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 30, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_RAM_STATUS_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_ram_status", length = 30, nullable = true)
     private String ramStatus;
 
@@ -247,7 +248,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: DISABLE
      * </pre>
      */
-    @Length(max = 30, message = "{BANK_ATM_BEAN_CPU_STATUS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 30, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_CPU_STATUS_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_cpu_status", length = 30, nullable = true)
     private String cpuStatus;
 
@@ -281,7 +282,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: DISABLE
      * </pre>
      */
-    @Length(max = 30, message = "{BANK_ATM_BEAN_DISK_STATUS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 30, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_DISK_STATUS_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_disk_status", length = 30, nullable = true)
     private String diskStatus;
 
@@ -315,7 +316,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: DISABLE
      * </pre>
      */
-    @Length(max = 30, message = "{BANK_ATM_BEAN_SAFE_DOOR_STATUS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 30, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_SAFE_DOOR_STATUS_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_safe_door_status", length = 30, nullable = true)
     private String safeDoorStatus;
 
@@ -327,7 +328,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: 00000
      * </pre>
      */
-    @Length(max = 10, message = "{BANK_ATM_BEAN_SAFE_DOOR_ERROR_CODE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 10, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_SAFE_DOOR_ERROR_CODE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_safe_door_error_code", length = 10, nullable = true)
     private String safeDoorErrorCode;
 
@@ -339,7 +340,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: 
      * </pre>
      */
-    @Length(max = 100, message = "{BANK_ATM_BEAN_SAFE_DOOR_DESCRIPTION_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 100, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_SAFE_DOOR_DESCRIPTION_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_safe_door_description", length = 100, nullable = true)
     private String safeDoorDescription;
 
@@ -351,7 +352,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: DISABLE
      * </pre>
      */
-    @Length(max = 30, message = "{BANK_ATM_BEAN_UPS_STATUS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 30, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_UPS_STATUS_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_ups_status", length = 30, nullable = true)
     private String upsStatus;
 
@@ -363,7 +364,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: DISABLE
      * </pre>
      */
-    @Length(max = 30, message = "{BANK_ATM_BEAN_CARD_STATUS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 30, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_CARD_STATUS_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_card_status", length = 30, nullable = true)
     private String cardStatus;
 
@@ -375,7 +376,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: DISABLE
      * </pre>
      */
-    @Length(max = 30, message = "{BANK_ATM_BEAN_ICCARD_STATUS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 30, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_ICCARD_STATUS_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_iccard_status", length = 30, nullable = true)
     private String iccardStatus;
 
@@ -387,7 +388,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: DISABLE
      * </pre>
      */
-    @Length(max = 30, message = "{BANK_ATM_BEAN_EDOOR_STATUS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 30, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_EDOOR_STATUS_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_edoor_status", length = 30, nullable = true)
     private String edoorStatus;
 
@@ -399,7 +400,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: DISABLE
      * </pre>
      */
-    @Length(max = 30, message = "{BANK_ATM_BEAN_ENVELOPE_STATUS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 30, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_ENVELOPE_STATUS_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_envelope_status", length = 30, nullable = true)
     private String envelopeStatus;
 
@@ -411,7 +412,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: DISABLE
      * </pre>
      */
-    @Length(max = 30, message = "{BANK_ATM_BEAN_JOURNAL_STATUS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 30, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_JOURNAL_STATUS_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_journal_status", length = 30, nullable = true)
     private String journalStatus;
 
@@ -423,7 +424,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: DISABLE
      * </pre>
      */
-    @Length(max = 30, message = "{BANK_ATM_BEAN_INVOICE_STATUS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 30, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_INVOICE_STATUS_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_invoice_status", length = 30, nullable = true)
     private String invoiceStatus;
 
@@ -435,7 +436,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: DISABLE
      * </pre>
      */
-    @Length(max = 30, message = "{BANK_ATM_BEAN_LEFT_DEPOSIT_STATUS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 30, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_LEFT_DEPOSIT_STATUS_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_left_deposit_status", length = 30, nullable = true)
     private String leftDepositStatus;
 
@@ -447,7 +448,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: DISABLE
      * </pre>
      */
-    @Length(max = 30, message = "{BANK_ATM_BEAN_DEPOSIT_STATUS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 30, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_DEPOSIT_STATUS_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_deposit_status", length = 30, nullable = true)
     private String depositStatus;
 
@@ -459,7 +460,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: DISABLE
      * </pre>
      */
-    @Length(max = 30, message = "{BANK_ATM_BEAN_RECEIPT_PRINTER_STATUS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 30, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_RECEIPT_PRINTER_STATUS_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_receipt_printer_status", length = 30, nullable = true)
     private String receiptPrinterStatus;
 
@@ -471,7 +472,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: 00000
      * </pre>
      */
-    @Length(max = 10, message = "{BANK_ATM_BEAN_RECEIPT_PRINTER_ERROR_CODE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 10, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_RECEIPT_PRINTER_ERROR_CODE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_receipt_printer_error_code", length = 10, nullable = true)
     private String receiptPrinterErrorCode;
 
@@ -483,7 +484,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: 
      * </pre>
      */
-    @Length(max = 100, message = "{BANK_ATM_BEAN_RECEIPT_PRINTER_DESCRIPTION_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 100, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_RECEIPT_PRINTER_DESCRIPTION_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_receipt_printer_description", length = 100, nullable = true)
     private String receiptPrinterDescription;
 
@@ -495,7 +496,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: DISABLE
      * </pre>
      */
-    @Length(max = 30, message = "{BANK_ATM_BEAN_CASH_ACCEPTANCE_STATUS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 30, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_CASH_ACCEPTANCE_STATUS_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_cash_acceptance_status", length = 30, nullable = true)
     private String cashAcceptanceStatus;
 
@@ -507,7 +508,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: 00000
      * </pre>
      */
-    @Length(max = 10, message = "{BANK_ATM_BEAN_CASH_ACCEPTANCE_ERROR_CODE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 10, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_CASH_ACCEPTANCE_ERROR_CODE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_cash_acceptance_error_code", length = 10, nullable = true)
     private String cashAcceptanceErrorCode;
 
@@ -519,7 +520,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: 
      * </pre>
      */
-    @Length(max = 100, message = "{BANK_ATM_BEAN_CASH_ACCEPTANCE_DESCRIPTION_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 100, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_CASH_ACCEPTANCE_DESCRIPTION_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_cash_acceptance_description", length = 100, nullable = true)
     private String cashAcceptanceDescription;
 
@@ -531,7 +532,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: DISABLE
      * </pre>
      */
-    @Length(max = 30, message = "{BANK_ATM_BEAN_CASH_DISPENSER_STATUS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 30, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_CASH_DISPENSER_STATUS_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_cash_dispenser_status", length = 30, nullable = true)
     private String cashDispenserStatus;
 
@@ -543,7 +544,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: 00000
      * </pre>
      */
-    @Length(max = 10, message = "{BANK_ATM_BEAN_CASH_DISPENSER_ERROR_CODE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 10, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_CASH_DISPENSER_ERROR_CODE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_cash_dispenser_error_code", length = 10, nullable = true)
     private String cashDispenserErrorCode;
 
@@ -555,7 +556,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: 
      * </pre>
      */
-    @Length(max = 100, message = "{BANK_ATM_BEAN_CASH_DISPENSER_DESCRIPTION_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 100, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_CASH_DISPENSER_DESCRIPTION_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_cash_dispenser_description", length = 100, nullable = true)
     private String cashDispenserDescription;
 
@@ -567,7 +568,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 14, message = "{BANK_ATM_BEAN_MONEY_BOX1_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 14, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_MONEY_BOX1_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_money_box_1_id", length = 14, nullable = true)
     private String moneyBox1Id;
 
@@ -579,7 +580,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: DISABLE
      * </pre>
      */
-    @Length(max = 30, message = "{BANK_ATM_BEAN_MONEY_BOX1_STATUS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 30, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_MONEY_BOX1_STATUS_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_money_box_1_status", length = 30, nullable = true)
     private String moneyBox1Status;
 
@@ -613,7 +614,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: 0
      * </pre>
      */
-    @ValidLength(max = 10, message = "{BANK_ATM_BEAN_MONEY_BOX1_CURRENT_COUNT_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidLength(max = 10, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_MONEY_BOX1_CURRENT_COUNT_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_money_box_1_current_count", length = 10, nullable = true)
     private Integer moneyBox1CurrentCount;
 
@@ -625,7 +626,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: 0
      * </pre>
      */
-    @ValidLength(max = 10, message = "{BANK_ATM_BEAN_MONEY_BOX1_MAX_COUNT_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidLength(max = 10, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_MONEY_BOX1_MAX_COUNT_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_money_box_1_max_count", length = 10, nullable = true)
     private Integer moneyBox1MaxCount;
 
@@ -648,7 +649,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 10, message = "{BANK_ATM_BEAN_MONEY_BOX1_UNIT_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 10, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_MONEY_BOX1_UNIT_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_money_box_1_unit", length = 10, nullable = true)
     private String moneyBox1Unit;
 
@@ -660,7 +661,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 10, message = "{BANK_ATM_BEAN_MONEY_BOX1_TYPE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 10, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_MONEY_BOX1_TYPE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_money_box_1_type", length = 10, nullable = true)
     private String moneyBox1Type;
 
@@ -672,7 +673,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 14, message = "{BANK_ATM_BEAN_MONEY_BOX2_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 14, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_MONEY_BOX2_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_money_box_2_id", length = 14, nullable = true)
     private String moneyBox2Id;
 
@@ -684,7 +685,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: DISABLE
      * </pre>
      */
-    @Length(max = 30, message = "{BANK_ATM_BEAN_MONEY_BOX2_STATUS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 30, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_MONEY_BOX2_STATUS_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_money_box_2_status", length = 30, nullable = true)
     private String moneyBox2Status;
 
@@ -718,7 +719,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: 0
      * </pre>
      */
-    @ValidLength(max = 10, message = "{BANK_ATM_BEAN_MONEY_BOX2_CURRENT_COUNT_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidLength(max = 10, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_MONEY_BOX2_CURRENT_COUNT_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_money_box_2_current_count", length = 10, nullable = true)
     private Integer moneyBox2CurrentCount;
 
@@ -730,7 +731,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: 0
      * </pre>
      */
-    @ValidLength(max = 10, message = "{BANK_ATM_BEAN_MONEY_BOX2_MAX_COUNT_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidLength(max = 10, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_MONEY_BOX2_MAX_COUNT_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_money_box_2_max_count", length = 10, nullable = true)
     private Integer moneyBox2MaxCount;
 
@@ -753,7 +754,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 10, message = "{BANK_ATM_BEAN_MONEY_BOX2_UNIT_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 10, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_MONEY_BOX2_UNIT_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_money_box_2_unit", length = 10, nullable = true)
     private String moneyBox2Unit;
 
@@ -765,7 +766,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 10, message = "{BANK_ATM_BEAN_MONEY_BOX2_TYPE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 10, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_MONEY_BOX2_TYPE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_money_box_2_type", length = 10, nullable = true)
     private String moneyBox2Type;
 
@@ -777,7 +778,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 14, message = "{BANK_ATM_BEAN_MONEY_BOX3_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 14, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_MONEY_BOX3_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_money_box_3_id", length = 14, nullable = true)
     private String moneyBox3Id;
 
@@ -789,7 +790,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: DISABLE
      * </pre>
      */
-    @Length(max = 30, message = "{BANK_ATM_BEAN_MONEY_BOX3_STATUS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 30, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_MONEY_BOX3_STATUS_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_money_box_3_status", length = 30, nullable = true)
     private String moneyBox3Status;
 
@@ -823,7 +824,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: 0
      * </pre>
      */
-    @ValidLength(max = 10, message = "{BANK_ATM_BEAN_MONEY_BOX3_CURRENT_COUNT_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidLength(max = 10, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_MONEY_BOX3_CURRENT_COUNT_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_money_box_3_current_count", length = 10, nullable = true)
     private Integer moneyBox3CurrentCount;
 
@@ -835,7 +836,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: 0
      * </pre>
      */
-    @ValidLength(max = 10, message = "{BANK_ATM_BEAN_MONEY_BOX3_MAX_COUNT_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidLength(max = 10, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_MONEY_BOX3_MAX_COUNT_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_money_box_3_max_count", length = 10, nullable = true)
     private Integer moneyBox3MaxCount;
 
@@ -858,7 +859,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 10, message = "{BANK_ATM_BEAN_MONEY_BOX3_UNIT_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 10, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_MONEY_BOX3_UNIT_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_money_box_3_unit", length = 10, nullable = true)
     private String moneyBox3Unit;
 
@@ -870,7 +871,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 10, message = "{BANK_ATM_BEAN_MONEY_BOX3_TYPE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 10, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_MONEY_BOX3_TYPE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_money_box_3_type", length = 10, nullable = true)
     private String moneyBox3Type;
 
@@ -882,7 +883,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 14, message = "{BANK_ATM_BEAN_MONEY_BOX4_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 14, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_MONEY_BOX4_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_money_box_4_id", length = 14, nullable = true)
     private String moneyBox4Id;
 
@@ -894,7 +895,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: DISABLE
      * </pre>
      */
-    @Length(max = 30, message = "{BANK_ATM_BEAN_MONEY_BOX4_STATUS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 30, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_MONEY_BOX4_STATUS_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_money_box_4_status", length = 30, nullable = true)
     private String moneyBox4Status;
 
@@ -928,7 +929,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: 0
      * </pre>
      */
-    @ValidLength(max = 10, message = "{BANK_ATM_BEAN_MONEY_BOX4_CURRENT_COUNT_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidLength(max = 10, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_MONEY_BOX4_CURRENT_COUNT_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_money_box_4_current_count", length = 10, nullable = true)
     private Integer moneyBox4CurrentCount;
 
@@ -940,7 +941,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: 0
      * </pre>
      */
-    @ValidLength(max = 10, message = "{BANK_ATM_BEAN_MONEY_BOX4_MAX_COUNT_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidLength(max = 10, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_MONEY_BOX4_MAX_COUNT_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_money_box_4_max_count", length = 10, nullable = true)
     private Integer moneyBox4MaxCount;
 
@@ -963,7 +964,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 10, message = "{BANK_ATM_BEAN_MONEY_BOX4_UNIT_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 10, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_MONEY_BOX4_UNIT_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_money_box_4_unit", length = 10, nullable = true)
     private String moneyBox4Unit;
 
@@ -975,7 +976,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 10, message = "{BANK_ATM_BEAN_MONEY_BOX4_TYPE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 10, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_MONEY_BOX4_TYPE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_money_box_4_type", length = 10, nullable = true)
     private String moneyBox4Type;
 
@@ -987,7 +988,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 14, message = "{BANK_ATM_BEAN_MONEY_BOX5_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 14, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_MONEY_BOX5_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_money_box_5_id", length = 14, nullable = true)
     private String moneyBox5Id;
 
@@ -999,7 +1000,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: DISABLE
      * </pre>
      */
-    @Length(max = 30, message = "{BANK_ATM_BEAN_MONEY_BOX5_STATUS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 30, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_MONEY_BOX5_STATUS_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_money_box_5_status", length = 30, nullable = true)
     private String moneyBox5Status;
 
@@ -1033,7 +1034,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: 0
      * </pre>
      */
-    @ValidLength(max = 10, message = "{BANK_ATM_BEAN_MONEY_BOX5_CURRENT_COUNT_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidLength(max = 10, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_MONEY_BOX5_CURRENT_COUNT_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_money_box_5_current_count", length = 10, nullable = true)
     private Integer moneyBox5CurrentCount;
 
@@ -1045,7 +1046,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: 0
      * </pre>
      */
-    @ValidLength(max = 10, message = "{BANK_ATM_BEAN_MONEY_BOX5_MAX_COUNT_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidLength(max = 10, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_MONEY_BOX5_MAX_COUNT_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_money_box_5_max_count", length = 10, nullable = true)
     private Integer moneyBox5MaxCount;
 
@@ -1068,7 +1069,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 10, message = "{BANK_ATM_BEAN_MONEY_BOX5_UNIT_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 10, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_MONEY_BOX5_UNIT_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_money_box_5_unit", length = 10, nullable = true)
     private String moneyBox5Unit;
 
@@ -1080,7 +1081,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 10, message = "{BANK_ATM_BEAN_MONEY_BOX5_TYPE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 10, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_MONEY_BOX5_TYPE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_money_box_5_type", length = 10, nullable = true)
     private String moneyBox5Type;
 
@@ -1092,9 +1093,9 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{BANK_ATM_BEAN_UPLOAD_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_UPLOAD_TIMESTAMP_DATE_TIME_FORMAT + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
-    @NotNull(message = "{BANK_ATM_BEAN_UPLOAD_TIMESTAMP_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotNull(message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_UPLOAD_TIMESTAMP_NOT_NULL + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_upload_timestamp", length = 19, nullable = false)
     private Date uploadTimestamp;
 
@@ -1106,8 +1107,8 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: INSERVICE
      * </pre>
      */
-    @NotBlank(message = "{BANK_ATM_BEAN_STATUS_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 32, message = "{BANK_ATM_BEAN_STATUS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_STATUS_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 32, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_STATUS_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_status", length = 32, nullable = false)
     private String status;
 
@@ -1119,7 +1120,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 32, message = "{BANK_ATM_BEAN_TERM_STATUS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 32, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_TERM_STATUS_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_term_status", length = 32, nullable = true)
     private String termStatus;
 
@@ -1131,7 +1132,7 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{BANK_ATM_BEAN_LIVE_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_LIVE_TIMESTAMP_DATE_TIME_FORMAT + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
     @Column(name = "atm_live_timestamp", length = 19, nullable = true)
     private Date liveTimestamp;
@@ -1144,9 +1145,9 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: CURRENT_TIMESTAMP
      * </pre>
      */
-    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{BANK_ATM_BEAN_CREATE_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_CREATE_TIMESTAMP_DATE_TIME_FORMAT + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
-    @NotNull(message = "{BANK_ATM_BEAN_CREATE_TIMESTAMP_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotNull(message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_CREATE_TIMESTAMP_NOT_NULL + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_create_timestamp", length = 19, nullable = false)
     private Date createTimestamp;
 
@@ -1158,8 +1159,8 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{BANK_ATM_BEAN_CREATE_BY_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 20, message = "{BANK_ATM_BEAN_CREATE_BY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_CREATE_BY_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 20, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_CREATE_BY_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_create_by", length = 20, nullable = false)
     private String createBy;
 
@@ -1171,8 +1172,8 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotNull(message = "{BANK_ATM_BEAN_OPERATOR_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @ValidLength(max = 20, message = "{BANK_ATM_BEAN_OPERATOR_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotNull(message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_OPERATOR_ID_NOT_NULL + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidLength(max = 20, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_OPERATOR_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_operator_id", length = 20, nullable = false)
     private Long operatorId;
 
@@ -1184,8 +1185,8 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{BANK_ATM_BEAN_OPERATOR_NAME_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 20, message = "{BANK_ATM_BEAN_OPERATOR_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_OPERATOR_NAME_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 20, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_OPERATOR_NAME_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_operator_name", length = 20, nullable = false)
     private String operatorName;
 
@@ -1197,8 +1198,8 @@ public class BankAtmBean implements Serializable {
      * DB defaultValue: N
      * </pre>
      */
-    @NotBlank(message = "{BANK_ATM_BEAN_DELETE_FLAG_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 1, message = "{BANK_ATM_BEAN_DELETE_FLAG_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_DELETE_FLAG_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 1, message = "{" + BankAtmBeanI18nConstant.BANK_ATM_BEAN_DELETE_FLAG_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_delete_flag", length = 1, nullable = false)
     private String deleteFlag;
 

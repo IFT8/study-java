@@ -3,6 +3,7 @@ package com.comodin.fleet.core.bean;
 import com.comodin.basic.util.date.DateUtil;
 import com.comodin.basic.validation.IBaseValidGroup;
 import com.comodin.basic.validation.constraints.*;
+import com.comodin.fleet.constant.i18n.AtmGunneboTransactionBeanI18nConstant;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
@@ -22,8 +23,8 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotNull(message = "{ATM_GUNNEBO_TRANSACTION_BEAN_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @ValidLength(max = 20, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotNull(message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_ID_NOT_NULL + "}", groups = {IBaseValidGroup.Update.class})
+    @ValidLength(max = 20, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_ID_LENGTH + "}", groups = {IBaseValidGroup.Update.class})
     @Column(name = "transaction_id", length = 20, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -37,8 +38,8 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{ATM_GUNNEBO_TRANSACTION_BEAN_ORIGINAL_ID_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 20, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_ORIGINAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_ORIGINAL_ID_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 20, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_ORIGINAL_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_original_id", length = 20, nullable = false)
     private String originalId;
 
@@ -50,7 +51,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_CLIENT_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_CLIENT_INTERNAL_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_client_internal_id", length = 15, nullable = true)
     private String clientInternalId;
 
@@ -62,7 +63,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_CLIENT_BRANCH_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_CLIENT_BRANCH_INTERNAL_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_client_branch_internal_id", length = 15, nullable = true)
     private String clientBranchInternalId;
 
@@ -74,7 +75,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_OPERATION_TYPE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_OPERATION_TYPE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_operation_type", length = 15, nullable = true)
     private String operationType;
 
@@ -86,9 +87,9 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: CURRENT_TIMESTAMP
      * </pre>
      */
-    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{ATM_GUNNEBO_TRANSACTION_BEAN_OPERATE_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_OPERATE_TIMESTAMP_DATE_TIME_FORMAT + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
-    @NotNull(message = "{ATM_GUNNEBO_TRANSACTION_BEAN_OPERATE_TIMESTAMP_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotNull(message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_OPERATE_TIMESTAMP_NOT_NULL + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_operate_timestamp", length = 19, nullable = false)
     private Date operateTimestamp;
 
@@ -100,7 +101,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_DEPOSIT_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_DEPOSIT_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_deposit_id", length = 15, nullable = true)
     private String depositId;
 
@@ -112,7 +113,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_DEPOSIT_USER_ACCOUNT_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_DEPOSIT_USER_ACCOUNT_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_deposit_user_account", length = 15, nullable = true)
     private String depositUserAccount;
 
@@ -124,7 +125,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{ATM_GUNNEBO_TRANSACTION_BEAN_DEPOSIT_DATE_TIME_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_DEPOSIT_DATE_TIME_DATE_TIME_FORMAT + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
     @Column(name = "transaction_deposit_date_time", length = 19, nullable = true)
     private Date depositDateTime;
@@ -137,7 +138,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_WITHDRAWALS_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_WITHDRAWALS_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_withdrawals_id", length = 15, nullable = true)
     private String withdrawalsId;
 
@@ -149,7 +150,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_STATUS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_STATUS_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_status", length = 15, nullable = true)
     private String status;
 
@@ -161,7 +162,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_DEVICE_STATUS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_DEVICE_STATUS_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_device_status", length = 15, nullable = true)
     private String deviceStatus;
 
@@ -173,7 +174,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_TRANSACTION_STATUS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_TRANSACTION_STATUS_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_transaction_status", length = 15, nullable = true)
     private String transactionStatus;
 
@@ -185,7 +186,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_DESCRIPTION_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_DESCRIPTION_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_description", length = 15, nullable = true)
     private String description;
 
@@ -197,7 +198,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_COD_ERROR_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_COD_ERROR_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_cod_error", length = 15, nullable = true)
     private String codError;
 
@@ -209,7 +210,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_CHEQUE_TOTAL_AMOUNT_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_CHEQUE_TOTAL_AMOUNT_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_cheque_total_amount", length = 15, nullable = true)
     private String chequeTotalAmount;
 
@@ -221,7 +222,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_CHEQUE_NUMBER_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_CHEQUE_NUMBER_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_cheque_number", length = 15, nullable = true)
     private String chequeNumber;
 
@@ -233,7 +234,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_ENVELOPES_NUMBER_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_ENVELOPES_NUMBER_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_envelopes_number", length = 15, nullable = true)
     private String envelopesNumber;
 
@@ -245,7 +246,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_ENVELOPES_CODE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_ENVELOPES_CODE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_envelopes_code", length = 15, nullable = true)
     private String envelopesCode;
 
@@ -257,7 +258,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_CURRENCY_TYPE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_CURRENCY_TYPE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_currency_type", length = 15, nullable = true)
     private String currencyType;
 
@@ -269,7 +270,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_CURRENCY_CURRENT_NUMBER_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_CURRENCY_CURRENT_NUMBER_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_currency_current_number", length = 15, nullable = true)
     private String currencyCurrentNumber;
 
@@ -281,7 +282,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_CURRENCY_TOTAL_AMOUNT_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_CURRENCY_TOTAL_AMOUNT_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_currency_total_amount", length = 15, nullable = true)
     private String currencyTotalAmount;
 
@@ -293,7 +294,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_HARD_DENOMINATION1_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_HARD_DENOMINATION1_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_hard_denomination1", length = 15, nullable = true)
     private String hardDenomination1;
 
@@ -305,7 +306,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_HARD_DENOMINATION2_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_HARD_DENOMINATION2_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_hard_denomination2", length = 15, nullable = true)
     private String hardDenomination2;
 
@@ -317,7 +318,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_HARD_DENOMINATION3_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_HARD_DENOMINATION3_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_hard_denomination3", length = 15, nullable = true)
     private String hardDenomination3;
 
@@ -329,7 +330,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_HARD_DENOMINATION4_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_HARD_DENOMINATION4_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_hard_denomination4", length = 15, nullable = true)
     private String hardDenomination4;
 
@@ -341,7 +342,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_HARD_DENOMINATION5_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_HARD_DENOMINATION5_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_hard_denomination5", length = 15, nullable = true)
     private String hardDenomination5;
 
@@ -353,7 +354,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_HARD_DENOMINATION6_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_HARD_DENOMINATION6_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_hard_denomination6", length = 15, nullable = true)
     private String hardDenomination6;
 
@@ -365,7 +366,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_HARD_DENOMINATION7_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_HARD_DENOMINATION7_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_hard_denomination7", length = 15, nullable = true)
     private String hardDenomination7;
 
@@ -377,7 +378,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_HARD_DENOMINATION8_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_HARD_DENOMINATION8_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_hard_denomination8", length = 15, nullable = true)
     private String hardDenomination8;
 
@@ -389,7 +390,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_PAPER_DENOMINATION1_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_PAPER_DENOMINATION1_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_paper_denomination1", length = 15, nullable = true)
     private String paperDenomination1;
 
@@ -401,7 +402,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_PAPER_DENOMINATION2_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_PAPER_DENOMINATION2_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_paper_denomination2", length = 15, nullable = true)
     private String paperDenomination2;
 
@@ -413,7 +414,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_PAPER_DENOMINATION3_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_PAPER_DENOMINATION3_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_paper_denomination3", length = 15, nullable = true)
     private String paperDenomination3;
 
@@ -425,7 +426,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_PAPER_DENOMINATION4_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_PAPER_DENOMINATION4_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_paper_denomination4", length = 15, nullable = true)
     private String paperDenomination4;
 
@@ -437,7 +438,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_PAPER_DENOMINATION5_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_PAPER_DENOMINATION5_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_paper_denomination5", length = 15, nullable = true)
     private String paperDenomination5;
 
@@ -449,7 +450,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_PAPER_DENOMINATION6_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_PAPER_DENOMINATION6_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_paper_denomination6", length = 15, nullable = true)
     private String paperDenomination6;
 
@@ -461,7 +462,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_PAPER_DENOMINATION7_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_PAPER_DENOMINATION7_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_paper_denomination7", length = 15, nullable = true)
     private String paperDenomination7;
 
@@ -473,7 +474,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_MANUAL_TOTAL_AMOUNT_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_MANUAL_TOTAL_AMOUNT_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_manual_total_amount", length = 15, nullable = true)
     private String manualTotalAmount;
 
@@ -485,7 +486,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_MANUAL_DENOMINATION1_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_MANUAL_DENOMINATION1_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_manual_denomination1", length = 15, nullable = true)
     private String manualDenomination1;
 
@@ -497,7 +498,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_MANUAL_DENOMINATION2_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_MANUAL_DENOMINATION2_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_manual_denomination2", length = 15, nullable = true)
     private String manualDenomination2;
 
@@ -509,7 +510,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_MANUAL_DENOMINATION3_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_MANUAL_DENOMINATION3_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_manual_denomination3", length = 15, nullable = true)
     private String manualDenomination3;
 
@@ -521,7 +522,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_MANUAL_DENOMINATION4_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_MANUAL_DENOMINATION4_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_manual_denomination4", length = 15, nullable = true)
     private String manualDenomination4;
 
@@ -533,7 +534,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_MANUAL_DENOMINATION5_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_MANUAL_DENOMINATION5_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_manual_denomination5", length = 15, nullable = true)
     private String manualDenomination5;
 
@@ -545,7 +546,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_MANUAL_DENOMINATION6_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_MANUAL_DENOMINATION6_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_manual_denomination6", length = 15, nullable = true)
     private String manualDenomination6;
 
@@ -557,7 +558,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_MANUAL_DENOMINATION7_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_MANUAL_DENOMINATION7_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_manual_denomination7", length = 15, nullable = true)
     private String manualDenomination7;
 
@@ -569,7 +570,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_MANUAL_DENOMINATION8_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_MANUAL_DENOMINATION8_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_manual_denomination8", length = 15, nullable = true)
     private String manualDenomination8;
 
@@ -581,7 +582,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_DOCUMENT_TOTAL_AMOUNT_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_DOCUMENT_TOTAL_AMOUNT_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_document_total_amount", length = 15, nullable = true)
     private String documentTotalAmount;
 
@@ -593,7 +594,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_REFERENCE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_REFERENCE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_reference", length = 15, nullable = true)
     private String reference;
 
@@ -605,7 +606,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_CLAVE_SOBRE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_CLAVE_SOBRE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_clave_sobre", length = 15, nullable = true)
     private String claveSobre;
 
@@ -617,7 +618,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_TOTAL_SOBRE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_TOTAL_SOBRE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_total_sobre", length = 15, nullable = true)
     private String totalSobre;
 
@@ -629,7 +630,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_IMPRESO_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_IMPRESO_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_impreso", length = 15, nullable = true)
     private String impreso;
 
@@ -641,7 +642,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_BALANZA_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_BALANZA_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_balanza", length = 15, nullable = true)
     private String balanza;
 
@@ -653,7 +654,7 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_FECHA_CONT_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_FECHA_CONT_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_fecha_cont", length = 15, nullable = true)
     private String fechaCont;
 
@@ -665,9 +666,9 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: CURRENT_TIMESTAMP
      * </pre>
      */
-    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{ATM_GUNNEBO_TRANSACTION_BEAN_CREATE_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_CREATE_TIMESTAMP_DATE_TIME_FORMAT + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
-    @NotNull(message = "{ATM_GUNNEBO_TRANSACTION_BEAN_CREATE_TIMESTAMP_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotNull(message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_CREATE_TIMESTAMP_NOT_NULL + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_create_timestamp", length = 19, nullable = false)
     private Date createTimestamp;
 
@@ -679,8 +680,8 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{ATM_GUNNEBO_TRANSACTION_BEAN_CREATE_BY_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 20, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_CREATE_BY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_CREATE_BY_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 20, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_CREATE_BY_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_create_by", length = 20, nullable = false)
     private String createBy;
 
@@ -692,8 +693,8 @@ public class AtmGunneboTransactionBean implements Serializable {
      * DB defaultValue: N
      * </pre>
      */
-    @NotBlank(message = "{ATM_GUNNEBO_TRANSACTION_BEAN_DELETE_FLAG_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 1, message = "{ATM_GUNNEBO_TRANSACTION_BEAN_DELETE_FLAG_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_DELETE_FLAG_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 1, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_DELETE_FLAG_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_delete_flag", length = 1, nullable = false)
     private String deleteFlag;
 

@@ -3,6 +3,7 @@ package com.comodin.fleet.core.bean;
 import com.comodin.basic.util.date.DateUtil;
 import com.comodin.basic.validation.IBaseValidGroup;
 import com.comodin.basic.validation.constraints.*;
+import com.comodin.fleet.constant.i18n.BankAtmCodeBeanI18nConstant;
 import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -21,8 +22,8 @@ public class BankAtmCodeBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotNull(message = "{BANK_ATM_CODE_BEAN_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @ValidLength(max = 20, message = "{BANK_ATM_CODE_BEAN_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotNull(message = "{" + BankAtmCodeBeanI18nConstant.BANK_ATM_CODE_BEAN_ID_NOT_NULL + "}", groups = {IBaseValidGroup.Update.class})
+    @ValidLength(max = 20, message = "{" + BankAtmCodeBeanI18nConstant.BANK_ATM_CODE_BEAN_ID_LENGTH + "}", groups = {IBaseValidGroup.Update.class})
     @Column(name = "code_id", length = 20, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -36,7 +37,7 @@ public class BankAtmCodeBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @ValidLength(max = 20, message = "{BANK_ATM_CODE_BEAN_CLIENT_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidLength(max = 20, message = "{" + BankAtmCodeBeanI18nConstant.BANK_ATM_CODE_BEAN_CLIENT_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "code_client_id", length = 20, nullable = true)
     private Long clientId;
 
@@ -48,7 +49,7 @@ public class BankAtmCodeBean implements Serializable {
      * DB defaultValue: 
      * </pre>
      */
-    @Length(max = 200, message = "{BANK_ATM_CODE_BEAN_SUGGESTION_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 200, message = "{" + BankAtmCodeBeanI18nConstant.BANK_ATM_CODE_BEAN_SUGGESTION_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "code_suggestion", length = 200, nullable = true)
     private String suggestion;
 
@@ -60,8 +61,8 @@ public class BankAtmCodeBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{BANK_ATM_CODE_BEAN_NUM_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 10, message = "{BANK_ATM_CODE_BEAN_NUM_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + BankAtmCodeBeanI18nConstant.BANK_ATM_CODE_BEAN_NUM_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 10, message = "{" + BankAtmCodeBeanI18nConstant.BANK_ATM_CODE_BEAN_NUM_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "code_num", length = 10, nullable = false)
     private String num;
 
@@ -73,7 +74,7 @@ public class BankAtmCodeBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 200, message = "{BANK_ATM_CODE_BEAN_DESCRIPTION_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 200, message = "{" + BankAtmCodeBeanI18nConstant.BANK_ATM_CODE_BEAN_DESCRIPTION_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "code_description", length = 200, nullable = true)
     private String description;
 

@@ -17,7 +17,7 @@ import java.util.Set;
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class GenerateServiceInterfaceFile {
 
-    public static void generateApplicationServiceInterfaceFile(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
+    public static void generateServiceInterfaceFile(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
 
         String javaBeanName = introspectedTable.getFullyQualifiedTable().getDomainObjectName();
 

@@ -10,20 +10,23 @@ import org.mybatis.generator.api.dom.java.TopLevelClass;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class GenerateConstantFile {
 
-    public static void generateApplicationConstantFile(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
+    public static void generateConstantFile(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
 
         String javaBeanName = introspectedTable.getFullyQualifiedTable().getDomainObjectName();
         Set<EntityProperty> entityConstantSet = PluginsUtils.getEntityConstantToMapByEntityBeanName().get(javaBeanName);
-        if (entityConstantSet == null || entityConstantSet.isEmpty()) {
-            return;
+        //if (entityConstantSet == null || entityConstantSet.isEmpty()) {
+        //    return;
+        //}
+        if (entityConstantSet == null) {
+            entityConstantSet = new HashSet<>();
         }
-
         //String outFileRootDir = "D:\\ideaProjects\\study-java\\basic-parent\\basic-mybatis-MBG\\src\\main\\java\\com\\comodin\\fleet\\constant";
         String outFileRootDir = PluginsUtils.getGenerateConstantFileDir();
         String outFileExtensionName = ".java";

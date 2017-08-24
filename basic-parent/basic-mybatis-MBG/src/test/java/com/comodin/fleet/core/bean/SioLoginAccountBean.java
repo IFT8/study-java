@@ -2,13 +2,17 @@ package com.comodin.fleet.core.bean;
 
 import com.comodin.basic.util.date.DateUtil;
 import com.comodin.basic.validation.IBaseValidGroup;
-import com.comodin.basic.validation.constraints.*;
+import com.comodin.basic.validation.constraints.ValidDateTimeFormat;
+import com.comodin.basic.validation.constraints.ValidLength;
+import com.comodin.fleet.constant.i18n.SioLoginAccountBeanI18nConstant;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.*;
-import javax.validation.constraints.*;
-import org.hibernate.validator.constraints.*;
-import org.springframework.format.annotation.DateTimeFormat;
 
 @SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue", "DefaultAnnotationParam"})
 @Entity
@@ -22,8 +26,8 @@ public class SioLoginAccountBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotNull(message = "{SIO_LOGIN_ACCOUNT_BEAN_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @ValidLength(max = 20, message = "{SIO_LOGIN_ACCOUNT_BEAN_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotNull(message = "{" + SioLoginAccountBeanI18nConstant.SIO_LOGIN_ACCOUNT_BEAN_ID_NOT_NULL + "}", groups = {IBaseValidGroup.Update.class})
+    @ValidLength(max = 20, message = "{" + SioLoginAccountBeanI18nConstant.SIO_LOGIN_ACCOUNT_BEAN_ID_LENGTH + "}", groups = {IBaseValidGroup.Update.class})
     @Column(name = "account_id", length = 20, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -37,8 +41,8 @@ public class SioLoginAccountBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{SIO_LOGIN_ACCOUNT_BEAN_COMPANY_INTERNAL_ID_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 15, message = "{SIO_LOGIN_ACCOUNT_BEAN_COMPANY_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + SioLoginAccountBeanI18nConstant.SIO_LOGIN_ACCOUNT_BEAN_COMPANY_INTERNAL_ID_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + SioLoginAccountBeanI18nConstant.SIO_LOGIN_ACCOUNT_BEAN_COMPANY_INTERNAL_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "account_company_internal_id", length = 15, nullable = false)
     private String companyInternalId;
 
@@ -50,7 +54,7 @@ public class SioLoginAccountBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 50, message = "{SIO_LOGIN_ACCOUNT_BEAN_COMPANY_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 50, message = "{" + SioLoginAccountBeanI18nConstant.SIO_LOGIN_ACCOUNT_BEAN_COMPANY_NAME_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "account_company_name", length = 50, nullable = true)
     private String companyName;
 
@@ -62,8 +66,8 @@ public class SioLoginAccountBean implements Serializable {
      * DB defaultValue: 
      * </pre>
      */
-    @NotBlank(message = "{SIO_LOGIN_ACCOUNT_BEAN_BRANCH_INTERNAL_ID_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 15, message = "{SIO_LOGIN_ACCOUNT_BEAN_BRANCH_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + SioLoginAccountBeanI18nConstant.SIO_LOGIN_ACCOUNT_BEAN_BRANCH_INTERNAL_ID_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + SioLoginAccountBeanI18nConstant.SIO_LOGIN_ACCOUNT_BEAN_BRANCH_INTERNAL_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "account_branch_internal_id", length = 15, nullable = false)
     private String branchInternalId;
 
@@ -75,7 +79,7 @@ public class SioLoginAccountBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 15, message = "{SIO_LOGIN_ACCOUNT_BEAN_BRANCH_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 15, message = "{" + SioLoginAccountBeanI18nConstant.SIO_LOGIN_ACCOUNT_BEAN_BRANCH_NAME_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "account_branch_name", length = 15, nullable = true)
     private String branchName;
 
@@ -87,8 +91,8 @@ public class SioLoginAccountBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{SIO_LOGIN_ACCOUNT_BEAN_USERNAME_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 20, message = "{SIO_LOGIN_ACCOUNT_BEAN_USERNAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + SioLoginAccountBeanI18nConstant.SIO_LOGIN_ACCOUNT_BEAN_USERNAME_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 20, message = "{" + SioLoginAccountBeanI18nConstant.SIO_LOGIN_ACCOUNT_BEAN_USERNAME_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "account_username", length = 20, nullable = false)
     private String username;
 
@@ -100,7 +104,7 @@ public class SioLoginAccountBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 20, message = "{SIO_LOGIN_ACCOUNT_BEAN_PASSWORD_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 20, message = "{" + SioLoginAccountBeanI18nConstant.SIO_LOGIN_ACCOUNT_BEAN_PASSWORD_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "account_password", length = 20, nullable = true)
     private String password;
 
@@ -112,8 +116,8 @@ public class SioLoginAccountBean implements Serializable {
      * DB defaultValue: http://189.240.94.180:8090/CompSegWebSrv/rest/login
      * </pre>
      */
-    @NotBlank(message = "{SIO_LOGIN_ACCOUNT_BEAN_LOGIN_URL_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 100, message = "{SIO_LOGIN_ACCOUNT_BEAN_LOGIN_URL_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + SioLoginAccountBeanI18nConstant.SIO_LOGIN_ACCOUNT_BEAN_LOGIN_URL_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 100, message = "{" + SioLoginAccountBeanI18nConstant.SIO_LOGIN_ACCOUNT_BEAN_LOGIN_URL_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "account_login_url", length = 100, nullable = false)
     private String loginUrl;
 
@@ -125,8 +129,8 @@ public class SioLoginAccountBean implements Serializable {
      * DB defaultValue: company
      * </pre>
      */
-    @NotBlank(message = "{SIO_LOGIN_ACCOUNT_BEAN_KEY_LOGIN_COMPANY_INTERNAL_ID_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 20, message = "{SIO_LOGIN_ACCOUNT_BEAN_KEY_LOGIN_COMPANY_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + SioLoginAccountBeanI18nConstant.SIO_LOGIN_ACCOUNT_BEAN_KEY_LOGIN_COMPANY_INTERNAL_ID_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 20, message = "{" + SioLoginAccountBeanI18nConstant.SIO_LOGIN_ACCOUNT_BEAN_KEY_LOGIN_COMPANY_INTERNAL_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "account_key_login_company_internal_id", length = 20, nullable = false)
     private String keyLoginCompanyInternalId;
 
@@ -138,8 +142,8 @@ public class SioLoginAccountBean implements Serializable {
      * DB defaultValue: branch
      * </pre>
      */
-    @NotBlank(message = "{SIO_LOGIN_ACCOUNT_BEAN_KEY_LOGIN_BRANCH_INTERNAL_ID_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 20, message = "{SIO_LOGIN_ACCOUNT_BEAN_KEY_LOGIN_BRANCH_INTERNAL_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + SioLoginAccountBeanI18nConstant.SIO_LOGIN_ACCOUNT_BEAN_KEY_LOGIN_BRANCH_INTERNAL_ID_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 20, message = "{" + SioLoginAccountBeanI18nConstant.SIO_LOGIN_ACCOUNT_BEAN_KEY_LOGIN_BRANCH_INTERNAL_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "account_key_login_branch_internal_id", length = 20, nullable = false)
     private String keyLoginBranchInternalId;
 
@@ -151,8 +155,8 @@ public class SioLoginAccountBean implements Serializable {
      * DB defaultValue: user
      * </pre>
      */
-    @NotBlank(message = "{SIO_LOGIN_ACCOUNT_BEAN_KEY_LOGIN_USERNAME_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 20, message = "{SIO_LOGIN_ACCOUNT_BEAN_KEY_LOGIN_USERNAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + SioLoginAccountBeanI18nConstant.SIO_LOGIN_ACCOUNT_BEAN_KEY_LOGIN_USERNAME_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 20, message = "{" + SioLoginAccountBeanI18nConstant.SIO_LOGIN_ACCOUNT_BEAN_KEY_LOGIN_USERNAME_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "account_key_login_username", length = 20, nullable = false)
     private String keyLoginUsername;
 
@@ -164,8 +168,8 @@ public class SioLoginAccountBean implements Serializable {
      * DB defaultValue: pwd
      * </pre>
      */
-    @NotBlank(message = "{SIO_LOGIN_ACCOUNT_BEAN_KEY_LOGIN_PASSWORD_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 20, message = "{SIO_LOGIN_ACCOUNT_BEAN_KEY_LOGIN_PASSWORD_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + SioLoginAccountBeanI18nConstant.SIO_LOGIN_ACCOUNT_BEAN_KEY_LOGIN_PASSWORD_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 20, message = "{" + SioLoginAccountBeanI18nConstant.SIO_LOGIN_ACCOUNT_BEAN_KEY_LOGIN_PASSWORD_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "account_key_login_password", length = 20, nullable = false)
     private String keyLoginPassword;
 
@@ -177,8 +181,8 @@ public class SioLoginAccountBean implements Serializable {
      * DB defaultValue: http://189.240.94.180:8090/CompSegWebSrv/rest/fileUpload
      * </pre>
      */
-    @NotBlank(message = "{SIO_LOGIN_ACCOUNT_BEAN_UPLOAD_DATA_URL_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 100, message = "{SIO_LOGIN_ACCOUNT_BEAN_UPLOAD_DATA_URL_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + SioLoginAccountBeanI18nConstant.SIO_LOGIN_ACCOUNT_BEAN_UPLOAD_DATA_URL_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 100, message = "{" + SioLoginAccountBeanI18nConstant.SIO_LOGIN_ACCOUNT_BEAN_UPLOAD_DATA_URL_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "account_upload_data_url", length = 100, nullable = false)
     private String uploadDataUrl;
 
@@ -190,8 +194,8 @@ public class SioLoginAccountBean implements Serializable {
      * DB defaultValue: file
      * </pre>
      */
-    @NotBlank(message = "{SIO_LOGIN_ACCOUNT_BEAN_KEY_UPLOAD_DATA_FILE_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 20, message = "{SIO_LOGIN_ACCOUNT_BEAN_KEY_UPLOAD_DATA_FILE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + SioLoginAccountBeanI18nConstant.SIO_LOGIN_ACCOUNT_BEAN_KEY_UPLOAD_DATA_FILE_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 20, message = "{" + SioLoginAccountBeanI18nConstant.SIO_LOGIN_ACCOUNT_BEAN_KEY_UPLOAD_DATA_FILE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "account_key_upload_data_file", length = 20, nullable = false)
     private String keyUploadDataFile;
 
@@ -203,8 +207,8 @@ public class SioLoginAccountBean implements Serializable {
      * DB defaultValue: token
      * </pre>
      */
-    @NotBlank(message = "{SIO_LOGIN_ACCOUNT_BEAN_KEY_UPLOAD_DATA_TOKEN_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 20, message = "{SIO_LOGIN_ACCOUNT_BEAN_KEY_UPLOAD_DATA_TOKEN_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + SioLoginAccountBeanI18nConstant.SIO_LOGIN_ACCOUNT_BEAN_KEY_UPLOAD_DATA_TOKEN_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 20, message = "{" + SioLoginAccountBeanI18nConstant.SIO_LOGIN_ACCOUNT_BEAN_KEY_UPLOAD_DATA_TOKEN_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "account_key_upload_data_token", length = 20, nullable = false)
     private String keyUploadDataToken;
 
@@ -216,8 +220,8 @@ public class SioLoginAccountBean implements Serializable {
      * DB defaultValue: ENABLE
      * </pre>
      */
-    @NotBlank(message = "{SIO_LOGIN_ACCOUNT_BEAN_STATUS_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 7, message = "{SIO_LOGIN_ACCOUNT_BEAN_STATUS_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + SioLoginAccountBeanI18nConstant.SIO_LOGIN_ACCOUNT_BEAN_STATUS_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 7, message = "{" + SioLoginAccountBeanI18nConstant.SIO_LOGIN_ACCOUNT_BEAN_STATUS_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "account_status", length = 7, nullable = false)
     private String status;
 
@@ -229,9 +233,9 @@ public class SioLoginAccountBean implements Serializable {
      * DB defaultValue: CURRENT_TIMESTAMP
      * </pre>
      */
-    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{SIO_LOGIN_ACCOUNT_BEAN_CREATE_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS, message = "{" + SioLoginAccountBeanI18nConstant.SIO_LOGIN_ACCOUNT_BEAN_CREATE_TIMESTAMP_DATE_TIME_FORMAT + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
-    @NotNull(message = "{SIO_LOGIN_ACCOUNT_BEAN_CREATE_TIMESTAMP_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotNull(message = "{" + SioLoginAccountBeanI18nConstant.SIO_LOGIN_ACCOUNT_BEAN_CREATE_TIMESTAMP_NOT_NULL + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "account_create_timestamp", length = 19, nullable = false)
     private Date createTimestamp;
 
@@ -243,8 +247,8 @@ public class SioLoginAccountBean implements Serializable {
      * DB defaultValue: SYSTEM
      * </pre>
      */
-    @NotBlank(message = "{SIO_LOGIN_ACCOUNT_BEAN_CREATE_BY_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 20, message = "{SIO_LOGIN_ACCOUNT_BEAN_CREATE_BY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + SioLoginAccountBeanI18nConstant.SIO_LOGIN_ACCOUNT_BEAN_CREATE_BY_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 20, message = "{" + SioLoginAccountBeanI18nConstant.SIO_LOGIN_ACCOUNT_BEAN_CREATE_BY_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "account_create_by", length = 20, nullable = false)
     private String createBy;
 
@@ -256,8 +260,8 @@ public class SioLoginAccountBean implements Serializable {
      * DB defaultValue: N
      * </pre>
      */
-    @NotBlank(message = "{SIO_LOGIN_ACCOUNT_BEAN_DELETE_FLAG_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 1, message = "{SIO_LOGIN_ACCOUNT_BEAN_DELETE_FLAG_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + SioLoginAccountBeanI18nConstant.SIO_LOGIN_ACCOUNT_BEAN_DELETE_FLAG_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 1, message = "{" + SioLoginAccountBeanI18nConstant.SIO_LOGIN_ACCOUNT_BEAN_DELETE_FLAG_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "account_delete_flag", length = 1, nullable = false)
     private String deleteFlag;
 

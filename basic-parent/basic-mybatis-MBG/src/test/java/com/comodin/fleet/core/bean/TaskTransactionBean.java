@@ -3,6 +3,7 @@ package com.comodin.fleet.core.bean;
 import com.comodin.basic.util.date.DateUtil;
 import com.comodin.basic.validation.IBaseValidGroup;
 import com.comodin.basic.validation.constraints.*;
+import com.comodin.fleet.constant.i18n.TaskTransactionBeanI18nConstant;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
@@ -22,8 +23,8 @@ public class TaskTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotNull(message = "{TASK_TRANSACTION_BEAN_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @ValidLength(max = 20, message = "{TASK_TRANSACTION_BEAN_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotNull(message = "{" + TaskTransactionBeanI18nConstant.TASK_TRANSACTION_BEAN_ID_NOT_NULL + "}", groups = {IBaseValidGroup.Update.class})
+    @ValidLength(max = 20, message = "{" + TaskTransactionBeanI18nConstant.TASK_TRANSACTION_BEAN_ID_LENGTH + "}", groups = {IBaseValidGroup.Update.class})
     @Column(name = "transaction_id", length = 20, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -37,8 +38,8 @@ public class TaskTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotNull(message = "{TASK_TRANSACTION_BEAN_TASK_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @ValidLength(max = 20, message = "{TASK_TRANSACTION_BEAN_TASK_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotNull(message = "{" + TaskTransactionBeanI18nConstant.TASK_TRANSACTION_BEAN_TASK_ID_NOT_NULL + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidLength(max = 20, message = "{" + TaskTransactionBeanI18nConstant.TASK_TRANSACTION_BEAN_TASK_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_task_id", length = 20, nullable = false)
     private Long taskId;
 
@@ -50,8 +51,8 @@ public class TaskTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotNull(message = "{TASK_TRANSACTION_BEAN_OPERATOR_ID_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @ValidLength(max = 20, message = "{TASK_TRANSACTION_BEAN_OPERATOR_ID_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotNull(message = "{" + TaskTransactionBeanI18nConstant.TASK_TRANSACTION_BEAN_OPERATOR_ID_NOT_NULL + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidLength(max = 20, message = "{" + TaskTransactionBeanI18nConstant.TASK_TRANSACTION_BEAN_OPERATOR_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_operator_id", length = 20, nullable = false)
     private Long operatorId;
 
@@ -63,8 +64,8 @@ public class TaskTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{TASK_TRANSACTION_BEAN_OPERATOR_NAME_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 20, message = "{TASK_TRANSACTION_BEAN_OPERATOR_NAME_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + TaskTransactionBeanI18nConstant.TASK_TRANSACTION_BEAN_OPERATOR_NAME_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 20, message = "{" + TaskTransactionBeanI18nConstant.TASK_TRANSACTION_BEAN_OPERATOR_NAME_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_operator_name", length = 20, nullable = false)
     private String operatorName;
 
@@ -76,8 +77,8 @@ public class TaskTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{TASK_TRANSACTION_BEAN_OPERATE_TYPE_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 25, message = "{TASK_TRANSACTION_BEAN_OPERATE_TYPE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + TaskTransactionBeanI18nConstant.TASK_TRANSACTION_BEAN_OPERATE_TYPE_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 25, message = "{" + TaskTransactionBeanI18nConstant.TASK_TRANSACTION_BEAN_OPERATE_TYPE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_operate_type", length = 25, nullable = false)
     private String operateType;
 
@@ -89,7 +90,7 @@ public class TaskTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 80, message = "{TASK_TRANSACTION_BEAN_OPERATE_VALUE_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 80, message = "{" + TaskTransactionBeanI18nConstant.TASK_TRANSACTION_BEAN_OPERATE_VALUE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_operate_value", length = 80, nullable = true)
     private String operateValue;
 
@@ -101,7 +102,7 @@ public class TaskTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 500, message = "{TASK_TRANSACTION_BEAN_OPERATE_COMMENT_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 500, message = "{" + TaskTransactionBeanI18nConstant.TASK_TRANSACTION_BEAN_OPERATE_COMMENT_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_operate_comment", length = 500, nullable = true)
     private String operateComment;
 
@@ -113,9 +114,9 @@ public class TaskTransactionBean implements Serializable {
      * DB defaultValue: CURRENT_TIMESTAMP
      * </pre>
      */
-    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{TASK_TRANSACTION_BEAN_OPERATE_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS, message = "{" + TaskTransactionBeanI18nConstant.TASK_TRANSACTION_BEAN_OPERATE_TIMESTAMP_DATE_TIME_FORMAT + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
-    @NotNull(message = "{TASK_TRANSACTION_BEAN_OPERATE_TIMESTAMP_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotNull(message = "{" + TaskTransactionBeanI18nConstant.TASK_TRANSACTION_BEAN_OPERATE_TIMESTAMP_NOT_NULL + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_operate_timestamp", length = 19, nullable = false)
     private Date operateTimestamp;
 
@@ -127,9 +128,9 @@ public class TaskTransactionBean implements Serializable {
      * DB defaultValue: CURRENT_TIMESTAMP
      * </pre>
      */
-    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS , message = "{TASK_TRANSACTION_BEAN_CREATE_TIMESTAMP_DATE_TIME_FORMAT}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS, message = "{" + TaskTransactionBeanI18nConstant.TASK_TRANSACTION_BEAN_CREATE_TIMESTAMP_DATE_TIME_FORMAT + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
-    @NotNull(message = "{TASK_TRANSACTION_BEAN_CREATE_TIMESTAMP_NOT_NULL}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotNull(message = "{" + TaskTransactionBeanI18nConstant.TASK_TRANSACTION_BEAN_CREATE_TIMESTAMP_NOT_NULL + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_create_timestamp", length = 19, nullable = false)
     private Date createTimestamp;
 
@@ -141,8 +142,8 @@ public class TaskTransactionBean implements Serializable {
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{TASK_TRANSACTION_BEAN_CREATE_BY_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 20, message = "{TASK_TRANSACTION_BEAN_CREATE_BY_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + TaskTransactionBeanI18nConstant.TASK_TRANSACTION_BEAN_CREATE_BY_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 20, message = "{" + TaskTransactionBeanI18nConstant.TASK_TRANSACTION_BEAN_CREATE_BY_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_create_by", length = 20, nullable = false)
     private String createBy;
 
@@ -154,8 +155,8 @@ public class TaskTransactionBean implements Serializable {
      * DB defaultValue: N
      * </pre>
      */
-    @NotBlank(message = "{TASK_TRANSACTION_BEAN_DELETE_FLAG_NOT_BLANK}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 1, message = "{TASK_TRANSACTION_BEAN_DELETE_FLAG_LENGTH}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @NotBlank(message = "{" + TaskTransactionBeanI18nConstant.TASK_TRANSACTION_BEAN_DELETE_FLAG_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 1, message = "{" + TaskTransactionBeanI18nConstant.TASK_TRANSACTION_BEAN_DELETE_FLAG_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "transaction_delete_flag", length = 1, nullable = false)
     private String deleteFlag;
 

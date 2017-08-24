@@ -14,7 +14,7 @@ import java.util.*;
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class GenerateServiceImplementsFile {
 
-    public static void generateApplicationServiceImplementsFile(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
+    public static void generateServiceImplementsFile(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
 
         String javaBeanName = introspectedTable.getFullyQualifiedTable().getDomainObjectName();
 

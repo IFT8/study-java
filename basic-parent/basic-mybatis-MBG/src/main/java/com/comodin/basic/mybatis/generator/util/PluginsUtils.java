@@ -6,11 +6,12 @@ import com.comodin.basic.util.MyStringUtils;
 import com.comodin.basic.util.freemarker.EntityProperty;
 import org.apache.commons.lang3.StringUtils;
 import org.mybatis.generator.api.IntrospectedColumn;
+import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.config.Context;
 
 import java.util.*;
 
-@SuppressWarnings({"WeakerAccess", "unused"})
+@SuppressWarnings({"WeakerAccess", "unused", "MismatchedQueryAndUpdateOfCollection", "FieldCanBeLocal"})
 public class PluginsUtils {
 
     private static Map<String, Set<EntityProperty>> entityI18nToMapByEntityBeanName = new HashMap<>();
@@ -28,31 +29,49 @@ public class PluginsUtils {
     public static final String PACKAGE_SPRING_ANNOTATION_REQUEST_MAPPING = "org.springframework.web.bind.annotation.RequestMapping";
     public static final String PACKAGE_SPRING_DATE_TIME_FORMAT = "org.springframework.format.annotation.DateTimeFormat";
 
-    private static String beanDir = "";
-    private static String daoMappersDir = "";
+    private static String dateFormat = "yyyy-MM-dd";
+    private static String dateTimeFormat = "yyyy-MM-dd HH:mm:ss";
 
+    private static String beanDir = "com.comodin.fleet.core.bean";
+
+    private static String daoInterfacePackage = "com.comodin.fleet.core.mapper";
+    private static String daoMappersDir = "sqlMapper";
     private static Set<String> daoInterfaceExtendsInterfaceSet = new HashSet<>();
-    private static String dateFormat = "";
-    private static String dateTimeFormat = "";
-    private static String constantPackage = "";
+
+    private static String constantPackage = "com.comodin.fleet.constant";
     private static String constantFileNamePrefix = "";
-    private static String constantFileNameSuffix = "";
-    private static String serviceInterfacePackage = "";
-    private static String serviceInterfaceFileNamePrefix = "";
-    private static String serviceInterfaceFileNameSuffix = "";
+    private static String constantFileNameSuffix = "Constant";
+
+    private static String i18nConstantPackage = "com.comodin.fleet.constant.i18n";
+    private static String i18nConstantFileNamePrefix = "I18n";
+    private static String i18nConstantFileNameSuffix = "Constant";
+
+    private static String serviceInterfacePackage = "com.comodin.fleet.service";
+    private static String serviceInterfaceFileNamePrefix = "I";
+    private static String serviceInterfaceFileNameSuffix = "Service";
     private static Set<String> serviceInterfaceExtendsInterfaceSet = new HashSet<>();
-    private static String serviceImplementsPackage = "";
+
+    private static String serviceImplementsPackage = "com.comodin.fleet.service.impl";
     private static String serviceImplementsFileNamePrefix = "";
-    private static String serviceImplementsFileNameSuffix = "";
-    private static String serviceImplementsExtendsSubClass = "";
-    private static String controllerPackage = "";
+    private static String serviceImplementsFileNameSuffix = "Service";
+    private static String serviceImplementsExtendsSubClass = "com.comodin.basic.service.AbstractBaseService";
+
+    private static String controllerPackage = "com.comodin.fleet.controller";
     private static String controllerFileNamePrefix = "";
-    private static String controllerFileNameSuffix = "";
-    private static String controllerExtendsSubClass = "";
-    private static Set<String> i18nLanguageSet = new HashSet<>();
-    private static String i18nDir = "";
-    private static String i18nFileNamePrefix = "";
+    private static String controllerFileNameSuffix = "Controller";
+    private static String controllerExtendsSubClass = "com.comodin.basic.controller.AbstractBaseController";
+
+    private static String i18nDir = "i18n";
+    private static String i18nFileNamePrefix = "i18n-";
     private static String i18nFileNameSuffix = "";
+    private static Set<String> i18nLanguageSet = new HashSet<>();
+
+    static {
+        i18nLanguageSet.add("");
+        i18nLanguageSet.add("zh_CN");
+        i18nLanguageSet.add("en_US");
+        i18nLanguageSet.add("es_MX");
+    }
 
     public static void initCfg(Context context, Properties properties) {
 
@@ -79,6 +98,17 @@ public class PluginsUtils {
         }
         if (StringUtils.isNotBlank(properties.getProperty("constantFileNameSuffix"))) {
             constantFileNameSuffix = properties.getProperty("constantFileNameSuffix");
+        }
+
+
+        if (StringUtils.isNotBlank(properties.getProperty("i18nConstantPackage"))) {
+            i18nConstantPackage = properties.getProperty("i18nConstantPackage").trim();
+        }
+        if (properties.getProperty("i18nConstantFileNamePrefix") != null) {
+            i18nConstantFileNamePrefix = properties.getProperty("i18nConstantFileNamePrefix");
+        }
+        if (StringUtils.isNotBlank(properties.getProperty("i18nConstantFileNameSuffix"))) {
+            i18nConstantFileNameSuffix = properties.getProperty("i18nConstantFileNameSuffix");
         }
 
 
@@ -163,12 +193,20 @@ public class PluginsUtils {
         }
     }
 
+    public static String getGenerateConstantFileDir() {
+        return String.format("%s/%s", beanDir, constantPackage.replace('.', '/'));
+    }
+
     public static String getConstantBeanClassName(String javaBeanName) {
         return String.format("%s%s%s", constantFileNamePrefix, javaBeanName, constantFileNameSuffix);
     }
 
-    public static String getGenerateConstantFileDir() {
-        return String.format("%s/%s", beanDir, constantPackage.replace('.', '/'));
+    public static String getGenerateI18nConstantFileDir() {
+        return String.format("%s/%s", beanDir, i18nConstantPackage.replace('.', '/'));
+    }
+
+    public static String getI18nConstantBeanClassName(String javaBeanName) {
+        return String.format("%s%s%s", i18nConstantFileNamePrefix, javaBeanName, i18nConstantFileNameSuffix);
     }
 
     public static void setFieldI18nToEntityI18nSet(String i18nMessageKey, String i18nMessageValue, IntrospectedColumn introspectedColumn) {
@@ -181,6 +219,10 @@ public class PluginsUtils {
 
     public static String getConstantPackage() {
         return constantPackage;
+    }
+
+    public static String getI18nConstantPackage() {
+        return i18nConstantPackage;
     }
 
     public static Map<String, Set<EntityProperty>> getEntityConstantToMapByEntityBeanName() {
@@ -262,5 +304,22 @@ public class PluginsUtils {
 
     public static String getControllerRequestMappingModuleName(String javaBeanName) {
         return MyStringUtils.toLowerCaseFirstOne(javaBeanName.replace("Bean", ""));
+    }
+
+    public static String assemblyFieldValidatorAnnotationMessageKey(String javaBeanName, String validMessageKey) {
+        String i18nConstantBeanClassName = PluginsUtils.getI18nConstantBeanClassName(javaBeanName);
+        String messageKey = i18nConstantBeanClassName + "." + validMessageKey;
+        return "\"{\" + " + messageKey + " + \"}\"";
+    }
+
+    public static String assemblyFieldValidatorAnnotationValidGroups(IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn) {
+        String validGroups = "{IBaseValidGroup.Add.class, IBaseValidGroup.Update.class}";
+        for (IntrospectedColumn introspectedColumn1 : introspectedTable.getPrimaryKeyColumns()) {
+            if (introspectedColumn == introspectedColumn1) {
+                validGroups = "{IBaseValidGroup.Update.class}";
+                break;
+            }
+        }
+        return validGroups;
     }
 }

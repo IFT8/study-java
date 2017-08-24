@@ -14,7 +14,7 @@ import java.util.*;
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class GenerateControllerFile {
 
-    public static void generateApplicationControllerFile(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
+    public static void generateControllerFile(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
 
         String javaBeanName = introspectedTable.getFullyQualifiedTable().getDomainObjectName();
 
