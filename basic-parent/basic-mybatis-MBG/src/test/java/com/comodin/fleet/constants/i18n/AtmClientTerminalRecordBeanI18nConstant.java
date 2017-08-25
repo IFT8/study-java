@@ -1,0 +1,75 @@
+package com.comodin.fleet.constants.i18n;
+
+@SuppressWarnings({"unused", "SpringAutowiredFieldsWarningInspection", "StatementWithEmptyBody"})
+public class AtmClientTerminalRecordBeanI18nConstant  {
+
+    /**
+     * ATM终端，唯一标识
+     */
+    public static final String ATM_CLIENT_TERMINAL_RECORD_BEAN_ATM_TERMINAL_ID_NOT_BLANK = "ATM_CLIENT_TERMINAL_RECORD_BEAN_ATM_TERMINAL_ID_NOT_BLANK";
+    /**
+     * ATM终端，上次读取记录
+     */
+    public static final String ATM_CLIENT_TERMINAL_RECORD_BEAN_LAST_READ_DATE_TIME_NOT_BLANK = "ATM_CLIENT_TERMINAL_RECORD_BEAN_LAST_READ_DATE_TIME_NOT_BLANK";
+    /**
+     * ATM终端，唯一标识
+     */
+    public static final String ATM_CLIENT_TERMINAL_RECORD_BEAN_ATM_TERMINAL_ID_LENGTH = "ATM_CLIENT_TERMINAL_RECORD_BEAN_ATM_TERMINAL_ID_LENGTH";
+    /**
+     * 创建时间
+     */
+    public static final String ATM_CLIENT_TERMINAL_RECORD_BEAN_CREATE_TIMESTAMP_NOT_NULL = "ATM_CLIENT_TERMINAL_RECORD_BEAN_CREATE_TIMESTAMP_NOT_NULL";
+    /**
+     * 数据库主键ID
+     */
+    public static final String ATM_CLIENT_TERMINAL_RECORD_BEAN_ID_NOT_NULL = "ATM_CLIENT_TERMINAL_RECORD_BEAN_ID_NOT_NULL";
+    /**
+     * 更新时间
+     */
+    public static final String ATM_CLIENT_TERMINAL_RECORD_BEAN_UPDATE_TIMESTAMP_NOT_NULL = "ATM_CLIENT_TERMINAL_RECORD_BEAN_UPDATE_TIMESTAMP_NOT_NULL";
+    /**
+     * 创建的用户
+     */
+    public static final String ATM_CLIENT_TERMINAL_RECORD_BEAN_CREATE_BY_LENGTH = "ATM_CLIENT_TERMINAL_RECORD_BEAN_CREATE_BY_LENGTH";
+    /**
+     * ATM终端，读取记录的类型
+     */
+    public static final String ATM_CLIENT_TERMINAL_RECORD_BEAN_READ_RECORD_TYPE_ALLOW_DATA = "ATM_CLIENT_TERMINAL_RECORD_BEAN_READ_RECORD_TYPE_ALLOW_DATA";
+    /**
+     * 更新时间
+     */
+    public static final String ATM_CLIENT_TERMINAL_RECORD_BEAN_UPDATE_TIMESTAMP_DATE_TIME_FORMAT = "ATM_CLIENT_TERMINAL_RECORD_BEAN_UPDATE_TIMESTAMP_DATE_TIME_FORMAT";
+    /**
+     * 逻辑删除标志【N[正常]，Y[删除]】
+     */
+    public static final String ATM_CLIENT_TERMINAL_RECORD_BEAN_DELETE_FLAG_NOT_BLANK = "ATM_CLIENT_TERMINAL_RECORD_BEAN_DELETE_FLAG_NOT_BLANK";
+    /**
+     * ATM终端，上次读取记录
+     */
+    public static final String ATM_CLIENT_TERMINAL_RECORD_BEAN_LAST_READ_DATE_TIME_LENGTH = "ATM_CLIENT_TERMINAL_RECORD_BEAN_LAST_READ_DATE_TIME_LENGTH";
+    /**
+     * 创建的用户
+     */
+    public static final String ATM_CLIENT_TERMINAL_RECORD_BEAN_CREATE_BY_NOT_BLANK = "ATM_CLIENT_TERMINAL_RECORD_BEAN_CREATE_BY_NOT_BLANK";
+    /**
+     * ATM终端，读取记录的类型
+     */
+    public static final String ATM_CLIENT_TERMINAL_RECORD_BEAN_READ_RECORD_TYPE_LENGTH = "ATM_CLIENT_TERMINAL_RECORD_BEAN_READ_RECORD_TYPE_LENGTH";
+    /**
+     * 逻辑删除标志【N[正常]，Y[删除]】
+     */
+    public static final String ATM_CLIENT_TERMINAL_RECORD_BEAN_DELETE_FLAG_LENGTH = "ATM_CLIENT_TERMINAL_RECORD_BEAN_DELETE_FLAG_LENGTH";
+    /**
+     * 创建时间
+     */
+    public static final String ATM_CLIENT_TERMINAL_RECORD_BEAN_CREATE_TIMESTAMP_DATE_TIME_FORMAT = "ATM_CLIENT_TERMINAL_RECORD_BEAN_CREATE_TIMESTAMP_DATE_TIME_FORMAT";
+    /**
+     * ATM终端，读取记录的类型
+     */
+    public static final String ATM_CLIENT_TERMINAL_RECORD_BEAN_READ_RECORD_TYPE_NOT_BLANK = "ATM_CLIENT_TERMINAL_RECORD_BEAN_READ_RECORD_TYPE_NOT_BLANK";
+    /**
+     * 数据库主键ID
+     */
+    public static final String ATM_CLIENT_TERMINAL_RECORD_BEAN_ID_LENGTH = "ATM_CLIENT_TERMINAL_RECORD_BEAN_ID_LENGTH";
+
+}

@@ -8,6 +8,7 @@
     <id column="upgrade_id" jdbcType="BIGINT" property="id" />
     <result column="upgrade_version" jdbcType="BIGINT" property="version" />
     <result column="upgrade_version_text" jdbcType="VARCHAR" property="versionText" />
+    <result column="upgrade_app_name" jdbcType="VARCHAR" property="appName" />
     <result column="upgrade_desc" jdbcType="VARCHAR" property="desc" />
     <result column="upgrade_force" jdbcType="CHAR" property="force" />
     <result column="upgrade_md5" jdbcType="CHAR" property="md5" />

@@ -3,7 +3,7 @@ package com.comodin.fleet.core.bean;
 import com.comodin.basic.util.date.DateUtil;
 import com.comodin.basic.validation.IBaseValidGroup;
 import com.comodin.basic.validation.constraints.*;
-import com.comodin.fleet.constant.i18n.AtmGunneboBeanI18nConstant;
+import com.comodin.fleet.constants.i18n.AtmGunneboBeanI18nConstant;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -33,16 +33,29 @@ public class AtmGunneboBean implements Serializable {
 
     /**
      * <pre>
-     * DB remark: 设备型号
-     * DB column: atm_device_type	VARCHAR(20)	<--->	deviceType	java.lang.String
+     * DB remark: ATM终端，唯一标识
+     * DB column: atm_terminal_id	VARCHAR(64)	<--->	terminalId	java.lang.String
      * DB is  Nullable: false
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{" + AtmGunneboBeanI18nConstant.ATM_GUNNEBO_BEAN_DEVICE_TYPE_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 20, message = "{" + AtmGunneboBeanI18nConstant.ATM_GUNNEBO_BEAN_DEVICE_TYPE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "atm_device_type", length = 20, nullable = false)
-    private String deviceType;
+    @NotBlank(message = "{" + AtmGunneboBeanI18nConstant.ATM_GUNNEBO_BEAN_TERMINAL_ID_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 64, message = "{" + AtmGunneboBeanI18nConstant.ATM_GUNNEBO_BEAN_TERMINAL_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Column(name = "atm_terminal_id", length = 64, nullable = false)
+    private String terminalId;
+
+    /**
+     * <pre>
+     * DB remark: ATM终端，设备类型
+     * DB column: atm_terminal_type	VARCHAR(20)	<--->	terminalType	java.lang.String
+     * DB is  Nullable: false
+     * DB defaultValue: null
+     * </pre>
+     */
+    @NotBlank(message = "{" + AtmGunneboBeanI18nConstant.ATM_GUNNEBO_BEAN_TERMINAL_TYPE_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 20, message = "{" + AtmGunneboBeanI18nConstant.ATM_GUNNEBO_BEAN_TERMINAL_TYPE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Column(name = "atm_terminal_type", length = 20, nullable = false)
+    private String terminalType;
 
     /**
      * <pre>
@@ -133,13 +146,13 @@ public class AtmGunneboBean implements Serializable {
 
     /**
      * <pre>
-     * DB remark: 负责人,与t_client.client_id 字段关联【{"max":13}】
+     * DB remark: 负责人,与t_client.client_name 字段关联
      * DB column: atm_cit_owner_name	VARCHAR(50)	<--->	citOwnerName	java.lang.String
      * DB is  Nullable: true
      * DB defaultValue: null
      * </pre>
      */
-    @Length(max = 13, message = "{" + AtmGunneboBeanI18nConstant.ATM_GUNNEBO_BEAN_CIT_OWNER_NAME_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 50, message = "{" + AtmGunneboBeanI18nConstant.ATM_GUNNEBO_BEAN_CIT_OWNER_NAME_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "atm_cit_owner_name", length = 50, nullable = true)
     private String citOwnerName;
 
@@ -410,21 +423,40 @@ public class AtmGunneboBean implements Serializable {
     }
 
     /**
-     * 获取 设备型号
+     * 获取 ATM终端，唯一标识
      *
-     * @return atm_device_type - 设备型号
+     * @return atm_terminal_id - ATM终端，唯一标识
      */
-    public String getDeviceType() {
-        return deviceType;
+    public String getTerminalId() {
+        return terminalId;
     }
 
     /**
-     * 设置 设备型号
+     * 设置 ATM终端，唯一标识
      *
-     * @param deviceType - 设备型号
+     * @param terminalId - ATM终端，唯一标识
      */
-    public AtmGunneboBean setDeviceType(String deviceType) {
-        this.deviceType = deviceType == null ? null : deviceType.trim();
+    public AtmGunneboBean setTerminalId(String terminalId) {
+        this.terminalId = terminalId == null ? null : terminalId.trim();
+        return this;
+    }
+
+    /**
+     * 获取 ATM终端，设备类型
+     *
+     * @return atm_terminal_type - ATM终端，设备类型
+     */
+    public String getTerminalType() {
+        return terminalType;
+    }
+
+    /**
+     * 设置 ATM终端，设备类型
+     *
+     * @param terminalType - ATM终端，设备类型
+     */
+    public AtmGunneboBean setTerminalType(String terminalType) {
+        this.terminalType = terminalType == null ? null : terminalType.trim();
         return this;
     }
 
@@ -562,18 +594,18 @@ public class AtmGunneboBean implements Serializable {
     }
 
     /**
-     * 获取 负责人,与t_client.client_id 字段关联【{"max":13}】
+     * 获取 负责人,与t_client.client_name 字段关联
      *
-     * @return atm_cit_owner_name - 负责人,与t_client.client_id 字段关联【{"max":13}】
+     * @return atm_cit_owner_name - 负责人,与t_client.client_name 字段关联
      */
     public String getCitOwnerName() {
         return citOwnerName;
     }
 
     /**
-     * 设置 负责人,与t_client.client_id 字段关联【{"max":13}】
+     * 设置 负责人,与t_client.client_name 字段关联
      *
-     * @param citOwnerName - 负责人,与t_client.client_id 字段关联【{"max":13}】
+     * @param citOwnerName - 负责人,与t_client.client_name 字段关联
      */
     public AtmGunneboBean setCitOwnerName(String citOwnerName) {
         this.citOwnerName = citOwnerName == null ? null : citOwnerName.trim();

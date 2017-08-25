@@ -6,16 +6,19 @@
       WARNING - @mbg.generated
     -->
     <id column="transaction_id" jdbcType="BIGINT" property="id" />
+    <result column="transaction_atm_id" jdbcType="BIGINT" property="atmId" />
+    <result column="transaction_atm_terminal_id" jdbcType="VARCHAR" property="atmTerminalId" />
+    <result column="transaction_atm_terminal_type" jdbcType="VARCHAR" property="atmTerminalType" />
     <result column="transaction_original_id" jdbcType="VARCHAR" property="originalId" />
     <result column="transaction_client_internal_id" jdbcType="VARCHAR" property="clientInternalId" />
     <result column="transaction_client_branch_internal_id" jdbcType="VARCHAR" property="clientBranchInternalId" />
     <result column="transaction_operation_type" jdbcType="VARCHAR" property="operationType" />
-    <result column="transaction_operate_timestamp" jdbcType="TIMESTAMP" property="operateTimestamp" />
     <result column="transaction_deposit_id" jdbcType="VARCHAR" property="depositId" />
     <result column="transaction_deposit_user_account" jdbcType="VARCHAR" property="depositUserAccount" />
     <result column="transaction_deposit_date_time" jdbcType="TIMESTAMP" property="depositDateTime" />
+    <result column="transaction_deposit_send_server_date_time" jdbcType="TIMESTAMP" property="depositSendServerDateTime" />
     <result column="transaction_withdrawals_id" jdbcType="VARCHAR" property="withdrawalsId" />
-    <result column="transaction_status" jdbcType="VARCHAR" property="status" />
+    <result column="transaction_status" jdbcType="CHAR" property="status" />
     <result column="transaction_device_status" jdbcType="VARCHAR" property="deviceStatus" />
     <result column="transaction_transaction_status" jdbcType="VARCHAR" property="transactionStatus" />
     <result column="transaction_description" jdbcType="VARCHAR" property="description" />

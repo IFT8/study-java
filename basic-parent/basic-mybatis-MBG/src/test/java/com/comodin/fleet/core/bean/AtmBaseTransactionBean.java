@@ -3,7 +3,7 @@ package com.comodin.fleet.core.bean;
 import com.comodin.basic.util.date.DateUtil;
 import com.comodin.basic.validation.IBaseValidGroup;
 import com.comodin.basic.validation.constraints.*;
-import com.comodin.fleet.constant.i18n.AtmBaseTransactionBeanI18nConstant;
+import com.comodin.fleet.constants.i18n.AtmBaseTransactionBeanI18nConstant;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
@@ -32,7 +32,7 @@ public class AtmBaseTransactionBean implements Serializable {
 
     /**
      * <pre>
-     * DB remark: 任务ID,与t_task.task_task_id关联
+     * DB remark: 任务ID,t_atm_base.atm_id关联
      * DB column: transaction_atm_id	BIGINT(20)	<--->	atmId	java.lang.Long
      * DB is  Nullable: false
      * DB defaultValue: null
@@ -182,18 +182,18 @@ public class AtmBaseTransactionBean implements Serializable {
     }
 
     /**
-     * 获取 任务ID,与t_task.task_task_id关联
+     * 获取 任务ID,t_atm_base.atm_id关联
      *
-     * @return transaction_atm_id - 任务ID,与t_task.task_task_id关联
+     * @return transaction_atm_id - 任务ID,t_atm_base.atm_id关联
      */
     public Long getAtmId() {
         return atmId;
     }
 
     /**
-     * 设置 任务ID,与t_task.task_task_id关联
+     * 设置 任务ID,t_atm_base.atm_id关联
      *
-     * @param atmId - 任务ID,与t_task.task_task_id关联
+     * @param atmId - 任务ID,t_atm_base.atm_id关联
      */
     public AtmBaseTransactionBean setAtmId(Long atmId) {
         this.atmId = atmId;

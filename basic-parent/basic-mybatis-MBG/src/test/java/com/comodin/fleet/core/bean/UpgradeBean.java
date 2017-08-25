@@ -3,7 +3,7 @@ package com.comodin.fleet.core.bean;
 import com.comodin.basic.util.date.DateUtil;
 import com.comodin.basic.validation.IBaseValidGroup;
 import com.comodin.basic.validation.constraints.*;
-import com.comodin.fleet.constant.i18n.UpgradeBeanI18nConstant;
+import com.comodin.fleet.constants.i18n.UpgradeBeanI18nConstant;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
@@ -55,6 +55,19 @@ public class UpgradeBean implements Serializable {
     @Length(max = 20, message = "{" + UpgradeBeanI18nConstant.UPGRADE_BEAN_VERSION_TEXT_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "upgrade_version_text", length = 20, nullable = false)
     private String versionText;
+
+    /**
+     * <pre>
+     * DB remark: APP名称
+     * DB column: upgrade_app_name	VARCHAR(20)	<--->	appName	java.lang.String
+     * DB is  Nullable: false
+     * DB defaultValue: 
+     * </pre>
+     */
+    @NotBlank(message = "{" + UpgradeBeanI18nConstant.UPGRADE_BEAN_APP_NAME_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 20, message = "{" + UpgradeBeanI18nConstant.UPGRADE_BEAN_APP_NAME_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Column(name = "upgrade_app_name", length = 20, nullable = false)
+    private String appName;
 
     /**
      * <pre>
@@ -217,6 +230,25 @@ public class UpgradeBean implements Serializable {
      */
     public UpgradeBean setVersionText(String versionText) {
         this.versionText = versionText == null ? null : versionText.trim();
+        return this;
+    }
+
+    /**
+     * 获取 APP名称
+     *
+     * @return upgrade_app_name - APP名称
+     */
+    public String getAppName() {
+        return appName;
+    }
+
+    /**
+     * 设置 APP名称
+     *
+     * @param appName - APP名称
+     */
+    public UpgradeBean setAppName(String appName) {
+        this.appName = appName == null ? null : appName.trim();
         return this;
     }
 

@@ -2,17 +2,14 @@ package com.comodin.fleet.core.bean;
 
 import com.comodin.basic.util.date.DateUtil;
 import com.comodin.basic.validation.IBaseValidGroup;
-import com.comodin.basic.validation.constraints.ValidDateTimeFormat;
-import com.comodin.basic.validation.constraints.ValidLength;
-import com.comodin.fleet.constant.i18n.SioLoginAccountBeanI18nConstant;
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import com.comodin.basic.validation.constraints.*;
+import com.comodin.fleet.constants.i18n.SioLoginAccountBeanI18nConstant;
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.*;
+import javax.validation.constraints.*;
+import org.hibernate.validator.constraints.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue", "DefaultAnnotationParam"})
 @Entity

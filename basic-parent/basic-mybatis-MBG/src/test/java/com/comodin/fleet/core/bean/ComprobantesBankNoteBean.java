@@ -3,7 +3,7 @@ package com.comodin.fleet.core.bean;
 import com.comodin.basic.util.date.DateUtil;
 import com.comodin.basic.validation.IBaseValidGroup;
 import com.comodin.basic.validation.constraints.*;
-import com.comodin.fleet.constant.i18n.ComprobantesBankNoteBeanI18nConstant;
+import com.comodin.fleet.constants.i18n.ComprobantesBankNoteBeanI18nConstant;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
