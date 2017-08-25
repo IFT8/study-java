@@ -2,15 +2,19 @@ package com.comodin.fleet.core.bean;
 
 import com.comodin.basic.util.date.DateUtil;
 import com.comodin.basic.validation.IBaseValidGroup;
-import com.comodin.basic.validation.constraints.*;
+import com.comodin.basic.validation.constraints.ValidAllowData;
+import com.comodin.basic.validation.constraints.ValidDateTimeFormat;
+import com.comodin.basic.validation.constraints.ValidLength;
 import com.comodin.fleet.constants.bean.AtmClientTerminalRecordBeanConstant;
 import com.comodin.fleet.constants.i18n.AtmClientTerminalRecordBeanI18nConstant;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.*;
-import javax.validation.constraints.*;
-import org.hibernate.validator.constraints.*;
-import org.springframework.format.annotation.DateTimeFormat;
 
 @SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue", "DefaultAnnotationParam"})
 @Entity
@@ -46,13 +50,13 @@ public class AtmClientTerminalRecordBean implements Serializable {
 
     /**
      * <pre>
-     * DB remark: ATM终端，读取记录的类型【{"dataList":["TRANSACTION_DATA","DEVICE_STATUS_DATA","CASSETTE_STATUS_DATA"]}】
+     * DB remark: ATM终端，读取记录的类型【{"dataList":["TRANSACTION_RECORD","DEVICE_STATUS_RECORD","CASSETTE_STATUS_RECORD"]}】
      * DB column: record_read_record_type	VARCHAR(20)	<--->	readRecordType	java.lang.String
      * DB is  Nullable: false
      * DB defaultValue: null
      * </pre>
      */
-    @ValidAllowData(allowDataArray = {AtmClientTerminalRecordBeanConstant.ATM_CLIENT_TERMINAL_RECORD_BEAN_READ_RECORD_TYPE_TRANSACTION_DATA,AtmClientTerminalRecordBeanConstant.ATM_CLIENT_TERMINAL_RECORD_BEAN_READ_RECORD_TYPE_CASSETTE_STATUS_DATA,AtmClientTerminalRecordBeanConstant.ATM_CLIENT_TERMINAL_RECORD_BEAN_READ_RECORD_TYPE_DEVICE_STATUS_DATA}, message = "{" + AtmClientTerminalRecordBeanI18nConstant.ATM_CLIENT_TERMINAL_RECORD_BEAN_READ_RECORD_TYPE_ALLOW_DATA + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidAllowData(allowDataArray = {AtmClientTerminalRecordBeanConstant.ATM_CLIENT_TERMINAL_RECORD_BEAN_READ_RECORD_TYPE_CASSETTE_STATUS_RECORD,AtmClientTerminalRecordBeanConstant.ATM_CLIENT_TERMINAL_RECORD_BEAN_READ_RECORD_TYPE_TRANSACTION_RECORD,AtmClientTerminalRecordBeanConstant.ATM_CLIENT_TERMINAL_RECORD_BEAN_READ_RECORD_TYPE_DEVICE_STATUS_RECORD}, message = "{" + AtmClientTerminalRecordBeanI18nConstant.ATM_CLIENT_TERMINAL_RECORD_BEAN_READ_RECORD_TYPE_ALLOW_DATA + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @NotBlank(message = "{" + AtmClientTerminalRecordBeanI18nConstant.ATM_CLIENT_TERMINAL_RECORD_BEAN_READ_RECORD_TYPE_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 20, message = "{" + AtmClientTerminalRecordBeanI18nConstant.ATM_CLIENT_TERMINAL_RECORD_BEAN_READ_RECORD_TYPE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Column(name = "record_read_record_type", length = 20, nullable = false)
@@ -166,18 +170,18 @@ public class AtmClientTerminalRecordBean implements Serializable {
     }
 
     /**
-     * 获取 ATM终端，读取记录的类型【{"dataList":["TRANSACTION_DATA","DEVICE_STATUS_DATA","CASSETTE_STATUS_DATA"]}】
+     * 获取 ATM终端，读取记录的类型【{"dataList":["TRANSACTION_RECORD","DEVICE_STATUS_RECORD","CASSETTE_STATUS_RECORD"]}】
      *
-     * @return record_read_record_type - ATM终端，读取记录的类型【{"dataList":["TRANSACTION_DATA","DEVICE_STATUS_DATA","CASSETTE_STATUS_DATA"]}】
+     * @return record_read_record_type - ATM终端，读取记录的类型【{"dataList":["TRANSACTION_RECORD","DEVICE_STATUS_RECORD","CASSETTE_STATUS_RECORD"]}】
      */
     public String getReadRecordType() {
         return readRecordType;
     }
 
     /**
-     * 设置 ATM终端，读取记录的类型【{"dataList":["TRANSACTION_DATA","DEVICE_STATUS_DATA","CASSETTE_STATUS_DATA"]}】
+     * 设置 ATM终端，读取记录的类型【{"dataList":["TRANSACTION_RECORD","DEVICE_STATUS_RECORD","CASSETTE_STATUS_RECORD"]}】
      *
-     * @param readRecordType - ATM终端，读取记录的类型【{"dataList":["TRANSACTION_DATA","DEVICE_STATUS_DATA","CASSETTE_STATUS_DATA"]}】
+     * @param readRecordType - ATM终端，读取记录的类型【{"dataList":["TRANSACTION_RECORD","DEVICE_STATUS_RECORD","CASSETTE_STATUS_RECORD"]}】
      */
     public AtmClientTerminalRecordBean setReadRecordType(String readRecordType) {
         this.readRecordType = readRecordType == null ? null : readRecordType.trim();
