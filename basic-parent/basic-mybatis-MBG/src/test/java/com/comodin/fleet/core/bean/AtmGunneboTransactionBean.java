@@ -11,7 +11,7 @@ import javax.validation.constraints.*;
 import org.hibernate.validator.constraints.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
-@SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue", "DefaultAnnotationParam"})
+@SuppressWarnings({"unused", "SpringAutowiredFieldsWarningInspection", "StatementWithEmptyBody", "WeakerAccess"})
 @Entity
 @Table(name = "t_atm_gunnebo_transaction")
 public class AtmGunneboTransactionBean implements Serializable {
@@ -32,15 +32,16 @@ public class AtmGunneboTransactionBean implements Serializable {
 
     /**
      * <pre>
-     * DB remark: gunneboATM主表ID,与t_atm_gunnebo.atm_id 字段关联【{"max":13}】
-     * DB column: transaction_atm_id	BIGINT(20)	<--->	atmId	java.lang.Long
-     * DB is  Nullable: true
+     * DB remark: t_atm_gunnebo.gunnebo_id 关联
+     * DB column: transaction_gunnebo_id	BIGINT(20)	<--->	gunneboId	java.lang.Long
+     * DB is  Nullable: false
      * DB defaultValue: null
      * </pre>
      */
-    @ValidLength(max = 13, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_ATM_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "transaction_atm_id", length = 20, nullable = true)
-    private Long atmId;
+    @NotNull(message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_GUNNEBO_ID_NOT_NULL + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidLength(max = 20, message = "{" + AtmGunneboTransactionBeanI18nConstant.ATM_GUNNEBO_TRANSACTION_BEAN_GUNNEBO_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Column(name = "transaction_gunnebo_id", length = 20, nullable = false)
+    private Long gunneboId;
 
     /**
      * <pre>
@@ -757,21 +758,21 @@ public class AtmGunneboTransactionBean implements Serializable {
     }
 
     /**
-     * 获取 gunneboATM主表ID,与t_atm_gunnebo.atm_id 字段关联【{"max":13}】
+     * 获取 t_atm_gunnebo.gunnebo_id 关联
      *
-     * @return transaction_atm_id - gunneboATM主表ID,与t_atm_gunnebo.atm_id 字段关联【{"max":13}】
+     * @return transaction_gunnebo_id - t_atm_gunnebo.gunnebo_id 关联
      */
-    public Long getAtmId() {
-        return atmId;
+    public Long getGunneboId() {
+        return gunneboId;
     }
 
     /**
-     * 设置 gunneboATM主表ID,与t_atm_gunnebo.atm_id 字段关联【{"max":13}】
+     * 设置 t_atm_gunnebo.gunnebo_id 关联
      *
-     * @param atmId - gunneboATM主表ID,与t_atm_gunnebo.atm_id 字段关联【{"max":13}】
+     * @param gunneboId - t_atm_gunnebo.gunnebo_id 关联
      */
-    public AtmGunneboTransactionBean setAtmId(Long atmId) {
-        this.atmId = atmId;
+    public AtmGunneboTransactionBean setGunneboId(Long gunneboId) {
+        this.gunneboId = gunneboId;
         return this;
     }
 

@@ -12,21 +12,21 @@ import javax.validation.constraints.*;
 import org.hibernate.validator.constraints.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
-@SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue", "DefaultAnnotationParam"})
+@SuppressWarnings({"unused", "SpringAutowiredFieldsWarningInspection", "StatementWithEmptyBody", "WeakerAccess"})
 @Entity
 @Table(name = "t_atm_base")
 public class AtmBaseBean implements Serializable {
     /**
      * <pre>
      * DB remark: 数据库主键ID
-     * DB column: atm_id	BIGINT(20)	<--->	id	java.lang.Long
+     * DB column: base_id	BIGINT(20)	<--->	id	java.lang.Long
      * DB is  Nullable: false
      * DB defaultValue: null
      * </pre>
      */
     @NotNull(message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_ID_NOT_NULL + "}", groups = {IBaseValidGroup.Update.class})
     @ValidLength(max = 20, message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_ID_LENGTH + "}", groups = {IBaseValidGroup.Update.class})
-    @Column(name = "atm_id", length = 20, nullable = false)
+    @Column(name = "base_id", length = 20, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
@@ -34,336 +34,375 @@ public class AtmBaseBean implements Serializable {
     /**
      * <pre>
      * DB remark: ATM终端，唯一标识
-     * DB column: atm_terminal_id	VARCHAR(64)	<--->	terminalId	java.lang.String
+     * DB column: base_atm_terminal_id	VARCHAR(64)	<--->	atmTerminalId	java.lang.String
      * DB is  Nullable: false
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_TERMINAL_ID_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 64, message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_TERMINAL_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "atm_terminal_id", length = 64, nullable = false)
-    private String terminalId;
+    @NotBlank(message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_ATM_TERMINAL_ID_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 64, message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_ATM_TERMINAL_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Column(name = "base_atm_terminal_id", length = 64, nullable = false)
+    private String atmTerminalId;
 
     /**
      * <pre>
      * DB remark: ATM终端，设备类型
-     * DB column: atm_terminal_type	VARCHAR(20)	<--->	terminalType	java.lang.String
+     * DB column: base_atm_terminal_type	VARCHAR(20)	<--->	atmTerminalType	java.lang.String
      * DB is  Nullable: false
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_TERMINAL_TYPE_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 20, message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_TERMINAL_TYPE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "atm_terminal_type", length = 20, nullable = false)
-    private String terminalType;
+    @NotBlank(message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_ATM_TERMINAL_TYPE_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 20, message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_ATM_TERMINAL_TYPE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Column(name = "base_atm_terminal_type", length = 20, nullable = false)
+    private String atmTerminalType;
 
     /**
      * <pre>
      * DB remark: cit公司ID,与t_client.client_id 字段关联【{"max":13}】
-     * DB column: atm_cit_id	BIGINT(20)	<--->	citId	java.lang.Long
-     * DB is  Nullable: true
+     * DB column: base_cit_id	BIGINT(20)	<--->	citId	java.lang.Long
+     * DB is  Nullable: false
      * DB defaultValue: null
      * </pre>
      */
+    @NotNull(message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_CIT_ID_NOT_NULL + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @ValidLength(max = 13, message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_CIT_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "atm_cit_id", length = 20, nullable = true)
+    @Column(name = "base_cit_id", length = 20, nullable = false)
     private Long citId;
 
     /**
      * <pre>
      * DB remark: cit公司内部ID,与t_client.client_internal_id 字段冗余
-     * DB column: atm_cit_internal_id	VARCHAR(15)	<--->	citInternalId	java.lang.String
+     * DB column: base_cit_internal_id	VARCHAR(15)	<--->	citInternalId	java.lang.String
      * DB is  Nullable: false
      * DB defaultValue: null
      * </pre>
      */
     @NotBlank(message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_CIT_INTERNAL_ID_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 15, message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_CIT_INTERNAL_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "atm_cit_internal_id", length = 15, nullable = false)
+    @Column(name = "base_cit_internal_id", length = 15, nullable = false)
     private String citInternalId;
 
     /**
      * <pre>
-     * DB remark: cit公司名称,与t_client.client_name,冗余
-     * DB column: atm_cit_name	VARCHAR(100)	<--->	citName	java.lang.String
+     * DB remark: cit公司名称,与t_client.client_name,字段冗余
+     * DB column: base_cit_name	VARCHAR(100)	<--->	citName	java.lang.String
      * DB is  Nullable: true
      * DB defaultValue: null
      * </pre>
      */
     @Length(max = 100, message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_CIT_NAME_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "atm_cit_name", length = 100, nullable = true)
+    @Column(name = "base_cit_name", length = 100, nullable = true)
     private String citName;
 
     /**
      * <pre>
      * DB remark: cit网点ID,网点id,与t_client_branch.branch_id,关联【{"max":13}】
-     * DB column: atm_cit_branch_id	VARCHAR(15)	<--->	citBranchId	java.lang.String
+     * DB column: base_cit_branch_id	BIGINT(20)	<--->	citBranchId	java.lang.Long
      * DB is  Nullable: false
      * DB defaultValue: null
      * </pre>
      */
-    @NotBlank(message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_CIT_BRANCH_ID_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Length(max = 13, message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_CIT_BRANCH_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "atm_cit_branch_id", length = 15, nullable = false)
-    private String citBranchId;
+    @NotNull(message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_CIT_BRANCH_ID_NOT_NULL + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidLength(max = 13, message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_CIT_BRANCH_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Column(name = "base_cit_branch_id", length = 20, nullable = false)
+    private Long citBranchId;
 
     /**
      * <pre>
-     * DB remark: cit网点ID,网点内部Id,与t_client_branch.branch_internal_id,关联
-     * DB column: atm_cit_branch_internal_id	VARCHAR(15)	<--->	citBranchInternalId	java.lang.String
+     * DB remark: cit网点ID,网点内部Id,与t_client_branch.branch_internal_id,字段冗余
+     * DB column: base_cit_branch_internal_id	VARCHAR(15)	<--->	citBranchInternalId	java.lang.String
      * DB is  Nullable: false
      * DB defaultValue: null
      * </pre>
      */
     @NotBlank(message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_CIT_BRANCH_INTERNAL_ID_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 15, message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_CIT_BRANCH_INTERNAL_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "atm_cit_branch_internal_id", length = 15, nullable = false)
+    @Column(name = "base_cit_branch_internal_id", length = 15, nullable = false)
     private String citBranchInternalId;
 
     /**
      * <pre>
-     * DB remark: cit网点名称,与t_client_branch.branch_name,冗余
-     * DB column: atm_cit_branch_name	VARCHAR(100)	<--->	citBranchName	java.lang.String
+     * DB remark: cit网点名称,与t_client_branch.branch_name,字段冗余
+     * DB column: base_cit_branch_name	VARCHAR(100)	<--->	citBranchName	java.lang.String
      * DB is  Nullable: true
      * DB defaultValue: null
      * </pre>
      */
     @Length(max = 100, message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_CIT_BRANCH_NAME_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "atm_cit_branch_name", length = 100, nullable = true)
+    @Column(name = "base_cit_branch_name", length = 100, nullable = true)
     private String citBranchName;
 
     /**
      * <pre>
-     * DB remark: 负责人,与t_crew.crew_id 字段关联【{"max":13}】
-     * DB column: atm_cit_owner_id	BIGINT(20)	<--->	citOwnerId	java.lang.Long
-     * DB is  Nullable: true
-     * DB defaultValue: null
-     * </pre>
-     */
-    @ValidLength(max = 13, message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_CIT_OWNER_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "atm_cit_owner_id", length = 20, nullable = true)
-    private Long citOwnerId;
-
-    /**
-     * <pre>
-     * DB remark: 负责人,与t_client.client_id 字段关联
-     * DB column: atm_cit_owner_name	VARCHAR(50)	<--->	citOwnerName	java.lang.String
+     * DB remark: cit负责人,名字
+     * DB column: base_cit_owner_name	VARCHAR(50)	<--->	citOwnerName	java.lang.String
      * DB is  Nullable: true
      * DB defaultValue: null
      * </pre>
      */
     @Length(max = 50, message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_CIT_OWNER_NAME_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "atm_cit_owner_name", length = 50, nullable = true)
+    @Column(name = "base_cit_owner_name", length = 50, nullable = true)
     private String citOwnerName;
 
     /**
      * <pre>
-     * DB remark: 客户公司名
-     * DB column: atm_client_name	VARCHAR(100)	<--->	clientName	java.lang.String
+     * DB remark: cit客户,公司内部ID
+     * DB column: base_client_internal_id	VARCHAR(15)	<--->	clientInternalId	java.lang.String
+     * DB is  Nullable: true
+     * DB defaultValue: null
+     * </pre>
+     */
+    @Length(max = 15, message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_CLIENT_INTERNAL_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Column(name = "base_client_internal_id", length = 15, nullable = true)
+    private String clientInternalId;
+
+    /**
+     * <pre>
+     * DB remark: cit客户,公司名
+     * DB column: base_client_name	VARCHAR(100)	<--->	clientName	java.lang.String
      * DB is  Nullable: true
      * DB defaultValue: null
      * </pre>
      */
     @Length(max = 100, message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_CLIENT_NAME_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "atm_client_name", length = 100, nullable = true)
+    @Column(name = "base_client_name", length = 100, nullable = true)
     private String clientName;
 
     /**
      * <pre>
-     * DB remark: 客户网点名
-     * DB column: atm_client_branch_name	VARCHAR(100)	<--->	clientBranchName	java.lang.String
+     * DB remark: cit客户,网点内部Id
+     * DB column: base_client_branch_internal_id	VARCHAR(15)	<--->	clientBranchInternalId	java.lang.String
+     * DB is  Nullable: true
+     * DB defaultValue: null
+     * </pre>
+     */
+    @Length(max = 15, message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_CLIENT_BRANCH_INTERNAL_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Column(name = "base_client_branch_internal_id", length = 15, nullable = true)
+    private String clientBranchInternalId;
+
+    /**
+     * <pre>
+     * DB remark: cit客户,网点名
+     * DB column: base_client_branch_name	VARCHAR(100)	<--->	clientBranchName	java.lang.String
      * DB is  Nullable: true
      * DB defaultValue: null
      * </pre>
      */
     @Length(max = 100, message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_CLIENT_BRANCH_NAME_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "atm_client_branch_name", length = 100, nullable = true)
+    @Column(name = "base_client_branch_name", length = 100, nullable = true)
     private String clientBranchName;
 
     /**
      * <pre>
-     * DB remark: 客户网点联系电话,与t_client_branch.branch_phone,关联
-     * DB column: atm_client_branch_phone	VARCHAR(15)	<--->	clientBranchPhone	java.lang.String
+     * DB remark: cit客户,网点,联系电话
+     * DB column: base_client_branch_phone	VARCHAR(15)	<--->	clientBranchPhone	java.lang.String
      * DB is  Nullable: true
      * DB defaultValue: null
      * </pre>
      */
     @Length(max = 15, message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_CLIENT_BRANCH_PHONE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "atm_client_branch_phone", length = 15, nullable = true)
+    @Column(name = "base_client_branch_phone", length = 15, nullable = true)
     private String clientBranchPhone;
 
     /**
      * <pre>
-     * DB remark: 客户网点地址,与t_client_branch.branch_address,关联
-     * DB column: atm_client_branch_address	VARCHAR(150)	<--->	clientBranchAddress	java.lang.String
+     * DB remark: cit客户,网点,地址
+     * DB column: base_client_branch_address	VARCHAR(150)	<--->	clientBranchAddress	java.lang.String
      * DB is  Nullable: true
      * DB defaultValue: null
      * </pre>
      */
     @Length(max = 150, message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_CLIENT_BRANCH_ADDRESS_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "atm_client_branch_address", length = 150, nullable = true)
+    @Column(name = "base_client_branch_address", length = 150, nullable = true)
     private String clientBranchAddress;
 
     /**
      * <pre>
-     * DB remark: 客户网点地址坐标纬度,浮点型,与t_client_branch.branch_latitude,关联
-     * DB column: atm_client_branch_latitude	VARCHAR(15)	<--->	clientBranchLatitude	java.lang.String
+     * DB remark: cit客户,网点,地址坐标纬度,浮点型
+     * DB column: base_client_branch_latitude	VARCHAR(15)	<--->	clientBranchLatitude	java.lang.String
      * DB is  Nullable: true
      * DB defaultValue: null
      * </pre>
      */
     @Length(max = 15, message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_CLIENT_BRANCH_LATITUDE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "atm_client_branch_latitude", length = 15, nullable = true)
+    @Column(name = "base_client_branch_latitude", length = 15, nullable = true)
     private String clientBranchLatitude;
 
     /**
      * <pre>
-     * DB remark: 客户网点地址坐标经度,浮点型,与t_client_branch.branch_longitude,关联
-     * DB column: atm_client_branch_longitude	VARCHAR(15)	<--->	clientBranchLongitude	java.lang.String
+     * DB remark: cit客户,网点,址坐标经度,浮点型
+     * DB column: base_client_branch_longitude	VARCHAR(15)	<--->	clientBranchLongitude	java.lang.String
      * DB is  Nullable: true
      * DB defaultValue: null
      * </pre>
      */
     @Length(max = 15, message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_CLIENT_BRANCH_LONGITUDE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "atm_client_branch_longitude", length = 15, nullable = true)
+    @Column(name = "base_client_branch_longitude", length = 15, nullable = true)
     private String clientBranchLongitude;
 
     /**
      * <pre>
-     * DB remark: 负责人,与t_crew.crew_id 字段关联【{"max":13}】
-     * DB column: atm_client_owner_id	BIGINT(20)	<--->	clientOwnerId	java.lang.Long
+     * DB remark: cit客户,网点,ATM设备,负责人,名字
+     * DB column: base_client_owner_name	VARCHAR(50)	<--->	clientOwnerName	java.lang.String
      * DB is  Nullable: true
      * DB defaultValue: null
      * </pre>
      */
-    @ValidLength(max = 13, message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_CLIENT_OWNER_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "atm_client_owner_id", length = 20, nullable = true)
-    private Long clientOwnerId;
-
-    /**
-     * <pre>
-     * DB remark: 负责人,与t_client.client_id 字段关联【{"max":13}】
-     * DB column: atm_client_owner_name	VARCHAR(50)	<--->	clientOwnerName	java.lang.String
-     * DB is  Nullable: true
-     * DB defaultValue: null
-     * </pre>
-     */
-    @Length(max = 13, message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_CLIENT_OWNER_NAME_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "atm_client_owner_name", length = 50, nullable = true)
+    @Length(max = 50, message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_CLIENT_OWNER_NAME_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Column(name = "base_client_owner_name", length = 50, nullable = true)
     private String clientOwnerName;
 
     /**
      * <pre>
      * DB remark: 基础状态
-     * DB column: atm_status	CHAR(32)	<--->	status	java.lang.String
+     * DB column: base_status	CHAR(32)	<--->	status	java.lang.String
      * DB is  Nullable: true
      * DB defaultValue: null
      * </pre>
      */
     @Length(max = 32, message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_STATUS_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "atm_status", length = 32, nullable = true)
+    @Column(name = "base_status", length = 32, nullable = true)
     private String status;
 
     /**
      * <pre>
-     * DB remark: 货币,总金额
-     * DB column: atm_currency_total_amount	DECIMAL(14)	<--->	currencyTotalAmount	java.math.BigDecimal
+     * DB remark: 错误，类型
+     * DB column: base_error_type	VARCHAR(10)	<--->	errorType	java.lang.String
      * DB is  Nullable: true
-     * DB defaultValue: 0.0000
+     * DB defaultValue: null
      * </pre>
      */
-    @Column(name = "atm_currency_total_amount", length = 14, nullable = true)
-    private BigDecimal currencyTotalAmount;
+    @Length(max = 10, message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_ERROR_TYPE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Column(name = "base_error_type", length = 10, nullable = true)
+    private String errorType;
 
     /**
      * <pre>
-     * DB remark: 货币,当前容量【单位：张】
-     * DB column: atm_current_capacity	INTEGER(10)	<--->	currentCapacity	java.lang.Integer
+     * DB remark: 错误，产生时间
+     * DB column: base_error_time	TIMESTAMP(19)	<--->	errorTime	java.util.Date
      * DB is  Nullable: true
-     * DB defaultValue: 0
+     * DB defaultValue: null
      * </pre>
      */
-    @ValidLength(max = 10, message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_CURRENT_CAPACITY_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "atm_current_capacity", length = 10, nullable = true)
-    private Integer currentCapacity;
+    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS, message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_ERROR_TIME_DATE_TIME_FORMAT + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
+    @Column(name = "base_error_time", length = 19, nullable = true)
+    private Date errorTime;
 
     /**
      * <pre>
-     * DB remark: 货币,最大容量【单位：张】
-     * DB column: atm_currency_max_capacity	INTEGER(10)	<--->	currencyMaxCapacity	java.lang.Integer
+     * DB remark: 错误，修复时间
+     * DB column: base_error_fixed_time	TIMESTAMP(19)	<--->	errorFixedTime	java.util.Date
      * DB is  Nullable: true
-     * DB defaultValue: 0
+     * DB defaultValue: null
      * </pre>
      */
-    @ValidLength(max = 10, message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_CURRENCY_MAX_CAPACITY_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "atm_currency_max_capacity", length = 10, nullable = true)
-    private Integer currencyMaxCapacity;
+    @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS, message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_ERROR_FIXED_TIME_DATE_TIME_FORMAT + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
+    @Column(name = "base_error_fixed_time", length = 19, nullable = true)
+    private Date errorFixedTime;
 
     /**
      * <pre>
-     * DB remark: 货币,类型
-     * DB column: atm_currency_type	VARCHAR(5)	<--->	currencyType	java.lang.String
+     * DB remark: 纸币,类型
+     * DB column: base_currency_type	VARCHAR(5)	<--->	currencyType	java.lang.String
      * DB is  Nullable: true
      * DB defaultValue: null
      * </pre>
      */
     @Length(max = 5, message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_CURRENCY_TYPE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "atm_currency_type", length = 5, nullable = true)
+    @Column(name = "base_currency_type", length = 5, nullable = true)
     private String currencyType;
 
     /**
      * <pre>
+     * DB remark: 纸币,总金额
+     * DB column: base_currency_amount	DECIMAL(14)	<--->	currencyAmount	java.math.BigDecimal
+     * DB is  Nullable: true
+     * DB defaultValue: 0.0000
+     * </pre>
+     */
+    @Column(name = "base_currency_amount", length = 14, nullable = true)
+    private BigDecimal currencyAmount;
+
+    /**
+     * <pre>
+     * DB remark: 纸币,当前容量【单位：张】
+     * DB column: base_currency_capacity	INTEGER(10)	<--->	currencyCapacity	java.lang.Integer
+     * DB is  Nullable: true
+     * DB defaultValue: 0
+     * </pre>
+     */
+    @ValidLength(max = 10, message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_CURRENCY_CAPACITY_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Column(name = "base_currency_capacity", length = 10, nullable = true)
+    private Integer currencyCapacity;
+
+    /**
+     * <pre>
+     * DB remark: 纸币,最大容量【单位：张】
+     * DB column: base_currency_max_capacity	INTEGER(10)	<--->	currencyMaxCapacity	java.lang.Integer
+     * DB is  Nullable: true
+     * DB defaultValue: 0
+     * </pre>
+     */
+    @ValidLength(max = 10, message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_CURRENCY_MAX_CAPACITY_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Column(name = "base_currency_max_capacity", length = 10, nullable = true)
+    private Integer currencyMaxCapacity;
+
+    /**
+     * <pre>
      * DB remark: 信封,总数【单位：张】
-     * DB column: atm_envelopes_total_amount	INTEGER(10)	<--->	envelopesTotalAmount	java.lang.Integer
+     * DB column: base_envelopes_total_amount	INTEGER(10)	<--->	envelopesTotalAmount	java.lang.Integer
      * DB is  Nullable: true
      * DB defaultValue: 0
      * </pre>
      */
     @ValidLength(max = 10, message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_ENVELOPES_TOTAL_AMOUNT_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "atm_envelopes_total_amount", length = 10, nullable = true)
+    @Column(name = "base_envelopes_total_amount", length = 10, nullable = true)
     private Integer envelopesTotalAmount;
 
     /**
      * <pre>
      * DB remark: 信封,当前容量【单位：张】
-     * DB column: atm_envelopes_capacity	INTEGER(10)	<--->	envelopesCapacity	java.lang.Integer
+     * DB column: base_envelopes_capacity	INTEGER(10)	<--->	envelopesCapacity	java.lang.Integer
      * DB is  Nullable: true
      * DB defaultValue: 0
      * </pre>
      */
     @ValidLength(max = 10, message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_ENVELOPES_CAPACITY_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "atm_envelopes_capacity", length = 10, nullable = true)
+    @Column(name = "base_envelopes_capacity", length = 10, nullable = true)
     private Integer envelopesCapacity;
 
     /**
      * <pre>
      * DB remark: 信封,最大容量【单位：张】
-     * DB column: atm_envelopes_max_capacity	INTEGER(10)	<--->	envelopesMaxCapacity	java.lang.Integer
+     * DB column: base_envelopes_max_capacity	INTEGER(10)	<--->	envelopesMaxCapacity	java.lang.Integer
      * DB is  Nullable: true
      * DB defaultValue: 0
      * </pre>
      */
     @ValidLength(max = 10, message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_ENVELOPES_MAX_CAPACITY_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "atm_envelopes_max_capacity", length = 10, nullable = true)
+    @Column(name = "base_envelopes_max_capacity", length = 10, nullable = true)
     private Integer envelopesMaxCapacity;
 
     /**
      * <pre>
      * DB remark: 创建的用户
-     * DB column: atm_create_by	VARCHAR(20)	<--->	createBy	java.lang.String
+     * DB column: base_create_by	VARCHAR(20)	<--->	createBy	java.lang.String
      * DB is  Nullable: false
      * DB defaultValue: null
      * </pre>
      */
     @NotBlank(message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_CREATE_BY_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 20, message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_CREATE_BY_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "atm_create_by", length = 20, nullable = false)
+    @Column(name = "base_create_by", length = 20, nullable = false)
     private String createBy;
 
     /**
      * <pre>
      * DB remark: 创建时间
-     * DB column: atm_create_timestamp	TIMESTAMP(19)	<--->	createTimestamp	java.util.Date
+     * DB column: base_create_timestamp	TIMESTAMP(19)	<--->	createTimestamp	java.util.Date
      * DB is  Nullable: false
      * DB defaultValue: CURRENT_TIMESTAMP
      * </pre>
@@ -371,13 +410,13 @@ public class AtmBaseBean implements Serializable {
     @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS, message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_CREATE_TIMESTAMP_DATE_TIME_FORMAT + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
     @NotNull(message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_CREATE_TIMESTAMP_NOT_NULL + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "atm_create_timestamp", length = 19, nullable = false)
+    @Column(name = "base_create_timestamp", length = 19, nullable = false)
     private Date createTimestamp;
 
     /**
      * <pre>
      * DB remark: 更新时间
-     * DB column: atm_update_timestamp	TIMESTAMP(19)	<--->	updateTimestamp	java.util.Date
+     * DB column: base_update_timestamp	TIMESTAMP(19)	<--->	updateTimestamp	java.util.Date
      * DB is  Nullable: false
      * DB defaultValue: CURRENT_TIMESTAMP
      * </pre>
@@ -385,20 +424,20 @@ public class AtmBaseBean implements Serializable {
     @ValidDateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS, message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_UPDATE_TIMESTAMP_DATE_TIME_FORMAT + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @DateTimeFormat(pattern = DateUtil.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
     @NotNull(message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_UPDATE_TIMESTAMP_NOT_NULL + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "atm_update_timestamp", length = 19, nullable = false)
+    @Column(name = "base_update_timestamp", length = 19, nullable = false)
     private Date updateTimestamp;
 
     /**
      * <pre>
      * DB remark: 逻辑删除标志【N[正常]，Y[删除]】
-     * DB column: atm_delete_flag	CHAR(1)	<--->	deleteFlag	java.lang.String
+     * DB column: base_delete_flag	CHAR(1)	<--->	deleteFlag	java.lang.String
      * DB is  Nullable: false
      * DB defaultValue: N
      * </pre>
      */
     @NotBlank(message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_DELETE_FLAG_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
     @Length(max = 1, message = "{" + AtmBaseBeanI18nConstant.ATM_BASE_BEAN_DELETE_FLAG_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "atm_delete_flag", length = 1, nullable = false)
+    @Column(name = "base_delete_flag", length = 1, nullable = false)
     private String deleteFlag;
 
     private static final long serialVersionUID = 1L;
@@ -406,7 +445,7 @@ public class AtmBaseBean implements Serializable {
     /**
      * 获取 数据库主键ID
      *
-     * @return atm_id - 数据库主键ID
+     * @return base_id - 数据库主键ID
      */
     public Long getId() {
         return id;
@@ -425,45 +464,45 @@ public class AtmBaseBean implements Serializable {
     /**
      * 获取 ATM终端，唯一标识
      *
-     * @return atm_terminal_id - ATM终端，唯一标识
+     * @return base_atm_terminal_id - ATM终端，唯一标识
      */
-    public String getTerminalId() {
-        return terminalId;
+    public String getAtmTerminalId() {
+        return atmTerminalId;
     }
 
     /**
      * 设置 ATM终端，唯一标识
      *
-     * @param terminalId - ATM终端，唯一标识
+     * @param atmTerminalId - ATM终端，唯一标识
      */
-    public AtmBaseBean setTerminalId(String terminalId) {
-        this.terminalId = terminalId == null ? null : terminalId.trim();
+    public AtmBaseBean setAtmTerminalId(String atmTerminalId) {
+        this.atmTerminalId = atmTerminalId == null ? null : atmTerminalId.trim();
         return this;
     }
 
     /**
      * 获取 ATM终端，设备类型
      *
-     * @return atm_terminal_type - ATM终端，设备类型
+     * @return base_atm_terminal_type - ATM终端，设备类型
      */
-    public String getTerminalType() {
-        return terminalType;
+    public String getAtmTerminalType() {
+        return atmTerminalType;
     }
 
     /**
      * 设置 ATM终端，设备类型
      *
-     * @param terminalType - ATM终端，设备类型
+     * @param atmTerminalType - ATM终端，设备类型
      */
-    public AtmBaseBean setTerminalType(String terminalType) {
-        this.terminalType = terminalType == null ? null : terminalType.trim();
+    public AtmBaseBean setAtmTerminalType(String atmTerminalType) {
+        this.atmTerminalType = atmTerminalType == null ? null : atmTerminalType.trim();
         return this;
     }
 
     /**
      * 获取 cit公司ID,与t_client.client_id 字段关联【{"max":13}】
      *
-     * @return atm_cit_id - cit公司ID,与t_client.client_id 字段关联【{"max":13}】
+     * @return base_cit_id - cit公司ID,与t_client.client_id 字段关联【{"max":13}】
      */
     public Long getCitId() {
         return citId;
@@ -482,7 +521,7 @@ public class AtmBaseBean implements Serializable {
     /**
      * 获取 cit公司内部ID,与t_client.client_internal_id 字段冗余
      *
-     * @return atm_cit_internal_id - cit公司内部ID,与t_client.client_internal_id 字段冗余
+     * @return base_cit_internal_id - cit公司内部ID,与t_client.client_internal_id 字段冗余
      */
     public String getCitInternalId() {
         return citInternalId;
@@ -499,18 +538,18 @@ public class AtmBaseBean implements Serializable {
     }
 
     /**
-     * 获取 cit公司名称,与t_client.client_name,冗余
+     * 获取 cit公司名称,与t_client.client_name,字段冗余
      *
-     * @return atm_cit_name - cit公司名称,与t_client.client_name,冗余
+     * @return base_cit_name - cit公司名称,与t_client.client_name,字段冗余
      */
     public String getCitName() {
         return citName;
     }
 
     /**
-     * 设置 cit公司名称,与t_client.client_name,冗余
+     * 设置 cit公司名称,与t_client.client_name,字段冗余
      *
-     * @param citName - cit公司名称,与t_client.client_name,冗余
+     * @param citName - cit公司名称,与t_client.client_name,字段冗余
      */
     public AtmBaseBean setCitName(String citName) {
         this.citName = citName == null ? null : citName.trim();
@@ -520,9 +559,9 @@ public class AtmBaseBean implements Serializable {
     /**
      * 获取 cit网点ID,网点id,与t_client_branch.branch_id,关联【{"max":13}】
      *
-     * @return atm_cit_branch_id - cit网点ID,网点id,与t_client_branch.branch_id,关联【{"max":13}】
+     * @return base_cit_branch_id - cit网点ID,网点id,与t_client_branch.branch_id,关联【{"max":13}】
      */
-    public String getCitBranchId() {
+    public Long getCitBranchId() {
         return citBranchId;
     }
 
@@ -531,24 +570,24 @@ public class AtmBaseBean implements Serializable {
      *
      * @param citBranchId - cit网点ID,网点id,与t_client_branch.branch_id,关联【{"max":13}】
      */
-    public AtmBaseBean setCitBranchId(String citBranchId) {
-        this.citBranchId = citBranchId == null ? null : citBranchId.trim();
+    public AtmBaseBean setCitBranchId(Long citBranchId) {
+        this.citBranchId = citBranchId;
         return this;
     }
 
     /**
-     * 获取 cit网点ID,网点内部Id,与t_client_branch.branch_internal_id,关联
+     * 获取 cit网点ID,网点内部Id,与t_client_branch.branch_internal_id,字段冗余
      *
-     * @return atm_cit_branch_internal_id - cit网点ID,网点内部Id,与t_client_branch.branch_internal_id,关联
+     * @return base_cit_branch_internal_id - cit网点ID,网点内部Id,与t_client_branch.branch_internal_id,字段冗余
      */
     public String getCitBranchInternalId() {
         return citBranchInternalId;
     }
 
     /**
-     * 设置 cit网点ID,网点内部Id,与t_client_branch.branch_internal_id,关联
+     * 设置 cit网点ID,网点内部Id,与t_client_branch.branch_internal_id,字段冗余
      *
-     * @param citBranchInternalId - cit网点ID,网点内部Id,与t_client_branch.branch_internal_id,关联
+     * @param citBranchInternalId - cit网点ID,网点内部Id,与t_client_branch.branch_internal_id,字段冗余
      */
     public AtmBaseBean setCitBranchInternalId(String citBranchInternalId) {
         this.citBranchInternalId = citBranchInternalId == null ? null : citBranchInternalId.trim();
@@ -556,18 +595,18 @@ public class AtmBaseBean implements Serializable {
     }
 
     /**
-     * 获取 cit网点名称,与t_client_branch.branch_name,冗余
+     * 获取 cit网点名称,与t_client_branch.branch_name,字段冗余
      *
-     * @return atm_cit_branch_name - cit网点名称,与t_client_branch.branch_name,冗余
+     * @return base_cit_branch_name - cit网点名称,与t_client_branch.branch_name,字段冗余
      */
     public String getCitBranchName() {
         return citBranchName;
     }
 
     /**
-     * 设置 cit网点名称,与t_client_branch.branch_name,冗余
+     * 设置 cit网点名称,与t_client_branch.branch_name,字段冗余
      *
-     * @param citBranchName - cit网点名称,与t_client_branch.branch_name,冗余
+     * @param citBranchName - cit网点名称,与t_client_branch.branch_name,字段冗余
      */
     public AtmBaseBean setCitBranchName(String citBranchName) {
         this.citBranchName = citBranchName == null ? null : citBranchName.trim();
@@ -575,37 +614,18 @@ public class AtmBaseBean implements Serializable {
     }
 
     /**
-     * 获取 负责人,与t_crew.crew_id 字段关联【{"max":13}】
+     * 获取 cit负责人,名字
      *
-     * @return atm_cit_owner_id - 负责人,与t_crew.crew_id 字段关联【{"max":13}】
-     */
-    public Long getCitOwnerId() {
-        return citOwnerId;
-    }
-
-    /**
-     * 设置 负责人,与t_crew.crew_id 字段关联【{"max":13}】
-     *
-     * @param citOwnerId - 负责人,与t_crew.crew_id 字段关联【{"max":13}】
-     */
-    public AtmBaseBean setCitOwnerId(Long citOwnerId) {
-        this.citOwnerId = citOwnerId;
-        return this;
-    }
-
-    /**
-     * 获取 负责人,与t_client.client_id 字段关联
-     *
-     * @return atm_cit_owner_name - 负责人,与t_client.client_id 字段关联
+     * @return base_cit_owner_name - cit负责人,名字
      */
     public String getCitOwnerName() {
         return citOwnerName;
     }
 
     /**
-     * 设置 负责人,与t_client.client_id 字段关联
+     * 设置 cit负责人,名字
      *
-     * @param citOwnerName - 负责人,与t_client.client_id 字段关联
+     * @param citOwnerName - cit负责人,名字
      */
     public AtmBaseBean setCitOwnerName(String citOwnerName) {
         this.citOwnerName = citOwnerName == null ? null : citOwnerName.trim();
@@ -613,18 +633,37 @@ public class AtmBaseBean implements Serializable {
     }
 
     /**
-     * 获取 客户公司名
+     * 获取 cit客户,公司内部ID
      *
-     * @return atm_client_name - 客户公司名
+     * @return base_client_internal_id - cit客户,公司内部ID
+     */
+    public String getClientInternalId() {
+        return clientInternalId;
+    }
+
+    /**
+     * 设置 cit客户,公司内部ID
+     *
+     * @param clientInternalId - cit客户,公司内部ID
+     */
+    public AtmBaseBean setClientInternalId(String clientInternalId) {
+        this.clientInternalId = clientInternalId == null ? null : clientInternalId.trim();
+        return this;
+    }
+
+    /**
+     * 获取 cit客户,公司名
+     *
+     * @return base_client_name - cit客户,公司名
      */
     public String getClientName() {
         return clientName;
     }
 
     /**
-     * 设置 客户公司名
+     * 设置 cit客户,公司名
      *
-     * @param clientName - 客户公司名
+     * @param clientName - cit客户,公司名
      */
     public AtmBaseBean setClientName(String clientName) {
         this.clientName = clientName == null ? null : clientName.trim();
@@ -632,18 +671,37 @@ public class AtmBaseBean implements Serializable {
     }
 
     /**
-     * 获取 客户网点名
+     * 获取 cit客户,网点内部Id
      *
-     * @return atm_client_branch_name - 客户网点名
+     * @return base_client_branch_internal_id - cit客户,网点内部Id
+     */
+    public String getClientBranchInternalId() {
+        return clientBranchInternalId;
+    }
+
+    /**
+     * 设置 cit客户,网点内部Id
+     *
+     * @param clientBranchInternalId - cit客户,网点内部Id
+     */
+    public AtmBaseBean setClientBranchInternalId(String clientBranchInternalId) {
+        this.clientBranchInternalId = clientBranchInternalId == null ? null : clientBranchInternalId.trim();
+        return this;
+    }
+
+    /**
+     * 获取 cit客户,网点名
+     *
+     * @return base_client_branch_name - cit客户,网点名
      */
     public String getClientBranchName() {
         return clientBranchName;
     }
 
     /**
-     * 设置 客户网点名
+     * 设置 cit客户,网点名
      *
-     * @param clientBranchName - 客户网点名
+     * @param clientBranchName - cit客户,网点名
      */
     public AtmBaseBean setClientBranchName(String clientBranchName) {
         this.clientBranchName = clientBranchName == null ? null : clientBranchName.trim();
@@ -651,18 +709,18 @@ public class AtmBaseBean implements Serializable {
     }
 
     /**
-     * 获取 客户网点联系电话,与t_client_branch.branch_phone,关联
+     * 获取 cit客户,网点,联系电话
      *
-     * @return atm_client_branch_phone - 客户网点联系电话,与t_client_branch.branch_phone,关联
+     * @return base_client_branch_phone - cit客户,网点,联系电话
      */
     public String getClientBranchPhone() {
         return clientBranchPhone;
     }
 
     /**
-     * 设置 客户网点联系电话,与t_client_branch.branch_phone,关联
+     * 设置 cit客户,网点,联系电话
      *
-     * @param clientBranchPhone - 客户网点联系电话,与t_client_branch.branch_phone,关联
+     * @param clientBranchPhone - cit客户,网点,联系电话
      */
     public AtmBaseBean setClientBranchPhone(String clientBranchPhone) {
         this.clientBranchPhone = clientBranchPhone == null ? null : clientBranchPhone.trim();
@@ -670,18 +728,18 @@ public class AtmBaseBean implements Serializable {
     }
 
     /**
-     * 获取 客户网点地址,与t_client_branch.branch_address,关联
+     * 获取 cit客户,网点,地址
      *
-     * @return atm_client_branch_address - 客户网点地址,与t_client_branch.branch_address,关联
+     * @return base_client_branch_address - cit客户,网点,地址
      */
     public String getClientBranchAddress() {
         return clientBranchAddress;
     }
 
     /**
-     * 设置 客户网点地址,与t_client_branch.branch_address,关联
+     * 设置 cit客户,网点,地址
      *
-     * @param clientBranchAddress - 客户网点地址,与t_client_branch.branch_address,关联
+     * @param clientBranchAddress - cit客户,网点,地址
      */
     public AtmBaseBean setClientBranchAddress(String clientBranchAddress) {
         this.clientBranchAddress = clientBranchAddress == null ? null : clientBranchAddress.trim();
@@ -689,18 +747,18 @@ public class AtmBaseBean implements Serializable {
     }
 
     /**
-     * 获取 客户网点地址坐标纬度,浮点型,与t_client_branch.branch_latitude,关联
+     * 获取 cit客户,网点,地址坐标纬度,浮点型
      *
-     * @return atm_client_branch_latitude - 客户网点地址坐标纬度,浮点型,与t_client_branch.branch_latitude,关联
+     * @return base_client_branch_latitude - cit客户,网点,地址坐标纬度,浮点型
      */
     public String getClientBranchLatitude() {
         return clientBranchLatitude;
     }
 
     /**
-     * 设置 客户网点地址坐标纬度,浮点型,与t_client_branch.branch_latitude,关联
+     * 设置 cit客户,网点,地址坐标纬度,浮点型
      *
-     * @param clientBranchLatitude - 客户网点地址坐标纬度,浮点型,与t_client_branch.branch_latitude,关联
+     * @param clientBranchLatitude - cit客户,网点,地址坐标纬度,浮点型
      */
     public AtmBaseBean setClientBranchLatitude(String clientBranchLatitude) {
         this.clientBranchLatitude = clientBranchLatitude == null ? null : clientBranchLatitude.trim();
@@ -708,18 +766,18 @@ public class AtmBaseBean implements Serializable {
     }
 
     /**
-     * 获取 客户网点地址坐标经度,浮点型,与t_client_branch.branch_longitude,关联
+     * 获取 cit客户,网点,址坐标经度,浮点型
      *
-     * @return atm_client_branch_longitude - 客户网点地址坐标经度,浮点型,与t_client_branch.branch_longitude,关联
+     * @return base_client_branch_longitude - cit客户,网点,址坐标经度,浮点型
      */
     public String getClientBranchLongitude() {
         return clientBranchLongitude;
     }
 
     /**
-     * 设置 客户网点地址坐标经度,浮点型,与t_client_branch.branch_longitude,关联
+     * 设置 cit客户,网点,址坐标经度,浮点型
      *
-     * @param clientBranchLongitude - 客户网点地址坐标经度,浮点型,与t_client_branch.branch_longitude,关联
+     * @param clientBranchLongitude - cit客户,网点,址坐标经度,浮点型
      */
     public AtmBaseBean setClientBranchLongitude(String clientBranchLongitude) {
         this.clientBranchLongitude = clientBranchLongitude == null ? null : clientBranchLongitude.trim();
@@ -727,37 +785,18 @@ public class AtmBaseBean implements Serializable {
     }
 
     /**
-     * 获取 负责人,与t_crew.crew_id 字段关联【{"max":13}】
+     * 获取 cit客户,网点,ATM设备,负责人,名字
      *
-     * @return atm_client_owner_id - 负责人,与t_crew.crew_id 字段关联【{"max":13}】
-     */
-    public Long getClientOwnerId() {
-        return clientOwnerId;
-    }
-
-    /**
-     * 设置 负责人,与t_crew.crew_id 字段关联【{"max":13}】
-     *
-     * @param clientOwnerId - 负责人,与t_crew.crew_id 字段关联【{"max":13}】
-     */
-    public AtmBaseBean setClientOwnerId(Long clientOwnerId) {
-        this.clientOwnerId = clientOwnerId;
-        return this;
-    }
-
-    /**
-     * 获取 负责人,与t_client.client_id 字段关联【{"max":13}】
-     *
-     * @return atm_client_owner_name - 负责人,与t_client.client_id 字段关联【{"max":13}】
+     * @return base_client_owner_name - cit客户,网点,ATM设备,负责人,名字
      */
     public String getClientOwnerName() {
         return clientOwnerName;
     }
 
     /**
-     * 设置 负责人,与t_client.client_id 字段关联【{"max":13}】
+     * 设置 cit客户,网点,ATM设备,负责人,名字
      *
-     * @param clientOwnerName - 负责人,与t_client.client_id 字段关联【{"max":13}】
+     * @param clientOwnerName - cit客户,网点,ATM设备,负责人,名字
      */
     public AtmBaseBean setClientOwnerName(String clientOwnerName) {
         this.clientOwnerName = clientOwnerName == null ? null : clientOwnerName.trim();
@@ -767,7 +806,7 @@ public class AtmBaseBean implements Serializable {
     /**
      * 获取 基础状态
      *
-     * @return atm_status - 基础状态
+     * @return base_status - 基础状态
      */
     public String getStatus() {
         return status;
@@ -784,75 +823,75 @@ public class AtmBaseBean implements Serializable {
     }
 
     /**
-     * 获取 货币,总金额
+     * 获取 错误，类型
      *
-     * @return atm_currency_total_amount - 货币,总金额
+     * @return base_error_type - 错误，类型
      */
-    public BigDecimal getCurrencyTotalAmount() {
-        return currencyTotalAmount;
+    public String getErrorType() {
+        return errorType;
     }
 
     /**
-     * 设置 货币,总金额
+     * 设置 错误，类型
      *
-     * @param currencyTotalAmount - 货币,总金额
+     * @param errorType - 错误，类型
      */
-    public AtmBaseBean setCurrencyTotalAmount(BigDecimal currencyTotalAmount) {
-        this.currencyTotalAmount = currencyTotalAmount;
+    public AtmBaseBean setErrorType(String errorType) {
+        this.errorType = errorType == null ? null : errorType.trim();
         return this;
     }
 
     /**
-     * 获取 货币,当前容量【单位：张】
+     * 获取 错误，产生时间
      *
-     * @return atm_current_capacity - 货币,当前容量【单位：张】
+     * @return base_error_time - 错误，产生时间
      */
-    public Integer getCurrentCapacity() {
-        return currentCapacity;
+    public Date getErrorTime() {
+        return errorTime;
     }
 
     /**
-     * 设置 货币,当前容量【单位：张】
+     * 设置 错误，产生时间
      *
-     * @param currentCapacity - 货币,当前容量【单位：张】
+     * @param errorTime - 错误，产生时间
      */
-    public AtmBaseBean setCurrentCapacity(Integer currentCapacity) {
-        this.currentCapacity = currentCapacity;
+    public AtmBaseBean setErrorTime(Date errorTime) {
+        this.errorTime = errorTime;
         return this;
     }
 
     /**
-     * 获取 货币,最大容量【单位：张】
+     * 获取 错误，修复时间
      *
-     * @return atm_currency_max_capacity - 货币,最大容量【单位：张】
+     * @return base_error_fixed_time - 错误，修复时间
      */
-    public Integer getCurrencyMaxCapacity() {
-        return currencyMaxCapacity;
+    public Date getErrorFixedTime() {
+        return errorFixedTime;
     }
 
     /**
-     * 设置 货币,最大容量【单位：张】
+     * 设置 错误，修复时间
      *
-     * @param currencyMaxCapacity - 货币,最大容量【单位：张】
+     * @param errorFixedTime - 错误，修复时间
      */
-    public AtmBaseBean setCurrencyMaxCapacity(Integer currencyMaxCapacity) {
-        this.currencyMaxCapacity = currencyMaxCapacity;
+    public AtmBaseBean setErrorFixedTime(Date errorFixedTime) {
+        this.errorFixedTime = errorFixedTime;
         return this;
     }
 
     /**
-     * 获取 货币,类型
+     * 获取 纸币,类型
      *
-     * @return atm_currency_type - 货币,类型
+     * @return base_currency_type - 纸币,类型
      */
     public String getCurrencyType() {
         return currencyType;
     }
 
     /**
-     * 设置 货币,类型
+     * 设置 纸币,类型
      *
-     * @param currencyType - 货币,类型
+     * @param currencyType - 纸币,类型
      */
     public AtmBaseBean setCurrencyType(String currencyType) {
         this.currencyType = currencyType == null ? null : currencyType.trim();
@@ -860,9 +899,66 @@ public class AtmBaseBean implements Serializable {
     }
 
     /**
+     * 获取 纸币,总金额
+     *
+     * @return base_currency_amount - 纸币,总金额
+     */
+    public BigDecimal getCurrencyAmount() {
+        return currencyAmount;
+    }
+
+    /**
+     * 设置 纸币,总金额
+     *
+     * @param currencyAmount - 纸币,总金额
+     */
+    public AtmBaseBean setCurrencyAmount(BigDecimal currencyAmount) {
+        this.currencyAmount = currencyAmount;
+        return this;
+    }
+
+    /**
+     * 获取 纸币,当前容量【单位：张】
+     *
+     * @return base_currency_capacity - 纸币,当前容量【单位：张】
+     */
+    public Integer getCurrencyCapacity() {
+        return currencyCapacity;
+    }
+
+    /**
+     * 设置 纸币,当前容量【单位：张】
+     *
+     * @param currencyCapacity - 纸币,当前容量【单位：张】
+     */
+    public AtmBaseBean setCurrencyCapacity(Integer currencyCapacity) {
+        this.currencyCapacity = currencyCapacity;
+        return this;
+    }
+
+    /**
+     * 获取 纸币,最大容量【单位：张】
+     *
+     * @return base_currency_max_capacity - 纸币,最大容量【单位：张】
+     */
+    public Integer getCurrencyMaxCapacity() {
+        return currencyMaxCapacity;
+    }
+
+    /**
+     * 设置 纸币,最大容量【单位：张】
+     *
+     * @param currencyMaxCapacity - 纸币,最大容量【单位：张】
+     */
+    public AtmBaseBean setCurrencyMaxCapacity(Integer currencyMaxCapacity) {
+        this.currencyMaxCapacity = currencyMaxCapacity;
+        return this;
+    }
+
+    /**
      * 获取 信封,总数【单位：张】
      *
-     * @return atm_envelopes_total_amount - 信封,总数【单位：张】
+     * @return base_envelopes_total_amount - 信封,总数【单位：张】
      */
     public Integer getEnvelopesTotalAmount() {
         return envelopesTotalAmount;
@@ -881,7 +977,7 @@ public class AtmBaseBean implements Serializable {
     /**
      * 获取 信封,当前容量【单位：张】
      *
-     * @return atm_envelopes_capacity - 信封,当前容量【单位：张】
+     * @return base_envelopes_capacity - 信封,当前容量【单位：张】
      */
     public Integer getEnvelopesCapacity() {
         return envelopesCapacity;
@@ -900,7 +996,7 @@ public class AtmBaseBean implements Serializable {
     /**
      * 获取 信封,最大容量【单位：张】
      *
-     * @return atm_envelopes_max_capacity - 信封,最大容量【单位：张】
+     * @return base_envelopes_max_capacity - 信封,最大容量【单位：张】
      */
     public Integer getEnvelopesMaxCapacity() {
         return envelopesMaxCapacity;
@@ -919,7 +1015,7 @@ public class AtmBaseBean implements Serializable {
     /**
      * 获取 创建的用户
      *
-     * @return atm_create_by - 创建的用户
+     * @return base_create_by - 创建的用户
      */
     public String getCreateBy() {
         return createBy;
@@ -938,7 +1034,7 @@ public class AtmBaseBean implements Serializable {
     /**
      * 获取 创建时间
      *
-     * @return atm_create_timestamp - 创建时间
+     * @return base_create_timestamp - 创建时间
      */
     public Date getCreateTimestamp() {
         return createTimestamp;
@@ -957,7 +1053,7 @@ public class AtmBaseBean implements Serializable {
     /**
      * 获取 更新时间
      *
-     * @return atm_update_timestamp - 更新时间
+     * @return base_update_timestamp - 更新时间
      */
     public Date getUpdateTimestamp() {
         return updateTimestamp;
@@ -976,7 +1072,7 @@ public class AtmBaseBean implements Serializable {
     /**
      * 获取 逻辑删除标志【N[正常]，Y[删除]】
      *
-     * @return atm_delete_flag - 逻辑删除标志【N[正常]，Y[删除]】
+     * @return base_delete_flag - 逻辑删除标志【N[正常]，Y[删除]】
      */
     public String getDeleteFlag() {
         return deleteFlag;

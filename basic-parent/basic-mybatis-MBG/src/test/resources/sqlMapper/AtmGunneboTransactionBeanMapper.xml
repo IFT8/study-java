@@ -6,7 +6,7 @@
       WARNING - @mbg.generated
     -->
     <id column="transaction_id" jdbcType="BIGINT" property="id" />
-    <result column="transaction_atm_id" jdbcType="BIGINT" property="atmId" />
+    <result column="transaction_gunnebo_id" jdbcType="BIGINT" property="gunneboId" />
     <result column="transaction_atm_terminal_id" jdbcType="VARCHAR" property="atmTerminalId" />
     <result column="transaction_atm_terminal_type" jdbcType="VARCHAR" property="atmTerminalType" />
     <result column="transaction_original_id" jdbcType="VARCHAR" property="originalId" />

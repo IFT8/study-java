@@ -1,10 +1,10 @@
 package com.comodin.fleet.service;
 
 import com.comodin.basic.service.IBaseService;
+import com.comodin.fleet.core.bean.AtmBaseMaintainBean;
 import com.comodin.basic.vo.BaseVo;
-import com.comodin.fleet.core.bean.AtmClientTerminalRecordBean;
 
 @SuppressWarnings({"unused", "SpringAutowiredFieldsWarningInspection", "StatementWithEmptyBody"})
-public interface IAtmClientTerminalRecordBeanService extends IBaseService<AtmClientTerminalRecordBean, BaseVo<AtmClientTerminalRecordBean>> {
+public interface IAtmBaseMaintainBeanService extends IBaseService<AtmBaseMaintainBean, BaseVo<AtmBaseMaintainBean>> {
 
 }

@@ -17,8 +17,8 @@ logging:
   level:
     root: info
     org.hibernate: info
-    org.hibernate.type.descriptor.sql.BasicBinder: trace
-    org.hibernate.type.descriptor.sql.BasicExtractor: trace
+    org.hibernate.type.descriptor.sql.BasicBinder: error
+    org.hibernate.type.descriptor.sql.BasicExtractor: error
     cn.assupg.study: debug
 eureka:
   client:

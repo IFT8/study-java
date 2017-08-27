@@ -525,27 +525,30 @@
 
 
         <table tableName="t_atm_base" domainObjectName="AtmBaseBean">
-            <generatedKey column="atm_id" sqlStatement="Mysql" identity="true"/>
-            <columnRenamingRule searchString="atm_" replaceString=""/>
+            <generatedKey column="base_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="base_" replaceString=""/>
         </table>
         <table tableName="t_atm_base_transaction" domainObjectName="AtmBaseTransactionBean">
             <generatedKey column="transaction_id" sqlStatement="Mysql" identity="true"/>
             <columnRenamingRule searchString="transaction_" replaceString=""/>
         </table>
+        <table tableName="t_atm_sync_log" domainObjectName="AtmSyncLogBean">
+            <generatedKey column="sync_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="sync_" replaceString=""/>
+        </table>
+        <table tableName="t_atm_base_maintain" domainObjectName="AtmBaseMaintainBean">
+            <generatedKey column="maintain_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="maintain_" replaceString=""/>
+        </table>
+
         <table tableName="t_atm_gunnebo" domainObjectName="AtmGunneboBean">
-            <generatedKey column="atm_id" sqlStatement="Mysql" identity="true"/>
-            <columnRenamingRule searchString="atm_" replaceString=""/>
+            <generatedKey column="gunnebo_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="gunnebo_" replaceString=""/>
         </table>
         <table tableName="t_atm_gunnebo_transaction" domainObjectName="AtmGunneboTransactionBean">
             <generatedKey column="transaction_id" sqlStatement="Mysql" identity="true"/>
             <columnRenamingRule searchString="transaction_" replaceString=""/>
             <columnOverride column="transaction_transaction_status" property="transactionStatus"/>
-        </table>
-
-        <table tableName="t_atm_client_terminal_record" domainObjectName="AtmClientTerminalRecordBean">
-            <generatedKey column="record_id" sqlStatement="Mysql" identity="true"/>
-            <columnRenamingRule searchString="record_" replaceString=""/>
-            <columnOverride column="record_read_record_type" property="readRecordType"/>
         </table>
 
     </context>

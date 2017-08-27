@@ -16,13 +16,13 @@ public class BankAtmCodeBeanI18nConstant  {
      */
     public static final String BANK_ATM_CODE_BEAN_DESCRIPTION_LENGTH = "BANK_ATM_CODE_BEAN_DESCRIPTION_LENGTH";
     /**
+     * 出错状态码
+     */
+    public static final String BANK_ATM_CODE_BEAN_NUM_NOT_BLANK = "BANK_ATM_CODE_BEAN_NUM_NOT_BLANK";
+    /**
      * 状态码所属客户ID,与t_client.client_id 字段关联
      */
     public static final String BANK_ATM_CODE_BEAN_CLIENT_ID_LENGTH = "BANK_ATM_CODE_BEAN_CLIENT_ID_LENGTH";
-    /**
-     * 出错状态码
-     */
-    public static final String BANK_ATM_CODE_BEAN_NUM_LENGTH = "BANK_ATM_CODE_BEAN_NUM_LENGTH";
     /**
      * 数据库主键ID
      */
@@ -30,6 +30,6 @@ public class BankAtmCodeBeanI18nConstant  {
     /**
      * 出错状态码
      */
-    public static final String BANK_ATM_CODE_BEAN_NUM_NOT_BLANK = "BANK_ATM_CODE_BEAN_NUM_NOT_BLANK";
+    public static final String BANK_ATM_CODE_BEAN_NUM_LENGTH = "BANK_ATM_CODE_BEAN_NUM_LENGTH";
 
 }

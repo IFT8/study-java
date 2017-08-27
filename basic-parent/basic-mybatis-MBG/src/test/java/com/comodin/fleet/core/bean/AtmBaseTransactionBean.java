@@ -11,7 +11,7 @@ import javax.validation.constraints.*;
 import org.hibernate.validator.constraints.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
-@SuppressWarnings({"unused", "UnusedReturnValue", "SameParameterValue", "DefaultAnnotationParam"})
+@SuppressWarnings({"unused", "SpringAutowiredFieldsWarningInspection", "StatementWithEmptyBody", "WeakerAccess"})
 @Entity
 @Table(name = "t_atm_base_transaction")
 public class AtmBaseTransactionBean implements Serializable {
@@ -32,33 +32,59 @@ public class AtmBaseTransactionBean implements Serializable {
 
     /**
      * <pre>
-     * DB remark: 任务ID,t_atm_base.atm_id关联
-     * DB column: transaction_atm_id	BIGINT(20)	<--->	atmId	java.lang.Long
+     * DB remark: t_atm_base.base_id 关联
+     * DB column: transaction_base_id	BIGINT(20)	<--->	baseId	java.lang.Long
      * DB is  Nullable: false
      * DB defaultValue: null
      * </pre>
      */
-    @NotNull(message = "{" + AtmBaseTransactionBeanI18nConstant.ATM_BASE_TRANSACTION_BEAN_ATM_ID_NOT_NULL + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @ValidLength(max = 20, message = "{" + AtmBaseTransactionBeanI18nConstant.ATM_BASE_TRANSACTION_BEAN_ATM_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "transaction_atm_id", length = 20, nullable = false)
-    private Long atmId;
+    @NotNull(message = "{" + AtmBaseTransactionBeanI18nConstant.ATM_BASE_TRANSACTION_BEAN_BASE_ID_NOT_NULL + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @ValidLength(max = 20, message = "{" + AtmBaseTransactionBeanI18nConstant.ATM_BASE_TRANSACTION_BEAN_BASE_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Column(name = "transaction_base_id", length = 20, nullable = false)
+    private Long baseId;
 
     /**
      * <pre>
-     * DB remark: 操作人ID与t_user.user_id和t_crew.crew_id关联,0代表系统自动执行
-     * DB column: transaction_operator_id	BIGINT(20)	<--->	operatorId	java.lang.Long
+     * DB remark: ATM终端，唯一标识
+     * DB column: transaction_atm_terminal_id	VARCHAR(64)	<--->	atmTerminalId	java.lang.String
      * DB is  Nullable: false
      * DB defaultValue: null
      * </pre>
      */
-    @NotNull(message = "{" + AtmBaseTransactionBeanI18nConstant.ATM_BASE_TRANSACTION_BEAN_OPERATOR_ID_NOT_NULL + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @ValidLength(max = 20, message = "{" + AtmBaseTransactionBeanI18nConstant.ATM_BASE_TRANSACTION_BEAN_OPERATOR_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
-    @Column(name = "transaction_operator_id", length = 20, nullable = false)
-    private Long operatorId;
+    @NotBlank(message = "{" + AtmBaseTransactionBeanI18nConstant.ATM_BASE_TRANSACTION_BEAN_ATM_TERMINAL_ID_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 64, message = "{" + AtmBaseTransactionBeanI18nConstant.ATM_BASE_TRANSACTION_BEAN_ATM_TERMINAL_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Column(name = "transaction_atm_terminal_id", length = 64, nullable = false)
+    private String atmTerminalId;
 
     /**
      * <pre>
-     * DB remark: 操作人用户名与t_user.user_name和t_crew.crew_name关联,system代表系统自动执行
+     * DB remark: ATM终端，设备类型
+     * DB column: transaction_atm_terminal_type	VARCHAR(20)	<--->	atmTerminalType	java.lang.String
+     * DB is  Nullable: false
+     * DB defaultValue: null
+     * </pre>
+     */
+    @NotBlank(message = "{" + AtmBaseTransactionBeanI18nConstant.ATM_BASE_TRANSACTION_BEAN_ATM_TERMINAL_TYPE_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 20, message = "{" + AtmBaseTransactionBeanI18nConstant.ATM_BASE_TRANSACTION_BEAN_ATM_TERMINAL_TYPE_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Column(name = "transaction_atm_terminal_type", length = 20, nullable = false)
+    private String atmTerminalType;
+
+    /**
+     * <pre>
+     * DB remark: ATM，交易记录，原始ID
+     * DB column: transaction_original_id	VARCHAR(20)	<--->	originalId	java.lang.String
+     * DB is  Nullable: false
+     * DB defaultValue: null
+     * </pre>
+     */
+    @NotBlank(message = "{" + AtmBaseTransactionBeanI18nConstant.ATM_BASE_TRANSACTION_BEAN_ORIGINAL_ID_NOT_BLANK + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Length(max = 20, message = "{" + AtmBaseTransactionBeanI18nConstant.ATM_BASE_TRANSACTION_BEAN_ORIGINAL_ID_LENGTH + "}", groups = {IBaseValidGroup.Add.class, IBaseValidGroup.Update.class})
+    @Column(name = "transaction_original_id", length = 20, nullable = false)
+    private String originalId;
+
+    /**
+     * <pre>
+     * DB remark: 操作人用户名
      * DB column: transaction_operator_name	VARCHAR(20)	<--->	operatorName	java.lang.String
      * DB is  Nullable: false
      * DB defaultValue: null
@@ -182,56 +208,94 @@ public class AtmBaseTransactionBean implements Serializable {
     }
 
     /**
-     * 获取 任务ID,t_atm_base.atm_id关联
+     * 获取 t_atm_base.base_id 关联
      *
-     * @return transaction_atm_id - 任务ID,t_atm_base.atm_id关联
+     * @return transaction_base_id - t_atm_base.base_id 关联
      */
-    public Long getAtmId() {
-        return atmId;
+    public Long getBaseId() {
+        return baseId;
     }
 
     /**
-     * 设置 任务ID,t_atm_base.atm_id关联
+     * 设置 t_atm_base.base_id 关联
      *
-     * @param atmId - 任务ID,t_atm_base.atm_id关联
+     * @param baseId - t_atm_base.base_id 关联
      */
-    public AtmBaseTransactionBean setAtmId(Long atmId) {
-        this.atmId = atmId;
+    public AtmBaseTransactionBean setBaseId(Long baseId) {
+        this.baseId = baseId;
         return this;
     }
 
     /**
-     * 获取 操作人ID与t_user.user_id和t_crew.crew_id关联,0代表系统自动执行
+     * 获取 ATM终端，唯一标识
      *
-     * @return transaction_operator_id - 操作人ID与t_user.user_id和t_crew.crew_id关联,0代表系统自动执行
+     * @return transaction_atm_terminal_id - ATM终端，唯一标识
      */
-    public Long getOperatorId() {
-        return operatorId;
+    public String getAtmTerminalId() {
+        return atmTerminalId;
     }
 
     /**
-     * 设置 操作人ID与t_user.user_id和t_crew.crew_id关联,0代表系统自动执行
+     * 设置 ATM终端，唯一标识
      *
-     * @param operatorId - 操作人ID与t_user.user_id和t_crew.crew_id关联,0代表系统自动执行
+     * @param atmTerminalId - ATM终端，唯一标识
      */
-    public AtmBaseTransactionBean setOperatorId(Long operatorId) {
-        this.operatorId = operatorId;
+    public AtmBaseTransactionBean setAtmTerminalId(String atmTerminalId) {
+        this.atmTerminalId = atmTerminalId == null ? null : atmTerminalId.trim();
         return this;
     }
 
     /**
-     * 获取 操作人用户名与t_user.user_name和t_crew.crew_name关联,system代表系统自动执行
+     * 获取 ATM终端，设备类型
      *
-     * @return transaction_operator_name - 操作人用户名与t_user.user_name和t_crew.crew_name关联,system代表系统自动执行
+     * @return transaction_atm_terminal_type - ATM终端，设备类型
+     */
+    public String getAtmTerminalType() {
+        return atmTerminalType;
+    }
+
+    /**
+     * 设置 ATM终端，设备类型
+     *
+     * @param atmTerminalType - ATM终端，设备类型
+     */
+    public AtmBaseTransactionBean setAtmTerminalType(String atmTerminalType) {
+        this.atmTerminalType = atmTerminalType == null ? null : atmTerminalType.trim();
+        return this;
+    }
+
+    /**
+     * 获取 ATM，交易记录，原始ID
+     *
+     * @return transaction_original_id - ATM，交易记录，原始ID
+     */
+    public String getOriginalId() {
+        return originalId;
+    }
+
+    /**
+     * 设置 ATM，交易记录，原始ID
+     *
+     * @param originalId - ATM，交易记录，原始ID
+     */
+    public AtmBaseTransactionBean setOriginalId(String originalId) {
+        this.originalId = originalId == null ? null : originalId.trim();
+        return this;
+    }
+
+    /**
+     * 获取 操作人用户名
+     *
+     * @return transaction_operator_name - 操作人用户名
      */
     public String getOperatorName() {
         return operatorName;
     }
 
     /**
-     * 设置 操作人用户名与t_user.user_name和t_crew.crew_name关联,system代表系统自动执行
+     * 设置 操作人用户名
      *
-     * @param operatorName - 操作人用户名与t_user.user_name和t_crew.crew_name关联,system代表系统自动执行
+     * @param operatorName - 操作人用户名
      */
     public AtmBaseTransactionBean setOperatorName(String operatorName) {
         this.operatorName = operatorName == null ? null : operatorName.trim();
