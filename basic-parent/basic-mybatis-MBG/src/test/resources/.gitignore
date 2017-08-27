@@ -1,4 +1,5 @@
 # Ignore everything in this directory
-.gitignore
+i18n
+sqlMapper
 # Except this file
 !.gitignore
