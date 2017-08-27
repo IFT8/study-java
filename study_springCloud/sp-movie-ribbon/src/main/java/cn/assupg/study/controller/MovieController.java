@@ -6,23 +6,24 @@ import com.netflix.discovery.EurekaClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+@SuppressWarnings({"SpringAutowiredFieldsWarningInspection", "SpringJavaAutowiringInspection"})
 @RestController
 public class MovieController {
 
     @Autowired
     private RestTemplate restTemplate;
-
-    @SuppressWarnings("SpringJavaAutowiringInspection")
     @Autowired
     private EurekaClient eurekaClient;
     @Autowired
     private DiscoveryClient discoveryClient;
-
+    @Autowired
+    private LoadBalancerClient loadBalancerClient;
 
     @GetMapping("/movie/{id}")
     public User findById(@PathVariable Long id) {
@@ -48,10 +49,22 @@ public class MovieController {
      *
      * @return //
      */
-    @SuppressWarnings("UnnecessaryLocalVariable")
     @GetMapping("/instance-info")
     public ServiceInstance showInfo() {
-        ServiceInstance localServiceInstance = discoveryClient.getLocalServiceInstance();
-        return localServiceInstance;
+        return discoveryClient.getLocalServiceInstance();
+    }
+
+    @GetMapping("/test")
+    public String test() {
+        ServiceInstance serviceInstance = this.loadBalancerClient.choose("sp-user");
+        System.out.println("test:\t" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + ":" + serviceInstance.getServiceId());
+        return "1";
+    }
+
+    @GetMapping("/test2")
+    public String test2() {
+        ServiceInstance serviceInstance = this.loadBalancerClient.choose("sp-user2");
+        System.out.println("test2:\t" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + ":" + serviceInstance.getServiceId());
+        return "2";
     }
 }

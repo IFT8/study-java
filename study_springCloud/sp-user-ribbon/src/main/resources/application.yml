@@ -1,8 +1,8 @@
 server:
-  port: 7901
+  port: 7903
 spring:
   application:
-    name: sp-user    #建议，名称写为小写
+    name: sp-user2    #建议，名称写为小写
   jpa:
     generate-ddl: false
     show-sql: true

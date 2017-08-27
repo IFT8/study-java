@@ -1,6 +1,6 @@
 package cn.assupg.study;
 
-import cn.assupg.ribbon.config.TestConfiguration;
+import cn.assupg.ribbon.config.TestRibbonCustomizeConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -18,7 +18,7 @@ import org.springframework.web.client.RestTemplate;
  */
 @SpringBootApplication
 @EnableEurekaClient
-@RibbonClient(name = "sp-user", configuration = TestConfiguration.class)
+@RibbonClient(name = "sp-user", configuration = TestRibbonCustomizeConfiguration.class)
 public class SpMovieRibbonApp {
 
     @LoadBalanced
