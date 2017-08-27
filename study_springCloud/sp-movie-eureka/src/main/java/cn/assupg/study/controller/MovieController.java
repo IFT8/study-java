@@ -12,13 +12,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+@SuppressWarnings({"SpringAutowiredFieldsWarningInspection", "SpringJavaAutowiringInspection"})
 @RestController
 public class MovieController {
 
     @Autowired
     private RestTemplate restTemplate;
-
-    @SuppressWarnings("SpringJavaAutowiringInspection")
     @Autowired
     private EurekaClient eurekaClient;
     @Autowired
@@ -41,7 +40,7 @@ public class MovieController {
      */
     @GetMapping("/eureka-instance")
     public String serviceUrl() {
-        InstanceInfo instance = eurekaClient.getNextServerFromEureka("SP-MOVIE", false);
+        InstanceInfo instance = eurekaClient.getNextServerFromEureka("SP-MOVIE-EUREKA", false);
         return instance.getHomePageUrl();
     }
 

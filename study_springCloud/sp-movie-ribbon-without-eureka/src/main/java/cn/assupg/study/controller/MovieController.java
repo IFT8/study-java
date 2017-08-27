@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.net.URI;
+
 @SuppressWarnings({"SpringAutowiredFieldsWarningInspection", "SpringJavaAutowiringInspection", "Duplicates"})
 @RestController
 public class MovieController {
@@ -29,6 +31,10 @@ public class MovieController {
     public User findById(@PathVariable Long id) {
         //String url = "http://localhost:7900/user/" + id;
         //String url = this.userServicePath + id;
+
+        ServiceInstance serviceInstance = this.loadBalancerClient.choose("sp-user-ribbon");
+        System.out.println("====:\t" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + ":" + serviceInstance.getServiceId());
+
         String url = "http://sp-user-ribbon/user/" + id;
         return this.restTemplate.getForObject(url, User.class);
     }
@@ -40,7 +46,7 @@ public class MovieController {
      */
     @GetMapping("/eureka-instance")
     public String serviceUrl() {
-        InstanceInfo instance = eurekaClient.getNextServerFromEureka("SP-MOVIE-RIBBON", false);
+        InstanceInfo instance = eurekaClient.getNextServerFromEureka("SP-MOVIE-RIBBON-PROPERTIES-CUSTOMIZING", false);
         return instance.getHomePageUrl();
     }
 
@@ -62,5 +68,16 @@ public class MovieController {
         System.out.println("sp-user-ribbon2:\t" + serviceInstance2.getHost() + ":" + serviceInstance2.getPort() + ":" + serviceInstance2.getServiceId());
         System.out.println("");
         return "1";
+    }
+
+    @Autowired
+    private LoadBalancerClient loadBalancer;
+
+    //Using the Ribbon API Directly
+    //You can also use the LoadBalancerClient directly. Example:
+    public void doStuff() {
+        ServiceInstance instance = loadBalancer.choose("stores");
+        URI storesUri = URI.create(String.format("http://%s:%s", instance.getHost(), instance.getPort()));
+        // ... do something with the URI
     }
 }

@@ -1,12 +1,15 @@
 package cn.assupg.study;
 
-import cn.assupg.ribbon.config.TestRibbonCustomizeConfiguration;
+import cn.assupg.study.config.ExcludeFromComponentScan;
+import cn.assupg.study.config.TestRibbonCustomizeConfiguration2;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -18,7 +21,15 @@ import org.springframework.web.client.RestTemplate;
  */
 @SpringBootApplication
 @EnableEurekaClient
-@RibbonClient(name = "sp-user", configuration = TestRibbonCustomizeConfiguration.class)
+//Customizing the Ribbon Client You can configure some bits of a Ribbon client
+//  The TestRibbonCustomizeConfiguration has to be @Configuration but take care that it is not in a
+//      @ComponentScan for the main application context, otherwise it will be shared by all the @RibbonClients.
+//      If you use @ComponentScan (or @SpringBootApplication) you need to take steps to avoid it being included
+//      (for instance put it in a separate, non-overlapping package, or specify the packages to scan explicitly in the @ComponentScan).
+//@RibbonClient(name = "sp-user", configuration = TestRibbonCustomizeConfiguration.class)
+//通过，@ComponentScan 排除指定的 TestRibbonCustomizeConfiguration2.class
+@RibbonClient(name = "sp-user-ribbon", configuration = TestRibbonCustomizeConfiguration2.class)
+@ComponentScan(excludeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION, value = ExcludeFromComponentScan.class)})
 public class SpMovieRibbonApp {
 
     @LoadBalanced

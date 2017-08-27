@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+@SuppressWarnings({"SpringJavaAutowiringInspection", "SpringAutowiredFieldsWarningInspection"})
 @RestController
 public class UserController {
 
@@ -33,7 +34,7 @@ public class UserController {
      */
     @GetMapping("/eureka-instance")
     public String serviceUrl() {
-        InstanceInfo instance = eurekaClient.getNextServerFromEureka("SP-USER", false);
+        InstanceInfo instance = eurekaClient.getNextServerFromEureka("SP-USER-RIBBON", false);
         return instance.getHomePageUrl();
     }
 

@@ -29,6 +29,10 @@ public class MovieController {
     public User findById(@PathVariable Long id) {
         //String url = "http://localhost:7900/user/" + id;
         //String url = this.userServicePath + id;
+
+        ServiceInstance serviceInstance = this.loadBalancerClient.choose("sp-user-ribbon");
+        System.out.println("====:\t" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + ":" + serviceInstance.getServiceId());
+
         String url = "http://sp-user-ribbon/user/" + id;
         return this.restTemplate.getForObject(url, User.class);
     }
@@ -40,7 +44,7 @@ public class MovieController {
      */
     @GetMapping("/eureka-instance")
     public String serviceUrl() {
-        InstanceInfo instance = eurekaClient.getNextServerFromEureka("SP-MOVIE-RIBBON", false);
+        InstanceInfo instance = eurekaClient.getNextServerFromEureka("SP-MOVIE-RIBBON-PROPERTIES-CUSTOMIZING", false);
         return instance.getHomePageUrl();
     }
 

@@ -1,10 +1,10 @@
+server:
+  port: 2001
 spring:
   application:
-    name: sp-movie
-server:
-  port: 8900
+    name: sp-movie-eureka
 user:
-  userServicePath: http://localhost:7900/user/
+  userServicePath: http://localhost:1000/user/
 eureka:
   client:
     #实现健康检查开关，需要依赖：spring-boot-actuator

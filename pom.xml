@@ -45,6 +45,8 @@
 		
 		<module>study_springCloud/sp-user-ribbon</module>
         <module>study_springCloud/sp-movie-ribbon</module>
+        <module>study_springCloud/sp-movie-ribbon-properties-customizing</module>
+        <module>study_springCloud/sp-movie-ribbon-without-eureka</module>
     </modules>
 
     <properties>
