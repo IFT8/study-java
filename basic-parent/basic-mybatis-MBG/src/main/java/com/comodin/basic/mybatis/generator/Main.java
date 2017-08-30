@@ -20,7 +20,8 @@ public class Main {
     public static void main(String[] args) throws IOException, XMLParserException, InvalidConfigurationException, SQLException, InterruptedException {
         List<String> warnings = new ArrayList<String>();
 
-        InputStream resourceAsStream = Main.class.getResourceAsStream("/mybatis-generator/mybatisGeneratorConfig.xml");
+        //InputStream resourceAsStream = Main.class.getResourceAsStream("/mybatis-generator/mybatisGeneratorConfig.xml");
+        InputStream resourceAsStream = Main.class.getResourceAsStream("/mybatis-generator/mybatisGeneratorConfig-study.xml");
         //File configFile = new File("generatorConfig.xml");
 
         ConfigurationParser cp = new ConfigurationParser(warnings);
