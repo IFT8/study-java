@@ -26,8 +26,8 @@ import static java.lang.annotation.ElementType.TYPE;
 @SuppressWarnings("unused")
 public @interface ValidExcelMultipleIf {
 
-    //String DEFAULT_MESSAGE = "{com.comodin.basic.validation.constraints.ValidExcelMultipleIf.message}";
-    String DEFAULT_MESSAGE = "The all data is empty or Not empty. {propertyNameArray}.";    //所有数据为空或不为空。
+    //String DEFAULT_MESSAGE = "{com.comodin.basic.util.excel.ValidExcelMultipleIf.message}";
+    String DEFAULT_MESSAGE = "The all data is empty or Not empty.";    //所有数据为空或不为空。
 
     String[] propertyNameArray() default {};
 
@@ -93,26 +93,34 @@ public @interface ValidExcelMultipleIf {
                 }
             }
 
+
             if (!isValid) {
-                Map<String, String> mapBeanPropertyToExcelTitle = new HashMap<>();
-                for (String propertyName : propertyNameArray) {
+                Map<String, Object> mapAllPropertyNamePropertyValue = new HashMap<>();
+                mapAllPropertyNamePropertyValue.putAll(mapPropertyNameToValueNotEmpty);
+                mapAllPropertyNamePropertyValue.putAll(mapPropertyNameToValueIsEmpty);
+
+                Map<String, Object> mapBeanPropertyToExcelTitle = new HashMap<>();
+                mapAllPropertyNamePropertyValue.forEach((propertyName, propertyValueObj) -> {
                     try {
                         Field propertyDeclaredField = beanObject.getClass().getDeclaredField(propertyName);
                         if (propertyDeclaredField.isAnnotationPresent(ExcelResources.class)) {
                             String title = propertyDeclaredField.getAnnotation(ExcelResources.class).title();
-                            mapBeanPropertyToExcelTitle.put(propertyName, title);
+                            mapBeanPropertyToExcelTitle.put(title, propertyValueObj);
                         }
                     } catch (NoSuchFieldException e) {
                         log.error(String.format("@interface ValidExcelMultipleIf implements class: Validator ==> Get bean property: %s @ExcelResources, exception", propertyName), e);
                     }
-                }
+                });
 
                 ConstraintValidatorContextImpl constraintValidatorContextImpl = (ConstraintValidatorContextImpl) constraintContext;
                 Object message = constraintValidatorContextImpl.getConstraintDescriptor().getAttributes().get("message");
+
                 if (ValidExcelMultipleIf.DEFAULT_MESSAGE.equals(message.toString())) {
+                    String msg = ExcelUtils.getMessageByRowColumn(beanObject, mapBeanPropertyToExcelTitle.keySet(),
+                            String.format("%s The current value: %s", ValidExcelMultipleIf.DEFAULT_MESSAGE, mapBeanPropertyToExcelTitle.toString()));
                     constraintContext.disableDefaultConstraintViolation();//禁用默认的message的值
                     constraintContext//重新添加错误提示语句
-                            .buildConstraintViolationWithTemplate(String.format("The all data is empty or Not empty. %s", mapBeanPropertyToExcelTitle.isEmpty() ? ValidExcelMultipleIf.DEFAULT_MESSAGE : mapBeanPropertyToExcelTitle.values().toString()))
+                            .buildConstraintViolationWithTemplate(msg)
                             .addConstraintViolation();
                 }
             }

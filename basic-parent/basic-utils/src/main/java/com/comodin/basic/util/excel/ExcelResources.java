@@ -52,14 +52,14 @@ public @interface ExcelResources {
      *
      * @return //
      */
-    String errorCode();
+    String errorCode() default "";
 
     /**
      * 在excel的顺序，默认为：0，即代表对顺序没有限定
      *
      * @return //
      */
-    int order() default 0;
+    int order() default -999;
 
 
     String pattern() default "";

@@ -1,7 +1,8 @@
 package com.comodin.basic.util.db.rws;
 
-import com.comodin.basic.util.RandomUtils;
 import org.apache.log4j.Logger;
+
+import com.comodin.basic.util.RandomUtils;
 
 import java.util.HashSet;
 import java.util.Set;

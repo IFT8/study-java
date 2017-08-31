@@ -4,14 +4,19 @@ import com.comodin.basic.exception.UploadDataErrorException;
 import com.comodin.basic.util.reflect.MyBeanUtils;
 import com.comodin.basic.util.validator.HibernateValidatorUtils;
 import com.comodin.basic.validation.constraints.ValidDateTimeFormat;
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.NumberToTextConverter;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Matcher;
@@ -19,9 +24,9 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 
-@SuppressWarnings({"Convert2Diamond", "unused", "Duplicates"})
+@SuppressWarnings({"Convert2Diamond", "unused", "Duplicates", "WeakerAccess", "InfiniteRecursion", "TypeParameterHidesVisibleType"})
 public class ExcelUtils {
-    private Logger log = Logger.getLogger(this.getClass());
+    private static Logger log = Logger.getLogger(ExcelUtils.class);
     private static ExcelUtils instance = new ExcelUtils();
 
     private ExcelUtils() {
@@ -80,6 +85,8 @@ public class ExcelUtils {
     private int dataColumnEndPositions = DATA_COLUMN_END_POSITIONS_DEFAULT_0;
     private int dataColumnMaxPositions = DATA_COLUMN_MAX_POSITIONS_DEFAULT_0;
 
+    private String recordExcelAddressColumnProperty;
+
     /**
      * 装换失败的数据信息，记录行数
      */
@@ -98,56 +105,417 @@ public class ExcelUtils {
     }
 
 
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+    // 以下，导出对象到Excel，基于模板方式 // by:supeng date:2017-8-10 17:00:56
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * 将对象转换为Excel并且导出，该方法是基于模板的导出，导出到流
+     *
+     * @param replaceFinalDataMap 模板中的替换的常量数据
+     * @param templatePath        模板路径
+     * @param outputStream        输出流
+     * @param beanList            对象列表
+     * @param tClass              对象的类型
+     * @param isClassPath         模板是否在classPath路径下
+     */
+    public <T> void exportBeanList2ExcelByTemplate(Map<String, String> replaceFinalDataMap, String templatePath, OutputStream outputStream, List<T> beanList, Class<?> tClass, boolean isClassPath) {
+        ExcelTemplate et = handlerBeanList2Excel(templatePath, beanList, tClass, isClassPath);
+        et.replaceFinalData(replaceFinalDataMap);
+        et.writeToStream(outputStream);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+    // 以下，导出对象到Excel，基于模板方式 // by:supeng date:2017-8-10 17:00:56
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * 将对象转换为Excel并且导出，该方法是基于模板的导出，导出到流
+     *
+     * @param replaceFinalDataMap 模板中的替换的常量数据
+     * @param templatePath        模板路径
+     * @param outputStream        输出流
+     * @param beanList            对象列表
+     * @param tClass              对象的类型
+     * @param isClassPath         模板是否在classPath路径下
+     *
+     */
+    public <T> void exportBeanList3ExcelByTemplate(Map<String, String> replaceFinalDataMap, String templatePath, OutputStream outputStream, List<T> beanList, Class<?> tClass, boolean isClassPath) {
+        ExcelTemplate et = handlerBeanList3Excel(templatePath, beanList, tClass, isClassPath);
+        et.replaceFinalData(replaceFinalDataMap);
+        et.writeToStream(outputStream);
+    }
+
+    /**
+     * 将对象转换为Excel并且导出，该方法是基于模板的导出，导出到一个具体的路径中
+     *
+     * @param replaceFinalDataMap 模板中的替换的常量数据
+     * @param templatePath        模板路径
+     * @param outPath             输出路径
+     * @param beanList            对象列表
+     * @param tClass              对象的类型
+     * @param isClassPath         模板是否在classPath路径下
+     */
+    public <T> void exportBeanList2ExcelByTemplate(Map<String, String> replaceFinalDataMap, String templatePath, String outPath, List<T> beanList, Class<?> tClass, boolean isClassPath) {
+        ExcelTemplate et = handlerBeanList2Excel(templatePath, beanList, tClass, isClassPath);
+        et.replaceFinalData(replaceFinalDataMap);
+        et.writeToFile(outPath);
+    }
+
+    /**
+     * 将对象转换为Excel并且导出，该方法是基于模板的导出，导出到流,基于Properties作为常量数据
+     *
+     * @param properties   基于Properties的常量数据模型
+     * @param templatePath 模板路径
+     * @param outputStream 输出流
+     * @param beanList     对象列表
+     * @param tClass       对象的类型
+     * @param isClassPath  模板是否在classPath路径下
+     */
+    public <T> void exportBeanList2ExcelByTemplate(Properties properties, String templatePath, OutputStream outputStream, List<T> beanList, Class<?> tClass, boolean isClassPath) {
+        ExcelTemplate et = handlerBeanList2Excel(templatePath, beanList, tClass, isClassPath);
+        et.replaceFinalData(properties);
+        et.writeToStream(outputStream);
+    }
+
+    /**
+     * 将对象转换为Excel并且导出，该方法是基于模板的导出，导出到一个具体的路径中,基于Properties作为常量数据
+     *
+     * @param properties   基于Properties的常量数据模型
+     * @param templatePath 模板路径
+     * @param outPath      输出路径
+     * @param beanList     对象列表
+     * @param tClass       对象的类型
+     * @param isClassPath  模板是否在classPath路径下
+     */
+    public <T> void exportBeanList2ExcelByTemplate(Properties properties, String templatePath, String outPath, List<T> beanList, Class<?> tClass, boolean isClassPath) {
+        ExcelTemplate et = handlerBeanList2Excel(templatePath, beanList, tClass, isClassPath);
+        et.replaceFinalData(properties);
+        et.writeToFile(outPath);
+    }
+
+    /**
+     * 处理对象转换为Excel
+     *
+     * @param templatePath //模版路径
+     * @param beanList     bean对象列表
+     * @param tClass       bean对象列表 中的Class
+     * @param isClassPath  是绝对路径，还是相对路径，模版
+     *
+     * @return //
+     */
+    private <T> ExcelTemplate handlerBeanList2Excel(final String templatePath, final List<T> beanList, final Class<?> tClass, final boolean isClassPath) {
+        ExcelTemplate et = ExcelTemplate.getInstance();
+
+        try {
+            if (isClassPath) {
+                et.readTemplateByClasspath(templatePath);
+            } else {
+                et.readTemplateByPath(templatePath);
+            }
+            List<ExcelHeader> headers = getHeaderList(tClass);
+            Collections.sort(headers);
+
+            ////输出标题
+            //et.createNewRow();
+            //for (ExcelHeader eh : headers) {
+            //    et.createCell(eh.getTitle());
+            //}
+
+            //输出值
+            for (T t : beanList) {
+                et.createNewRow();
+                for (ExcelHeader eh : headers) {
+                    String propertyValue = BeanUtils.getProperty(t, eh.getPropertyName());
+
+                    et.createCell(propertyValue);
+                    //if (log.isDebugEnabled()) {
+                    //    log.info("output bean info: beanPropertyName: " + eh.getPropertyName() + " beanPropertyValue: " + propertyValue + " excelTitle: " + eh.getTitle());
+                    //}
+                }
+            }
+        } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+            log.error("output bean BeanUtils.getProperty(t, eh.getPropertyName()) error ", e);
+        }
+        return et;
+    }
+
+    /**
+     * 处理对象转换为Excel
+     *
+     * @param templatePath //模版路径
+     * @param beanList     bean对象列表
+     * @param tClass       bean对象列表 中的Class
+     * @param isClassPath  是绝对路径，还是相对路径，模版
+     *
+     * @return //
+     */
+    private <T> ExcelTemplate handlerBeanList3Excel(final String templatePath, final List<T> beanList, final Class<?> tClass, final boolean isClassPath) {
+        ExcelTemplate et = ExcelTemplate.getInstance();
+
+        try {
+            if (isClassPath) {
+                et.readTemplateByClasspath(templatePath);
+            } else {
+                et.readTemplateByPath(templatePath);
+            }
+            List<ExcelHeader> headers = getHeaderList(tClass);
+            Collections.sort(headers);
+
+            ////输出标题
+            //et.createNewRow();
+            //for (ExcelHeader eh : headers) {
+            //    et.createCell(eh.getTitle());
+            //}
+
+            //输出值
+            for (T t : beanList) {
+                et.createNewRow();
+                for (ExcelHeader eh : headers) {
+                    String propertyName = eh.getPropertyName();
+                    String propertyValue = BeanUtils.getProperty(t, propertyName);
+                    Cell cell = et.createCell(propertyValue);
+
+                    CellBean cellBean = new CellBean(propertyName,propertyValue,cell);
+                    CellStyle style = getStyle(cellBean);
+                    if (style != null) {
+                        cell.setCellStyle(style);
+                    }
+
+                    //if (log.isDebugEnabled()) {
+                    //    log.info("output bean info: beanPropertyName: " + eh.getPropertyName() + " beanPropertyValue: " + propertyValue + " excelTitle: " + eh.getTitle());
+                    //}
+                }
+            }
+        } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+            log.error("output bean BeanUtils.getProperty(t, eh.getPropertyName()) error ", e);
+        }
+        return et;
+    }
+
+    private static CellStyle getStyle(CellBean cellBean){
+        String propertyName = cellBean.getPropertyName();
+        if(propertyName.equals("serviceLevel")){//若是遇到serviceLevel列，则需要判断需不需要高亮
+            return getServiceLevelStyle(cellBean);
+        }
+
+        return null;
+    }
+
+    private static CellStyle getServiceLevelStyle(CellBean cellBean){
+
+        String propertyValue = cellBean.getPropertyValue();
+        CellStyle cellStyle = cellBean.getCell().getCellStyle();//获取默认样式
+        Workbook workbook = cellBean.getCell().getSheet().getWorkbook();
+        if ("DENTRO DE HORARIO".equalsIgnoreCase(propertyValue) || "N/A".equalsIgnoreCase(propertyValue)) {//属于正常，不高亮
+            CellStyle newCellStyle = workbook.createCellStyle();
+            newCellStyle.setFillForegroundColor(IndexedColors.WHITE.getIndex());
+            newCellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+            newCellStyle.setBorderBottom(BorderStyle.THIN);
+            newCellStyle.setBorderLeft(BorderStyle.THIN);
+            newCellStyle.setBorderRight(BorderStyle.THIN);
+            newCellStyle.setBorderTop(BorderStyle.THIN);
+
+            return newCellStyle;
+        } else {
+            //增加背景颜色
+            //cellStyle.setFillBackgroundColor(IndexedColors.RED.getIndex());
+            cellStyle.setFillForegroundColor(IndexedColors.RED.getIndex());
+            cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        }
+        return cellStyle;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+    // 以下，导出对象到Excel，不基于模板方式 // by:supeng date:2017-8-10 17:00:56
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+
+    private <T> Workbook handleBeanList2Excel(List<T> beanList, Class<?> tClass, boolean isXSSFWorkbook) {
+        Workbook workbook = null;
+        try {
+            workbook = isXSSFWorkbook ? new XSSFWorkbook() : new HSSFWorkbook();
+            Sheet sheet = workbook.createSheet();
+            Row row = sheet.createRow(0);
+
+            List<ExcelHeader> headers = getHeaderList(tClass);
+            Collections.sort(headers);
+
+            //写标题
+            for (int i = 0; i < headers.size(); i++) {
+                row.createCell(i).setCellValue(headers.get(i).getTitle());
+            }
+
+            //写数据
+            for (int i = 0; i < beanList.size(); i++) {
+                row = sheet.createRow(i + 1);
+                T t = beanList.get(i);
+                for (int j = 0; j < headers.size(); j++) {
+                    ExcelHeader excelHeader = headers.get(j);
+                    String propertyValue = BeanUtils.getProperty(t, excelHeader.getPropertyName());
+                    //r.createCell(j).setCellValue(BeanUtils.getProperty(obj, getMethodName(headers.get(j))));
+                    row.createCell(j).setCellValue(propertyValue);
+                }
+            }
+        } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+            log.error("output bean BeanUtils.getProperty(t, eh.getPropertyName()) error ", e);
+        }
+        return workbook;
+    }
+
+    /**
+     * 导出对象到Excel，不是基于模板的，直接新建一个Excel完成导出，基于路径的导出
+     *
+     * @param outPath        导出路径
+     * @param beanList       对象列表
+     * @param tClass         对象类型
+     * @param isXSSFWorkbook 是否是2007版本
+     */
+    public <T> void exportBeanList2Excel(String outPath, List<T> beanList, Class<?> tClass, boolean isXSSFWorkbook) {
+        Workbook wb = handleBeanList2Excel(beanList, tClass, isXSSFWorkbook);
+        try {
+            try (FileOutputStream fos = new FileOutputStream(outPath)) {
+                wb.write(fos);
+            }
+        } catch (FileNotFoundException e) {
+            //throw new RuntimeException("写入的文件不存在");
+            throw new UploadDataErrorException("-1201", "The written file does not exist. filePath: " + outPath, e.getMessage(), e);
+        } catch (IOException e) {
+            //throw new RuntimeException("写入数据失败:" + e.getMessage());
+            throw new UploadDataErrorException("-1201", "Write data to file failed. filePath: " + outPath, e.getMessage(), e);
+        }
+    }
+
+    /**
+     * 导出对象到Excel，不是基于模板的，直接新建一个Excel完成导出，基于流
+     *
+     * @param outputStream   输出流
+     * @param beanList       对象列表
+     * @param tClass         对象类型
+     * @param isXSSFWorkbook 是否是2007版本
+     */
+    public <T> void exportBeanList2Excel(OutputStream outputStream, List<T> beanList, Class<?> tClass, boolean isXSSFWorkbook) {
+        try {
+            Workbook wb = handleBeanList2Excel(beanList, tClass, isXSSFWorkbook);
+            wb.write(outputStream);
+        } catch (IOException e) {
+            //throw new RuntimeException("写入流失败:" + e.getMessage());
+            throw new UploadDataErrorException("-1201", "Write data to Output Stream.", e.getMessage(), e);
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+    // 以下，读取 Excel到bean // by:supeng date:2017-8-10 17:00:56
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * 从类路径读取相应的Excel文件到对象列表
+     *
+     * @param path   路径
+     * @param tClass 类型
+     *
+     * @return 对象列表
+     */
+    public <T> List<T> readExcel2BeanListByClasspath(String path, Class<T> tClass) {
+        String file;
+        try {
+            file = URLDecoder.decode(ExcelUtils.class.getResource(path).getFile(), "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            //throw new UploadDataErrorException("-1201", "Upload an Excel file that does not exist. FilePath: " + path, e.getMessage(), e);
+            throw new UploadDataErrorException("-1201", "Cargar un archivo de Excel que no existe. Ruta de archivo: " + path, e.getMessage(), e);
+        }
+        return this.readExcel2BeanListByPath(file, tClass);
+    }
+
+    /**
+     * 从文件路径读取相应的Excel文件到对象列表
+     *
+     * @param path   路径
+     * @param tClass 类型
+     *
+     * @return 对象列表
+     */
+    public <T> List<T> readExcel2BeanListByPath(String path, Class<T> tClass) {
+        FileInputStream fileInputStream;
+        try {
+            fileInputStream = new FileInputStream(new File(path));
+        } catch (FileNotFoundException e) {//上传Excel文件，不存在. filePath:
+            //throw new UploadDataErrorException("-1201", "Upload an Excel file that does not exist. FilePath: " + path, e.getMessage(), e);
+            throw new UploadDataErrorException("-1201", "Cargar un archivo de Excel que no existe. Ruta de archivo: " + path, e.getMessage(), e);
+        }
+        return this.readExcel2BeanListByInputStream(fileInputStream, tClass);
+    }
+
     /**
      * 从类路径读取相应的Excel文件到对象列表
      *
      * @param inputStream 类路径下的path
-     * @param clazz       对象类型
+     * @param tClass      对象类型
      *
-     * @return // List<clazz>
+     * @return // List<tClass>
      */
-    public <T> List<T> readExcel2BeanByInputStream(InputStream inputStream, Class<T> clazz) {
+    public <T> List<T> readExcel2BeanListByInputStream(InputStream inputStream, Class<T> tClass) {
         Workbook workbook;
         try {
             workbook = WorkbookFactory.create(inputStream);
         } catch (IOException | InvalidFormatException e) {//上传文件无效Excel文件或已损坏。 请检查是否正常打开.
-            throw new UploadDataErrorException("-1201", "The upload file is not valid Excel files or corrupted. Please check whether the normal open.", e);
+            //throw new UploadDataErrorException("-1201", "The upload file is not valid Excel files or corrupted. Please check whether the normal open.", e);
+            throw new UploadDataErrorException("-1201", "El archivo de subida es archivos de Excel no válidos o dañado. Por favor, compruebe si el normalmente abierto.", e);
         }
         if (workbook.getNumberOfSheets() < 1) {//Excel没有工作表，是一个空文件，请检查.
-            throw new UploadDataErrorException("-1202", "Excel does not have a worksheet, it is an empty file, please check.");
+            //throw new UploadDataErrorException("-1202", "Excel does not have a worksheet, it is an empty file, please check.");
+            throw new UploadDataErrorException("-1202", "Excel no tiene una hoja de cálculo, es un archivo vacío, compruebe.");
         }
 
-        this.initConfig(clazz);
+        this.initConfig(tClass);
         if (this.sheetName == null || "".equals(this.sheetName.trim())) {
             this.sheetName = workbook.getSheetAt(0).getSheetName();
         }
 
         Sheet workbookSheet = workbook.getSheet(this.sheetName);
         if (workbookSheet == null) {
-            throw new UploadDataErrorException("-1203", String.format("worksheet name: %s not found.", this.sheetName));
+            //throw new UploadDataErrorException("-1203", String.format("worksheet name: %s not found.", this.sheetName));
+            throw new UploadDataErrorException("-1203", String.format("nombre de la hoja: %s no se ha encontrado.", this.sheetName));
         }
 
-        return handlerExcel2Bean(workbookSheet, clazz);
+        return handlerExcel2Bean(workbookSheet, tClass);
     }
 
-    public <T> List<T> readExcel2BeanBySheet(final Sheet sheet, final Class<T> clazz) {
-        this.initConfig(clazz);
+    public <T> List<T> readExcel2BeanListBySheet(final Sheet sheet, final Class<T> tClass) {
+        this.initConfig(tClass);
         if (this.sheetName == null || "".equals(this.sheetName.trim())) {
             this.sheetName = sheet.getSheetName();
         }
         if (sheet == null || !sheet.getSheetName().equals(this.sheetName)) {
-            throw new UploadDataErrorException("-1203", String.format("worksheet name: %s not found.", this.sheetName));
+            throw new UploadDataErrorException("-1203", String.format("nombre de la hoja: %s no se ha encontrado.", this.sheetName));
         }
-        return handlerExcel2Bean(sheet, clazz);
+        return handlerExcel2Bean(sheet, tClass);
     }
 
-    private <T> List<T> handlerExcel2Bean(final Sheet sheet, final Class<T> clazz) {
+    private <T> List<T> handlerExcel2Bean(final Sheet sheet, final Class<T> tClass) {
         List<T> result = new ArrayList<>();
+        this.error.setLength(0);
 
         //1、检查，整个工作表,不能为空
         int sheetRowTotalNumber = sheet.getPhysicalNumberOfRows(); //获取总行数，包含《标题》
         if (sheetRowTotalNumber <= 0) {
-            throw new UploadDataErrorException("-1211", this.getMessageBySheet("The entire worksheet can not be empty"));
+            //throw new UploadDataErrorException("-1211", this.getMessageBySheet("The entire worksheet can not be empty"));
+            throw new UploadDataErrorException("-1211", this.getMessageBySheet("Toda la hoja no puede estar vacía"));
         }
 
         Map<Integer, ExcelHeader> excelTitleToPropertyMapping = new HashMap<Integer, ExcelHeader>();
@@ -160,35 +528,41 @@ public class ExcelUtils {
         //2.1.5、检查，系统设置,标题行,最大列数为20列,当前Excel标题行总列数为:21列,请检查.
         if (sheetRowTotalNumber < this.titleRowPositions) {
             throw new UploadDataErrorException("-1221", this.getMessageBySheet(
-                    String.format("System settings, the header line, where the behavior of the first %d lines, the current total number of Excel %d lines, please check.", this.titleRowPositions, sheetRowTotalNumber)));
+                    //String.format("System settings, the header line, where the behavior of the first %d lines, the current total number of Excel %d lines, please check.", this.titleRowPositions, sheetRowTotalNumber)));
+                    String.format("La configuración del sistema, la línea de cabecera, donde el comportamiento de la primera %d líneas, el número total actual de Excel %d líneas, Por favor, compruebe.", this.titleRowPositions, sheetRowTotalNumber)));
         }
         Row titleRow = sheet.getRow((this.titleRowPositions - 1));
         int titleColumnTotalNumber = titleRow.getLastCellNum();
         if (titleColumnTotalNumber <= 0) {
             throw new UploadDataErrorException("-1222", this.getMessageByRow(titleRow,
-                    String.format("System settings, the title line, where the behavior of line %d, the data can not be empty, please check.", this.titleRowPositions)));
+                    //String.format("System settings, the title line, where the behavior of line %d, the data can not be empty, please check.", this.titleRowPositions)));
+                    String.format("La configuración del sistema, la línea del título, donde el comportamiento de la línea %d, los datos no pueden estar vacíos, por favor, compruebe.", this.titleRowPositions)));
         }
         if (titleColumnTotalNumber < this.titleColumnStartPositions) {
             throw new UploadDataErrorException("-1223", this.getMessageByRow(titleRow,
-                    String.format("System settings, header line, read the beginning of the data listed as column %d, the current Excel header line total number of columns: %d, please check.", this.titleColumnStartPositions, titleColumnTotalNumber)));
+                    //String.format("System settings, header line, read the beginning of the data listed as column %d, the current Excel header line total number of columns: %d, please check.", this.titleColumnStartPositions, titleColumnTotalNumber)));
+                    String.format("La configuración del sistema, línea de cabecera, leen el principio de los datos que figuran como columna %d, el número total actual línea de cabecera de las columnas de Excel: %d, Por favor, compruebe.", this.titleColumnStartPositions, titleColumnTotalNumber)));
         }
         if (this.titleColumnEndPositions != TITLE_COLUMN_END_POSITIONS_DEFAULT_0 && titleColumnTotalNumber < this.titleColumnEndPositions) {
             throw new UploadDataErrorException("-1224", this.getMessageByRow(titleRow,
-                    String.format("System settings, the header line, the end of the read data as the first %d columns, the current Excel header line total number of columns: %d columns, please check.", this.titleColumnEndPositions, titleColumnTotalNumber)));
+                    //String.format("System settings, the header line, the end of the read data as the first %d columns, the current Excel header line total number of columns: %d columns, please check.", this.titleColumnEndPositions, titleColumnTotalNumber)));
+                    String.format("La configuración del sistema, la línea de cabecera, al final de los datos de lectura como la primera %d columnas, el número total actual línea de cabecera de las columnas de Excel: %d columns, Por favor, compruebe.", this.titleColumnEndPositions, titleColumnTotalNumber)));
         }
         if (this.titleColumnMaxPositions != TITLE_COLUMN_MAX_POSITIONS_DEFAULT_0 && titleColumnTotalNumber > this.titleColumnMaxPositions) {
             throw new UploadDataErrorException("-1225", this.getMessageByRow(titleRow,
-                    String.format("System settings, the header row, the maximum number of columns for the %d columns, the current Excel header line total number of columns: %d columns, please check.", this.titleColumnMaxPositions, titleColumnTotalNumber)));
+                    //String.format("System settings, the header row, the maximum number of columns for the %d columns, the current Excel header line total number of columns: %d columns, please check.", this.titleColumnMaxPositions, titleColumnTotalNumber)));
+                    String.format("La configuración del sistema, la fila de encabezado, el número máximo de columnas para el %d columnas, el número total actual línea de cabecera de las columnas de Excel: %d columnas, Por favor, compruebe.", this.titleColumnMaxPositions, titleColumnTotalNumber)));
         }
         //2.2、提出javaBean配置的注解@ExcelResources所对应的标题——>在Excel对应对应标题的列索引
         //2.2.1、提出javaBean配置的注解@ExcelResources所对应的标题
-        List<ExcelHeader> headerList = this.getHeaderList(clazz);
+        List<ExcelHeader> headerList = this.getHeaderList(tClass);
         //2.2.2、计算出，标题列开始读取的位置和结束位置；遍历Excel标题列；组装JavaBean的标题与在Excel对应对应标题的列索引
         int titleReadColumnStartPositions = this.titleColumnStartPositions;
         int titleReadColumnEndPositions = this.titleColumnEndPositions != TITLE_COLUMN_END_POSITIONS_DEFAULT_0 ? this.titleColumnEndPositions : titleColumnTotalNumber;
         if (log.isDebugEnabled()) {
             log.info("title --> excelColumnIndex ---> property ---> propertyType");
         }
+
         for (int i = titleReadColumnStartPositions; i <= titleReadColumnEndPositions; i++) {
             Cell currentTitleCell = titleRow.getCell((i - 1));
             for (ExcelHeader excelHeader : headerList) {
@@ -204,7 +578,8 @@ public class ExcelUtils {
         //2.3、检查，Excel中的标题信息与JavaBean属性配置的注解@ExcelResources(title) 数量是否一致；
         if (excelTitleToPropertyMapping.isEmpty() || excelTitleToPropertyMapping.size() != headerList.size()) {
             throw new UploadDataErrorException("-1226", this.getMessageByRow(this.titleRowPositions,//系统设置,Excel标题名必需含有[],请检查.
-                    String.format("System settings, Excel title name must contain %s, please check.", headerList.stream().map(ExcelHeader::getTitle).collect(Collectors.toList()).toString())));
+                    //String.format("System settings, Excel title name must contain %s, please check.", headerList.stream().map(ExcelHeader::getTitle).collect(Collectors.toList()).toString())));
+                    String.format("La configuración del sistema, Excel nombre del título debe contener %s, por favor consulte.", headerList.stream().map(ExcelHeader::getTitle).collect(Collectors.toList()).toString())));
         }
 
         //3、检查数据区域
@@ -214,17 +589,21 @@ public class ExcelUtils {
         //3.1.3、检查，系统设置,数据区域,读取数据的开始行为:102行,当前Excel总行数为:200行,已限定数据行数不能少于100行,请检查.
         //3.1.4、检查，系统设置,数据区域,读取数据的开始行为:102行,当前Excel总行数为:400行,已限定数据区域每次最大处理行数为:300行,请分批再重试.
         if (sheetRowTotalNumber < this.dataRowStartPositions) {
-            throw new UploadDataErrorException("-1231", this.getMessageBySheet(String.format("System settings, data area, read the beginning of the data: %d lines, the current number of Excel total line: %d lines, please check.", this.dataRowStartPositions, sheetRowTotalNumber)));
+            //throw new UploadDataErrorException("-1231", this.getMessageBySheet(String.format("System settings, data area, read the beginning of the data: %d lines, the current number of Excel total line: %d lines, please check.", this.dataRowStartPositions, sheetRowTotalNumber)));
+            throw new UploadDataErrorException("-1231", this.getMessageBySheet(String.format("La configuración del sistema, área de datos, leen el principio de los datos: %d líneas, el número actual de la línea total de Excel: %d líneas, Por favor, compruebe.", this.dataRowStartPositions, sheetRowTotalNumber)));
         }
         int dataAreaTotalRowNumber = sheetRowTotalNumber - ((this.dataRowStartPositions - 1) + Math.abs(this.dataRowEndPositions));
         if (dataAreaTotalRowNumber <= 0) {
-            throw new UploadDataErrorException("-1232", this.getMessageBySheet(String.format("System settings, data area, read the beginning of the data: %d lines, the current number of Excel total line: %d lines, limited number of rows can not be less than %d lines, please check.", this.dataRowStartPositions, sheetRowTotalNumber, this.dataRowEndPositions)));
+            //throw new UploadDataErrorException("-1232", this.getMessageBySheet(String.format("System settings, data area, read the beginning of the data: %d lines, the current number of Excel total line: %d lines, limited number of rows can not be less than %d lines, please check.", this.dataRowStartPositions, sheetRowTotalNumber, this.dataRowEndPositions)));
+            throw new UploadDataErrorException("-1232", this.getMessageBySheet(String.format("La configuración del sistema, área de datos, leen el principio de los datos: %d líneas, el número actual de la línea total de Excel: %d líneas, número limitado de filas no puede ser inferior a %d líneas, Por favor, compruebe.", this.dataRowStartPositions, sheetRowTotalNumber, this.dataRowEndPositions)));
         }
         if (this.dataRowEndPositions != DATA_ROW_END_POSITIONS_DEFAULT_0 && dataAreaTotalRowNumber < this.dataRowEndPositions) {
-            throw new UploadDataErrorException("-1233", this.getMessageBySheet(String.format("System settings, data area, read the beginning of the data: %d lines, the current number of Excel total line: %d lines, limited number of rows can not be less than %d lines, please check.", this.dataRowStartPositions, sheetRowTotalNumber, this.dataRowEndPositions)));
+            //throw new UploadDataErrorException("-1233", this.getMessageBySheet(String.format("System settings, data area, read the beginning of the data: %d lines, the current number of Excel total line: %d lines, limited number of rows can not be less than %d lines, please check.", this.dataRowStartPositions, sheetRowTotalNumber, this.dataRowEndPositions)));
+            throw new UploadDataErrorException("-1233", this.getMessageBySheet(String.format("La configuración del sistema, área de datos, leen el principio de los datos: %d líneas, el número actual de la línea total de Excel: %d líneas, número limitado de filas no puede ser inferior a %d líneas, Por favor, compruebe.", this.dataRowStartPositions, sheetRowTotalNumber, this.dataRowEndPositions)));
         }
         if (this.dataRowMaxPositions != this.DATA_ROW_MAX_POSITIONS_DEFAULT_0 && dataAreaTotalRowNumber > this.dataRowMaxPositions) {
-            throw new UploadDataErrorException("-1234", this.getMessageBySheet(String.format("System settings, data area, read the beginning of the data: %d lines, the current total number of Excel lines: %d lines, has been limited to the maximum number of data processing area per line: %d lines, please try again in batches.", this.dataRowStartPositions, sheetRowTotalNumber, this.dataRowMaxPositions)));
+            //throw new UploadDataErrorException("-1234", this.getMessageBySheet(String.format("System settings, data area, read the beginning of the data: %d lines, the current total number of Excel lines: %d lines, has been limited to the maximum number of data processing area per line: %d lines, please try again in batches.", this.dataRowStartPositions, sheetRowTotalNumber, this.dataRowMaxPositions)));
+            throw new UploadDataErrorException("-1234", this.getMessageBySheet(String.format("La configuración del sistema, área de datos, leen el principio de los datos: %d líneas, el número actual de la línea total de Excel: %d líneas, se ha limitado a la cantidad máxima de área de procesamiento de datos por línea: %d líneas, Por favor, inténtelo de nuevo en lotes.", this.dataRowStartPositions, sheetRowTotalNumber, this.dataRowMaxPositions)));
         }
 
         //4、遍历，数据区域，每行每列的数据；
@@ -242,21 +621,25 @@ public class ExcelUtils {
             //1.3、系统设置,数据区域,每行读取列的结束列数为:10列,当前Excel列数为:9列,请检查.
             //1.4、系统设置,数据区域,每行读取列的最大列数为:10列,当前Excel列数为:9列,请检查.
             if (currentDataRowColumnTotalNumber <= 0) {
-                throw new UploadDataErrorException("-1241", this.getMessageByRow(currentDataRow, String.format("Data area, the current number of Excel columns: %d column, invalid data, please check.", currentDataRowColumnTotalNumber)));
+                //throw new UploadDataErrorException("-1241", this.getMessageByRow(currentDataRow, String.format("Data area, the current number of Excel columns: %d column, invalid data, please check.", currentDataRowColumnTotalNumber)));
+                throw new UploadDataErrorException("-1241", this.getMessageByRow(currentDataRow, String.format("Área de datos, el número actual de columnas de Excel: %d la columna, los datos no válidos, por favor, compruebe.", currentDataRowColumnTotalNumber)));
             }
             if (currentDataRowColumnTotalNumber < this.dataRowStartPositions) {
-                throw new UploadDataErrorException("-1242", this.getMessageByRow(currentDataRow, String.format("System settings, data area, the number of columns for each row to read the column: %d columns, the current number of Excel columns: %d, please check.", this.dataRowStartPositions, currentDataRowColumnTotalNumber)));
+                //throw new UploadDataErrorException("-1242", this.getMessageByRow(currentDataRow, String.format("System settings, data area, the number of columns for each row to read the column: %d columns, the current number of Excel columns: %d, please check.", this.dataRowStartPositions, currentDataRowColumnTotalNumber)));
+                throw new UploadDataErrorException("-1242", this.getMessageByRow(currentDataRow, String.format("La configuración del sistema, el área de datos, el número de columnas para cada fila para leer la columna: %d columnas, el número actual de columnas de Excel: %d, Por favor, compruebe.", this.dataRowStartPositions, currentDataRowColumnTotalNumber)));
             }
             if (this.dataColumnEndPositions != DATA_COLUMN_END_POSITIONS_DEFAULT_0 && currentDataRowColumnTotalNumber < this.dataColumnEndPositions) {
-                throw new UploadDataErrorException("-1243", this.getMessageByRow(currentDataRow, String.format("System settings, data area, the number of rows per column to read the column: %d, the current number of Excel columns: %d, please check.", this.dataColumnEndPositions, currentDataRowColumnTotalNumber)));
+                //throw new UploadDataErrorException("-1243", this.getMessageByRow(currentDataRow, String.format("System settings, data area, the number of rows per column to read the column: %d, the current number of Excel columns: %d, please check.", this.dataColumnEndPositions, currentDataRowColumnTotalNumber)));
+                throw new UploadDataErrorException("-1243", this.getMessageByRow(currentDataRow, String.format("La configuración del sistema, el área de datos, el número de filas por la columna de leer la columna: %d, el número actual de columnas de Excel: %d, Por favor, compruebe.", this.dataColumnEndPositions, currentDataRowColumnTotalNumber)));
             }
             if (this.dataColumnMaxPositions != this.DATA_COLUMN_MAX_POSITIONS_DEFAULT_0 && currentDataRowColumnTotalNumber > this.dataColumnMaxPositions) {
-                throw new UploadDataErrorException("-1244", this.getMessageByRow(currentDataRow, String.format("System settings, data area, the maximum number of rows per row to read the column: %d columns, the current number of Excel columns: %d, please check.", this.dataColumnMaxPositions, currentDataRowColumnTotalNumber)));
+                //throw new UploadDataErrorException("-1244", this.getMessageByRow(currentDataRow, String.format("System settings, data area, the maximum number of rows per row to read the column: %d columns, the current number of Excel columns: %d, please check.", this.dataColumnMaxPositions, currentDataRowColumnTotalNumber)));
+                throw new UploadDataErrorException("-1244", this.getMessageByRow(currentDataRow, String.format("La configuración del sistema, el área de datos, el número máximo de filas por fila para leer la columna: %d columnas, el número actual de columnas de Excel: %d, Por favor, compruebe.", this.dataColumnMaxPositions, currentDataRowColumnTotalNumber)));
             }
 
             //4.2、组装到List<Bean>集合中
             try {
-                T instance = clazz.newInstance();
+                T instance = tClass.newInstance();
 
                 //4.2.1、计算出，数据区域 列，开始读取的位置，和结束位置
                 int dataReadColumnStartPositions = this.dataColumnStartPositions;
@@ -284,16 +667,22 @@ public class ExcelUtils {
                             this.error.append("\n").append(infoError);
                             log.debug(infoError);
                         }
+                        ValidExcelRepeat.Validator.clear();
                         throw new UploadDataErrorException(currentColumnToExcelHeader.getErrorCode(), this.getError().toString());
                     }
                 }
 
+                if (StringUtils.isNotBlank(this.recordExcelAddressColumnProperty)) {
+                    MyBeanUtils.copyProperty(instance, this.recordExcelAddressColumnProperty, (currentDataRow.getRowNum() + 1));
+                }
+
                 //此处逻辑是，针对 class是否增加了注解 ValidExcelMultipleIf，即代表多字段多条件进行判断，要么全部为空，要么全部不为空.
-                if (clazz.isAnnotationPresent(ValidExcelMultipleIf.class)) {
+                if (tClass.isAnnotationPresent(ValidExcelMultipleIf.class)) {
                     //Map[propertyName,Map[violationAnnotationSimpleName,message]]
-                    Map<String, Map<String, String>> stringMapMap = HibernateValidatorUtils.getInstance().validateBean(instance, clazz.getAnnotation(ValidExcelMultipleIf.class).groups());
+                    Map<String, Map<String, String>> stringMapMap = HibernateValidatorUtils.getInstance().validateBean(instance, tClass.getAnnotation(ValidExcelMultipleIf.class).groups());
                     stringMapMap.forEach((propertyName, stringStringMap) -> stringStringMap.forEach((violationAnnotationSimpleName, message) -> {
                         if (ValidExcelMultipleIf.class.getSimpleName().equals(violationAnnotationSimpleName)) {
+                            ValidExcelRepeat.Validator.clear();
                             throw new UploadDataErrorException(instance.getClass().getAnnotation(ValidExcelMultipleIf.class).errorCode(), message);
                         }
                     }));
@@ -302,7 +691,7 @@ public class ExcelUtils {
                 result.add(instance);
             } catch (InstantiationException | IllegalAccessException e) {
                 if (log.isDebugEnabled()) {
-                    log.error(String.format("instance bean: %s failed", clazz.getTypeName()), e);
+                    log.error(String.format("instance bean: %s failed", tClass.getTypeName()), e);
                 }
                 //} catch (Exception e) {
                 //    throw new UploadDataErrorException("-1", "unknown error.", String.format("handle excel fail. %s", e.getMessage()), e);
@@ -311,6 +700,7 @@ public class ExcelUtils {
         if (log.isDebugEnabled()) {
             log.debug("<<<<< Conversion is complete " + (this.hasError() ? "Error message" : "") + "，Total objects:" + result.size() + "A" + ">>>>>>");
         }
+        ValidExcelRepeat.Validator.clear();
         return result;
     }
 
@@ -327,7 +717,7 @@ public class ExcelUtils {
             if (Date.class.getTypeName().equals(excelHeader.getPropertyTypeName())) {
                 if (!validDate(cellValue, excelHeader.getPattern())) {
                     throw new UploadDataErrorException(excelHeader.getErrorCode(),
-                            this.getMessageByRowColumn(cell, String.format("Invalid time or date format error. pattern: %s Current value: %s", excelHeader.getPattern(), cellValue)));
+                            this.getMessageByRowColumn(cell, String.format("Hora no válida o error de formato de fecha. patrón: %s valor actual: %s", excelHeader.getPattern(), cellValue)));
                 }
                 return objToDate(cellValue, excelHeader.getPattern());
             } else if (Integer.class.getTypeName().equals(excelHeader.getPropertyTypeName())) {
@@ -336,7 +726,7 @@ public class ExcelUtils {
                 if (Date.class.getTypeName().equals(excelDateType)) {
                     if (!validDate(cellValue, excelHeader.getPattern())) {
                         throw new UploadDataErrorException(excelHeader.getErrorCode(),
-                                this.getMessageByRowColumn(cell, String.format("Invalid time or date format error. pattern: %s Current value: %s", excelHeader.getPattern(), cellValue)));
+                                this.getMessageByRowColumn(cell, String.format("Hora no válida o error de formato de fecha. Patrón: %s valor actual: %s", excelHeader.getPattern(), cellValue)));
                     }
                     return dateToStr(cellValue, excelHeader.getPattern());
                 } else {
@@ -384,14 +774,26 @@ public class ExcelUtils {
     /**
      * 提取出 bean 对应 excel标题，配置的数据
      *
-     * @param clazz //
+     * @param tClass //
      *
      * @return //
      */
-    private <T> List<ExcelHeader> getHeaderList(final Class<T> clazz) {
+    private <T> List<ExcelHeader> getHeaderList(final Class<T> tClass) {
         List<ExcelHeader> headers = new ArrayList<ExcelHeader>();
-        Field[] fields = clazz.getDeclaredFields();
-        for (Field field : fields) {
+
+        List<Field> list = new ArrayList<>();
+        try {
+            T t = tClass.newInstance();
+            Field[] fields = t.getClass().getDeclaredFields();
+            Collections.addAll(list, fields);
+            Field[] superClassFields = t.getClass().getSuperclass().getDeclaredFields();
+            Collections.addAll(list, superClassFields);
+            //noinspection UnusedAssignment
+            t = null;
+        } catch (InstantiationException | IllegalAccessException ignored) {
+        }
+
+        for (Field field : list) {
             String fieldName = field.getName();
             if (field.isAnnotationPresent(ExcelResources.class)) {
                 ExcelResources er = field.getAnnotation(ExcelResources.class);
@@ -411,165 +813,224 @@ public class ExcelUtils {
      * 根据 javaBean，类上面的注解 @see com.comodin.basic.util.excel.ExcelRootResources
      * 读取使用者，设置的配置参数，来初始化. 若没有该注解，即使用工具类提供的默认，配置参数，来初始化。
      *
-     * @param clazz javaBean
-     * @param <T>   //
+     * @param tClass javaBean
      */
-    private <T> void initConfig(final Class<T> clazz) {
-        if (!clazz.isAnnotationPresent(ExcelRoot.class)) {
+    private void initConfig(final Class<?> tClass) {
+        if (!tClass.isAnnotationPresent(ExcelRoot.class)) {
             return;
         }
 
-        ExcelRoot clazzAnnotation = clazz.getAnnotation(ExcelRoot.class);
-        this.validatorExcelRootParameters(clazzAnnotation);
+        ExcelRoot tClassExcelRootAnnotation = tClass.getAnnotation(ExcelRoot.class);
+        this.validatorExcelRootParameters(tClassExcelRootAnnotation);
 
-        this.sheetName = clazzAnnotation.sheetName();
-        this.titleRowPositions = clazzAnnotation.titleRowPositions();
-        this.titleColumnStartPositions = clazzAnnotation.titleColumnStartPositions();
-        this.titleColumnEndPositions = clazzAnnotation.titleColumnEndPositions();
-        this.titleColumnMaxPositions = clazzAnnotation.titleColumnMaxPositions();
-        this.titleOrder = clazzAnnotation.titleOrder();
-        this.dataRowStartPositions = clazzAnnotation.dataRowStartPositions();
-        this.dataRowEndPositions = clazzAnnotation.dataRowEndPositions();
-        this.dataRowMaxPositions = clazzAnnotation.dataRowMaxPositions();
-        this.dataColumnStartPositions = clazzAnnotation.dataColumnStartPositions();
-        this.dataColumnEndPositions = clazzAnnotation.dataColumnEndPositions();
-        this.dataColumnMaxPositions = clazzAnnotation.dataColumnMaxPositions();
-        this.validGroups = clazzAnnotation.validGroups();
+        this.sheetName = tClassExcelRootAnnotation.sheetName();
+        this.validGroups = tClassExcelRootAnnotation.validGroups();
+        this.titleRowPositions = tClassExcelRootAnnotation.titleRowPositions();
+        this.titleColumnStartPositions = tClassExcelRootAnnotation.titleColumnStartPositions();
+        this.titleColumnEndPositions = tClassExcelRootAnnotation.titleColumnEndPositions();
+        this.titleColumnMaxPositions = tClassExcelRootAnnotation.titleColumnMaxPositions();
+        this.titleOrder = tClassExcelRootAnnotation.titleOrder();
+        this.dataRowStartPositions = tClassExcelRootAnnotation.dataRowStartPositions();
+        this.dataRowEndPositions = tClassExcelRootAnnotation.dataRowEndPositions();
+        this.dataRowMaxPositions = tClassExcelRootAnnotation.dataRowMaxPositions();
+        this.dataColumnStartPositions = tClassExcelRootAnnotation.dataColumnStartPositions();
+        this.dataColumnEndPositions = tClassExcelRootAnnotation.dataColumnEndPositions();
+        this.dataColumnMaxPositions = tClassExcelRootAnnotation.dataColumnMaxPositions();
+
+        this.recordExcelAddressColumnProperty = tClassExcelRootAnnotation.recordExcelAddressColumnProperty();
     }
 
     /**
      * //检查，@ExcelRoot 参数，是否属于正常值范围
      *
-     * @param clazzAnnotation //
+     * @param tClassAnnotation //
      */
-    private void validatorExcelRootParameters(ExcelRoot clazzAnnotation) {
+    private void validatorExcelRootParameters(ExcelRoot tClassAnnotation) {
         //1、检查 标题，各参数配置
-        if (clazzAnnotation.titleRowPositions() != TITLE_ROW_POSITIONS_DEFAULT_1) {
-            if (!validNumber(String.valueOf(clazzAnnotation.titleRowPositions()), "+")) {
+        if (tClassAnnotation.titleRowPositions() != TITLE_ROW_POSITIONS_DEFAULT_1) {
+            if (!validNumber(String.valueOf(tClassAnnotation.titleRowPositions()), "+")) {
                 throw new RuntimeException("@ExcelRootResources.titleRowPositions Can only be a positive integer.");
             }
         }
-        if (clazzAnnotation.titleColumnStartPositions() != TITLE_COLUMN_START_POSITIONS_DEFAULT_1) {
-            if (!validNumber(String.valueOf(clazzAnnotation.titleColumnStartPositions()), "+")) {
+        if (tClassAnnotation.titleColumnStartPositions() != TITLE_COLUMN_START_POSITIONS_DEFAULT_1) {
+            if (!validNumber(String.valueOf(tClassAnnotation.titleColumnStartPositions()), "+")) {
                 throw new RuntimeException("@ExcelRootResources.titleColumnStartPositions Can only be a positive integer.");
             }
         }
-        if (clazzAnnotation.titleColumnEndPositions() != TITLE_COLUMN_END_POSITIONS_DEFAULT_0) {
-            if (!validNumber(String.valueOf(clazzAnnotation.titleColumnEndPositions()), "+")) {
+        if (tClassAnnotation.titleColumnEndPositions() != TITLE_COLUMN_END_POSITIONS_DEFAULT_0) {
+            if (!validNumber(String.valueOf(tClassAnnotation.titleColumnEndPositions()), "+")) {
                 throw new RuntimeException("@ExcelRootResources.titleColumnEndPositions Can only be a positive integer.");
             }
-            if (clazzAnnotation.titleColumnEndPositions() < clazzAnnotation.titleColumnStartPositions()) {
+            if (tClassAnnotation.titleColumnEndPositions() < tClassAnnotation.titleColumnStartPositions()) {
                 throw new RuntimeException("@ExcelRootResources.titleColumnEndPositions Can not be less than @ExcelRootResources.titleColumnStartPositions");
             }
-            if (clazzAnnotation.titleColumnMaxPositions() != TITLE_COLUMN_MAX_POSITIONS_DEFAULT_0 && clazzAnnotation.titleColumnEndPositions() > clazzAnnotation.titleColumnMaxPositions()) {
+            if (tClassAnnotation.titleColumnMaxPositions() != TITLE_COLUMN_MAX_POSITIONS_DEFAULT_0 && tClassAnnotation.titleColumnEndPositions() > tClassAnnotation.titleColumnMaxPositions()) {
                 throw new RuntimeException("@ExcelRootResources.titleColumnEndPositions Can not be greater than @ExcelRootResources.titleColumnMaxPositions");
             }
         }
-        if (clazzAnnotation.titleColumnMaxPositions() != TITLE_COLUMN_MAX_POSITIONS_DEFAULT_0) {
-            if (!validNumber(String.valueOf(clazzAnnotation.titleColumnMaxPositions()), "+")) {
+        if (tClassAnnotation.titleColumnMaxPositions() != TITLE_COLUMN_MAX_POSITIONS_DEFAULT_0) {
+            if (!validNumber(String.valueOf(tClassAnnotation.titleColumnMaxPositions()), "+")) {
                 throw new RuntimeException("@ExcelRootResources.titleColumnMaxPositions Can only be a positive integer.");
             }
-            if (clazzAnnotation.titleColumnMaxPositions() < clazzAnnotation.titleColumnStartPositions()) {
+            if (tClassAnnotation.titleColumnMaxPositions() < tClassAnnotation.titleColumnStartPositions()) {
                 throw new RuntimeException("@ExcelRootResources.titleColumnMaxPositions Can not be less than @ExcelRootResources.titleColumnStartPositions");
             }
-            if (clazzAnnotation.titleColumnMaxPositions() < clazzAnnotation.titleColumnEndPositions()) {
+            if (tClassAnnotation.titleColumnMaxPositions() < tClassAnnotation.titleColumnEndPositions()) {
                 throw new RuntimeException("@ExcelRootResources.titleColumnMaxPositions Can not be less than @ExcelRootResources.titleColumnEndPositions");
             }
         }
 
         //2、检查 数据区域，行参数，各参数配置
-        if (clazzAnnotation.dataRowStartPositions() != DATA_ROW_START_POSITIONS_DEFAULT_2) {
-            if (!validNumber(String.valueOf(clazzAnnotation.dataRowStartPositions()), "+")) {
+        if (tClassAnnotation.dataRowStartPositions() != DATA_ROW_START_POSITIONS_DEFAULT_2) {
+            if (!validNumber(String.valueOf(tClassAnnotation.dataRowStartPositions()), "+")) {
                 throw new RuntimeException("@ExcelRootResources.dataRowStartPositions Can only be a positive integer.");
             }
         }
-        if (clazzAnnotation.dataRowEndPositions() != DATA_ROW_END_POSITIONS_DEFAULT_0) {
-            if (!validNumber(String.valueOf(clazzAnnotation.dataRowEndPositions()), "")) {
+        if (tClassAnnotation.dataRowEndPositions() != DATA_ROW_END_POSITIONS_DEFAULT_0) {
+            if (!validNumber(String.valueOf(tClassAnnotation.dataRowEndPositions()), "")) {
                 throw new RuntimeException("@ExcelRootResources.dataRowEndPositions Not a valid integer.");
             }
 
-            if (clazzAnnotation.dataRowMaxPositions() != DATA_ROW_MAX_POSITIONS_DEFAULT_0 && clazzAnnotation.dataRowEndPositions() > clazzAnnotation.dataRowMaxPositions()) {
+            if (tClassAnnotation.dataRowMaxPositions() != DATA_ROW_MAX_POSITIONS_DEFAULT_0 && tClassAnnotation.dataRowEndPositions() > tClassAnnotation.dataRowMaxPositions()) {
                 throw new RuntimeException("@ExcelRootResources.dataRowEndPositions Can not be greater than @ExcelRootResources.dataRowMaxPositions");
             }
         }
-        if (clazzAnnotation.dataRowMaxPositions() != DATA_ROW_MAX_POSITIONS_DEFAULT_0) {
-            if (!validNumber(String.valueOf(clazzAnnotation.dataRowMaxPositions()), "+")) {
+        if (tClassAnnotation.dataRowMaxPositions() != DATA_ROW_MAX_POSITIONS_DEFAULT_0) {
+            if (!validNumber(String.valueOf(tClassAnnotation.dataRowMaxPositions()), "+")) {
                 throw new RuntimeException("@ExcelRootResources.dataRowMaxPositions Can only be a positive integer.");
             }
-            if (clazzAnnotation.dataRowMaxPositions() < clazzAnnotation.dataRowStartPositions()) {
+            if (tClassAnnotation.dataRowMaxPositions() < tClassAnnotation.dataRowStartPositions()) {
                 throw new RuntimeException("@ExcelRootResources.dataRowMaxPositions Can not be less than @ExcelRootResources.dataRowStartPositions");
             }
-            if (clazzAnnotation.dataRowMaxPositions() < clazzAnnotation.dataRowEndPositions()) {
+            if (tClassAnnotation.dataRowMaxPositions() < tClassAnnotation.dataRowEndPositions()) {
                 throw new RuntimeException("@ExcelRootResources.dataRowMaxPositions Can not be less than @ExcelRootResources.dataRowEndPositions");
             }
         }
 
         //3、检查 数据区域，行参数，各参数配置
-        if (clazzAnnotation.dataColumnStartPositions() != DATA_COLUMN_START_POSITIONS_DEFAULT_1) {
-            if (!validNumber(String.valueOf(clazzAnnotation.dataColumnStartPositions()), "+")) {
+        if (tClassAnnotation.dataColumnStartPositions() != DATA_COLUMN_START_POSITIONS_DEFAULT_1) {
+            if (!validNumber(String.valueOf(tClassAnnotation.dataColumnStartPositions()), "+")) {
                 throw new RuntimeException("@ExcelRootResources.dataColumnStartPositions Can only be a positive integer.");
             }
         }
-        if (clazzAnnotation.dataColumnEndPositions() != DATA_COLUMN_END_POSITIONS_DEFAULT_0) {
-            if (!validNumber(String.valueOf(clazzAnnotation.dataColumnEndPositions()), "+")) {
+        if (tClassAnnotation.dataColumnEndPositions() != DATA_COLUMN_END_POSITIONS_DEFAULT_0) {
+            if (!validNumber(String.valueOf(tClassAnnotation.dataColumnEndPositions()), "+")) {
                 throw new RuntimeException("@ExcelRootResources.dataColumnEndPositions Can only be a positive integer.");
             }
-            if (clazzAnnotation.dataColumnEndPositions() < clazzAnnotation.dataColumnStartPositions()) {
+            if (tClassAnnotation.dataColumnEndPositions() < tClassAnnotation.dataColumnStartPositions()) {
                 throw new RuntimeException("@ExcelRootResources.dataColumnEndPositions Can not be less than @ExcelRootResources.dataColumnStartPositions");
             }
-            if (clazzAnnotation.dataColumnMaxPositions() != DATA_COLUMN_MAX_POSITIONS_DEFAULT_0 && clazzAnnotation.dataColumnEndPositions() > clazzAnnotation.dataColumnMaxPositions()) {
+            if (tClassAnnotation.dataColumnMaxPositions() != DATA_COLUMN_MAX_POSITIONS_DEFAULT_0 && tClassAnnotation.dataColumnEndPositions() > tClassAnnotation.dataColumnMaxPositions()) {
                 throw new RuntimeException("@ExcelRootResources.dataColumnEndPositions Can not be greater than @ExcelRootResources.dataColumnMaxPositions");
             }
         }
-        if (clazzAnnotation.dataColumnMaxPositions() != DATA_COLUMN_MAX_POSITIONS_DEFAULT_0) {
-            if (!validNumber(String.valueOf(clazzAnnotation.dataColumnMaxPositions()), "+")) {
+        if (tClassAnnotation.dataColumnMaxPositions() != DATA_COLUMN_MAX_POSITIONS_DEFAULT_0) {
+            if (!validNumber(String.valueOf(tClassAnnotation.dataColumnMaxPositions()), "+")) {
                 throw new RuntimeException("@ExcelRootResources.dataColumnMaxPositions Can only be a positive integer.");
             }
-            if (clazzAnnotation.dataColumnMaxPositions() < clazzAnnotation.dataColumnStartPositions()) {
+            if (tClassAnnotation.dataColumnMaxPositions() < tClassAnnotation.dataColumnStartPositions()) {
                 throw new RuntimeException("@ExcelRootResources.dataColumnMaxPositions Can not be less than @ExcelRootResources.dataColumnStartPositions");
             }
-            if (clazzAnnotation.dataColumnMaxPositions() < clazzAnnotation.dataColumnEndPositions()) {
+            if (tClassAnnotation.dataColumnMaxPositions() < tClassAnnotation.dataColumnEndPositions()) {
                 throw new RuntimeException("@ExcelRootResources.dataColumnMaxPositions Can not be less than @ExcelRootResources.dataColumnEndPositions");
             }
         }
     }
 
-    private String getMessageBySystem(String message) {
-        return message;
-    }
-
     private String getMessageBySheet(String message) {
-        return String.format("worksheet: %s %s", this.sheetName, message);
+        return String.format("hoja de cálculo: %s %s", this.sheetName, message);
     }
 
     private String getMessageByRow(Row row, String message) {
-        return String.format("worksheet: %s Row: %d dataError: %s", this.sheetName, (row.getRowNum() + 1), message);
+        return String.format("hoja de cálculo: %s fila: %d dataError: %s", this.sheetName, (row.getRowNum() + 1), message);
     }
 
     private String getMessageByRow(String rowNumber, String message) {
-        return String.format("worksheet: %s Row: %s dataError: %s", this.sheetName, rowNumber, message);
+        return String.format("hoja de cálculo: %s fila: %s dataError: %s", this.sheetName, rowNumber, message);
     }
 
     private String getMessageByRow(int rowNumber, String message) {
-        return String.format("worksheet: %s Row: %s dataError: %s", this.sheetName, rowNumber, message);
+        return String.format("hoja de cálculo: %s fila: %s dataError: %s", this.sheetName, rowNumber, message);
     }
 
     private String getMessageByColumn(String columnTitleName, String message) {
-        return String.format("worksheet: %s Column: %s dataError: %s", this.sheetName, columnTitleName, message);
+        return String.format("hoja de cálculo: %s columna: %s dataError: %s", this.sheetName, columnTitleName, message);
     }
 
     private String getMessageByRowColumn(Cell cell, String message) {
-        return String.format("worksheet: %s ==>Cell: %s dataError: %s", this.sheetName, cell.getAddress().toString(), message);
+        return String.format("hoja de cálculo: %s ==>célula: %s dataError: %s", this.sheetName, cell.getAddress().toString(), message);
     }
 
     private String getMessageByRowColumn(String rowNumber, String columnTitleName, String message) {
-        return String.format("worksheet: %s ==>Row: %s ==>Column: %s dataError: %s", this.sheetName, rowNumber, columnTitleName, message);
+        return String.format("hoja de cálculo: %s ==>fila: %s ==>columna: %s dataError: %s", this.sheetName, rowNumber, columnTitleName, message);
     }
 
     private String getMessageByRowColumn(int rowNumber, String columnTitleName, String message) {
-        return String.format("worksheet: %s ==>Row: %d ==>Column: %s dataError: %s", this.sheetName, rowNumber, columnTitleName, message);
+        return String.format("hoja de cálculo: %s ==>fila: %d ==>columna: %s dataError: %s", this.sheetName, rowNumber, columnTitleName, message);
     }
 
+
+    public static <T> String getMessageByRow(T obj, String message) {
+        String sheetName = getExcelRootAnnotationSheetName(obj);
+        String excelRootRecordExcelAddressColumnProperty = getExcelRootAnnotationRecordExcelAddressColumnProperty(obj);
+        String rowNumber = "";
+        if (StringUtils.isNotBlank(excelRootRecordExcelAddressColumnProperty)) {
+            try {
+                rowNumber = BeanUtils.getProperty(obj, excelRootRecordExcelAddressColumnProperty);
+            } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+                if (log.isDebugEnabled()) {
+                    log.debug("ExcelUtils get bean ExcelRoot Annotation RecordExcelAddressColumnProperty value fail.", e);
+                }
+            }
+        }
+        return String.format("hoja de cálculo: %s Fila: %s error de datos: %s", sheetName, rowNumber, message);
+        //return String.format("worksheet: %s Row: %s dataError: %s", sheetName, rowNumber, message);
+    }
+
+    public static <T> String getMessageByRowColumn(T obj, String propertyName, String message) {
+        String sheetName = getExcelRootAnnotationSheetName(obj);
+        String excelRootRecordExcelAddressColumnProperty = getExcelRootAnnotationRecordExcelAddressColumnProperty(obj);
+        String rowNumber = "";
+        if (StringUtils.isNotBlank(excelRootRecordExcelAddressColumnProperty)) {
+            try {
+                rowNumber = BeanUtils.getProperty(obj, excelRootRecordExcelAddressColumnProperty);
+            } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+                if (log.isDebugEnabled()) {
+                    log.debug("ExcelUtils get bean ExcelRoot Annotation RecordExcelAddressColumnProperty value fail.", e);
+                }
+            }
+        }
+        String columnTitleName = ExcelUtils.getExcelResourcesTitleByPropertyName(obj, propertyName);
+
+        return getMessageByRowColumn(sheetName, rowNumber, columnTitleName, message);
+    }
+
+    public static <T> String getMessageByRowColumn(T obj, Set<String> columnTitleSet, String message) {
+        String sheetName = getExcelRootAnnotationSheetName(obj);
+        String excelRootRecordExcelAddressColumnProperty = getExcelRootAnnotationRecordExcelAddressColumnProperty(obj);
+        String rowNumber = "";
+        if (StringUtils.isNotBlank(excelRootRecordExcelAddressColumnProperty)) {
+            try {
+                rowNumber = BeanUtils.getProperty(obj, excelRootRecordExcelAddressColumnProperty);
+            } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+                if (log.isDebugEnabled()) {
+                    log.debug("ExcelUtils get bean ExcelRoot Annotation RecordExcelAddressColumnProperty value fail.", e);
+                }
+            }
+        }
+        String columnTitleName = columnTitleSet.toString();
+        return getMessageByRowColumn(sheetName, rowNumber, columnTitleName, message);
+    }
+
+    public static String getMessageByRowColumn(String sheetName, String rowNumber, String columnTitleName, String message) {
+        return String.format("hoja de cálculo: %s ==>Fila: %s ==>Columna: %s error de datos: %s", sheetName, rowNumber, columnTitleName, message);
+        //return String.format("worksheet: %s ==>Row: %s ==>Column: %s dataError: %s", sheetName, rowNumber, columnTitleName, message);
+    }
+
+    public static String getMessageByRowColumn(String sheetName, int rowNumber, String columnTitleName, String message) {
+        return String.format("hoja de cálculo: %s ==>Fila: %d ==>Columna: %s error de datos: %s", sheetName, rowNumber, columnTitleName, message);
+        //return String.format("worksheet: %s ==>Row: %d ==>Column: %s dataError: %s", sheetName, rowNumber, columnTitleName, message);
+    }
 
     /**
      * 检查整数
@@ -648,5 +1109,83 @@ public class ExcelUtils {
             // 如果throw java.text.ParseException或者NullPointerException，就说明格式不对
             return null;
         }
+    }
+
+
+    public static String getExcelRootAnnotationRecordExcelAddressColumnProperty(Object bean) {
+        return getExcelRootAnnotationRecordExcelAddressColumnProperty(bean.getClass());
+    }
+
+    public static String getExcelRootAnnotationRecordExcelAddressColumnProperty(Class<?> tClass) {
+        ExcelRoot excelRootAnnotation = getExcelRootAnnotation(tClass);
+        if (excelRootAnnotation != null) {
+            return excelRootAnnotation.recordExcelAddressColumnProperty();
+        }
+        return null;
+    }
+
+    public static String getExcelRootAnnotationSheetName(Object bean) {
+        return getExcelRootAnnotationSheetName(bean.getClass());
+    }
+
+    public static String getExcelRootAnnotationSheetName(Class<?> tClass) {
+        ExcelRoot excelRootAnnotation = getExcelRootAnnotation(tClass);
+        if (excelRootAnnotation != null) {
+            return excelRootAnnotation.sheetName();
+        }
+        return null;
+    }
+
+    public static ExcelRoot getExcelRootAnnotation(Object bean) {
+        return getExcelRootAnnotation(bean.getClass());
+    }
+
+    public static ExcelRoot getExcelRootAnnotation(Class<?> tClass) {
+        if (tClass.isAnnotationPresent(ExcelRoot.class)) {
+            return tClass.getAnnotation(ExcelRoot.class);
+        }
+        return null;
+    }
+
+    public static ExcelResources getExcelResourcesAnnotationByPropertyName(Object bean, String propertyName) {
+        return getExcelResourcesAnnotationByPropertyName(bean.getClass(), propertyName);
+    }
+
+    public static ExcelResources getExcelResourcesAnnotationByPropertyName(Class<?> tClass, String propertyName) {
+        try {
+            Field declaredField = tClass.getDeclaredField(propertyName);
+            if (declaredField == null) {
+                return null;
+            }
+            if (declaredField.isAnnotationPresent(ExcelResources.class)) {
+                return declaredField.getAnnotation(ExcelResources.class);
+            }
+        } catch (NoSuchFieldException ignored) {
+        }
+        return null;
+    }
+
+    public static String getExcelResourcesTitleByPropertyName(Object bean, String propertyName) {
+        return getExcelResourcesTitleByPropertyName(bean.getClass(), propertyName);
+    }
+
+    public static String getExcelResourcesTitleByPropertyName(Class<?> tClass, String propertyName) {
+        ExcelResources beanFieldExcelResourcesAnnotation = getExcelResourcesAnnotationByPropertyName(tClass, propertyName);
+        if (beanFieldExcelResourcesAnnotation != null) {
+            return beanFieldExcelResourcesAnnotation.title();
+        }
+        return null;
+    }
+
+    public static String getExcelResourcesErrorCodeByPropertyName(Object bean, String propertyName) {
+        return getExcelResourcesErrorCodeByPropertyName(bean.getClass(), propertyName);
+    }
+
+    public static String getExcelResourcesErrorCodeByPropertyName(Class<?> tClass, String propertyName) {
+        ExcelResources beanFieldExcelResourcesAnnotation = getExcelResourcesAnnotationByPropertyName(tClass, propertyName);
+        if (beanFieldExcelResourcesAnnotation != null) {
+            return beanFieldExcelResourcesAnnotation.errorCode();
+        }
+        return null;
     }
 }

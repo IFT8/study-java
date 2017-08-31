@@ -5,7 +5,6 @@ import java.io.File;
 /**
  * 发送附件用
  */
-@SuppressWarnings({"WeakerAccess", "unused"})
 public class AttachBean {
     private String cid;
     private File file;

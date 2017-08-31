@@ -9,10 +9,10 @@ import java.util.List;
  * 在创建了Mail对象之后
  * 可以调用它的setSubject()、setContent()，设置主题和正文
  * 也可以调用setFrom()和　addToAddress()，设置发件人，和添加收件人。
- * 也可以调用addAttach()添加附件
+ * 也可以调用addAttch()添加附件
  * 创建AttachBean：new AttachBean(new File("..."), "fileName");
  */
-@SuppressWarnings({"unused", "WeakerAccess", "Convert2Diamond"})
+@SuppressWarnings({"WeakerAccess", "unused", "Convert2Diamond"})
 public class Mail {
     private String from;                                    //发件人
     private StringBuilder toAddress = new StringBuilder();  //收件人
@@ -40,7 +40,7 @@ public class Mail {
     }
 
     /**
-     * 返回发件人
+     * 设置 发件人
      */
     public void setFrom(String from) {
         this.from = from;
@@ -129,7 +129,6 @@ public class Mail {
      *
      * @param cc //
      */
-    @SuppressWarnings("SameParameterValue")
     public void addCcAddress(String cc) {
         if (this.ccAddress.length() > 0) {
             this.ccAddress.append(",");
@@ -142,7 +141,6 @@ public class Mail {
      *
      * @param bcc //
      */
-    @SuppressWarnings("SameParameterValue")
     public void addBccAddress(String bcc) {
         if (this.bccAddress.length() > 0) {
             this.bccAddress.append(",");

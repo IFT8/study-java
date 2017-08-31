@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * The type Cookie util.
  */
-@SuppressWarnings({"WeakerAccess", "Duplicates", "unused"})
 public class CookieUtil {
 
     /**
@@ -20,7 +19,6 @@ public class CookieUtil {
      * @param maxAge   最长存活时间 单位为秒
      * @param response the response
      */
-    @SuppressWarnings("SameParameterValue")
     public static void addCookie(String name, String value, String domain, String path, Integer maxAge, HttpServletResponse response) {
         Cookie cookie = new Cookie(name, value);
         if (domain != null) cookie.setDomain(domain);
@@ -74,7 +72,6 @@ public class CookieUtil {
      * @param request  the request
      * @param response the response
      */
-    @SuppressWarnings("SameParameterValue")
     public static void removeCookie(String name, String domain, HttpServletRequest request, HttpServletResponse response) {
         if (getCookieByName(request, name) != null) {
             CookieUtil.addCookie(name, null, domain, null, 0, response);

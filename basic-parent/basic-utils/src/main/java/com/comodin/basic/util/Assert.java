@@ -8,9 +8,20 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
-@SuppressWarnings("Duplicates")
 public abstract class Assert {
+
+
+    public static void notContains(Object actual, Set<?> expected, String actualName, String... message) {
+        Assert.isNull(expected, " expected is null");
+        if (!expected.contains(actual)) {
+            if (message != null && message.length > 0 && StringUtils.isNotBlank(message[0])) {
+                throw new ParameterException(message[0]);
+            }
+            throw new ParameterException("param " + actualName + ", only as follows " + expected.toString() + ", current value:[" + actual + "].");
+        }
+    }
 
     public static void isNotEquals(Object actual, Object expected, String message) {
         Assert.isNull(actual, " actual is null");
@@ -52,6 +63,12 @@ public abstract class Assert {
         }
     }
 
+    public static void isNotNull(Object o, String message) {
+        if (Objects.nonNull(o)) {
+            throw new ParameterException(message);
+        }
+    }
+
     public static void isEmpty(Object[] array, String message) {
         if ((array == null || array.length == 0)) {
             throw new ParameterException(message);
@@ -80,5 +97,4 @@ public abstract class Assert {
             }
         }
     }
-
 }

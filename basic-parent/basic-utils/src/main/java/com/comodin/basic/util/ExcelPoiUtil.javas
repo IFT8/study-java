@@ -1,0 +1,511 @@
+package com.comodin.basic.util;
+
+import com.comodin.basic.exception.ExcelPoiException;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.util.NumberToTextConverter;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.Method;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+/**
+ * 将excel数据装换成数据模型
+ * 1、支持03，07格式的 Excel文件
+ * 2、可设置：行，列；起始位置，结束位置，以及最大行数，最大列数。
+ * 3、判断标题名顺序，是否一置。
+ */
+public class ExcelPoiUtil {
+    private Logger log = Logger.getLogger(this.getClass());
+
+    /**
+     * 标题
+     * key:excel对应标题 ,value:对象属性
+     */
+    private Map<String, String> mapExcelTitleToBeanPropertyMapping;
+    private Map<Integer, String> excelTitle;
+    private Map<String, List<String>> excelColumnsValues = new HashMap<>();
+    //默认值为0，代表标题设置excel第一行
+    private static final int TITLE_HEADER_DEFAULT_POSITIONS = 0;
+    private int titleHeaderPos = TITLE_HEADER_DEFAULT_POSITIONS;
+
+
+    /**
+     * 行数 初始化参数 ：
+     * 1、设定，每行，开始读取的位置，默认为0
+     * 2、设定，每行，结束读取的位置，默认为0，为最后一行（索引值=0，用负数来表示倒数第n行）
+     * 3、设定，每行，最大读取的位置，默认为0，代表不设置限制；
+     */
+    private final static int ROW_STAR_READ_DEFAULT_POSITIONS = 1;
+    private final static int ROW_END_READ_DEFAULT_POSITIONS = 0;
+    private final static int ROW_MAX_READ_DEFAULT_POSITIONS = 0;
+    private int rowStartReadPos = ROW_STAR_READ_DEFAULT_POSITIONS;
+    private int rowEndReadPos = ROW_END_READ_DEFAULT_POSITIONS;
+    private int rowMaxReadPos = ROW_MAX_READ_DEFAULT_POSITIONS;
+
+    /**
+     * 列数 初始化参数 ：
+     * 1、设定，每列，开始读取的位置，默认为0
+     * 2、设定，每列，结束读取的位置，默认为0，为最后一行（索引值=0，用负数来表示倒数第n行）
+     * 3、设定，每列，最大读取的位置，默认为0，代表不设置限制；
+     */
+    private final static int COLUMN_STAR_READ_DEFAULT_POSITIONS = 0;
+    private final static int COLUMN_END_READ_DEFAULT_POSITIONS = 0;
+    private final static int COLUMN_MAX_READ_DEFAULT_POSITIONS = 0;
+    private int columnStartReadPos = COLUMN_STAR_READ_DEFAULT_POSITIONS;
+    private int columnEndReadPos = COLUMN_END_READ_DEFAULT_POSITIONS;
+    private int columnMaxReadPos = COLUMN_MAX_READ_DEFAULT_POSITIONS;
+
+
+    private BeanStorage storage = new BeanStorage();
+
+    private Workbook workbook;
+
+
+    /**
+     * 类属性，存储bean中其他javabean类
+     */
+    //private Map<String, Object> beanPro = new HashMap<>();
+
+    /**
+     * 装换失败的数据信息，记录行数
+     */
+    private StringBuffer error = new StringBuffer(0);
+
+
+    /**
+     * 默认的日期格式
+     */
+    private String date_format = "yyyy-MM-dd HH:mm:ss";
+    private SimpleDateFormat format;
+
+    public ExcelPoiUtil(Map<String, String> mapExcelTitleToBeanPropertyMapping) {
+        this.mapExcelTitleToBeanPropertyMapping = mapExcelTitleToBeanPropertyMapping;
+        this.titleHeaderPos = TITLE_HEADER_DEFAULT_POSITIONS;
+        format = new SimpleDateFormat(date_format);
+    }
+
+
+    public ExcelPoiUtil(Map<String, String> mapExcelTitleToBeanPropertyMapping, int titleHeaderPos) {
+        this.mapExcelTitleToBeanPropertyMapping = mapExcelTitleToBeanPropertyMapping;
+        this.titleHeaderPos = titleHeaderPos;
+        this.rowStartReadPos = titleHeaderPos + 1;
+        format = new SimpleDateFormat(date_format);
+    }
+
+    public ExcelPoiUtil(Map<String, String> mapExcelTitleToBeanPropertyMapping, int titleHeaderPos, String date_format) {
+        this.mapExcelTitleToBeanPropertyMapping = mapExcelTitleToBeanPropertyMapping;
+        this.titleHeaderPos = titleHeaderPos;
+        this.rowStartReadPos = titleHeaderPos + 1;
+
+        this.date_format = date_format;
+        format = new SimpleDateFormat(date_format);
+    }
+
+    /**
+     * //使用给定的文件输入流初始化excel文件
+     *
+     * @param in excel文件输入流
+     */
+    public void init(InputStream in) {
+        try {
+            //workbook = new HSSFWorkbook(in);//读取Excel 09-03版，xls格式
+            //workbook = new XSSFWorkbook(in);//读取Excel 2007版，xlsx格式
+            //WorkbookFactory会自动进行解析，根据版本进行选择对应的类等。。。。。
+            workbook = WorkbookFactory.create(in);
+        } catch (IOException | InvalidFormatException e) {
+            //throw new ExcelPoiException("上传的文件，不是有效的Excel文件 或 已损坏.，请检查能否正常打开");
+            throw new ExcelPoiException("The uploaded file is not valid Excel files or corrupted. Please check whether the normal open.", e);
+        }
+    }
+
+    /**
+     * @return true 存在错误，false 不存在错误
+     */
+    public boolean hasError() {
+        return error.capacity() > 0;
+    }
+
+    public StringBuffer getError() {
+        return error;
+    }
+
+
+    /**
+     * 获取第一
+     * 行标题栏数据
+     * <p>
+     * map key：标题栏列下标（0开始） value 标题栏值
+     */
+    private void loadHeader(Sheet sheet) {
+        this.excelTitle = new HashMap<>();
+        Row titleRow = sheet.getRow(titleHeaderPos);
+        int titleColumnLastNum = titleRow.getLastCellNum();
+        //log.error("列数据====》》》 开始读取位置：" + this.columnStartReadPos + "\t 结束读取位置：" + this.columnEndReadPos + "\t 最大数据行数：" + this.columnMaxReadPos + "\t 实际数据行数：" + titleColumnLastNum);
+
+        //判断，当前标题的列数【在初始设定最大列数，在不等于默认初始化值0的前提下】，且标题列数大于设定的标题最大列数，说明上传的数据在列数上最明显不对。
+        if (columnMaxReadPos != COLUMN_MAX_READ_DEFAULT_POSITIONS && titleColumnLastNum > columnMaxReadPos) {
+            //throw new ExcelPoiException("标题最大列数为：" + columnMaxReadPos + "列； 当前标题行数为：" + titleColumnLastNum + "，请重新检查.");
+            throw new ExcelPoiException("The maximum number of columns for the title: " + columnMaxReadPos + "Column; the current title number of lines: " + titleColumnLastNum + "，Please re-check.");
+        }
+
+        for (int i = columnStartReadPos; i < titleColumnLastNum; i++) {
+            String value = titleRow.getCell(i).getStringCellValue();
+            if (null == value) {
+                //throw new ExcelPoiException("标题栏不能为空.");
+                throw new ExcelPoiException("The title bar can not be empty.");
+            }
+            excelTitle.put(i, value);
+        }
+    }
+
+    public <T> List<T> bindToModels(Class<T> clazz, boolean required, Sheet sheet) {
+        String sheetName = sheet.getSheetName();
+
+        String errorInfoPrefix = "Current Excel SheetName: " + sheetName + ", ";
+        int sheetTotalRows = sheet.getPhysicalNumberOfRows();// 获取总行数，包含《标题》
+        int sheetDataRows = sheetTotalRows - rowStartReadPos;//数据，总行数，除《标题位置》
+        if (sheetDataRows <= 0) {
+            //throw new ExcelPoiException("当前 " + sheetName + "没有数据");
+            throw new ExcelPoiException(errorInfoPrefix + "no data.");
+        }
+        if (rowMaxReadPos != ROW_MAX_READ_DEFAULT_POSITIONS && sheetDataRows > rowMaxReadPos) {
+            throw new ExcelPoiException(errorInfoPrefix + "the maximum number of rows to upload:" + rowMaxReadPos + " Line; the actual number of lines is:" + rowStartReadPos + " Row; please upload a batch process.");
+        }
+        //log.info("开始读取工作表名为【" + sheetName + "】的内容" + "标题位置：" + titleHeaderPos + "\t行总行数《含标题》：" + sheetTotalRows);
+        //log.info("行数据====》》》 开始读取位置：" + this.rowStartReadPos + "\t 结束读取位置：" + this.rowEndReadPos + "\t 最大数据行数：" + this.rowMaxReadPos + "\t 实际数据行数：" + sheetDataRows);
+
+
+        // 加载标题栏数据
+        this.loadHeader(sheet);
+
+
+        // 遍历，数据区域，每行每列的数据，组装到List<Bean>集合中
+        List<T> result = new ArrayList<>();
+        sheetTotalRows = rowEndReadPos != 0 ? rowEndReadPos : sheetTotalRows;
+        for (int i = this.rowStartReadPos; i < sheetTotalRows; i++) {
+
+            //获取遍历的当前行，并判断当前行的列数，不能大于初始化值 columnMaxReadPos，所设置的值；否则抛出异常，提示在第几行的列数不能大于 columnMaxReadPos；
+            Row sheetCurrentRowData = sheet.getRow(i);
+            int sheetCurrentColumnLastNum = sheetCurrentRowData.getLastCellNum();
+            if (columnMaxReadPos != COLUMN_MAX_READ_DEFAULT_POSITIONS && sheetCurrentColumnLastNum > columnMaxReadPos) {
+                //throw new ExcelPoiException("标题最大列数为：" + columnMaxReadPos + "列； 当前标题行数为：" + sheetCurrentColumnLastNum + "，请重新检查.");
+                throw new ExcelPoiException(errorInfoPrefix + "The maximum number of columns for the title:" + columnMaxReadPos + " Column; the current title number of lines:" + sheetCurrentColumnLastNum + " Please re-check.");
+            }
+
+
+            //遍历，当前行中每一列的数据。
+            int columns = 0;
+            try {
+                T instance = clazz.newInstance();
+                for (columns = 0; columns < columnMaxReadPos; columns++) {
+
+                    //遍历，每行中每个单元格中的数据，并根据单元格的数据类型，进行分析判断
+                    Cell cell = sheetCurrentRowData.getCell(columns);
+                    String value = getCellValue(cell);// 判断单元格的数据类型
+
+                    // 获取单元格的值
+                    if (null == value) {
+                        // 如果为必填的则将错误信息记录
+                        if (required) {
+                            //String infoError = "第" + (i + 1) + "行，" + excelTitle.get(columns) + "字段，数据错误，请检查.";
+                            String infoError = errorInfoPrefix + "Article " + (i + 1) + " Row,\t" + excelTitle.get(columns) + "\tField data is empty, skip.";
+                            this.error.append(infoError).append("\n");
+                            log.debug(infoError);
+                        }
+                    }
+
+                    value = (StringUtils.isBlank(value)) ? null : value.trim();
+
+                    // 为每一个Bean组装字段属性值。
+                    String key = excelTitle.get(columns);
+                    this.loadValue(clazz, instance, this.mapExcelTitleToBeanPropertyMapping.get(key), value);
+
+                    //为每一列，单独以一个容器存在该列所有的值。
+                    if (excelColumnsValues.get(key) == null) {
+                        List<String> strings = new ArrayList<>();
+                        strings.add(value);
+                        excelColumnsValues.put(key, strings);
+                    } else {
+                        excelColumnsValues.get(key).add(value);
+                    }
+                }
+
+                result.add(instance);
+            } catch (Exception e) {
+                //String infoError = "第" + (i + 1) + "行，" + excelTitle.get(columns) + "字段，数据错误，请检查.";
+                String infoError = errorInfoPrefix + "Article " + (i + 1) + " Row,\t" + excelTitle.get(columns) + "\tField data is invalid, skip.";
+                this.error.append(infoError).append("\n");
+                log.debug(infoError, e);
+            }
+        }
+        //log.debug("<<<<<转换完成" + (this.hasError() ? "有错误信息" : "") + "，共有对象:" + result.size() + "个" + ">>>>>>");
+        log.debug("<<<<< Conversion is complete " + (this.hasError() ? "Error message" : "") + "，Total objects:" + result.size() + "A" + ">>>>>>");
+        return result;
+    }
+
+
+    /**
+     * @param clazz    //
+     * @param required 是否每个属性都是必须的
+     *
+     * @return //
+     */
+    public <T> List<T> bindToModels(Class<T> clazz, boolean required) {
+        // 获取第一页
+        Sheet sheet = this.workbook.getSheetAt(0);
+        return bindToModels(clazz, required, sheet);
+    }
+
+    /**
+     * 将单元格数据转换成string类型
+     *
+     * @param cell //
+     *
+     * @return //
+     */
+    @SuppressWarnings("Duplicates")
+    public static String getCellValue(Cell cell) {
+
+        if (cell == null) {
+            return null;
+        }
+
+        String cellValue = null;
+        switch (cell.getCellTypeEnum()) {
+            case NUMERIC:    //数字类型【日期也为数字，需要转换】
+                //数字类型【日期也为数字，需要转换】
+                short format = cell.getCellStyle().getDataFormat();
+                if (format == 14 || format == 31 || format == 57 || format == 58) {   //excel中的时间格式
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    double value = cell.getNumericCellValue();
+                    Date date = DateUtil.getJavaDate(value);
+                    cellValue = sdf.format(date);
+                }
+
+                // 判断当前的cell是否为Date
+                else if (DateUtil.isCellDateFormatted(cell)) {  //先注释日期类型的转换，在实际测试中发现HSSFDateUtil.isCellDateFormatted(cell)只识别2014/02/02这种格式。
+                    // 如果是Date类型则，取得该Cell的Date值           // 对2014-02-02格式识别不出是日期格式
+                    Date date = cell.getDateCellValue();
+                    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    cellValue = dateFormat.format(date);
+                } else { // 如果是纯数字
+                    //去除科学计算法
+                    //DecimalFormat df = new DecimalFormat("0");
+                    //cellValue = df.format(cell.getNumericCellValue());
+
+                    // 取得当前Cell的数值 NumberToTextConverter.toText() 已包含，去除科学计算法
+                    cellValue = NumberToTextConverter.toText(cell.getNumericCellValue());
+                }
+                break;
+            case STRING:     //字符串
+                cellValue = cell.getStringCellValue();
+                break;
+            case BOOLEAN:    //
+                cellValue = String.valueOf(cell.getBooleanCellValue());
+                break;
+            case FORMULA:    //Excel里面的“公式”，可以用cell.getNumericCellValue(); 来获得“结果”，也就是“公式”计算之后的结果
+                cellValue = String.valueOf(cell.getStringCellValue());
+                break;
+            case ERROR:
+                cellValue = String.valueOf(cell.getErrorCellValue());
+                break;
+            case BLANK:
+                break;
+            default:
+                break;
+        }
+        return cellValue;
+    }
+
+    /**
+     * 注入属性值
+     *
+     * @param instance //
+     * @param pro      属性对象
+     * @param value    属性值
+     */
+    @SuppressWarnings({"unchecked", "ConfusingArgumentToVarargsMethod"})
+    private <T> void loadValue(Class clazz, T instance, String pro, String value) throws Exception {
+        String innerPro = null;
+        if (pro.contains(".")) {
+            String[] pros = pro.split("\\.");
+            pro = pros[0];
+            innerPro = pros[1];
+            // 将成员变量的类型存储到仓库中
+            storage.storeClass(instance.hashCode() + "", clazz.getDeclaredMethod(this.initGetMethod(pro), null).getReturnType());
+        }
+
+        String getMethod = this.initGetMethod(pro);
+
+        Class type = clazz.getDeclaredMethod(getMethod, null).getReturnType();
+
+        Method method = clazz.getMethod(this.initSetMethod(pro), type);
+
+        if (type == String.class) {
+            method.invoke(instance, value);
+        } else if (type == int.class || type == Integer.class) {
+            if (value.contains(".")) {
+                value = value.substring(0, value.indexOf("."));
+            }
+            method.invoke(instance, Integer.parseInt(value)); //若1.0，即为出错
+
+        } else if (type == long.class || type == Long.class) {
+            method.invoke(instance, Long.parseLong(value));
+
+        } else if (type == float.class || type == Float.class) {
+            method.invoke(instance, Float.parseFloat(value));
+
+        } else if (type == double.class || type == Double.class) {
+            method.invoke(instance, Double.parseDouble(value));
+
+        } else if (type == Date.class) {
+            if (value == null || "".equals(value.trim())) {
+                method.invoke(instance, (Object) null);
+            } else {
+                method.invoke(instance, this.parseDate(value));
+            }
+        } else {
+            // 引用类型数据
+            Object ins = storage.getInstance(instance.hashCode() + "");
+            this.loadValue(ins.getClass(), ins, innerPro, value);
+            method.invoke(instance, ins);
+        }
+    }
+
+    private Date parseDate(String value) throws ParseException {
+        return format.parse(value);
+    }
+
+    private String formateDate(Date date) {
+        return format.format(date);
+    }
+
+    private String initSetMethod(String field) {
+        return "set" + field.substring(0, 1).toUpperCase() + field.substring(1);
+    }
+
+    private String initGetMethod(String field) {
+        return "get" + field.substring(0, 1).toUpperCase() + field.substring(1);
+    }
+
+    public String getDate_format() {
+        return date_format;
+    }
+
+    public void setDate_format(String date_format) {
+        this.date_format = date_format;
+    }
+
+    /**
+     * 存储bean中的bean成员变量
+     *
+     * @author 陈孟琳
+     */
+    private class BeanStorage {
+        private Map<String, Class> proClass = new HashMap<>();
+        private Map<String, Object> instances = new HashMap<>();
+
+        public void storeClass(String key, Class clazz) throws Exception {
+            if (!instances.containsKey(key)) {
+                instances.put(key, clazz.newInstance());
+                proClass.put(key, clazz);
+            }
+        }
+
+        public Class loadClass(String key) {
+            return proClass.get(key);
+        }
+
+        public Object getInstance(String key) {
+            return instances.get(key);
+        }
+
+    }
+
+    public int getRowStartReadPos() {
+        return rowStartReadPos;
+    }
+
+    public void setRowStartReadPos(int rowStartReadPos) {
+        this.rowStartReadPos = rowStartReadPos;
+    }
+
+    public int getRowEndReadPos() {
+        return rowEndReadPos;
+    }
+
+    public void setRowEndReadPos(int rowEndReadPos) {
+        this.rowEndReadPos = rowEndReadPos;
+    }
+
+    public int getRowMaxReadPos() {
+        return rowMaxReadPos;
+    }
+
+    public void setRowMaxReadPos(int rowMaxReadPos) {
+        this.rowMaxReadPos = rowMaxReadPos;
+    }
+
+    public int getColumnStartReadPos() {
+        return columnStartReadPos;
+    }
+
+    public void setColumnStartReadPos(int columnStartReadPos) {
+        this.columnStartReadPos = columnStartReadPos;
+    }
+
+    public int getColumnEndReadPos() {
+        return columnEndReadPos;
+    }
+
+    public void setColumnEndReadPos(int columnEndReadPos) {
+        this.columnEndReadPos = columnEndReadPos;
+    }
+
+    public int getColumnMaxReadPos() {
+        return columnMaxReadPos;
+    }
+
+    public void setColumnMaxReadPos(int columnMaxReadPos) {
+        this.columnMaxReadPos = columnMaxReadPos;
+    }
+
+    public int getTitleHeaderPos() {
+        return titleHeaderPos;
+    }
+
+    public void setTitleHeaderPos(int titleHeaderPos) {
+        this.titleHeaderPos = titleHeaderPos;
+    }
+
+    public Map<String, List<String>> getExcelColumnsValues() {
+        return excelColumnsValues;
+    }
+
+    public void setExcelColumnsValues(Map<String, List<String>> excelColumnsValues) {
+        this.excelColumnsValues = excelColumnsValues;
+    }
+
+    public static String getAssemblySheetErrorInfo(String worksheetName, String message) {
+        return String.format("worksheet: %s %s", worksheetName, message);
+    }
+
+    public static String getAssemblySheetErrorInfoByRow(String worksheetName, int rowNumber, String message) {
+        return String.format("worksheet: %s Row: %d dataError: %s", worksheetName, rowNumber, message);
+    }
+
+    public static String getAssemblySheetErrorInfoByColumn(String worksheetName, String columnTitleName, String message) {
+        return String.format("worksheet: %s Column: %s dataError: %s", worksheetName, columnTitleName, message);
+    }
+
+    public static String getAssemblySheetErrorInfoByRowColumn(String worksheetName, int rowNumber, String columnTitleName, String message) {
+        return String.format("worksheet: %s ==>Row: %d ==>Column: %s dataError: %s", worksheetName, rowNumber, columnTitleName, message);
+    }
+}

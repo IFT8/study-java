@@ -4,19 +4,16 @@ import com.esotericsoftware.reflectasm.MethodAccess;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
-@SuppressWarnings({"Duplicates", "unused", "Convert2Diamond"})
+@SuppressWarnings({"Duplicates", "unused", "Convert2Diamond", "WeakerAccess"})
 public class MyBeanUtils {
-    private static Map<Class, MethodAccess> methodMap = new HashMap<Class, MethodAccess>();
+    private static Map<Class<?>, MethodAccess> methodMap = new HashMap<>();
 
-    private static Map<String, Integer> methodIndexMap = new HashMap<String, Integer>();
+    private static Map<String, Integer> methodIndexMap = new HashMap<>();
 
-    private static Map<Class, List<String>> fieldMap = new HashMap<Class, List<String>>();
+    private static Map<Class<?>, List<String>> fieldMap = new HashMap<>();
 
     @SuppressWarnings("SpellCheckingInspection")
     public static void copyProperties(final Object dest, final Object orig) {
@@ -31,8 +28,8 @@ public class MyBeanUtils {
 
         List<String> fieldList = fieldMap.get(orig.getClass());
         for (String field : fieldList) {
-            String getKey = orig.getClass().getName() + "." + "get" + field;
-            String setKey = dest.getClass().getName() + "." + "set" + field;
+            String getKey = orig.getClass().getName() + "." + "get" + toUpperCaseFirstOne(field);
+            String setKey = dest.getClass().getName() + "." + "set" + toUpperCaseFirstOne(field);
             Integer setIndex = methodIndexMap.get(setKey);
             if (setIndex != null) {
                 int getIndex = methodIndexMap.get(getKey);
@@ -63,11 +60,12 @@ public class MyBeanUtils {
 
     // 单例模式
     private static MethodAccess cache(Object orig) {
-        //noinspection SynchronizationOnGetClass
-        synchronized (orig.getClass()) {
+
+        synchronized (MyBeanUtils.class) {
             MethodAccess methodAccess = MethodAccess.get(orig.getClass());
+            List<String> fieldList = new ArrayList<>();
+
             Field[] fields = orig.getClass().getDeclaredFields();
-            List<String> fieldList = new ArrayList<String>(fields.length);
             for (Field field : fields) {
                 if (Modifier.isPrivate(field.getModifiers()) && !Modifier.isStatic(field.getModifiers())) { // 是否是私有的，是否是静态的
                     // 非公共私有变量
@@ -81,6 +79,22 @@ public class MyBeanUtils {
                     fieldList.add(fieldName); // 将属性名称放入集合里
                 }
             }
+
+            Field[] superClassFields = orig.getClass().getSuperclass().getDeclaredFields();
+            for (Field superClassField : superClassFields) {
+                if (Modifier.isPrivate(superClassField.getModifiers()) && !Modifier.isStatic(superClassField.getModifiers())) { // 是否是私有的，是否是静态的
+                    // 非公共私有变量
+                    String fieldName = superClassField.getName(); // 获取属性名称
+                    String fieldGetMethodName = "get" + toUpperCaseFirstOne(fieldName);
+                    String fieldSetMethodName = "set" + toUpperCaseFirstOne(fieldName);
+                    int getIndex = methodAccess.getIndex(fieldGetMethodName); // 获取get方法的下标
+                    int setIndex = methodAccess.getIndex(fieldSetMethodName); // 获取set方法的下标
+                    methodIndexMap.put(orig.getClass().getName() + "." + fieldGetMethodName, getIndex); // 将类名get方法名，方法下标注册到map中
+                    methodIndexMap.put(orig.getClass().getName() + "." + fieldSetMethodName, setIndex); // 将类名set方法名，方法下标注册到map中
+                    fieldList.add(fieldName); // 将属性名称放入集合里
+                }
+            }
+
             fieldMap.put(orig.getClass(), fieldList); // 将类名，属性名称注册到map中
             methodMap.put(orig.getClass(), methodAccess);
             return methodAccess;
@@ -97,7 +111,6 @@ public class MyBeanUtils {
     }
 
     //首字母转大写
-    @SuppressWarnings("WeakerAccess")
     public static String toUpperCaseFirstOne(String s) {
         if (Character.isUpperCase(s.charAt(0)))
             return s;

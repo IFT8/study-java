@@ -1,6 +1,5 @@
 package com.comodin.basic.util.ftp;
 
-@SuppressWarnings({"WeakerAccess", "unused"})
 public class FTPClientException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 

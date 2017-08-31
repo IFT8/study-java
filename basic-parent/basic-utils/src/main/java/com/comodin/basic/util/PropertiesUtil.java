@@ -13,7 +13,7 @@ import java.util.Properties;
 /**
  * The type Properties util.
  */
-@SuppressWarnings({"Duplicates", "WeakerAccess", "Convert2Diamond", "unused"})
+@SuppressWarnings({"Duplicates", "unused", "Convert2Diamond"})
 public class PropertiesUtil {
     private static PropertiesUtil util = null;
     private static Map<String, Properties> maps = new HashMap<String, Properties>();
@@ -60,10 +60,10 @@ public class PropertiesUtil {
     }
 
     /**
-     * @param propertiesName  //
+     * @param propertiesName //
      * @param inStream       路径的最后一定要增加/，xxx/
      *
-     * @return  //
+     * @return //
      */
     public Properties load(String propertiesName, InputStream inStream) {
         if (maps.get(propertiesName) != null) {
@@ -81,10 +81,10 @@ public class PropertiesUtil {
     }
 
     /**
-     * @param propertiesName  //
+     * @param propertiesName //
      * @param propertiesFile 路径的最后一定要增加/，xxx/
      *
-     * @return  //
+     * @return //
      */
     public Properties load(String propertiesName, File propertiesFile) {
         if (maps.get(propertiesName) != null) {
