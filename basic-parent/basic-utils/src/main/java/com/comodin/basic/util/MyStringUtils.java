@@ -3,7 +3,7 @@ package com.comodin.basic.util;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@SuppressWarnings("WeakerAccess")
+@SuppressWarnings({"WeakerAccess", "unused", "Duplicates"})
 public class MyStringUtils {
 
     public static final char UNDERLINE = '_';
