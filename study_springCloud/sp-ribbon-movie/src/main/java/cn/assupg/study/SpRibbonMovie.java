@@ -1,15 +1,14 @@
 package cn.assupg.study;
 
-import cn.assupg.study.config.ExcludeFromComponentScan;
-import cn.assupg.study.config.TestRibbonCustomizeConfiguration2;
+import cn.assupg.ribbon.config.ConfigurationRibbonRuleByRandom;
+import cn.assupg.ribbon.config.ConfigurationRibbonRuleByRound;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
+import org.springframework.cloud.netflix.ribbon.RibbonClients;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.FilterType;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -28,8 +27,10 @@ import org.springframework.web.client.RestTemplate;
 //      (for instance put it in a separate, non-overlapping package, or specify the packages to scan explicitly in the @ComponentScan).
 //@RibbonClient(name = "sp-ribbon-user", configuration = TestRibbonCustomizeConfiguration.class)
 //通过，@ComponentScan 排除指定的 TestRibbonCustomizeConfiguration2.class
-@RibbonClient(name = "sp-ribbon-user", configuration = TestRibbonCustomizeConfiguration2.class)
-@ComponentScan(excludeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION, value = ExcludeFromComponentScan.class)})
+@RibbonClients(value = {
+        @RibbonClient(name = "sp-ribbon-user", configuration = ConfigurationRibbonRuleByRandom.class),
+        @RibbonClient(name = "sp-ribbon-user2", configuration = ConfigurationRibbonRuleByRound.class)})
+//@ComponentScan(excludeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION, value = ExcludeFromComponentScan.class)})
 public class SpRibbonMovie {
 
     @LoadBalanced
