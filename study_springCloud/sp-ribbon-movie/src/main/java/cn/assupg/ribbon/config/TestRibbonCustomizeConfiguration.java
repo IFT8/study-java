@@ -25,4 +25,3 @@ public class TestRibbonCustomizeConfiguration {
         return new RandomRule();
     }
 }
-

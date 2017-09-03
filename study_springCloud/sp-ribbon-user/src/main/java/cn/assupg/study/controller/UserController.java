@@ -2,7 +2,6 @@ package cn.assupg.study.controller;
 
 import cn.assupg.study.entity.User;
 import cn.assupg.study.repository.IUserRepository;
-import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
@@ -27,16 +26,16 @@ public class UserController {
         return this.iUserRepository.findOne(id);
     }
 
-    /**
-     * 本地服务实现的信息
-     *
-     * @return //
-     */
-    @GetMapping("/eureka-instance")
-    public String serviceUrl() {
-        InstanceInfo instance = eurekaClient.getNextServerFromEureka("SP-RIBBON-USER", false);
-        return instance.getHomePageUrl();
-    }
+    ///**
+    // * 本地服务实现的信息
+    // *
+    // * @return //
+    // */
+    //@GetMapping("/eureka-instance")
+    //public String serviceUrl() {
+    //    InstanceInfo instance = eurekaClient.getNextServerFromEureka("SP-RIBBON-USER", false);
+    //    return instance.getHomePageUrl();
+    //}
 
     /**
      * 本地服务实现的信息

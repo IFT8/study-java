@@ -26,7 +26,7 @@ import org.springframework.web.client.RestTemplate;
 //      @ComponentScan for the main application context, otherwise it will be shared by all the @RibbonClients.
 //      If you use @ComponentScan (or @SpringBootApplication) you need to take steps to avoid it being included
 //      (for instance put it in a separate, non-overlapping package, or specify the packages to scan explicitly in the @ComponentScan).
-//@RibbonClient(name = "sp-user", configuration = TestRibbonCustomizeConfiguration.class)
+//@RibbonClient(name = "sp-ribbon-user", configuration = TestRibbonCustomizeConfiguration.class)
 //通过，@ComponentScan 排除指定的 TestRibbonCustomizeConfiguration2.class
 @RibbonClient(name = "sp-ribbon-user", configuration = TestRibbonCustomizeConfiguration2.class)
 @ComponentScan(excludeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION, value = ExcludeFromComponentScan.class)})
