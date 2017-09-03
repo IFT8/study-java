@@ -29,7 +29,7 @@ public class MovieController {
     public User findById(@PathVariable Long id) {
         //String url = "http://localhost:7900/user/" + id;
         //String url = this.userServicePath + id;
-        String url = "http://sp-user-ribbon/user/" + id;
+        String url = "http://sp-ribbon-user/user/" + id;
         return this.restTemplate.getForObject(url, User.class);
     }
 
@@ -40,7 +40,7 @@ public class MovieController {
      */
     @GetMapping("/eureka-instance")
     public String serviceUrl() {
-        InstanceInfo instance = eurekaClient.getNextServerFromEureka("SP-MOVIE-RIBBON", false);
+        InstanceInfo instance = eurekaClient.getNextServerFromEureka("SP-RIBBON-MOVIE", false);
         return instance.getHomePageUrl();
     }
 
@@ -56,10 +56,10 @@ public class MovieController {
 
     @GetMapping("/test")
     public String test() {
-        ServiceInstance serviceInstance = this.loadBalancerClient.choose("sp-user-ribbon");
-        System.out.println("sp-user-ribbon:\t" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + ":" + serviceInstance.getServiceId());
-        ServiceInstance serviceInstance2 = this.loadBalancerClient.choose("sp-user-ribbon2");
-        System.out.println("sp-user-ribbon2:\t" + serviceInstance2.getHost() + ":" + serviceInstance2.getPort() + ":" + serviceInstance2.getServiceId());
+        ServiceInstance serviceInstance = this.loadBalancerClient.choose("sp-ribbon-user");
+        System.out.println("sp-ribbon-user:\t" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + ":" + serviceInstance.getServiceId());
+        ServiceInstance serviceInstance2 = this.loadBalancerClient.choose("sp-ribbon-user2");
+        System.out.println("sp-ribbon-user2:\t" + serviceInstance2.getHost() + ":" + serviceInstance2.getPort() + ":" + serviceInstance2.getServiceId());
         System.out.println("");
         return "1";
     }

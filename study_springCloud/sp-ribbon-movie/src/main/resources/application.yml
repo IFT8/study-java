@@ -2,7 +2,7 @@ server:
   port: 2002
 spring:
   application:
-    name: sp-movie-ribbon
+    name: sp-ribbon-movie
 # 使用Ribbon 实现负载均衡，即不需要配置 服务者的URL，通过 eureka注册中心获取
 #user:
 #  userServicePath: http://localhost:1000/user/

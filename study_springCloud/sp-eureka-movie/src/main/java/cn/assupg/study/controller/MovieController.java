@@ -40,7 +40,7 @@ public class MovieController {
      */
     @GetMapping("/eureka-instance")
     public String serviceUrl() {
-        InstanceInfo instance = eurekaClient.getNextServerFromEureka("SP-MOVIE-EUREKA", false);
+        InstanceInfo instance = eurekaClient.getNextServerFromEureka("SP-EUREKA-MOVIE", false);
         return instance.getHomePageUrl();
     }
 

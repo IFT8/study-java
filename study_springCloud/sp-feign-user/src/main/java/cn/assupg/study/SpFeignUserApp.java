@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpUserFeignApp {
+public class SpFeignUserApp {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpUserFeignApp.class, args);
+		SpringApplication.run(SpFeignUserApp.class, args);
 	}
 }

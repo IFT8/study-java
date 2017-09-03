@@ -20,7 +20,7 @@ import org.springframework.web.client.RestTemplate;
  */
 @SpringBootApplication
 @EnableEurekaClient
-public class SpMovieRibbonPropertiesCustomizingApp {
+public class SpRibbonMoviePropertiesCustomizing {
 
     @LoadBalanced
     @Bean
@@ -29,6 +29,6 @@ public class SpMovieRibbonPropertiesCustomizingApp {
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(SpMovieRibbonPropertiesCustomizingApp.class, args);
+        SpringApplication.run(SpRibbonMoviePropertiesCustomizing.class, args);
     }
 }

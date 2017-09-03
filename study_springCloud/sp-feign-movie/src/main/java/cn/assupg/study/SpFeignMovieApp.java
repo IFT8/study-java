@@ -8,10 +8,10 @@ import org.springframework.cloud.netflix.feign.EnableFeignClients;
 @SpringBootApplication
 @EnableEurekaClient
 @EnableFeignClients
-public class SpMovieFeignApp {
+public class SpFeignMovieApp {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpMovieFeignApp.class, args);
+        SpringApplication.run(SpFeignMovieApp.class, args);
     }
 
 }

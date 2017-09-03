@@ -20,7 +20,7 @@ import org.springframework.web.client.RestTemplate;
  */
 @SpringBootApplication
 @EnableEurekaClient
-public class SpMovieRibbonWithoutEurekaApp {
+public class SpRibbonMovieWithoutEureka {
 
     @LoadBalanced
     @Bean
@@ -29,6 +29,6 @@ public class SpMovieRibbonWithoutEurekaApp {
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(SpMovieRibbonWithoutEurekaApp.class, args);
+        SpringApplication.run(SpRibbonMovieWithoutEureka.class, args);
     }
 }

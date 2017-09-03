@@ -28,9 +28,9 @@ import org.springframework.web.client.RestTemplate;
 //      (for instance put it in a separate, non-overlapping package, or specify the packages to scan explicitly in the @ComponentScan).
 //@RibbonClient(name = "sp-user", configuration = TestRibbonCustomizeConfiguration.class)
 //通过，@ComponentScan 排除指定的 TestRibbonCustomizeConfiguration2.class
-@RibbonClient(name = "sp-user-ribbon", configuration = TestRibbonCustomizeConfiguration2.class)
+@RibbonClient(name = "sp-ribbon-user", configuration = TestRibbonCustomizeConfiguration2.class)
 @ComponentScan(excludeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION, value = ExcludeFromComponentScan.class)})
-public class SpMovieRibbonApp {
+public class SpRibbonMovie {
 
     @LoadBalanced
     @Bean
@@ -39,6 +39,6 @@ public class SpMovieRibbonApp {
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(SpMovieRibbonApp.class, args);
+        SpringApplication.run(SpRibbonMovie.class, args);
     }
 }

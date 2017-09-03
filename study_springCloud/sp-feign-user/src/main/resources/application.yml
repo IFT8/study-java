@@ -2,7 +2,7 @@ server:
   port: 1005
 spring:
   application:
-    name: sp-user-feign    #建议，名称写为小写
+    name: sp-feign-user    #建议，名称写为小写
   jpa:
     generate-ddl: false
     show-sql: true

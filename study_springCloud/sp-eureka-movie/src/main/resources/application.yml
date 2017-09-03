@@ -2,7 +2,7 @@ server:
   port: 2001
 spring:
   application:
-    name: sp-movie-eureka
+    name: sp-eureka-movie
 user:
   userServicePath: http://localhost:1000/user/
 eureka:

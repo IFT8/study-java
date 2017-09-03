@@ -2,7 +2,7 @@ server:
   port: 1002
 spring:
   application:
-    name: sp-user-ribbon    #建议，名称写为小写
+    name: sp-ribbon-user    #建议，名称写为小写
   jpa:
     generate-ddl: false
     show-sql: true

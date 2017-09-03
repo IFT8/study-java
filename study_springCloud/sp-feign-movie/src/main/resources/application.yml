@@ -2,7 +2,7 @@ server:
   port: 2005
 spring:
   application:
-    name: sp-movie-feign
+    name: sp-feign-movie
 eureka:
   client:
     #实现健康检查开关，需要依赖：spring-boot-actuator

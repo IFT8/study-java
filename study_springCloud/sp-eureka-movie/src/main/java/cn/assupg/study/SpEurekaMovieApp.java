@@ -8,7 +8,7 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @EnableEurekaClient
-public class SpMovieEurekaApp {
+public class SpEurekaMovieApp {
 
     @Bean
     public RestTemplate restTemplate() {
@@ -16,6 +16,6 @@ public class SpMovieEurekaApp {
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(SpMovieEurekaApp.class, args);
+        SpringApplication.run(SpEurekaMovieApp.class, args);
     }
 }

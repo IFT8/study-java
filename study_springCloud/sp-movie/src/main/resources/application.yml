@@ -1,4 +1,4 @@
 server:
   port: 2000
 user:
-  userServicePath: http://localhost:7900/user/
+  userServicePath: http://localhost:1000/user/
