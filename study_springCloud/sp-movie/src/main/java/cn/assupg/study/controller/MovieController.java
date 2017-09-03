@@ -19,7 +19,6 @@ public class MovieController {
 
     @GetMapping("/movie/{id}")
     public User findById(@PathVariable Long id) {
-        //String url = "http://localhost:7900/user/" + id;
         String url = this.userServicePath + id;
         return this.restTemplate.getForObject(url, User.class);
     }
