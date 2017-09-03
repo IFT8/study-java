@@ -36,20 +36,22 @@
         <module>study_springBoot/sp_springBoot02-jdbc</module>
         <module>study_springBoot/sp_springBoot03-web</module>
 
-
         <module>study_springCloud/sp-user</module>
-        <module>study_springCloud/sp-user-eureka</module>
-        <module>study_springCloud/sp-user-ribbon</module>
-        <module>study_springCloud/sp-user-feign</module>
+        <module>study_springCloud/sp-movie</module>
 
         <module>study_springCloud/sp-discovery-eureka</module>
 
-        <module>study_springCloud/sp-movie</module>
-        <module>study_springCloud/sp-movie-eureka</module>
-        <module>study_springCloud/sp-movie-ribbon</module>
-        <module>study_springCloud/sp-movie-ribbon-properties-customizing</module>
-        <module>study_springCloud/sp-movie-ribbon-without-eureka</module>
-        <module>study_springCloud/sp-movie-feign</module>
+        <module>study_springCloud/sp-eureka-user</module>
+        <module>study_springCloud/sp-eureka-movie</module>
+
+        <module>study_springCloud/sp-feign-user</module>
+        <module>study_springCloud/sp-feign-movie</module>
+
+        <module>study_springCloud/sp-ribbon-user</module>
+        <module>study_springCloud/sp-ribbon-movie</module>
+        <module>study_springCloud/sp-ribbon-movie-properties-customizing</module>
+        <module>study_springCloud/sp-ribbon-movie-without-eureka</module>
+
     </modules>
 
     <properties>

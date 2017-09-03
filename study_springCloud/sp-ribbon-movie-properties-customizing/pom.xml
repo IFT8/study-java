@@ -9,7 +9,7 @@
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
-    <artifactId>sp-movie-ribbon</artifactId>
+    <artifactId>sp-ribbon-movie-properties-customizing</artifactId>
     <packaging>jar</packaging>
 
     <properties>
