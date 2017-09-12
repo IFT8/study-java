@@ -428,8 +428,6 @@
         </table>
 
 
-
-
         <table tableName="Transacciones" domainObjectName="TransactionsBean">
             <generatedKey column="idtransaccion" sqlStatement="SqlServer" identity="true"/>
 
@@ -523,7 +521,6 @@
         </table>
 
 
-
         <table tableName="t_atm_base" domainObjectName="AtmBaseBean">
             <generatedKey column="base_id" sqlStatement="Mysql" identity="true"/>
             <columnRenamingRule searchString="base_" replaceString=""/>
@@ -550,6 +547,16 @@
             <columnRenamingRule searchString="transaction_" replaceString=""/>
             <columnOverride column="transaction_transaction_status" property="transactionStatus"/>
         </table>
+
+        <table tableName="t_xml_sio_to_comodin_record" domainObjectName="XmlSioToComodinRecordBean">
+            <generatedKey column="xml_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="xml_" replaceString=""/>
+        </table>
+        <table tableName="t_xml_comodin_to_sio_record" domainObjectName="XmlComodinToSioRecordBean">
+            <generatedKey column="xml_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="xml_" replaceString=""/>
+        </table>
+
 
     </context>
 </generatorConfiguration>
