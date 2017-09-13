@@ -63,209 +63,158 @@
         <encoding>UTF-8</encoding>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring_version>4.3.8.RELEASE</spring_version>
-        <mysql_version>5.1.42</mysql_version>
-        <mybatis_generator_version>1.3.5</mybatis_generator_version>
-        <mybatis_mapper_version>3.4.0</mybatis_mapper_version>
+        <project.spring.version>4.3.10.RELEASE</project.spring.version>
         <!--<project.parentBasedir>${project.parent.basedir}</project.parentBasedir>-->
     </properties>
 
     <dependencies>
-        <!--web =================================================================================== -->
-        <dependency>
-            <groupId>javax.servlet.jsp</groupId>
-            <artifactId>javax.servlet.jsp-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>javax.el</groupId>
-            <artifactId>javax.el-api</artifactId>
-        </dependency>
-        <!--test  testng mockito =================================================================================== -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-all</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
         </dependency>
     </dependencies>
 
     <dependencyManagement>
         <dependencies>
-            <!--test  testNG mockito ==================================================================start-->
+            <!--webSocket-->
             <dependency>
-                <groupId>org.testng</groupId>
-                <artifactId>testng</artifactId>
-                <version>6.11</version>   <!--jdk1.5 最高版本5.11-->
-                <scope>test</scope>
-                <!--
-                很多人对classifier会有点陌生，事实上maven的包名是这样构成的
-                    <artifactId>-<version>-<classifier>.<packaging>
-                （这里仅仅是针对编译后的jar包，如果是sources或者javadoc，则会变成
-                    <artifactId>-<version>-<classifier>-<type>.<packaging>,这里<type>可以替换成sources或者javadoc）。
-                那么按照这个规则，testng在maven仓库里完整的包名就应该是：testng-5.11-jdk15.jar
-                classifier主要是用来区分不同环境或者不同jdk版本的。-->
-                <!--<classifier>jdk15</classifier>-->
+                <groupId>javax</groupId>
+                <artifactId>javaee-api</artifactId>
+                <version>7.0</version>
             </dependency>
             <dependency>
-                <groupId>org.hamcrest</groupId>
-                <artifactId>hamcrest-core</artifactId>
-                <version>1.3</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.hamcrest</groupId>
-                <artifactId>hamcrest-all</artifactId>
-                <version>1.3</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.mockito</groupId>
-                <artifactId>mockito-core</artifactId>
-                <version>2.7.17</version>
-                <scope>test</scope>
-            </dependency>
-            <!--test  testNG mockito ==================================================================end-->
-            <!--web ===================================================================================start-->
-            <dependency>
-                <groupId>javax.servlet</groupId>
-                <artifactId>javax.servlet-api</artifactId>
-                <version>3.1.0</version>
+                <groupId>javax.websocket</groupId>
+                <artifactId>javax.websocket-api</artifactId>
+                <version>1.0</version>
                 <scope>provided</scope>
             </dependency>
             <dependency>
-                <groupId>javax.servlet.jsp</groupId>
-                <artifactId>javax.servlet.jsp-api</artifactId>
-                <version>2.3.1</version>
-                <scope>provided</scope>
+                <groupId>org.java-websocket</groupId>
+                <artifactId>Java-WebSocket</artifactId>
+                <version>1.3.4</version>
+                <scope>test</scope>
             </dependency>
+
+
             <dependency>
-                <groupId>javax.el</groupId>
-                <artifactId>javax.el-api</artifactId>
-                <version>3.0.0</version>
-                <scope>provided</scope>
+                <groupId>javax.mail</groupId>
+                <artifactId>mail</artifactId>
+                <version>1.4.7</version>
             </dependency>
-            <!--web ===================================================================================end-->
-            <dependency>
-                <groupId>javax.servlet</groupId>
-                <artifactId>jstl</artifactId>
-                <version>1.2</version>
-            </dependency>
-            <dependency>
-                <groupId>taglibs</groupId>
-                <artifactId>standard</artifactId>
-                <version>1.1.2</version>
-            </dependency>
-            <dependency>
-                <groupId>commons-fileupload</groupId>
-                <artifactId>commons-fileupload</artifactId>
-                <version>1.3.2</version>
-            </dependency>
+
+
             <!--SSM spring mybatis ====================================================================start-->
+            <dependency>
+                <groupId>javax.inject</groupId>
+                <artifactId>javax.inject</artifactId>
+                <version>1</version>
+            </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-core</artifactId>
-                <version>${spring_version}</version>
+                <version>${project.spring.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-beans</artifactId>
-                <version>${spring_version}</version>
+                <version>${project.spring.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
-                <version>${spring_version}</version>
+                <version>${project.spring.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context-support</artifactId>
-                <version>${spring_version}</version>
+                <version>${project.spring.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-aop</artifactId>
-                <version>${spring_version}</version>
+                <version>${project.spring.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-aspects</artifactId>
-                <version>${spring_version}</version>
+                <version>${project.spring.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-expression</artifactId>
-                <version>${spring_version}</version>
+                <version>${project.spring.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-jdbc</artifactId>
-                <version>${spring_version}</version>
+                <version>${project.spring.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-orm</artifactId>
-                <version>${spring_version}</version>
+                <version>${project.spring.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-oxm</artifactId>
-                <version>${spring_version}</version>
+                <version>${project.spring.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-tx</artifactId>
-                <version>${spring_version}</version>
+                <version>${project.spring.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-web</artifactId>
-                <version>${spring_version}</version>
+                <version>${project.spring.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-webmvc</artifactId>
-                <version>${spring_version}</version>
+                <version>${project.spring.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-test</artifactId>
-                <version>${spring_version}</version>
+                <version>${project.spring.version}</version>
             </dependency>
-            <!-- mybatis -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-websocket</artifactId>
+                <version>${project.spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-messaging</artifactId>
+                <version>${project.spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.persistence</groupId>
+                <artifactId>persistence-api</artifactId>
+                <version>1.0.2</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.mybatis</groupId>
                 <artifactId>mybatis</artifactId>
-                <version>3.4.4</version>
+                <version>3.4.5</version>
             </dependency>
             <dependency>
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-core</artifactId>
-                <version>${mybatis_generator_version}</version>
+                <version>1.3.5</version>
             </dependency>
             <dependency>
                 <groupId>org.mybatis</groupId>
                 <artifactId>mybatis-spring</artifactId>
                 <version>1.3.1</version>
             </dependency>
-            <!-- mybatis 集成通用Mapper-->
             <dependency>
                 <groupId>tk.mybatis</groupId>
                 <artifactId>mapper</artifactId>
-                <version>${mybatis_mapper_version}</version>
+                <version>3.4.3</version>
             </dependency>
             <!--分页插件-->
             <dependency>
@@ -278,8 +227,10 @@
                 <artifactId>jsqlparser</artifactId>
                 <version>0.9.7</version>
             </dependency>
-            <!--SSM spring mybatis ====================================================================end-->
-            <!--validation ============================================================================start-->
+
+
+
+            <!--validation-->
             <dependency>
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-validator</artifactId>
@@ -295,12 +246,13 @@
                 <artifactId>el-impl</artifactId>
                 <version>2.2</version>
             </dependency>
-            <!--validation ============================================================================end-->
-            <!--db connect ============================================================================start-->
+
+
+            <!--db connect -->
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
-                <version>${mysql_version}</version>
+                <version>5.1.42</version>
             </dependency>
             <dependency>
                 <groupId>com.microsoft.sqlserver</groupId>
@@ -310,7 +262,7 @@
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid</artifactId>
-                <version>1.0.31</version>
+                <version>1.1.2</version>
             </dependency>
             <dependency>
                 <groupId>redis.clients</groupId>
@@ -320,30 +272,102 @@
             <dependency>
                 <groupId>org.mongodb</groupId>
                 <artifactId>mongo-java-driver</artifactId>
-                <version>3.4.2</version>
+                <version>3.5.0</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.data</groupId>
                 <artifactId>spring-data-mongodb</artifactId>
-                <version>1.10.4.RELEASE</version>
+                <version>1.10.6.RELEASE</version>
             </dependency>
-            <!--db connect ============================================================================end-->
-            <!--common jar=============================================================================start-->
+
+
             <dependency>
-                <groupId>javax.mail</groupId>
-                <artifactId>mail</artifactId>
-                <version>1.4.7</version>
+                <groupId>org.quartz-scheduler</groupId>
+                <artifactId>quartz</artifactId>
+                <version>2.3.0</version>
+            </dependency>
+
+
+            <!-- CXF -->
+            <dependency>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-rt-frontend-jaxws</artifactId>
+                <version>3.1.12</version>
             </dependency>
             <dependency>
-                <groupId>javax.inject</groupId>
-                <artifactId>javax.inject</artifactId>
-                <version>1</version>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-rt-transports-http</artifactId>
+                <version>3.1.12</version>
             </dependency>
             <dependency>
-                <groupId>javax.persistence</groupId>
-                <artifactId>persistence-api</artifactId>
-                <version>1.0.2</version>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-rt-transports-http-jetty</artifactId>
+                <version>3.1.12</version>
             </dependency>
+
+
+            <!-- 模版 -->
+            <dependency>
+                <groupId>org.freemarker</groupId>
+                <artifactId>freemarker</artifactId>
+                <version>2.3.23</version>
+            </dependency>
+
+
+            <!-- 上传Excel文件 -->
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi</artifactId>
+                <version>3.16</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml</artifactId>
+                <version>3.16</version>
+            </dependency>
+
+
+            <!--AOP-->
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjrt</artifactId>
+                <version>1.8.10</version>
+            </dependency>
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>1.8.10</version>
+            </dependency>
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjtools</artifactId>
+                <version>1.8.10</version>
+            </dependency>
+
+
+            <!--JSON-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>1.2.37</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>2.9.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>2.9.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>2.9.0</version>
+            </dependency>
+
+
             <!--1、BeanUtils 提供了对于JavaBean进行各种操作， 比如对象,属性复制等等。-->
             <dependency>
                 <groupId>commons-beanutils</groupId>
@@ -361,7 +385,6 @@
                 <artifactId>asm</artifactId>
                 <version>5.2</version>
             </dependency>
-
             <!--2、XML-->
             <!--
                 Java 领域 XML 文件的技术大致分为两类： XML API 和 OXMapping 。
@@ -402,7 +425,7 @@
             <dependency>
                 <groupId>com.thoughtworks.xstream</groupId>
                 <artifactId>xstream</artifactId>
-                <version>1.4.9</version>
+                <version>1.4.10</version>
             </dependency>
             <dependency>
                 <groupId>dom4j</groupId>
@@ -425,19 +448,19 @@
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-compress</artifactId>
-                <version>1.13</version>
+                <version>1.14</version>
             </dependency>
             <!--6、Configuration 用来帮助处理配置文件的，支持很多种存储方式。-->
             <dependency>
-                <groupId>commons-configuration</groupId>
-                <artifactId>commons-configuration</artifactId>
-                <version>1.10</version>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-configuration2</artifactId>
+                <version>2.1.1</version>
             </dependency>
             <!--7、DbUtils Apache组织提供的一个资源JDBC工具类库，它是对JDBC的简单封装，对传统操作数据库的类进行二次封装，可以把结果集转化成List。，同时也不影响程序的性能。-->
             <dependency>
                 <groupId>commons-dbutils</groupId>
                 <artifactId>commons-dbutils</artifactId>
-                <version>1.6</version>
+                <version>1.7</version>
             </dependency>
             <!--8、基于HttpCore实 现的一个HTTP/1.1兼容的HTTP客户端，它提供了一系列可重用的客户端身份验证、HTTP状态保持、HTTP连接管理module。-->
             <dependency>
@@ -455,6 +478,11 @@
                 <artifactId>httpcore</artifactId>
                 <version>4.4.6</version>
             </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpcore-nio</artifactId>
+                <version>4.4.6</version>
+            </dependency>
             <!--9、IO 对java.io的扩展 操作文件非常方便。-->
             <dependency>
                 <groupId>commons-io</groupId>
@@ -465,7 +493,7 @@
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
-                <version>3.5</version>
+                <version>3.6</version>
             </dependency>
             <!--11、FTP -->
             <dependency>
@@ -479,7 +507,6 @@
                 <artifactId>commons-logging</artifactId>
                 <version>1.2</version>
             </dependency>
-            <!--日志-->
             <dependency>
                 <groupId>log4j</groupId>
                 <artifactId>log4j</artifactId>
@@ -488,84 +515,88 @@
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
-                <version>1.7.24</version>
+                <version>1.7.25</version>
             </dependency>
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-log4j12</artifactId>
-                <version>1.7.24</version>
+                <version>1.7.25</version>
             </dependency>
-            <!--JSON-->
+
+
+            <!--web-->
             <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>fastjson</artifactId>
-                <version>1.2.32</version>
-            </dependency>
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-core</artifactId>
-                <version>2.8.8</version>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>3.1.0</version>
+                <scope>provided</scope>
             </dependency>
             <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-annotations</artifactId>
-                <version>2.8.8</version>
+                <groupId>javax.servlet.jsp</groupId>
+                <artifactId>javax.servlet.jsp-api</artifactId>
+                <version>2.3.1</version>
+                <scope>provided</scope>
             </dependency>
             <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-databind</artifactId>
-                <version>2.8.8</version>
+                <groupId>javax.el</groupId>
+                <artifactId>javax.el-api</artifactId>
+                <version>3.0.0</version>
+                <scope>provided</scope>
             </dependency>
             <dependency>
-                <groupId>org.aspectj</groupId>
-                <artifactId>aspectjrt</artifactId>
-                <version>1.8.10</version>
+                <groupId>javax.servlet</groupId>
+                <artifactId>jstl</artifactId>
+                <version>1.2</version>
             </dependency>
             <dependency>
-                <groupId>org.aspectj</groupId>
-                <artifactId>aspectjweaver</artifactId>
-                <version>1.8.10</version>
-            </dependency>
-            <!--<dependency>-->
-            <!--<groupId>org.aspectj</groupId>-->
-            <!--<artifactId>aspectjtools</artifactId>-->
-            <!--<version>1.8.10</version>-->
-            <!--</dependency>-->
-            <dependency>
-                <groupId>org.quartz-scheduler</groupId>
-                <artifactId>quartz</artifactId>
-                <version>2.3.0</version>
-            </dependency>
-            <!-- 上传Excel文件 -->
-            <dependency>
-                <groupId>org.apache.poi</groupId>
-                <artifactId>poi</artifactId>
-                <version>3.16</version>
+                <groupId>taglibs</groupId>
+                <artifactId>standard</artifactId>
+                <version>1.1.2</version>
             </dependency>
             <dependency>
-                <groupId>org.apache.poi</groupId>
-                <artifactId>poi-ooxml</artifactId>
-                <version>3.16</version>
+                <groupId>commons-fileupload</groupId>
+                <artifactId>commons-fileupload</artifactId>
+                <version>1.3.3</version>
+            </dependency>
+
+            <!--test-->
+            <dependency>
+                <groupId>org.testng</groupId>
+                <artifactId>testng</artifactId>
+                <version>6.11</version>   <!--jdk1.5 最高版本5.11-->
+                <scope>test</scope>
+                <!--
+                很多人对classifier会有点陌生，事实上maven的包名是这样构成的
+                    <artifactId>-<version>-<classifier>.<packaging>
+                （这里仅仅是针对编译后的jar包，如果是sources或者javadoc，则会变成
+                    <artifactId>-<version>-<classifier>-<type>.<packaging>,这里<type>可以替换成sources或者javadoc）。
+                那么按照这个规则，testng在maven仓库里完整的包名就应该是：testng-5.11-jdk15.jar
+                classifier主要是用来区分不同环境或者不同jdk版本的。-->
+                <!--<classifier>jdk15</classifier>-->
             </dependency>
             <dependency>
-                <groupId>org.freemarker</groupId>
-                <artifactId>freemarker</artifactId>
-                <version>2.3.23</version>
+                <groupId>org.hamcrest</groupId>
+                <artifactId>hamcrest-core</artifactId>
+                <version>1.3</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
-                <groupId>org.apache.cxf</groupId>
-                <artifactId>cxf-rt-frontend-jaxws</artifactId>
-                <version>3.1.8</version>
+                <groupId>org.hamcrest</groupId>
+                <artifactId>hamcrest-all</artifactId>
+                <version>1.3</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
-                <groupId>org.apache.cxf</groupId>
-                <artifactId>cxf-rt-transports-http</artifactId>
-                <version>3.1.8</version>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>2.7.17</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
-                <groupId>org.apache.cxf</groupId>
-                <artifactId>cxf-rt-transports-http-jetty</artifactId>
-                <version>3.1.8</version>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.12</version>
+                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -574,50 +605,52 @@
     <build>
         <finalName>${project.artifactId}</finalName>
 
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <excludes><!--资源根目录排除各环境的配置，使用单独的资源目录来指定-->
-                    <exclude>*.properties</exclude>
-                    <exclude>environment/</exclude>
-                </excludes>
-            </resource>
-            <resource>
-                <directory>../fleet-core/src/main/resources/environment/${env}</directory>
-            </resource>
-        </resources>
-        <testResources>
-            <testResource>
-                <directory>src/test/resources</directory>
-            </testResource>
-        </testResources>
+        <!--<resources>-->
+            <!--<resource>-->
+                <!--<directory>src/main/resources</directory>-->
+                <!--<excludes>&lt;!&ndash;资源根目录排除各环境的配置，使用单独的资源目录来指定&ndash;&gt;-->
+                    <!--<exclude>*.properties</exclude>-->
+                    <!--<exclude>environment/</exclude>-->
+                <!--</excludes>-->
+            <!--</resource>-->
+            <!--<resource>-->
+                <!--<directory>../fleet-core/src/main/resources/environment/${env}</directory>-->
+            <!--</resource>-->
+        <!--</resources>-->
+        <!--<testResources>-->
+            <!--<testResource>-->
+                <!--<directory>src/test/resources</directory>-->
+            <!--</testResource>-->
+        <!--</testResources>-->
 
         <pluginManagement>
             <plugins>
 
+                <!--
+                    lifecycle-mapping   仅仅用于eclipse中m2e插件的补充，如果用的是idea，请忽略-->
                 <plugin>
                     <groupId>org.eclipse.m2e</groupId>
                     <artifactId>lifecycle-mapping</artifactId>
                     <version>1.0.0</version>
-                    <!--<configuration>-->
-                    <!--<lifecycleMappingMetadata>-->
-                    <!--<pluginExecutions>-->
-                    <!--<pluginExecution>-->
-                    <!--<pluginExecutionFilter>-->
-                    <!--<groupId>org.zeroturnaround</groupId>-->
-                    <!--<artifactId>jrebel-maven-plugin</artifactId>-->
-                    <!--<versionRange>1.1.7</versionRange>-->
-                    <!--<goals>-->
-                    <!--<goal>generate</goal>-->
-                    <!--</goals>-->
-                    <!--</pluginExecutionFilter>-->
-                    <!--<action>-->
-                    <!--<ignore/>-->
-                    <!--</action>-->
-                    <!--</pluginExecution>-->
-                    <!--</pluginExecutions>-->
-                    <!--</lifecycleMappingMetadata>-->
-                    <!--</configuration>-->
+                    <configuration>
+                        <lifecycleMappingMetadata>
+                            <pluginExecutions>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>org.zeroturnaround</groupId>
+                                        <artifactId>jrebel-maven-plugin</artifactId>
+                                        <versionRange>[1.1.7,)</versionRange>
+                                        <goals>
+                                            <goal>generate</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <ignore/>
+                                    </action>
+                                </pluginExecution>
+                            </pluginExecutions>
+                        </lifecycleMappingMetadata>
+                    </configuration>
                 </plugin>
 
                 <!--
@@ -781,9 +814,10 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-assembly-plugin</artifactId>
-                    <version>3.0.0</version>
+                    <version>3.1.0</version>
                     <configuration>
                         <encoding>UTF-8</encoding>
+                        <appendAssemblyId>false</appendAssemblyId>
                         <descriptors><!--descriptors 描述文件路径-->
                             <descriptor>src/main/assembly/package.xml</descriptor>
                         </descriptors>
@@ -805,23 +839,20 @@
                     <artifactId>appassembler-maven-plugin</artifactId>
                     <version>2.0.0</version>
                     <configuration>
-                        <!--assembleDirectory:整体包目录 默认是：${project.build.directory}/appassembler -->
-                        <assembleDirectory>${project.build.directory}/appassembler/programs/${project.artifactId}-${project.version}</assembleDirectory>
                         <!--target jsw 输出的目录 默认是：${project.build.directory}/generated-resources/appassembler-->
                         <target>${project.build.directory}/appassembler</target>
-
+                        <!--assembleDirectory:整体包目录 默认是：${project.build.directory}/appassembler -->
+                        <assembleDirectory>${project.build.directory}/appassembler/program/${project.artifactId}</assembleDirectory>
                         <!--repositoryName：打包的jar，以及maven依赖的jar放到这个目录里面，默认repo-->
                         <repositoryName>lib</repositoryName>
                         <!--repositoryLayout lib目录中的jar的存放规则，默认是${groupId}/${artifactId}的目录格式，flat表示直接把jar放到lib目录-->
                         <repositoryLayout>flat</repositoryLayout>
-
                         <!--binFolder 可执行脚本的目录-->
                         <binFolder>bin</binFolder>
                         <!--binFileExtensions：生成脚本的后缀-->
-                        <binFileExtensions>
+                        <!--<binFileExtensions>
                             <unix>.sh</unix>
-                        </binFileExtensions>
-
+                        </binFileExtensions>-->
                         <!--configurationDirectory：配置文件的目标目录-->
                         <configurationDirectory>conf</configurationDirectory>
                         <!--copyConfigurationDirectory 拷贝，配置文件，到上面的目录中-->
@@ -829,28 +860,28 @@
                         <includeConfigurationDirectoryInClasspath>true</includeConfigurationDirectoryInClasspath>
                         <!--configurationSourceDirectory：配置文件原路径，默认为src/main/config-->
                         <configurationSourceDirectory>src/main/resources/environment/${env}</configurationSourceDirectory>
-
                         <logsDirectory>logs</logsDirectory>
                         <tempDirectory>tmp</tempDirectory>
                         <encoding>UTF-8</encoding>
-                        <!--platforms：生成哪几种平台 生成 linux，windows两种平台的执行脚本-->
-                        <platforms>
-                            <platform>all</platform><!--<platform>unix</platform>--><!--<platform>windows</platform>-->
-                        </platforms>
 
                         <programs>
                             <program>
-                                <id>app</id>
+                                <!--platforms：生成哪几种平台 生成 all unix，windows两种平台的执行脚本-->
+                                <platforms>
+                                    <platform>all</platform> <!--<platform>all</platform>--> <!--<platform>unix</platform>--> <!--<platform>windows</platform>-->
+                                </platforms>
+                                <id>${project.artifactId}</id>
                                 <!--suppress MavenModelInspection -->
                                 <mainClass>${appassembler.mainClass}</mainClass>
+                                <!-- jvm参数 -->
                                 <jvmSettings>
                                     <initialMemorySize>20m</initialMemorySize>
-                                    <maxMemorySize>256m</maxMemorySize>
+                                    <maxMemorySize>64m</maxMemorySize>
                                     <maxStackSize>128m</maxStackSize>
                                     <extraArguments>
                                         <extraArgument>-server</extraArgument>
-                                        <extraArgument>-Xmx1G</extraArgument>
-                                        <extraArgument>-Xms1G</extraArgument>
+                                        <extraArgument>-Xmx64</extraArgument>
+                                        <extraArgument>-Xms128</extraArgument>
                                     </extraArguments>
                                 </jvmSettings>
                             </program>
@@ -858,7 +889,7 @@
 
                         <daemons>
                             <daemon>
-                                <id>app</id>
+                                <id>${project.artifactId}</id>
                                 <!--suppress MavenModelInspection -->
                                 <mainClass>${appassembler.mainClass}</mainClass>
                                 <commandLineArguments>
@@ -871,13 +902,13 @@
                                     <generatorConfiguration>
                                         <generator>jsw</generator>
                                         <includes>
-                                            <include>linux-x86-32</include>
-                                            <include>linux-x86-64</include>
-                                            <include>linux-ppc-64</include>
-                                            <include>macosx-ppc-32</include>
-                                            <include>macosx-x86-universal-32</include>
-                                            <include>macosx-universal-32</include>
-                                            <include>macosx-universal-64</include>
+                                            <!--<include>linux-x86-32</include>-->
+                                            <!--<include>linux-x86-64</include>-->
+                                            <!--<include>linux-ppc-64</include>-->
+                                            <!--<include>macosx-ppc-32</include>-->
+                                            <!--<include>macosx-x86-universal-32</include>-->
+                                            <!--<include>macosx-universal-32</include>-->
+                                            <!--<include>macosx-universal-64</include>-->
                                             <include>windows-x86-32</include>
                                             <include>windows-x86-64</include>
                                         </includes>
@@ -913,22 +944,22 @@
                                         </configuration>
                                     </generatorConfiguration>
                                 </generatorConfigurations>
+                                <!-- jvm参数 -->
                                 <jvmSettings>
-                                    <!-- jvm参数 -->
                                     <initialMemorySize>20m</initialMemorySize>
-                                    <maxMemorySize>256m</maxMemorySize>
+                                    <maxMemorySize>64m</maxMemorySize>
                                     <maxStackSize>128m</maxStackSize>
                                     <extraArguments>
                                         <extraArgument>-server</extraArgument>
-                                        <extraArgument>-Xmx1G</extraArgument>
-                                        <extraArgument>-Xms1G</extraArgument>
+                                        <extraArgument>-Xmx64</extraArgument>
+                                        <extraArgument>-Xms128</extraArgument>
                                     </extraArguments>
-                                    <systemProperties>
-                                        <systemProperty>com.sun.management.jmxremote</systemProperty>
-                                        <systemProperty>com.sun.management.jmxremote.port=1984</systemProperty>
-                                        <systemProperty>com.sun.management.jmxremote.authenticate=false</systemProperty>
-                                        <systemProperty>com.sun.management.jmxremote.ssl=false</systemProperty>
-                                    </systemProperties>
+                                    <!--<systemProperties>-->
+                                    <!--<systemProperty>com.sun.management.jmxremote</systemProperty>-->
+                                    <!--<systemProperty>com.sun.management.jmxremote.port=1984</systemProperty>-->
+                                    <!--<systemProperty>com.sun.management.jmxremote.authenticate=false</systemProperty>-->
+                                    <!--<systemProperty>com.sun.management.jmxremote.ssl=false</systemProperty>-->
+                                    <!--</systemProperties>-->
                                 </jvmSettings>
                             </daemon>
                         </daemons>
@@ -943,13 +974,13 @@
                                 <goal>assemble</goal>
                             </goals>
                         </execution>
-                        <!--<execution>-->
-                        <!--<id>generate-jsw-scripts</id>-->
-                        <!--<phase>package</phase>-->
-                        <!--<goals>-->
-                        <!--<goal>generate-daemons</goal>-->
-                        <!--</goals>-->
-                        <!--</execution>-->
+                        <execution>
+                            <id>generate-jsw-scripts</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>generate-daemons</goal>
+                            </goals>
+                        </execution>
                     </executions>
                 </plugin>
 
@@ -959,6 +990,12 @@
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>exec-maven-plugin</artifactId>
                     <version>1.6.0</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-project-info-reports-plugin</artifactId>
+                    <version>2.9</version>
                 </plugin>
 
                 <!--
@@ -1020,6 +1057,7 @@
                             <exclude>**/*.gitignore</exclude>
                             <exclude>**/*.properties</exclude>
                             <exclude>**/*.yml</exclude>
+                            <exclude>**/logback.xml</exclude>
                             <exclude>**/rebel.xml</exclude>
                         </excludes>
                     </configuration>
@@ -1116,6 +1154,10 @@
         </pluginManagement>
 
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
@@ -1226,7 +1268,7 @@
                 <tomcat-maven-plugin.manager.url>http://127.0.0.1:8080/manager/text</tomcat-maven-plugin.manager.url>
                 <tomcat-maven-plugin.manager.username>root</tomcat-maven-plugin.manager.username>
                 <tomcat-maven-plugin.manager.password>root123456</tomcat-maven-plugin.manager.password>
-                <sql-maven-plugin.url>jdbc:mysql://mysql.comodin.cn:3306/?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;allowMultiQueries=true</sql-maven-plugin.url>
+                <sql-maven-plugin.url>jdbc:mysql://127.0.0.1:3306/?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;allowMultiQueries=true</sql-maven-plugin.url>
                 <sql-maven-plugin.username>fleet</sql-maven-plugin.username>
                 <sql-maven-plugin.password>Comodin520</sql-maven-plugin.password>
             </properties>
@@ -1297,6 +1339,21 @@
             <id>gsi</id>
             <properties>
                 <env>gsi</env>
+                <db>fleet</db>
+                <!--生产环境，关掉 maven sql 插件 重构数据库连接入口 切记勿打开，生产环境是通过，补丁升级 // by:supeng date:2017-7-21 21:30:15-->
+                <!--<tomcat-maven-plugin.manager.url>http://127.0.0.1:8080/manager/text</tomcat-maven-plugin.manager.url>-->
+                <!--<tomcat-maven-plugin.manager.username>root</tomcat-maven-plugin.manager.username>-->
+                <!--<tomcat-maven-plugin.manager.password>root123456</tomcat-maven-plugin.manager.password>-->
+                <!--<sql-maven-plugin.url>jdbc:mysql://127.0.0.1:3306/?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;allowMultiQueries=true</sql-maven-plugin.url>-->
+                <!--<sql-maven-plugin.username>fleet</sql-maven-plugin.username>-->
+                <!--<sql-maven-plugin.password>Comodin520</sql-maven-plugin.password>-->
+            </properties>
+        </profile>
+        <profile>
+            <!-- production -->
+            <id>production</id>
+            <properties>
+                <env>production</env>
                 <db>fleet</db>
                 <!--生产环境，关掉 maven sql 插件 重构数据库连接入口 切记勿打开，生产环境是通过，补丁升级 // by:supeng date:2017-7-21 21:30:15-->
                 <!--<tomcat-maven-plugin.manager.url>http://127.0.0.1:8080/manager/text</tomcat-maven-plugin.manager.url>-->
