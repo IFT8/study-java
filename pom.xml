@@ -17,6 +17,7 @@
         <module>study_java/sp_java-Xml</module>
 
         <module>study_jms/sp_jms-ActiveMQ</module>
+        <module>study_jms/sp_jms-Redis</module>
         <module>study_nio/sp_nio-Netty</module>
         <module>study_search/sp_search-Nutch</module>
         <module>study_security/sp_security-Shiro</module>
@@ -626,8 +627,8 @@
         <pluginManagement>
             <plugins>
 
-                <!--
-                    lifecycle-mapping   仅仅用于eclipse中m2e插件的补充，如果用的是idea，请忽略-->
+               <!-- &lt;!&ndash;
+                    lifecycle-mapping   仅仅用于eclipse中m2e插件的补充，如果用的是idea，请忽略&ndash;&gt;
                 <plugin>
                     <groupId>org.eclipse.m2e</groupId>
                     <artifactId>lifecycle-mapping</artifactId>
@@ -651,7 +652,7 @@
                             </pluginExecutions>
                         </lifecycleMappingMetadata>
                     </configuration>
-                </plugin>
+                </plugin>-->
 
                 <!--
                     jrebel 热部署插件,用来生成rebel.xml文件-->
