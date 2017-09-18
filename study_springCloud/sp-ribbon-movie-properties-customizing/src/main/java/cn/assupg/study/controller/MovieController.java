@@ -61,7 +61,7 @@ public class MovieController {
     @GetMapping("/test")
     public String test() {
         ServiceInstance serviceInstance = this.loadBalancerClient.choose("sp-ribbon-user");
-        System.out.println("sp-ribbon-user:\t" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + ":" + serviceInstance.getServiceId());
+        System.out.println("sp-ribbon-user :\t" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + ":" + serviceInstance.getServiceId());
         ServiceInstance serviceInstance2 = this.loadBalancerClient.choose("sp-ribbon-user2");
         System.out.println("sp-ribbon-user2:\t" + serviceInstance2.getHost() + ":" + serviceInstance2.getPort() + ":" + serviceInstance2.getServiceId());
         System.out.println("");

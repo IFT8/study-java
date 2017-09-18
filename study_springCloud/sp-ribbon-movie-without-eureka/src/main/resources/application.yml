@@ -22,6 +22,7 @@ eureka:
     # Eureka Instance ID
     # 默认：${spring.cloud.client.hostname}:${spring.application.name}:${spring.application.instance_id:${server.port}}}.
     instance-id: ${spring.application.name}:${spring.application.instance_id:${server.port}}}.
+# 禁用 ribbon 使用eureka
 ribbon:
   eureka:
    enabled: false

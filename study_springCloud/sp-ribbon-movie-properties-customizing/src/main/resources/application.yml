@@ -22,7 +22,11 @@ eureka:
     # Eureka Instance ID
     # 默认：${spring.cloud.client.hostname}:${spring.application.name}:${spring.application.instance_id:${server.port}}}.
     instance-id: ${spring.application.name}:${spring.application.instance_id:${server.port}}}.
-sp-user-ribbon:
+sp-ribbon-user:
   ribbon:
     # NFLoadBalancerRuleClassName 配置负载均衡的规则 WeightedResponseTimeRule--> 根据响应时间加权规则。 本地无法模拟，根据响应时间规则，改为：RandomRule
     NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+sp-ribbon-user2:
+  ribbon:
+    # NFLoadBalancerRuleClassName 配置负载均衡的规则 WeightedResponseTimeRule--> 根据响应时间加权规则。 本地无法模拟，根据响应时间规则，改为：RandomRule
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RoundRobinRule
