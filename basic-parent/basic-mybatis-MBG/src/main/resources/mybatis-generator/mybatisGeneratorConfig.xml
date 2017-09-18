@@ -548,11 +548,11 @@
             <columnOverride column="transaction_transaction_status" property="transactionStatus"/>
         </table>
 
-        <table tableName="t_xml_sio_to_comodin_record" domainObjectName="XmlSioToComodinRecordBean">
+        <table tableName="t_xml_record_sio_to_comodin" domainObjectName="XmlRecordSioToComodinBean">
             <generatedKey column="xml_id" sqlStatement="Mysql" identity="true"/>
             <columnRenamingRule searchString="xml_" replaceString=""/>
         </table>
-        <table tableName="t_xml_comodin_to_sio_record" domainObjectName="XmlComodinToSioRecordBean">
+        <table tableName="t_xml_record_comodin_to_sio" domainObjectName="XmlRecordComodinToSioBean">
             <generatedKey column="xml_id" sqlStatement="Mysql" identity="true"/>
             <columnRenamingRule searchString="xml_" replaceString=""/>
         </table>
