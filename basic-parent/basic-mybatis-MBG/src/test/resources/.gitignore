@@ -1,6 +1,5 @@
 ﻿# Ignore everything in this directory
-java/com
-resources/i18n
-resources/sqlMapper
+i18n
+sqlMapper
 # Except this file
 !.gitignore
