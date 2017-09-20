@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.comodin.fleet.core.mapper.AtmGunneboTransactionBeanMapper">
+  <resultMap id="BaseResultMap" type="com.comodin.fleet.core.bean.AtmGunneboTransactionBean">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="transaction_id" jdbcType="BIGINT" property="id" />
+    <result column="transaction_atm_terminal_id" jdbcType="VARCHAR" property="atmTerminalId" />
+    <result column="transaction_atm_terminal_type" jdbcType="VARCHAR" property="atmTerminalType" />
+    <result column="transaction_original_id" jdbcType="VARCHAR" property="originalId" />
+    <result column="transaction_client_internal_id" jdbcType="VARCHAR" property="clientInternalId" />
+    <result column="transaction_client_branch_internal_id" jdbcType="VARCHAR" property="clientBranchInternalId" />
+    <result column="transaction_operation_type" jdbcType="VARCHAR" property="operationType" />
+    <result column="transaction_deposit_id" jdbcType="VARCHAR" property="depositId" />
+    <result column="transaction_deposit_user_account" jdbcType="VARCHAR" property="depositUserAccount" />
+    <result column="transaction_deposit_date_time" jdbcType="TIMESTAMP" property="depositDateTime" />
+    <result column="transaction_deposit_send_server_date_time" jdbcType="TIMESTAMP" property="depositSendServerDateTime" />
+    <result column="transaction_withdrawals_id" jdbcType="VARCHAR" property="withdrawalsId" />
+    <result column="transaction_status" jdbcType="CHAR" property="status" />
+    <result column="transaction_device_status" jdbcType="VARCHAR" property="deviceStatus" />
+    <result column="transaction_transaction_status" jdbcType="VARCHAR" property="transactionStatus" />
+    <result column="transaction_description" jdbcType="VARCHAR" property="description" />
+    <result column="transaction_cod_error" jdbcType="VARCHAR" property="codError" />
+    <result column="transaction_cheque_total_amount" jdbcType="VARCHAR" property="chequeTotalAmount" />
+    <result column="transaction_cheque_number" jdbcType="VARCHAR" property="chequeNumber" />
+    <result column="transaction_envelopes_number" jdbcType="VARCHAR" property="envelopesNumber" />
+    <result column="transaction_envelopes_code" jdbcType="VARCHAR" property="envelopesCode" />
+    <result column="transaction_currency_type" jdbcType="VARCHAR" property="currencyType" />
+    <result column="transaction_currency_current_number" jdbcType="VARCHAR" property="currencyCurrentNumber" />
+    <result column="transaction_currency_total_amount" jdbcType="VARCHAR" property="currencyTotalAmount" />
+    <result column="transaction_hard_denomination1" jdbcType="VARCHAR" property="hardDenomination1" />
+    <result column="transaction_hard_denomination2" jdbcType="VARCHAR" property="hardDenomination2" />
+    <result column="transaction_hard_denomination3" jdbcType="VARCHAR" property="hardDenomination3" />
+    <result column="transaction_hard_denomination4" jdbcType="VARCHAR" property="hardDenomination4" />
+    <result column="transaction_hard_denomination5" jdbcType="VARCHAR" property="hardDenomination5" />
+    <result column="transaction_hard_denomination6" jdbcType="VARCHAR" property="hardDenomination6" />
+    <result column="transaction_hard_denomination7" jdbcType="VARCHAR" property="hardDenomination7" />
+    <result column="transaction_hard_denomination8" jdbcType="VARCHAR" property="hardDenomination8" />
+    <result column="transaction_paper_denomination1" jdbcType="VARCHAR" property="paperDenomination1" />
+    <result column="transaction_paper_denomination2" jdbcType="VARCHAR" property="paperDenomination2" />
+    <result column="transaction_paper_denomination3" jdbcType="VARCHAR" property="paperDenomination3" />
+    <result column="transaction_paper_denomination4" jdbcType="VARCHAR" property="paperDenomination4" />
+    <result column="transaction_paper_denomination5" jdbcType="VARCHAR" property="paperDenomination5" />
+    <result column="transaction_paper_denomination6" jdbcType="VARCHAR" property="paperDenomination6" />
+    <result column="transaction_paper_denomination7" jdbcType="VARCHAR" property="paperDenomination7" />
+    <result column="transaction_manual_total_amount" jdbcType="VARCHAR" property="manualTotalAmount" />
+    <result column="transaction_manual_denomination1" jdbcType="VARCHAR" property="manualDenomination1" />
+    <result column="transaction_manual_denomination2" jdbcType="VARCHAR" property="manualDenomination2" />
+    <result column="transaction_manual_denomination3" jdbcType="VARCHAR" property="manualDenomination3" />
+    <result column="transaction_manual_denomination4" jdbcType="VARCHAR" property="manualDenomination4" />
+    <result column="transaction_manual_denomination5" jdbcType="VARCHAR" property="manualDenomination5" />
+    <result column="transaction_manual_denomination6" jdbcType="VARCHAR" property="manualDenomination6" />
+    <result column="transaction_manual_denomination7" jdbcType="VARCHAR" property="manualDenomination7" />
+    <result column="transaction_manual_denomination8" jdbcType="VARCHAR" property="manualDenomination8" />
+    <result column="transaction_document_total_amount" jdbcType="VARCHAR" property="documentTotalAmount" />
+    <result column="transaction_reference" jdbcType="VARCHAR" property="reference" />
+    <result column="transaction_clave_sobre" jdbcType="VARCHAR" property="claveSobre" />
+    <result column="transaction_total_sobre" jdbcType="VARCHAR" property="totalSobre" />
+    <result column="transaction_impreso" jdbcType="VARCHAR" property="impreso" />
+    <result column="transaction_balanza" jdbcType="VARCHAR" property="balanza" />
+    <result column="transaction_fecha_cont" jdbcType="VARCHAR" property="fechaCont" />
+    <result column="transaction_create_timestamp" jdbcType="TIMESTAMP" property="createTimestamp" />
+    <result column="transaction_create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="transaction_delete_flag" jdbcType="CHAR" property="deleteFlag" />
+  </resultMap>
+</mapper>

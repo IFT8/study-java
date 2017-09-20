@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.comodin.fleet.core.mapper.ComprobantesBankNoteBeanMapper">
+  <resultMap id="BaseResultMap" type="com.comodin.fleet.core.bean.ComprobantesBankNoteBean">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="banknote_id" jdbcType="BIGINT" property="id" />
+    <result column="banknote_comprobantes_code" jdbcType="VARCHAR" property="comprobantesCode" />
+    <result column="banknote_bank_note_type" jdbcType="CHAR" property="bankNoteType" />
+    <result column="banknote_denomination" jdbcType="DECIMAL" property="denomination" />
+    <result column="banknote_number" jdbcType="INTEGER" property="number" />
+    <result column="banknote_status" jdbcType="CHAR" property="status" />
+    <result column="banknote_create_timestamp" jdbcType="TIMESTAMP" property="createTimestamp" />
+    <result column="banknote_create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="banknote_delete_flag" jdbcType="CHAR" property="deleteFlag" />
+  </resultMap>
+</mapper>

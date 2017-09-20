@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.comodin.fleet.core.mapper.ComprobantesBagNumberBeanMapper">
+  <resultMap id="BaseResultMap" type="com.comodin.fleet.core.bean.ComprobantesBagNumberBean">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="bag_number_id" jdbcType="BIGINT" property="id" />
+    <result column="bag_number_comprobantes_id" jdbcType="BIGINT" property="comprobantesId" />
+    <result column="bag_number_serial_code" jdbcType="VARCHAR" property="serialCode" />
+    <result column="bag_number_create_timestamp" jdbcType="TIMESTAMP" property="createTimestamp" />
+    <result column="bag_number_create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="bag_number_delete_flag" jdbcType="CHAR" property="deleteFlag" />
+  </resultMap>
+</mapper>

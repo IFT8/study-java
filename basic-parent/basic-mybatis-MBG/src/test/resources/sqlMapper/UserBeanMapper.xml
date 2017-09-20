@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.comodin.fleet.core.mapper.UserBeanMapper">
+  <resultMap id="BaseResultMap" type="com.comodin.fleet.core.bean.UserBean">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="user_id" jdbcType="BIGINT" property="id" />
+    <result column="user_username" jdbcType="VARCHAR" property="username" />
+    <result column="user_password" jdbcType="VARCHAR" property="password" />
+    <result column="user_password_salt" jdbcType="CHAR" property="passwordSalt" />
+    <result column="user_branch_id" jdbcType="BIGINT" property="branchId" />
+    <result column="user_cit_id" jdbcType="BIGINT" property="citId" />
+    <result column="user_first_name" jdbcType="VARCHAR" property="firstName" />
+    <result column="user_last_name" jdbcType="VARCHAR" property="lastName" />
+    <result column="user_phone" jdbcType="VARCHAR" property="phone" />
+    <result column="user_email" jdbcType="VARCHAR" property="email" />
+    <result column="user_gender" jdbcType="CHAR" property="gender" />
+    <result column="user_birthday" jdbcType="DATE" property="birthday" />
+    <result column="user_curp_id" jdbcType="VARCHAR" property="curpId" />
+    <result column="user_address" jdbcType="VARCHAR" property="address" />
+    <result column="user_photo" jdbcType="VARCHAR" property="photo" />
+    <result column="user_description" jdbcType="VARCHAR" property="description" />
+    <result column="user_last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+    <result column="user_last_login_ip" jdbcType="VARCHAR" property="lastLoginIp" />
+    <result column="user_roles" jdbcType="VARCHAR" property="roles" />
+    <result column="user_pass_code_enable" jdbcType="CHAR" property="passCodeEnable" />
+    <result column="user_pass_code" jdbcType="VARCHAR" property="passCode" />
+    <result column="user_status" jdbcType="CHAR" property="status" />
+    <result column="user_create_timestamp" jdbcType="TIMESTAMP" property="createTimestamp" />
+    <result column="user_create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="user_delete_flag" jdbcType="CHAR" property="deleteFlag" />
+  </resultMap>
+</mapper>

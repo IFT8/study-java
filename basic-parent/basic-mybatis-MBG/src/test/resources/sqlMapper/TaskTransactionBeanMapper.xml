@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.comodin.fleet.core.mapper.TaskTransactionBeanMapper">
+  <resultMap id="BaseResultMap" type="com.comodin.fleet.core.bean.TaskTransactionBean">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="transaction_id" jdbcType="BIGINT" property="id" />
+    <result column="transaction_task_id" jdbcType="BIGINT" property="taskId" />
+    <result column="transaction_operator_id" jdbcType="BIGINT" property="operatorId" />
+    <result column="transaction_operator_name" jdbcType="VARCHAR" property="operatorName" />
+    <result column="transaction_operate_type" jdbcType="VARCHAR" property="operateType" />
+    <result column="transaction_operate_value" jdbcType="VARCHAR" property="operateValue" />
+    <result column="transaction_operate_comment" jdbcType="VARCHAR" property="operateComment" />
+    <result column="transaction_operate_timestamp" jdbcType="TIMESTAMP" property="operateTimestamp" />
+    <result column="transaction_create_timestamp" jdbcType="TIMESTAMP" property="createTimestamp" />
+    <result column="transaction_create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="transaction_delete_flag" jdbcType="CHAR" property="deleteFlag" />
+  </resultMap>
+</mapper>

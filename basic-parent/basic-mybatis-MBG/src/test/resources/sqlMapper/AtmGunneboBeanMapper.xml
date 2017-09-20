@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.comodin.fleet.core.mapper.AtmGunneboBeanMapper">
+  <resultMap id="BaseResultMap" type="com.comodin.fleet.core.bean.AtmGunneboBean">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="gunnebo_id" jdbcType="BIGINT" property="id" />
+    <result column="gunnebo_atm_terminal_id" jdbcType="VARCHAR" property="atmTerminalId" />
+    <result column="gunnebo_atm_terminal_type" jdbcType="VARCHAR" property="atmTerminalType" />
+    <result column="gunnebo_status" jdbcType="VARCHAR" property="status" />
+    <result column="gunnebo_device_status" jdbcType="VARCHAR" property="deviceStatus" />
+    <result column="gunnebo_transaction_status" jdbcType="VARCHAR" property="transactionStatus" />
+    <result column="gunnebo_currency_total_amount" jdbcType="DECIMAL" property="currencyTotalAmount" />
+    <result column="gunnebo_current_capacity" jdbcType="INTEGER" property="currentCapacity" />
+    <result column="gunnebo_currency_max_capacity" jdbcType="INTEGER" property="currencyMaxCapacity" />
+    <result column="gunnebo_currency_type" jdbcType="VARCHAR" property="currencyType" />
+    <result column="gunnebo_envelopes_total_amount" jdbcType="INTEGER" property="envelopesTotalAmount" />
+    <result column="gunnebo_envelopes_capacity" jdbcType="INTEGER" property="envelopesCapacity" />
+    <result column="gunnebo_envelopes_max_capacity" jdbcType="INTEGER" property="envelopesMaxCapacity" />
+    <result column="gunnebo_create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="gunnebo_create_timestamp" jdbcType="TIMESTAMP" property="createTimestamp" />
+    <result column="gunnebo_update_timestamp" jdbcType="TIMESTAMP" property="updateTimestamp" />
+    <result column="gunnebo_delete_flag" jdbcType="CHAR" property="deleteFlag" />
+  </resultMap>
+</mapper>
