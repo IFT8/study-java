@@ -101,8 +101,8 @@ public class NIOServer {
     /**
      * 处理读的事件
      *
-     * @param key   //
-     * @throws IOException  //
+     * @param key //
+     * @throws IOException //
      */
     public void handlerRead(SelectionKey key) throws IOException {
         // 服务器可读取消息:得到事件发生的Socket通道
@@ -114,7 +114,6 @@ public class NIOServer {
             byte[] data = buffer.array();
             String msg = new String(data).trim();
             System.out.println("服务端收到信息：" + msg);
-
             //回写数据
             ByteBuffer outBuffer = ByteBuffer.wrap("好的".getBytes());
             channel.write(outBuffer);// 将消息回送给客户端
