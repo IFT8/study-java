@@ -3,6 +3,10 @@ package com.comodin.basic.mybatis.generator.json;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * json
+ * 【{"min":5,"max":10,"email":true,"pattern":"pattern","dataList":["PART","Y","N"]}】
+ */
 public class RemarksJSON {
     private Integer min;
     private Integer max;
