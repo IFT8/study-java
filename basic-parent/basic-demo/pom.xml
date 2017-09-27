@@ -9,16 +9,16 @@
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
-
+    <groupId>com.comodin.fleet</groupId>
     <artifactId>basic-demo</artifactId>
     <packaging>war</packaging>
 
 
     <dependencies>
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>com.comodin.basic</groupId>
             <artifactId>basic-core</artifactId>
-            <version>${project.version}</version>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>

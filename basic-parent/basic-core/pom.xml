@@ -9,6 +9,7 @@
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
+    <groupId>com.comodin.basic</groupId>
     <artifactId>basic-core</artifactId>
     <packaging>jar</packaging>
 
