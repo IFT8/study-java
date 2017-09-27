@@ -9,7 +9,7 @@ public class QueueReceiver {
     public static void main(String[] args) throws JMSException, InterruptedException {
 
         //1、创建，连接工厂
-        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://192.168.10.129:61616");
+        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://assupg-centos:61616");
 
         //2、通过连接工作工厂，创建一个连接
         Connection connection = connectionFactory.createConnection();

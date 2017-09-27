@@ -9,7 +9,7 @@ public class QueueSender {
     public static void main(String[] args) throws JMSException, InterruptedException {
 
         //1、创建，连接工厂
-        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://192.168.10.129:61616");
+        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://assupg-centos:61616");
 
         //2、通过连接工作工厂，创建一个连接
         Connection connection = connectionFactory.createConnection();
@@ -27,7 +27,7 @@ public class QueueSender {
         MessageProducer producer = session.createProducer(destination);
         for (int i = 0; i < 3; i++) {
             TextMessage message = session.createTextMessage("message--" + i);
-            Thread.sleep(10000);
+            Thread.sleep(1000);
             //通过消息生产者，发出消息
             producer.send(message);
             System.out.println(message.getText());
