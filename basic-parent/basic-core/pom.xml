@@ -17,6 +17,12 @@
     <dependencies>
 
         <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>basic-utils</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
         </dependency>
@@ -28,13 +34,6 @@
             <groupId>javax.el</groupId>
             <artifactId>javax.el-api</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>basic-utils</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
