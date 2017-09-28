@@ -9,7 +9,7 @@ import org.mybatis.generator.api.dom.java.TopLevelClass;
 public class AddImportPackage {
 
     public static void addModelClassComment(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
-        topLevelClass.addAnnotation("@SuppressWarnings({\"unused\", \"SpringAutowiredFieldsWarningInspection\", \"StatementWithEmptyBody\", \"WeakerAccess\", \"DefaultAnnotationParam\"})");
+        topLevelClass.addAnnotation("@SuppressWarnings({\"unused\", \"SpringAutowiredFieldsWarningInspection\", \"StatementWithEmptyBody\", \"WeakerAccess\", \"DefaultAnnotationParam\", \"UnusedReturnValue\"})");
         if (!topLevelClass.getImportedTypes().contains(new FullyQualifiedJavaType(PluginsUtils.PACKAGE_JAVAX_PERSISTENCE))) {
             topLevelClass.addImportedType(PluginsUtils.PACKAGE_JAVAX_PERSISTENCE);
         }

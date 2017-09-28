@@ -388,6 +388,7 @@
             <columnOverride column="task_source_task_id" property="sourceTaskId"/>
             <columnOverride column="task_source_task_complex_id" property="sourceTaskOriginalComplexId"/>
             <columnOverride column="task_last_generate_xml_task_status" property="lastGenerateXmlTaskStatus"/>
+            <columnOverride column="task_app_sync_task_version" property="appSyncTaskVersion"/>
         </table>
         <!--<table tableName="t_task_contract" domainObjectName="TaskContractBean">-->
         <!--<generatedKey column="contract_id" sqlStatement="Mysql" identity="true"/>-->
