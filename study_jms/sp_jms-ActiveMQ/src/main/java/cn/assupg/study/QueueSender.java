@@ -28,11 +28,17 @@ public class QueueSender {
         MessageProducer producer = session.createProducer(destination);
 
         for (int i = 0; i < 3; i++) {
-            TextMessage message = session.createTextMessage("message--" + i);
-            producer.send(message); //通过消息生产者，发出消息
 
-            Thread.sleep(1000);
-            System.out.println(message.getText());
+            //TextMessage message = session.createTextMessage("message--" + i);
+            //producer.send(message); //通过消息生产者，发出消息
+            //System.out.println(message.getText());
+
+            MapMessage message = session.createMapMessage();
+
+            message.setStringProperty("extra" + i, "okok"); //设置属性
+            message.setString("message---" + i, "my map message " + i);
+
+            producer.send(message); //通过消息生产者，发出消息
         }
 
         session.commit();//进行提交，以及关闭连接

@@ -3,6 +3,7 @@ package cn.assupg.study;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
 import javax.jms.*;
+import java.util.Enumeration;
 
 public class QueueReceiver {
 
@@ -10,12 +11,16 @@ public class QueueReceiver {
 
         //1、创建，连接工厂
         ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://assupg-centos:61616");
-
         //2、通过连接工作工厂，创建一个连接
         Connection connection = connectionFactory.createConnection();
-
         //3、启动连接
         connection.start();
+
+        Enumeration jmsxPropertyNames = connection.getMetaData().getJMSXPropertyNames();
+        while (jmsxPropertyNames.hasMoreElements()) {
+            String jmsxPropertyName = (String) jmsxPropertyNames.nextElement();
+            System.out.println("jmsx name === " + jmsxPropertyName);
+        }
 
         //4、创建一个会话，通过连接拿到一个会话【可以配置是否事务，消息确认方式Session.AUTO_ACKNOWLEDGE[自动确认]】
         Session session = connection.createSession(Boolean.TRUE, Session.AUTO_ACKNOWLEDGE);
@@ -27,10 +32,15 @@ public class QueueReceiver {
         MessageConsumer consumer = session.createConsumer(destination);
         int i = 0;
         while (i < 3) {
-            i++;
-            TextMessage message = (TextMessage) consumer.receive();
+            //TextMessage message = (TextMessage) consumer.receive();
+            //session.commit();
+            //System.out.println("收到消息：" + message.getText());
+
+            MapMessage message = (MapMessage) consumer.receive();
             session.commit();
-            System.out.println("收到消息：" + message.getText());
+            System.out.println("收到消息：" + message.getString("message---" + i) + "\t, property= " + message.getStringProperty("extra" + i));
+
+            i++;
         }
 
         //进行提交，以及关闭连接
