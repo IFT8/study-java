@@ -269,6 +269,37 @@
                 typeHandler-->
 
 
+        <table tableName="t_atm_base" domainObjectName="AtmBaseBean">
+            <generatedKey column="base_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="base_" replaceString=""/>
+        </table>
+        <table tableName="t_atm_base_maintain" domainObjectName="AtmBaseMaintainBean">
+            <generatedKey column="maintain_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="maintain_" replaceString=""/>
+        </table>
+        <table tableName="t_atm_base_transaction" domainObjectName="AtmBaseTransactionBean">
+            <generatedKey column="transaction_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="transaction_" replaceString=""/>
+        </table>
+
+
+        <table tableName="t_atm_gunnebo" domainObjectName="AtmGunneboBean">
+            <generatedKey column="gunnebo_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="gunnebo_" replaceString=""/>
+        </table>
+        <table tableName="t_atm_gunnebo_transaction" domainObjectName="AtmGunneboTransactionBean">
+            <generatedKey column="transaction_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="transaction_" replaceString=""/>
+            <columnOverride column="transaction_transaction_status" property="transactionStatus"/>
+        </table>
+
+
+        <table tableName="t_atm_sync_log" domainObjectName="AtmSyncLogBean">
+            <generatedKey column="sync_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="sync_" replaceString=""/>
+        </table>
+
+
         <table tableName="t_bank_atm" domainObjectName="BankAtmBean">
             <generatedKey column="atm_id" sqlStatement="Mysql" identity="true"/>
             <columnRenamingRule searchString="atm_" replaceString=""/>
@@ -290,6 +321,16 @@
         <table tableName="t_client_branch" domainObjectName="ClientBranchBean">
             <generatedKey column="branch_id" sqlStatement="Mysql" identity="true"/>
             <columnRenamingRule searchString="branch_" replaceString=""/>
+        </table>
+
+
+        <table tableName="t_client_group" domainObjectName="ClientGroupBean">
+            <generatedKey column="client_group_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="client_group_" replaceString=""/>
+        </table>
+        <table tableName="t_client_group_branch_relation" domainObjectName="ClientGroupBranchRelationBean">
+            <generatedKey column="client_group_relation_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="client_group_relation_" replaceString=""/>
         </table>
 
 
@@ -340,11 +381,22 @@
             <columnRenamingRule searchString="log_" replaceString=""/>
         </table>
 
+        <table tableName="t_message_stage" domainObjectName="MessageStageBean">
+            <generatedKey column="ms_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="ms_" replaceString=""/>
+        </table>
+
 
         <table tableName="t_privilege" domainObjectName="PrivilegeBean">
             <generatedKey column="privilege_id" sqlStatement="Mysql" identity="true"/>
             <columnRenamingRule searchString="privilege_" replaceString=""/>
         </table>
+
+        <table tableName="t_report_history" domainObjectName="ReportHistoryBean">
+            <generatedKey column="report_history_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="report_history_" replaceString=""/>
+        </table>
+
         <table tableName="t_role" domainObjectName="RoleBean">
             <generatedKey column="role_id" sqlStatement="Mysql" identity="true"/>
             <columnRenamingRule searchString="role_" replaceString=""/>
@@ -361,17 +413,17 @@
             <generatedKey column="account_id" sqlStatement="Mysql" identity="true"/>
             <columnRenamingRule searchString="account_" replaceString=""/>
         </table>
-        <table tableName="t_sio_task" domainObjectName="SioTaskBean">
-            <generatedKey column="task_id" sqlStatement="Mysql" identity="true"/>
-            <columnRenamingRule searchString="task_" replaceString=""/>
-            <columnOverride column="task_task_id" property="taskId"/>
-            <columnOverride column="task_task_original_complex_id" property="taskOriginalComplexId"/>
-            <columnOverride column="task_inter_change_task_id" property="interChangeTaskId"/>
-        </table>
-        <table tableName="t_sio_task_comprobantes" domainObjectName="SioTaskComprobantesBean">
-            <generatedKey column="comprobantes_id" sqlStatement="Mysql" identity="true"/>
-            <columnRenamingRule searchString="comprobantes_" replaceString=""/>
-        </table>
+        <!--<table tableName="t_sio_task" domainObjectName="SioTaskBean">-->
+            <!--<generatedKey column="task_id" sqlStatement="Mysql" identity="true"/>-->
+            <!--<columnRenamingRule searchString="task_" replaceString=""/>-->
+            <!--<columnOverride column="task_task_id" property="taskId"/>-->
+            <!--<columnOverride column="task_task_original_complex_id" property="taskOriginalComplexId"/>-->
+            <!--<columnOverride column="task_inter_change_task_id" property="interChangeTaskId"/>-->
+        <!--</table>-->
+        <!--<table tableName="t_sio_task_comprobantes" domainObjectName="SioTaskComprobantesBean">-->
+            <!--<generatedKey column="comprobantes_id" sqlStatement="Mysql" identity="true"/>-->
+            <!--<columnRenamingRule searchString="comprobantes_" replaceString=""/>-->
+        <!--</table>-->
 
 
         <table tableName="t_system_status" domainObjectName="SystemStatusBean">
@@ -426,6 +478,16 @@
         <table tableName="t_vehicle" domainObjectName="VehicleBean">
             <generatedKey column="vehicle_id" sqlStatement="Mysql" identity="true"/>
             <columnRenamingRule searchString="vehicle_" replaceString=""/>
+        </table>
+
+
+        <table tableName="t_xml_record_comodin_to_sio" domainObjectName="XmlRecordComodinToSioBean">
+            <generatedKey column="xml_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="xml_" replaceString=""/>
+        </table>
+        <table tableName="t_xml_record_sio_to_comodin" domainObjectName="XmlRecordSioToComodinBean">
+            <generatedKey column="xml_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="xml_" replaceString=""/>
         </table>
 
 
@@ -520,44 +582,6 @@
             <columnOverride column="fecha_cont" property="fechaCont"/>
 
         </table>
-
-
-        <table tableName="t_atm_base" domainObjectName="AtmBaseBean">
-            <generatedKey column="base_id" sqlStatement="Mysql" identity="true"/>
-            <columnRenamingRule searchString="base_" replaceString=""/>
-        </table>
-        <table tableName="t_atm_base_transaction" domainObjectName="AtmBaseTransactionBean">
-            <generatedKey column="transaction_id" sqlStatement="Mysql" identity="true"/>
-            <columnRenamingRule searchString="transaction_" replaceString=""/>
-        </table>
-        <table tableName="t_atm_sync_log" domainObjectName="AtmSyncLogBean">
-            <generatedKey column="sync_id" sqlStatement="Mysql" identity="true"/>
-            <columnRenamingRule searchString="sync_" replaceString=""/>
-        </table>
-        <table tableName="t_atm_base_maintain" domainObjectName="AtmBaseMaintainBean">
-            <generatedKey column="maintain_id" sqlStatement="Mysql" identity="true"/>
-            <columnRenamingRule searchString="maintain_" replaceString=""/>
-        </table>
-
-        <table tableName="t_atm_gunnebo" domainObjectName="AtmGunneboBean">
-            <generatedKey column="gunnebo_id" sqlStatement="Mysql" identity="true"/>
-            <columnRenamingRule searchString="gunnebo_" replaceString=""/>
-        </table>
-        <table tableName="t_atm_gunnebo_transaction" domainObjectName="AtmGunneboTransactionBean">
-            <generatedKey column="transaction_id" sqlStatement="Mysql" identity="true"/>
-            <columnRenamingRule searchString="transaction_" replaceString=""/>
-            <columnOverride column="transaction_transaction_status" property="transactionStatus"/>
-        </table>
-
-        <table tableName="t_xml_record_sio_to_comodin" domainObjectName="XmlRecordSioToComodinBean">
-            <generatedKey column="xml_id" sqlStatement="Mysql" identity="true"/>
-            <columnRenamingRule searchString="xml_" replaceString=""/>
-        </table>
-        <table tableName="t_xml_record_comodin_to_sio" domainObjectName="XmlRecordComodinToSioBean">
-            <generatedKey column="xml_id" sqlStatement="Mysql" identity="true"/>
-            <columnRenamingRule searchString="xml_" replaceString=""/>
-        </table>
-
 
     </context>
 </generatorConfiguration>
