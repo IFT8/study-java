@@ -259,7 +259,7 @@ public class PluginsUtils {
     }
 
     public static String getServiceInterfaceClassName(String javaBeanName) {
-        return String.format("%s%s%s", serviceInterfaceFileNamePrefix, javaBeanName, serviceInterfaceFileNameSuffix);
+        return String.format("%s%s%s", serviceInterfaceFileNamePrefix, removeBeanSuffix(javaBeanName), serviceInterfaceFileNameSuffix);
     }
 
     public static String getServiceInterfacePackage() {
@@ -275,7 +275,7 @@ public class PluginsUtils {
     }
 
     public static String getServiceImplementsClassName(String javaBeanName) {
-        return String.format("%s%s%s", serviceImplementsFileNamePrefix, javaBeanName, serviceImplementsFileNameSuffix);
+        return String.format("%s%s%s", serviceImplementsFileNamePrefix, removeBeanSuffix(javaBeanName), serviceImplementsFileNameSuffix);
     }
 
     public static String getServiceImplementsExtendsSubClass() {
@@ -291,7 +291,7 @@ public class PluginsUtils {
     }
 
     public static String getControllerClassName(String javaBeanName) {
-        return String.format("%s%s%s", controllerFileNamePrefix, javaBeanName, controllerFileNameSuffix);
+        return String.format("%s%s%s", controllerFileNamePrefix, removeBeanSuffix(javaBeanName), controllerFileNameSuffix);
     }
 
     public static String getControllerExtendsSubClass() {
@@ -321,5 +321,9 @@ public class PluginsUtils {
             }
         }
         return validGroups;
+    }
+
+    public static String removeBeanSuffix(String javaBeanName) {
+        return javaBeanName.replace("Bean", "");
     }
 }

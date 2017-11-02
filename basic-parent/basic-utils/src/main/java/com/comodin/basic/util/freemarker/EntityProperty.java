@@ -62,4 +62,33 @@ public class EntityProperty {
         this.remarks = (remarks == null) ? null : remarks.trim();
         return this;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof EntityProperty)) {
+            return false;
+        }
+
+        EntityProperty that = (EntityProperty) o;
+
+        if (getName() != null ? !getName().equals(that.getName()) : that.getName() != null) {
+            return false;
+        }
+        if (getValue() != null ? !getValue().equals(that.getValue()) : that.getValue() != null) {
+            return false;
+        }
+        return getType() == that.getType() && (getRemarks() != null ? getRemarks().equals(that.getRemarks()) : that.getRemarks() == null);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getName() != null ? getName().hashCode() : 0;
+        result = 31 * result + (getValue() != null ? getValue().hashCode() : 0);
+        result = 31 * result + (getType() != null ? getType().hashCode() : 0);
+        result = 31 * result + (getRemarks() != null ? getRemarks().hashCode() : 0);
+        return result;
+    }
 }
