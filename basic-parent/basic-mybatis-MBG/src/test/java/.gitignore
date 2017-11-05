@@ -1,4 +1,4 @@
 ﻿# Ignore everything in this directory
-com
+com/comodin/fleet
 # Except this file
 !.gitignore
