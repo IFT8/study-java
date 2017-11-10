@@ -56,7 +56,8 @@ public class AddValidator {
         for (SqlRemarksConstantBean sqlRemarksConstantBean : sqlRemarksJSON.getConstantList()) {
 
             String constantBeanName = PluginsUtils.getConstantBeanClassName(introspectedTable.getFullyQualifiedTable().getDomainObjectName());
-            String constantName = String.format("%s_%s_%s", javaBeanNameByCamelToUnderline, fieldNameByCamelToUnderline, sqlRemarksConstantBean.getKey()).toUpperCase();
+            //String constantName = String.format("%s_%s_%s", javaBeanNameByCamelToUnderline, fieldNameByCamelToUnderline, sqlRemarksConstantBean.getKey()).toUpperCase();
+            String constantName = String.format("%s_BY_%s", fieldNameByCamelToUnderline, sqlRemarksConstantBean.getKey()).toUpperCase();
             stringBuffer.append(constantBeanName).append(".").append(constantName).append(",");
 
             //组装，生成每个类的常量变量，以便，待会使用freemarker生成，常量文件
@@ -64,7 +65,7 @@ public class AddValidator {
                     .setType(EntityPropertyType.valueOf(field.getType().getShortName()))
                     .setName(constantName)
                     .setValue(sqlRemarksConstantBean.getKey())
-                    .setRemarks(Arrays.asList(introspectedColumn.getRemarks(), "", sqlRemarksConstantBean.getDesc()));
+                    .setRemarks(Arrays.asList(introspectedColumn.getRemarks(), "<p>", sqlRemarksConstantBean.getDesc()));
             PluginsUtils.getEntityConstantToMapByEntityBeanName().get(javaBeanName).add(entityProperty);
         }
 
