@@ -1,36 +1,56 @@
 package com.comodin.basic.util.freemarker;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
  * 生成 实体类 模版
+ * @author supeng
  */
 @SuppressWarnings({"UnusedReturnValue", "unused"})
 public class Entity {
-    private String packageName;            // 实体所在的包名
-    private Set<String> importPackageSet = new HashSet<>();       // 导入包列表
 
-    private EntityType classType;               // java文件类型，即是class 还是 接口
-    private String className;                   // java文件名，也即类名
+    // 实体所在的包名
+    private String packageName;
+
+    // 导入包列表
+    private Set<String> importPackageSet = new HashSet<>();
+
+    // java文件类型，即是class 还是 接口
+    private EntityType classType;
+
+    // java文件名，也即类名
+    private String className;
+
     private Set<String> classAnnotationSet = new HashSet<>();
 
-    private String superClass;                                          //父类
-    private Set<String> implementsInterfaceClassSet = new HashSet<>();     //需要实现的接口
+    //父类
+    private String superClass;
 
-    private Set<String> interfaceSuperClassSet = new HashSet<>();     //模版生成是接口，即接口继承的接口集合
+    //需要实现的接口
+    private Set<String> implementsInterfaceClassSet = new HashSet<>();
 
-    private boolean generatedConstructors;               // 是否有构造函数
-    private boolean generatedGetSetMethod;      // 是否有构造函数
+    //模版生成是接口，即接口继承的接口集合
+    private Set<String> interfaceSuperClassSet = new HashSet<>();
 
-    private Set<EntityProperty> staticPropertySet = new HashSet<>();    // 类静态属性集合
-    private Set<EntityProperty> entityPropertySet = new HashSet<>();          // 属性集合
+    // 是否有构造函数
+    private boolean generatedConstructors;
+    // 是否有构造函数
+    private boolean generatedGetSetMethod;
 
-    private Set<String> temporaryMethodBodySet = new HashSet<>();
+    // 类静态属性集合
+    private List<EntityProperty> staticPropertySet = new ArrayList<>();
+    // 属性集合
+    private List<EntityProperty> entityPropertySet = new ArrayList<>();
+
+    private List<String> temporaryMethodBodySet = new ArrayList<>();
 
     public Entity(EntityType classType) {
         this.classType = classType;
     }
+
 
     public String getPackageName() {
         return (packageName == null) ? null : packageName.trim();
@@ -114,29 +134,29 @@ public class Entity {
         return this;
     }
 
-    public Set<EntityProperty> getStaticPropertySet() {
+    public List<EntityProperty> getStaticPropertySet() {
         return staticPropertySet;
     }
 
-    public Entity setStaticPropertySet(Set<EntityProperty> staticPropertySet) {
+    public Entity setStaticPropertySet(List<EntityProperty> staticPropertySet) {
         this.staticPropertySet = staticPropertySet;
         return this;
     }
 
-    public Set<EntityProperty> getEntityPropertySet() {
+    public List<EntityProperty> getEntityPropertySet() {
         return entityPropertySet;
     }
 
-    public Entity setEntityPropertySet(Set<EntityProperty> entityPropertySet) {
+    public Entity setEntityPropertySet(List<EntityProperty> entityPropertySet) {
         this.entityPropertySet = entityPropertySet;
         return this;
     }
 
-    public Set<String> getTemporaryMethodBodySet() {
+    public List<String> getTemporaryMethodBodySet() {
         return temporaryMethodBodySet;
     }
 
-    public Entity setTemporaryMethodBodySet(Set<String> temporaryMethodBodySet) {
+    public Entity setTemporaryMethodBodySet(List<String> temporaryMethodBodySet) {
         this.temporaryMethodBodySet = temporaryMethodBodySet;
         return this;
     }

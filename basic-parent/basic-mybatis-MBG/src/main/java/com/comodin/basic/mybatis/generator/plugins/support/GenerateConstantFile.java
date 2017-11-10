@@ -9,10 +9,7 @@ import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.dom.java.TopLevelClass;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class GenerateConstantFile {
@@ -20,12 +17,12 @@ public class GenerateConstantFile {
     public static void generateConstantFile(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
 
         String javaBeanName = introspectedTable.getFullyQualifiedTable().getDomainObjectName();
-        Set<EntityProperty> entityConstantSet = PluginsUtils.getEntityConstantToMapByEntityBeanName().get(javaBeanName);
+        List<EntityProperty> entityConstantSet = PluginsUtils.getEntityConstantToMapByEntityBeanName().get(javaBeanName);
         //if (entityConstantSet == null || entityConstantSet.isEmpty()) {
         //    return;
         //}
         if (entityConstantSet == null) {
-            entityConstantSet = new HashSet<>();
+            entityConstantSet = new ArrayList<>();
         }
         //String outFileRootDir = "D:\\ideaProjects\\study-java\\basic-parent\\basic-mybatis-MBG\\src\\main\\java\\com\\comodin\\fleet\\constant";
         String outFileRootDir = PluginsUtils.getGenerateConstantFileDir();

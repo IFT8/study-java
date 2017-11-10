@@ -1,6 +1,7 @@
 package com.comodin.basic.mybatis.generator.plugins.support;
 
-import com.comodin.basic.mybatis.generator.json.RemarksJSON;
+import com.comodin.basic.mybatis.generator.json.SqlRemarksConstantBean;
+import com.comodin.basic.mybatis.generator.json.SqlRemarksJSON;
 import com.comodin.basic.mybatis.generator.util.PluginsUtils;
 import com.comodin.basic.util.MyStringUtils;
 import com.comodin.basic.util.freemarker.EntityProperty;
@@ -9,8 +10,9 @@ import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.dom.java.Field;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
-import java.util.HashSet;
 
 @SuppressWarnings({"unused", "WeakerAccess"})
 public class AddValidator {
@@ -25,54 +27,59 @@ public class AddValidator {
         //introspectedColumn.getJavaProperty()              java 字段名      id
         //introspectedColumn.getFullyQualifiedJavaType()    java，字段，类型    java.lang.Long
 
-        RemarksJSON remarksJSON = PluginsUtils.extractRemarksJSON(introspectedColumn.getRemarks());
+        SqlRemarksJSON sqlRemarksJSON = PluginsUtils.extractRemarksJSON(introspectedColumn.getRemarks());
         String javaBeanNameByCamelToUnderline = MyStringUtils.camelToUnderline(introspectedTable.getFullyQualifiedTable().getDomainObjectName());
         String fieldNameByCamelToUnderline = MyStringUtils.camelToUnderline(field.getName());
 
-        processAnnotationValidAllowData(javaBeanNameByCamelToUnderline, fieldNameByCamelToUnderline, remarksJSON, field, introspectedTable, introspectedColumn);
-        processAnnotationEmail(javaBeanNameByCamelToUnderline, fieldNameByCamelToUnderline, remarksJSON, field, introspectedTable, introspectedColumn);
-        processAnnotationValidDateTimeFormat(javaBeanNameByCamelToUnderline, fieldNameByCamelToUnderline, remarksJSON, field, introspectedTable, introspectedColumn);
-        processAnnotationNotNullOrNotBlank(javaBeanNameByCamelToUnderline, fieldNameByCamelToUnderline, remarksJSON, field, introspectedTable, introspectedColumn);
-        processAnnotationLengthOrValidLength(javaBeanNameByCamelToUnderline, fieldNameByCamelToUnderline, remarksJSON, field, introspectedTable, introspectedColumn);
+        processAnnotationValidAllowData(javaBeanNameByCamelToUnderline, fieldNameByCamelToUnderline, sqlRemarksJSON, field, introspectedTable, introspectedColumn);
+        processAnnotationEmail(javaBeanNameByCamelToUnderline, fieldNameByCamelToUnderline, sqlRemarksJSON, field, introspectedTable, introspectedColumn);
+        processAnnotationValidDateTimeFormat(javaBeanNameByCamelToUnderline, fieldNameByCamelToUnderline, sqlRemarksJSON, field, introspectedTable, introspectedColumn);
+        processAnnotationNotNullOrNotBlank(javaBeanNameByCamelToUnderline, fieldNameByCamelToUnderline, sqlRemarksJSON, field, introspectedTable, introspectedColumn);
+        processAnnotationLengthOrValidLength(javaBeanNameByCamelToUnderline, fieldNameByCamelToUnderline, sqlRemarksJSON, field, introspectedTable, introspectedColumn);
     }
 
 
-    private static void processAnnotationValidAllowData(String javaBeanNameByCamelToUnderline, String fieldNameByCamelToUnderline, RemarksJSON remarksJSON, Field field, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn) {
-        if (remarksJSON == null || remarksJSON.getDataList() == null || remarksJSON.getDataList().isEmpty()) {
+    private static void processAnnotationValidAllowData(String javaBeanNameByCamelToUnderline, String fieldNameByCamelToUnderline, SqlRemarksJSON sqlRemarksJSON, Field field, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn) {
+        if (sqlRemarksJSON == null || sqlRemarksJSON.getConstantList() == null || sqlRemarksJSON.getConstantList().isEmpty()) {
             return;
         }
 
         String javaBeanName = introspectedColumn.getIntrospectedTable().getFullyQualifiedTable().getDomainObjectName();
         if (!PluginsUtils.getEntityConstantToMapByEntityBeanName().containsKey(javaBeanName)) {
-            PluginsUtils.getEntityConstantToMapByEntityBeanName().put(javaBeanName, new HashSet<>());
+            PluginsUtils.getEntityConstantToMapByEntityBeanName().put(javaBeanName, new ArrayList<>());
         }
 
         String validAllowDataMessageKey = String.format("%s_%s_ALLOW_DATA", javaBeanNameByCamelToUnderline, fieldNameByCamelToUnderline).toUpperCase();
-        String validAllowDataMessageVal = "Only as follows {allowDataArray}.";
+        String validAllowDataMessageVal = "only as follows {allowDataArray}.";
 
-        StringBuffer stringBuffer = new StringBuffer();
-        remarksJSON.getDataList().forEach(data -> {
+        StringBuilder stringBuffer = new StringBuilder();
+        for (SqlRemarksConstantBean sqlRemarksConstantBean : sqlRemarksJSON.getConstantList()) {
 
             String constantBeanName = PluginsUtils.getConstantBeanClassName(introspectedTable.getFullyQualifiedTable().getDomainObjectName());
-            String constantName = String.format("%s_%s_%s", javaBeanNameByCamelToUnderline, fieldNameByCamelToUnderline, data).toUpperCase();
+            String constantName = String.format("%s_%s_%s", javaBeanNameByCamelToUnderline, fieldNameByCamelToUnderline, sqlRemarksConstantBean.getKey()).toUpperCase();
             stringBuffer.append(constantBeanName).append(".").append(constantName).append(",");
 
             //组装，生成每个类的常量变量，以便，待会使用freemarker生成，常量文件
-            PluginsUtils.getEntityConstantToMapByEntityBeanName().get(javaBeanName)//
-                    .add(new EntityProperty().setType(EntityPropertyType.valueOf(field.getType().getShortName())).setName(constantName).setValue(data).setRemarks(introspectedColumn.getRemarks()));
-        });
+            EntityProperty entityProperty = new EntityProperty()
+                    .setType(EntityPropertyType.valueOf(field.getType().getShortName()))
+                    .setName(constantName)
+                    .setValue(sqlRemarksConstantBean.getKey())
+                    .setRemarks(Arrays.asList(introspectedColumn.getRemarks(), "", sqlRemarksConstantBean.getDesc()));
+            PluginsUtils.getEntityConstantToMapByEntityBeanName().get(javaBeanName).add(entityProperty);
+        }
+
         String substring = stringBuffer.substring(0, stringBuffer.length() - 1);
 
         String messageKey = PluginsUtils.assemblyFieldValidatorAnnotationMessageKey(javaBeanName, validAllowDataMessageKey);
         String validGroups = PluginsUtils.assemblyFieldValidatorAnnotationValidGroups(introspectedTable, introspectedColumn);
 
-        field.addAnnotation("@ValidAllowData(allowDataArray = {" + substring + "}, message = " + messageKey + ", groups = " + validGroups + ")");
+        field.addAnnotation("@ValidAllowData(message = " + messageKey + ", groups = " + validGroups + ", allowDataArray = {" + substring + "})");
         PluginsUtils.setFieldI18nToEntityI18nSet(validAllowDataMessageKey, validAllowDataMessageVal, introspectedColumn);
     }
 
 
-    private static void processAnnotationEmail(String javaBeanNameByCamelToUnderline, String fieldNameByCamelToUnderline, RemarksJSON remarksJSON, Field field, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn) {
-        if (remarksJSON == null || remarksJSON.getEmail() == null || !remarksJSON.getEmail()) {
+    private static void processAnnotationEmail(String javaBeanNameByCamelToUnderline, String fieldNameByCamelToUnderline, SqlRemarksJSON sqlRemarksJSON, Field field, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn) {
+        if (sqlRemarksJSON == null || sqlRemarksJSON.getEmail() == null || !sqlRemarksJSON.getEmail()) {
             return;
         }
 
@@ -89,8 +96,8 @@ public class AddValidator {
     }
 
 
-    private static void processAnnotationValidDateTimeFormat(String javaBeanNameByCamelToUnderline, String fieldNameByCamelToUnderline, RemarksJSON RemarksJSON, Field field, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn) {
-        String pattern = RemarksJSON != null && RemarksJSON.getPattern() != null && "".equals(RemarksJSON.getPattern().trim()) ? RemarksJSON.getPattern().trim() : null;
+    private static void processAnnotationValidDateTimeFormat(String javaBeanNameByCamelToUnderline, String fieldNameByCamelToUnderline, SqlRemarksJSON sqlRemarksJSON, Field field, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn) {
+        String pattern = sqlRemarksJSON != null && sqlRemarksJSON.getPattern() != null && "".equals(sqlRemarksJSON.getPattern().trim()) ? sqlRemarksJSON.getPattern().trim() : null;
 
         String dateTimeFormatMessageKey = String.format("%s_%s_DATE_TIME_FORMAT", javaBeanNameByCamelToUnderline, fieldNameByCamelToUnderline).toUpperCase();
         String dateTimeFormatMessageVal = "Invalid time or date format error. pattern: {pattern}.";
@@ -117,7 +124,7 @@ public class AddValidator {
         }
     }
 
-    private static void processAnnotationNotNullOrNotBlank(String javaBeanNameByCamelToUnderline, String fieldNameByCamelToUnderline, RemarksJSON RemarksJSON, Field field, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn) {
+    private static void processAnnotationNotNullOrNotBlank(String javaBeanNameByCamelToUnderline, String fieldNameByCamelToUnderline, SqlRemarksJSON sqlRemarksJSON, Field field, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn) {
         boolean isNullable = introspectedColumn.isNullable();
         if (isNullable) {
             return;
@@ -159,9 +166,9 @@ public class AddValidator {
     }
 
 
-    private static void processAnnotationLengthOrValidLength(String javaBeanNameByCamelToUnderline, String fieldNameByCamelToUnderline, RemarksJSON remarksJSON, Field field, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn) {
-        Integer lengthMin = remarksJSON != null && remarksJSON.getMin() != null ? remarksJSON.getMin() : null;
-        Integer lengthMax = remarksJSON != null && remarksJSON.getMax() != null ? remarksJSON.getMax() : introspectedColumn.getLength();
+    private static void processAnnotationLengthOrValidLength(String javaBeanNameByCamelToUnderline, String fieldNameByCamelToUnderline, SqlRemarksJSON sqlRemarksJSON, Field field, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn) {
+        Integer lengthMin = sqlRemarksJSON != null && sqlRemarksJSON.getMin() != null ? sqlRemarksJSON.getMin() : null;
+        Integer lengthMax = sqlRemarksJSON != null && sqlRemarksJSON.getMax() != null ? sqlRemarksJSON.getMax() : introspectedColumn.getLength();
 
         String validLengthMessageKey = String.format("%s_%s_Length", javaBeanNameByCamelToUnderline, fieldNameByCamelToUnderline).toUpperCase();
         String validLengthMessageVal = "data length must be between {min} and {max} bit.";

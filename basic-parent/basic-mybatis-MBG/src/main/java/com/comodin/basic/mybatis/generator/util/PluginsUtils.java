@@ -1,7 +1,8 @@
 package com.comodin.basic.mybatis.generator.util;
 
 import com.alibaba.fastjson.JSON;
-import com.comodin.basic.mybatis.generator.json.RemarksJSON;
+import com.alibaba.fastjson.JSONException;
+import com.comodin.basic.mybatis.generator.json.SqlRemarksJSON;
 import com.comodin.basic.util.MyStringUtils;
 import com.comodin.basic.util.freemarker.EntityProperty;
 import org.apache.commons.lang3.StringUtils;
@@ -14,8 +15,8 @@ import java.util.*;
 @SuppressWarnings({"WeakerAccess", "unused", "MismatchedQueryAndUpdateOfCollection", "FieldCanBeLocal"})
 public class PluginsUtils {
 
-    private static Map<String, Set<EntityProperty>> entityI18nToMapByEntityBeanName = new HashMap<>();
-    private static Map<String, Set<EntityProperty>> entityConstantToMapByEntityBeanName = new HashMap<>();
+    private static Map<String, List<EntityProperty>> entityI18nToMapByEntityBeanName = new HashMap<>();
+    private static Map<String, List<EntityProperty>> entityConstantToMapByEntityBeanName = new HashMap<>();
 
     public static final String PACKAGE_JAVAX_PERSISTENCE = "javax.persistence.*";
     public static final String PACKAGE_JAVA_VALIDATION_CONSTRAINTS = "javax.validation.constraints.*";
@@ -167,7 +168,7 @@ public class PluginsUtils {
         }
     }
 
-    public static RemarksJSON extractRemarksJSON(String columnRemarks) {
+    public static SqlRemarksJSON extractRemarksJSON(String columnRemarks) {
         if (columnRemarks == null || "".equals(columnRemarks.trim())) {
             return null;
         }
@@ -177,7 +178,11 @@ public class PluginsUtils {
             return null;
         }
         String extractSQLCommentJSONStr = columnRemarks.substring((columnRemarks.indexOf("【{") + 1), (columnRemarks.indexOf("}】") + 1));
-        return JSON.parseObject(extractSQLCommentJSONStr, RemarksJSON.class);
+        try {
+            return JSON.parseObject(extractSQLCommentJSONStr, SqlRemarksJSON.class);
+        } catch (JSONException e) {
+            return null;
+        }
     }
 
     public static String extractRemarksDescription(String columnRemarks) {
@@ -212,9 +217,11 @@ public class PluginsUtils {
     public static void setFieldI18nToEntityI18nSet(String i18nMessageKey, String i18nMessageValue, IntrospectedColumn introspectedColumn) {
         String javaBeanName = introspectedColumn.getIntrospectedTable().getFullyQualifiedTable().getDomainObjectName();
         if (!entityI18nToMapByEntityBeanName.containsKey(javaBeanName)) {
-            entityI18nToMapByEntityBeanName.put(javaBeanName, new HashSet<>());
+            entityI18nToMapByEntityBeanName.put(javaBeanName, new ArrayList<>());
         }
-        entityI18nToMapByEntityBeanName.get(javaBeanName).add(new EntityProperty().setName(i18nMessageKey).setValue(i18nMessageValue).setRemarks(PluginsUtils.extractRemarksDescription(introspectedColumn.getRemarks())));
+        //EntityProperty entityProperty = new EntityProperty().setName(i18nMessageKey).setValue(i18nMessageValue).setRemarks(Collections.singletonList(PluginsUtils.extractRemarksDescription(introspectedColumn.getRemarks())));
+        EntityProperty entityProperty = new EntityProperty().setName(i18nMessageKey).setValue(i18nMessageValue).setRemarks(Collections.singletonList(introspectedColumn.getRemarks()));
+        entityI18nToMapByEntityBeanName.get(javaBeanName).add(entityProperty);
     }
 
     public static String getConstantPackage() {
@@ -225,12 +232,12 @@ public class PluginsUtils {
         return i18nConstantPackage;
     }
 
-    public static Map<String, Set<EntityProperty>> getEntityConstantToMapByEntityBeanName() {
+    public static Map<String, List<EntityProperty>> getEntityConstantToMapByEntityBeanName() {
         return entityConstantToMapByEntityBeanName;
     }
 
 
-    public static Map<String, Set<EntityProperty>> getEntityI18nToMapByEntityBeanName() {
+    public static Map<String, List<EntityProperty>> getEntityI18nToMapByEntityBeanName() {
         return entityI18nToMapByEntityBeanName;
     }
 

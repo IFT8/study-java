@@ -1,6 +1,8 @@
 package com.comodin.basic.util.freemarker;
 
 
+import java.util.List;
+
 /**
  * 实体对应的属性类
  */
@@ -9,18 +11,18 @@ public class EntityProperty {
     private String name;// 属性名称
     private String value;// 属性值
     private EntityPropertyType type;
-    private String remarks;
+    private List<String> remarks;
 
     public EntityProperty() {
     }
 
-    public EntityProperty(String name, String value, String remarks) {
+    public EntityProperty(String name, String value, List<String> remarks) {
         this.name = name;
         this.value = value;
         this.remarks = remarks;
     }
 
-    public EntityProperty(String name, String value, EntityPropertyType type, String remarks) {
+    public EntityProperty(String name, String value, EntityPropertyType type, List<String> remarks) {
         this.name = name;
         this.value = value;
         this.type = type;
@@ -54,12 +56,12 @@ public class EntityProperty {
         return this;
     }
 
-    public String getRemarks() {
-        return (remarks == null) ? null : remarks.trim();
+    public List<String> getRemarks() {
+        return remarks;
     }
 
-    public EntityProperty setRemarks(String remarks) {
-        this.remarks = (remarks == null) ? null : remarks.trim();
+    public EntityProperty setRemarks(List<String> remarks) {
+        this.remarks = remarks;
         return this;
     }
 
@@ -74,21 +76,11 @@ public class EntityProperty {
 
         EntityProperty that = (EntityProperty) o;
 
-        if (getName() != null ? !getName().equals(that.getName()) : that.getName() != null) {
-            return false;
-        }
-        if (getValue() != null ? !getValue().equals(that.getValue()) : that.getValue() != null) {
-            return false;
-        }
-        return getType() == that.getType() && (getRemarks() != null ? getRemarks().equals(that.getRemarks()) : that.getRemarks() == null);
+        return getName() != null ? getName().equals(that.getName()) : that.getName() == null;
     }
 
     @Override
     public int hashCode() {
-        int result = getName() != null ? getName().hashCode() : 0;
-        result = 31 * result + (getValue() != null ? getValue().hashCode() : 0);
-        result = 31 * result + (getType() != null ? getType().hashCode() : 0);
-        result = 31 * result + (getRemarks() != null ? getRemarks().hashCode() : 0);
-        return result;
+        return getName() != null ? getName().hashCode() : 0;
     }
 }

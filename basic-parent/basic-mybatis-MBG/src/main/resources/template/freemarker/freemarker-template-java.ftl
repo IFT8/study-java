@@ -7,13 +7,15 @@ package ${dataModel.packageName};
 import ${importPackage};
     </#list>
 </#if>
-<#if dataModel.classAnnotationSet?has_content >
 
+/**
+ * @author Code generator automatically generated
+ */
+<#if dataModel.classAnnotationSet?has_content >
     <#list dataModel.classAnnotationSet as classAnnotation>
 ${classAnnotation}
     </#list>
 <#else>
-
 </#if>
 <#if dataModel.classType == "Class">
 @SuppressWarnings({"unused", "SpringAutowiredFieldsWarningInspection", "StatementWithEmptyBody"})
@@ -25,32 +27,36 @@ public interface ${dataModel.className} <#if dataModel.interfaceSuperClassSet?ha
 <#--********** class attribute ***********-->
 <#if dataModel.staticPropertySet?has_content >
 
-    <#list dataModel.staticPropertySet as staticProperty>
-    <#if staticProperty.remarks != "">
+    <#list dataModel.staticPropertySet as property>
+    <#if property.remarks?has_content >
     /**
-     * ${staticProperty.remarks}
+    <#list property.remarks as remark>
+     * ${remark}
+    </#list>
      */
     </#if>
-    <#if staticProperty.type == "String">
-    public static final ${staticProperty.type} ${staticProperty.name} = "${staticProperty.value}";
+    <#if property.type == "String">
+    public static final ${property.type} ${property.name} = "${property.value}";
     <#else>
-    public static final ${staticProperty.type} ${staticProperty.name} = ${staticProperty.value};
+    public static final ${property.type} ${property.name} = ${property.value};
     </#if>
     </#list>
 </#if >
 <#--********** attribute ***********-->
 <#if dataModel.entityPropertySet?has_content >
 
-    <#list dataModel.entityPropertySet as entityProperty>
-    <#if entityProperty.remarks != "">
+    <#list dataModel.entityPropertySet as property>
+    <#if property.remarks?has_content >
     /**
-     * ${entityProperty.remarks}
+    <#list property.remarks as remark>
+     * ${remark}
+    </#list>
      */
     </#if>
-    <#if entityProperty.type == "String">
-    public ${entityProperty.type} ${entityProperty.name} = "${entityProperty.value}";
+    <#if property.type == "String">
+    public ${property.type} ${property.name} = "${property.value}";
     <#else>
-    public ${entityProperty.type} ${entityProperty.name} = ${entityProperty.value};
+    public ${property.type} ${property.name} = ${property.value};
     </#if>
     </#list>
 </#if >
@@ -79,35 +85,39 @@ public interface ${dataModel.className} <#if dataModel.interfaceSuperClassSet?ha
 <#if dataModel.generatedGetSetMethod>
 
     <#if dataModel.entityPropertySet?has_content >
-    <#list dataModel.entityPropertySet as entityProperty>
-    <#if entityProperty.remarks != "">
+    <#list dataModel.entityPropertySet as property>
+    <#if property.remarks?has_content >
     /**
-     * get ${entityProperty.remarks}
+     <#list property.remarks as remark>
+     * get ${remark}
+     </#list>
      */
     </#if>
-    <#if entityProperty.type == "Boolean">
-    public ${entityProperty.type} is${entityProperty.name?cap_first}() {
+    <#if property.type == "Boolean">
+    public ${property.type} is${property.name?cap_first}() {
     <#else>
-    public ${entityProperty.type} get${entityProperty.name?cap_first}() {
+    public ${property.type} get${property.name?cap_first}() {
     </#if>
-        <#if entityProperty.type == "String">
-        return (${entityProperty.name} == null) ? null : this.${entityProperty.name}.trim();
+        <#if property.type == "String">
+        return (${property.name} == null) ? null : this.${property.name}.trim();
         <#else>
-        return ${entityProperty.name};
+        return ${property.name};
         </#if>
     }
 
-    <#if entityProperty.remarks != "">
+    <#if property.remarks?has_content >
     /**
-     * set ${entityProperty.remarks}
-     */
+        <#list property.remarks as remark>
+        * set ${remark}
+        </#list>
+    */
     </#if>
-    public ${dataModel.className} set${entityProperty.name?cap_first}(${entityProperty.type} ${entityProperty.name}) {
-        <#if entityProperty.type == "String">
-        this.${entityProperty.name} = (${entityProperty.name} == null) ? null : ${entityProperty.name}.trim();
+    public ${dataModel.className} set${property.name?cap_first}(${property.type} ${property.name}) {
+        <#if property.type == "String">
+        this.${property.name} = (${property.name} == null) ? null : ${property.name}.trim();
         return this;
         <#else>
-        this.${entityProperty.name} = ${entityProperty.name};
+        this.${property.name} = ${property.name};
         return this;
         </#if>
     }

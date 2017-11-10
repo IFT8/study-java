@@ -7,10 +7,8 @@ import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.dom.java.TopLevelClass;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+
 
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class GenerateI18nConstantFile {
@@ -18,11 +16,11 @@ public class GenerateI18nConstantFile {
     public static void generateI18nConstantFile(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
 
         String javaBeanName = introspectedTable.getFullyQualifiedTable().getDomainObjectName();
-        Set<EntityProperty> entityI18nSet = PluginsUtils.getEntityI18nToMapByEntityBeanName().get(javaBeanName);
+        List<EntityProperty> entityI18nSet = PluginsUtils.getEntityI18nToMapByEntityBeanName().get(javaBeanName);
         //if (entityI18nSet.isEmpty()) {
         //    return;
         //}
-        Set<EntityProperty> entityI18nConstantSet = new HashSet<>();
+        List<EntityProperty> entityI18nConstantSet = new ArrayList<>();
         if (!entityI18nSet.isEmpty()) {
             for (EntityProperty entityI18n : entityI18nSet) {
                 EntityProperty entityProperty = new EntityProperty()

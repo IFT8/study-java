@@ -156,6 +156,11 @@ public class ComodinPlugin extends PluginAdapter {
      * @param introspectedTable //
      */
     private void processEntityClass(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
+
+        topLevelClass.addJavaDocLine("/**");
+        topLevelClass.addJavaDocLine(" * @author Code generator automatically generated");
+        topLevelClass.addJavaDocLine(" */");
+
         //引入JPA注解
         //topLevelClass.addImportedType("javax.persistence.*");
         AddImportPackage.addModelClassComment(topLevelClass, introspectedTable);

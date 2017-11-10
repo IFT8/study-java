@@ -53,7 +53,7 @@ public class GenerateControllerFile {
 
         FullyQualifiedJavaType controllerExtendsSubClassType = new FullyQualifiedJavaType(PluginsUtils.getControllerExtendsSubClass());
         entity.setSuperClass(controllerExtendsSubClassType.getShortName() + "<" + javaBeanName + ", BaseVo<" + javaBeanName + ">>");
-        entity.setTemporaryMethodBodySet(new HashSet<>(Collections.singletonList("@Override protected String getModuleName() {return \""+PluginsUtils.getControllerRequestMappingModuleName(javaBeanName)+"\";}")));
+        entity.setTemporaryMethodBodySet(new ArrayList<>(Collections.singletonList("@Override protected String getModuleName() {return \""+PluginsUtils.getControllerRequestMappingModuleName(javaBeanName)+"\";}")));
         dataModel.put("dataModel", entity);
 
         FreeMarkerUtils freeMarkerUtils = FreeMarkerUtils.getInstance("/template/freemarker");

@@ -8,11 +8,11 @@ import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.dom.java.TopLevelClass;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
+/**
+ * @author Code generator automatically generated
+ */
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class GenerateI18nFile {
 
@@ -22,12 +22,12 @@ public class GenerateI18nFile {
         //}
 
         String javaBeanName = introspectedTable.getFullyQualifiedTable().getDomainObjectName();
-        Set<EntityProperty> entityI18nSet = PluginsUtils.getEntityI18nToMapByEntityBeanName().get(javaBeanName);
+        List<EntityProperty> entityI18nSet = PluginsUtils.getEntityI18nToMapByEntityBeanName().get(javaBeanName);
         //if (entityI18nSet.isEmpty()) {
         //    return;
         //}
         if (entityI18nSet == null) {
-            entityI18nSet = new HashSet<>();
+            entityI18nSet = new ArrayList<>();
         }
 
         //String outFileRootDir = "D:\\ideaProjects\\study-java\\basic-parent\\basic-mybatis-MBG\\src\\main\\resources\\i18n";
@@ -38,7 +38,7 @@ public class GenerateI18nFile {
         String outFileNameSuffix = PluginsUtils.getI18nFileNameSuffix();
 
 
-        Set<EntityProperty> finalEntityI18nSet = entityI18nSet;
+        List<EntityProperty> finalEntityI18nSet = entityI18nSet;
         PluginsUtils.getI18nLanguageSet().forEach(language -> {
             String outFileName;
             if (language == null || "\"\"".equals(language.trim()) || "default".equalsIgnoreCase(language.trim())) {
@@ -48,7 +48,7 @@ public class GenerateI18nFile {
             }
             File outFile = new File(outFileRootDir, String.format("%s%s", outFileName, outFileExtensionName));
 
-            Map<String, Set<EntityProperty>> dataModel = new HashMap<>();
+            Map<String, List<EntityProperty>> dataModel = new HashMap<>();
             dataModel.put("dataModel", finalEntityI18nSet);
 
             FreeMarkerUtils freeMarkerUtils = FreeMarkerUtils.getInstance("/template/freemarker");
