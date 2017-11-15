@@ -333,6 +333,10 @@
             <columnRenamingRule searchString="client_group_relation_" replaceString=""/>
         </table>
 
+        <table tableName="t_client_prospect" domainObjectName="ClientProspectBean">
+            <generatedKey column="client_prospect_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="client_prospect_" replaceString=""/>
+        </table>
 
         <table tableName="t_comprobantes" domainObjectName="ComprobantesBean">
             <generatedKey column="comprobantes_id" sqlStatement="Mysql" identity="true"/>
@@ -414,15 +418,15 @@
             <columnRenamingRule searchString="account_" replaceString=""/>
         </table>
         <!--<table tableName="t_sio_task" domainObjectName="SioTaskBean">-->
-            <!--<generatedKey column="task_id" sqlStatement="Mysql" identity="true"/>-->
-            <!--<columnRenamingRule searchString="task_" replaceString=""/>-->
-            <!--<columnOverride column="task_task_id" property="taskId"/>-->
-            <!--<columnOverride column="task_task_original_complex_id" property="taskOriginalComplexId"/>-->
-            <!--<columnOverride column="task_inter_change_task_id" property="interChangeTaskId"/>-->
+        <!--<generatedKey column="task_id" sqlStatement="Mysql" identity="true"/>-->
+        <!--<columnRenamingRule searchString="task_" replaceString=""/>-->
+        <!--<columnOverride column="task_task_id" property="taskId"/>-->
+        <!--<columnOverride column="task_task_original_complex_id" property="taskOriginalComplexId"/>-->
+        <!--<columnOverride column="task_inter_change_task_id" property="interChangeTaskId"/>-->
         <!--</table>-->
         <!--<table tableName="t_sio_task_comprobantes" domainObjectName="SioTaskComprobantesBean">-->
-            <!--<generatedKey column="comprobantes_id" sqlStatement="Mysql" identity="true"/>-->
-            <!--<columnRenamingRule searchString="comprobantes_" replaceString=""/>-->
+        <!--<generatedKey column="comprobantes_id" sqlStatement="Mysql" identity="true"/>-->
+        <!--<columnRenamingRule searchString="comprobantes_" replaceString=""/>-->
         <!--</table>-->
 
 
@@ -442,10 +446,10 @@
             <columnOverride column="task_last_generate_xml_task_status" property="lastGenerateXmlTaskStatus"/>
             <columnOverride column="task_app_sync_task_version" property="appSyncTaskVersion"/>
         </table>
-        <!--<table tableName="t_task_contract" domainObjectName="TaskContractBean">-->
-        <!--<generatedKey column="contract_id" sqlStatement="Mysql" identity="true"/>-->
-        <!--<columnRenamingRule searchString="contract_" replaceString=""/>-->
-        <!--</table>-->
+        <table tableName="t_task_contract" domainObjectName="TaskContractBean">
+            <generatedKey column="contract_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="contract_" replaceString=""/>
+        </table>
         <!--<table tableName="t_task_plan" domainObjectName="TaskPlanBean">-->
         <!--<generatedKey column="task_pk_id" sqlStatement="Mysql" identity="true"/>-->
         <!--<columnRenamingRule searchString="task_" replaceString=""/>-->
