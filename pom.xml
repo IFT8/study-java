@@ -65,8 +65,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <project.spring.version>4.3.11.RELEASE</project.spring.version>
-        <project.spring.boot.version>1.5.7.RELEASE</project.spring.boot.version>
+        <project.spring.version>5.0.1.RELEASE</project.spring.version>
+        <project.spring.boot.version>1.5.8.RELEASE</project.spring.boot.version>
         <project.spring.cloud.version>Camden.SR7</project.spring.cloud.version>
         <!--<project.parentBasedir>${project.parent.basedir}</project.parentBasedir>-->
     </properties>
@@ -228,6 +228,11 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-messaging</artifactId>
+                <version>${project.spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jms</artifactId>
                 <version>${project.spring.version}</version>
             </dependency>
 
