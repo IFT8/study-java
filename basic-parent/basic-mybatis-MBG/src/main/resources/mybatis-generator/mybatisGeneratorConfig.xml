@@ -323,6 +323,11 @@
             <columnRenamingRule searchString="branch_" replaceString=""/>
         </table>
 
+        <table tableName="t_client_contract" domainObjectName="ClientContractBean">
+            <generatedKey column="client_contract_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="client_contract_" replaceString=""/>
+        </table>
+
 
         <table tableName="t_client_group" domainObjectName="ClientGroupBean">
             <generatedKey column="client_group_id" sqlStatement="Mysql" identity="true"/>
@@ -337,6 +342,11 @@
             <generatedKey column="client_prospect_id" sqlStatement="Mysql" identity="true"/>
             <columnRenamingRule searchString="client_prospect_" replaceString=""/>
         </table>
+        <table tableName="t_client_prospect_quote" domainObjectName="ClientProspectQuoteBean">
+            <generatedKey column="quote_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="quote_" replaceString=""/>
+        </table>
+
 
         <table tableName="t_comprobantes" domainObjectName="ComprobantesBean">
             <generatedKey column="comprobantes_id" sqlStatement="Mysql" identity="true"/>
@@ -404,6 +414,11 @@
         <table tableName="t_role" domainObjectName="RoleBean">
             <generatedKey column="role_id" sqlStatement="Mysql" identity="true"/>
             <columnRenamingRule searchString="role_" replaceString=""/>
+        </table>
+
+        <table tableName="t_service_plan" domainObjectName="ServicePlanBean">
+            <generatedKey column="service_plan_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="service_plan_" replaceString=""/>
         </table>
 
 
