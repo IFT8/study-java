@@ -420,6 +420,10 @@
             <generatedKey column="service_plan_id" sqlStatement="Mysql" identity="true"/>
             <columnRenamingRule searchString="service_plan_" replaceString=""/>
         </table>
+        <table tableName="t_service_plan_generate_record" domainObjectName="ServicePlanGenerateRecordBean">
+            <generatedKey column="record_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="record_" replaceString=""/>
+        </table>
 
 
         <table tableName="t_setting" domainObjectName="SettingBean">
