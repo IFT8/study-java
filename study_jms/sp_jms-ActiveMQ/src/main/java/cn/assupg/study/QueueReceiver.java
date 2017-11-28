@@ -5,6 +5,9 @@ import org.apache.activemq.ActiveMQConnectionFactory;
 import javax.jms.*;
 import java.util.Enumeration;
 
+/**
+ * @author supeng
+ */
 public class QueueReceiver {
 
     public static void main(String[] args) throws JMSException, InterruptedException {

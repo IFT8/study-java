@@ -4,6 +4,9 @@ import org.apache.activemq.ActiveMQConnectionFactory;
 
 import javax.jms.*;
 
+/**
+ * @author supeng
+ */
 public class QueueSender {
 
     public static void main(String[] args) throws JMSException, InterruptedException {
@@ -35,10 +38,12 @@ public class QueueSender {
 
             MapMessage message = session.createMapMessage();
 
-            message.setStringProperty("extra" + i, "okok"); //设置属性
+            //设置属性
+            message.setStringProperty("extra" + i, "okok");
             message.setString("message---" + i, "my map message " + i);
 
-            producer.send(message); //通过消息生产者，发出消息
+            //通过消息生产者，发出消息
+            producer.send(message);
         }
 
         session.commit();//进行提交，以及关闭连接
