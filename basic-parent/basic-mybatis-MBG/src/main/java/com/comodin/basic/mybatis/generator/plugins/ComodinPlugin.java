@@ -137,6 +137,11 @@ public class ComodinPlugin extends PluginAdapter {
      */
     @Override
     public boolean clientGenerated(Interface interfaze, TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
+
+        interfaze.addJavaDocLine("/**");
+        interfaze.addJavaDocLine(" * @author Code generator automatically generated");
+        interfaze.addJavaDocLine(" */");
+
         //获取实体类
         FullyQualifiedJavaType entityType = new FullyQualifiedJavaType(introspectedTable.getBaseRecordType());
         //import接口
