@@ -353,13 +353,13 @@
             <columnRenamingRule searchString="comprobantes_" replaceString=""/>
         </table>
         <table tableName="t_comprobantes_bag_count" domainObjectName="ComprobantesBagCountBean">
-            <generatedKey column="bag_number_id" sqlStatement="Mysql" identity="true"/>
-            <columnRenamingRule searchString="bag_number_" replaceString=""/>
+            <generatedKey column="bag_count_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="bag_count_" replaceString=""/>
             <columnOverride column="bag_count_comprobantes_bag_id" property="comprobantesBagId"/>
         </table>
         <table tableName="t_comprobantes_bag_number" domainObjectName="ComprobantesBagNumberBean">
-            <generatedKey column="bag_count_id" sqlStatement="Mysql" identity="true"/>
-            <columnRenamingRule searchString="bag_count_" replaceString=""/>
+            <generatedKey column="bag_number_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="bag_number_" replaceString=""/>
         </table>
         <table tableName="t_comprobantes_banknote" domainObjectName="ComprobantesBankNoteBean">
             <generatedKey column="banknote_id" sqlStatement="Mysql" identity="true"/>
