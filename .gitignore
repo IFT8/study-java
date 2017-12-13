@@ -237,3 +237,4 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
+!/study_opencv/study_opencv-demo/src/main/webapp/WEB-INF/lib/
