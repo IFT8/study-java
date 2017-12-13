@@ -84,7 +84,7 @@ classes/
 # Compiled Object files, Static and Dynamic libs (Shared Objects)
 *.o
 *.a
-*.so
+#*.so
 
 # Folders
 _obj
@@ -119,7 +119,7 @@ __pycache__/
 # Distribution / packaging
 .Python
 env/
-build/
+#build/
 develop-eggs/
 dist/
 downloads/
@@ -174,7 +174,7 @@ instance/
 docs/_build/
 
 # PyBuilder
-target/
+#target/
 
 # IPython Notebook
 .ipynb_checkpoints
@@ -202,7 +202,7 @@ ENV/
 ##############################################################################################
 # Logs
 logs
-*.log
+#*.log
 npm-debug.log*
 
 # Runtime data

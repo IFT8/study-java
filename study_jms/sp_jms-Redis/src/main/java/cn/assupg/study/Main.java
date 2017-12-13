@@ -1,7 +1,7 @@
 package cn.assupg.study;
 
+
 import com.comodin.basic.util.RedisUtils;
-import redis.clients.jedis.Jedis;
 
 import java.util.Random;
 import java.util.UUID;
@@ -26,6 +26,7 @@ public class Main {
 
     //生产者模拟程序
     public static class TaskProducer implements Runnable {
+        @Override
         public void run() {
             Random random = new Random();
             while (true) {
@@ -46,6 +47,7 @@ public class Main {
     //消费者模拟程序
     public static class TaskConsumer implements Runnable {
 
+        @Override
         public void run() {
             Random random = new Random();
 
