@@ -352,10 +352,9 @@
             <generatedKey column="comprobantes_id" sqlStatement="Mysql" identity="true"/>
             <columnRenamingRule searchString="comprobantes_" replaceString=""/>
         </table>
-        <table tableName="t_comprobantes_bag_statistics" domainObjectName="ComprobantesBagStatisticsBean">
-            <generatedKey column="bag_id" sqlStatement="Mysql" identity="true"/>
-            <columnRenamingRule searchString="bag_" replaceString=""/>
-            <columnOverride column="bag_comprobantes_bag_id" property="comprobantesBagId"/>
+        <table tableName="t_comprobantes_bag_counting" domainObjectName="ComprobantesBagCountingBean">
+            <generatedKey column="bag_counting_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="bag_counting_" replaceString=""/>
         </table>
         <table tableName="t_comprobantes_bag_number" domainObjectName="ComprobantesBagNumberBean">
             <generatedKey column="bag_number_id" sqlStatement="Mysql" identity="true"/>
