@@ -321,6 +321,7 @@
         <table tableName="t_client_branch" domainObjectName="ClientBranchBean">
             <generatedKey column="branch_id" sqlStatement="Mysql" identity="true"/>
             <columnRenamingRule searchString="branch_" replaceString=""/>
+            <columnOverride column="branch_switch_upload_client_branch_latlng" property="switchUploadClientBranchLatlng"/>
         </table>
         <table tableName="t_client_branch_latlng" domainObjectName="ClientBranchLatlngBean">
             <generatedKey column="branch_latlng_id" sqlStatement="Mysql" identity="true"/>
