@@ -65,8 +65,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <project.spring.version>5.0.0.RELEASE</project.spring.version>
-        <project.spring.boot.version>1.5.7.RELEASE</project.spring.boot.version>
+        <project.spring.version>5.0.2.RELEASE</project.spring.version>
+        <project.spring.boot.version>1.5.9.RELEASE</project.spring.boot.version>
         <project.spring.cloud.version>Camden.SR7</project.spring.cloud.version>
         <!--<project.parentBasedir>${project.parent.basedir}</project.parentBasedir>-->
     </properties>

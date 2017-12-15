@@ -322,6 +322,10 @@
             <generatedKey column="branch_id" sqlStatement="Mysql" identity="true"/>
             <columnRenamingRule searchString="branch_" replaceString=""/>
         </table>
+        <table tableName="t_client_branch_latlng" domainObjectName="ClientBranchLatlngBean">
+            <generatedKey column="branch_latlng_id" sqlStatement="Mysql" identity="true"/>
+            <columnRenamingRule searchString="branch_latlng_" replaceString=""/>
+        </table>
 
         <table tableName="t_client_contract" domainObjectName="ClientContractBean">
             <generatedKey column="client_contract_id" sqlStatement="Mysql" identity="true"/>
