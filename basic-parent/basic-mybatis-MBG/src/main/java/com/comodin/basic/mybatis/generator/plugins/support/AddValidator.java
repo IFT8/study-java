@@ -172,10 +172,10 @@ public class AddValidator {
         Integer lengthMax = sqlRemarksJSON != null && sqlRemarksJSON.getMax() != null ? sqlRemarksJSON.getMax() : introspectedColumn.getLength();
 
         String validLengthMessageKey = String.format("%s_%s_Length", javaBeanNameByCamelToUnderline, fieldNameByCamelToUnderline).toUpperCase();
-        String validLengthMessageVal = "data length must be between {min} and {max} bit.";
+        String validLengthMessageVal = "data length must be between {min} and {max} digit.";
 
         String lengthMessageKey = String.format("%s_%s_Length", javaBeanNameByCamelToUnderline, fieldNameByCamelToUnderline).toUpperCase();
-        String lengthMessageVal = "data length must be between {min} and {max} bit.";
+        String lengthMessageVal = "data length must be between {min} and {max} digit.";
 
         String javaBeanName = introspectedColumn.getIntrospectedTable().getFullyQualifiedTable().getDomainObjectName();
         String validGroups = PluginsUtils.assemblyFieldValidatorAnnotationValidGroups(introspectedTable, introspectedColumn);
