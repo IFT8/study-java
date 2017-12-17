@@ -168,8 +168,8 @@ public class AddValidator {
 
 
     private static void processAnnotationLengthOrValidLength(String javaBeanNameByCamelToUnderline, String fieldNameByCamelToUnderline, SqlRemarksJSON sqlRemarksJSON, Field field, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn) {
-        Integer lengthMin = sqlRemarksJSON != null && sqlRemarksJSON.getMin() != null ? sqlRemarksJSON.getMin() : null;
-        Integer lengthMax = sqlRemarksJSON != null && sqlRemarksJSON.getMax() != null ? sqlRemarksJSON.getMax() : introspectedColumn.getLength();
+        Integer lengthMin = (sqlRemarksJSON != null && sqlRemarksJSON.getMin() != null) ? sqlRemarksJSON.getMin() : null;
+        Integer lengthMax = (sqlRemarksJSON != null && sqlRemarksJSON.getMax() != null) ? sqlRemarksJSON.getMax() : introspectedColumn.getLength();
 
         String validLengthMessageKey = String.format("%s_%s_Length", javaBeanNameByCamelToUnderline, fieldNameByCamelToUnderline).toUpperCase();
         String validLengthMessageVal = "data length must be between {min} and {max} digit.";
